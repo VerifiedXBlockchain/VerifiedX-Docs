@@ -22,7 +22,7 @@ If you have any issues please reach out to the community through discord or your
 
 To first create a transaction you must understand how the transaction class is made. Below is the class in its full form and the enums associated with it.
 
-```C#
+```csharp
 public class Transaction {
 
    public ObjectId Id { get; set; }
@@ -72,7 +72,7 @@ public class Transaction {
 - **TransactionRating** - This is auto filled through TX Verify and can be left _null._
 - **TransactionStatus** - This needs to be defaulted to 1.
 
-```C#
+```csharp
 public enum TransactionType {
    TX,
    NODE,
@@ -120,7 +120,7 @@ Now that you understand what each element is for you will learn how to craft a T
   - `{"Result":"Success","Message":"Timestamp Acquired.","Timestamp":1672795597}`
 - You will then create your class of Transaction
 
-```C#
+```csharp
  Transaction tx1 = new Transaction {
    ToAddress = "xJuWfvE3pp73wno85k3QFWwK9wM9XRhhd9",
    FromAddress = "xMpa8DxDLdC9SQPcAFBc2vqwyPsoFtrWyC",
@@ -144,7 +144,7 @@ Now that you understand what each element is for you will learn how to craft a T
 
 - You will take the fee **0.0000028515625** and paste it into your class. Now you have the following transactions:
 
-  ```C#
+```csharp
   Transaction tx2 = new Transaction{
       ToAddress = "xJuWfvE3pp73wno85k3QFWwK9wM9XRhhd9",
       FromAddress = "xMpa8DxDLdC9SQPcAFBc2vqwyPsoFtrWyC",
@@ -156,7 +156,7 @@ Now that you understand what each element is for you will learn how to craft a T
       Timestamp = 1672795597,
       TransactionRating = TransactionRating.A, //or 1
   };
-  ```
+```
 
 - You will take that class and Json Serialize it again and send it to the **POST** method for hash.
 
@@ -170,7 +170,7 @@ Now that you understand what each element is for you will learn how to craft a T
 
 - You now have an almost completed TX. Now you simply need to take the hash `(“9528d9693a824e55c456bd8646df10a060e7d6bdfcf0d5e04fcbfec9d718742a”)` and insert it into the classes Hash field. You will have a TX Class like this:
 
-```C#
+```csharp
 Transaction tx3 = new Transaction{
    ToAddress = "xJuWfvE3pp73wno85k3QFWwK9wM9XRhhd9",
    FromAddress = "xMpa8DxDLdC9SQPcAFBc2vqwyPsoFtrWyC",
@@ -204,7 +204,7 @@ Transaction tx3 = new Transaction{
 
 - Once you have a signature you need to add it back to your Transaction class you have been creating. You should have this now:
 
-```C#
+```csharp
 Transaction tx3 = new Transaction{
    ToAddress = "xJuWfvE3pp73wno85k3QFWwK9wM9XRhhd9",
    FromAddress = "xMpa8DxDLdC9SQPcAFBc2vqwyPsoFtrWyC",
@@ -255,9 +255,9 @@ If you however do have the key associated to the wallet You can simply use the i
 **[http://localhost:7292/txapi/TXV1/SendTransaction](http://localhost:7292/txapi/TXV1/SendTransaction/)/faddr/taddr/amt**
 
 ```
-  Faddr = xMpa8DxDLdC9SQPcAFBc2vqwyPsoFtrWyC
-  Taddr = xJuWfvE3pp73wno85k3QFWwK9wM9XRhhd9
-  Amt = 1.0
-  http://localhost:7292/txapi/TXV1/SendTransaction/xMpa8DxDLdC9SQPcAFBc2vqwyPsoFtrWyC/xJuWfvE3pp73wno85k3QFWwK9wM9XRhhd9/1
-  Response body is: Success! TxId: a09f62b718c7552c33fd5fe213341af39881668fa41ad9ffbe67d3140739aa4b
+Faddr = xMpa8DxDLdC9SQPcAFBc2vqwyPsoFtrWyC
+Taddr = xJuWfvE3pp73wno85k3QFWwK9wM9XRhhd9
+Amt = 1.0
+http://localhost:7292/txapi/TXV1/SendTransaction/xMpa8DxDLdC9SQPcAFBc2vqwyPsoFtrWyC/xJuWfvE3pp73wno85k3QFWwK9wM9XRhhd9/1
+Response body is: Success! TxId: a09f62b718c7552c33fd5fe213341af39881668fa41ad9ffbe67d3140739aa4b
 ```

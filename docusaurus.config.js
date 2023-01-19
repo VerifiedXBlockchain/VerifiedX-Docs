@@ -130,6 +130,9 @@ const config = {
         disableSwitch: true,
         respectPrefersColorScheme: true,
       },
+      prism: {
+        additionalLanguages:["csharp"]
+      }
           
     }),
 };
