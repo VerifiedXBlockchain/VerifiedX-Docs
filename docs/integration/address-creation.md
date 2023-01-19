@@ -1,7 +1,5 @@
 # RBX Address creation
 
-![](./media/rbx-reserve-block-logo.png)
-
 ## Summary:
 
 The purpose of this document is to teach you how a RBX address is

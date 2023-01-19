@@ -1,6 +1,4 @@
-# RBX Integration Summary
-
-![](./media/rbx-reserve-block-logo.png)
+# RBX Integration
 
 ## Summary
 
