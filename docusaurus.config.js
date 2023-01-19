@@ -62,6 +62,7 @@ const config = {
           hideable: true,
         },
       },
+    
       navbar: {
 
         logo: {
@@ -128,7 +129,7 @@ const config = {
       colorMode: {
         defaultMode: 'dark',
         disableSwitch: true,
-        respectPrefersColorScheme: true,
+        respectPrefersColorScheme: false,
       },
       prism: {
         additionalLanguages:["csharp"]
