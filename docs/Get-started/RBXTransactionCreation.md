@@ -16,6 +16,8 @@ If you have any issues please reach out to the community through discord or your
 
 - #### [Trillium Dev IDE](https://trillium.rbx.network/)
 
+## How to create an RBX Transaction
+
 To first create a transaction you must understand how the transaction class is made. Below is the class in its full form and the enums associated with it.
 
 ```csharp
