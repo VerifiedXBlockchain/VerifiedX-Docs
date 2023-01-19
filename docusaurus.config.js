@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'ReserveBlock Docs',
-  tagline: 'Your BlockYour Data YOUR NFT',
+  title: 'RBXWiki',
+  tagline: 'Your Block Your Data YOUR NFT',
   url: 'https://reserveblock.io',
   baseUrl: '/',
   onBrokenLinks: 'warn',
@@ -16,7 +16,7 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'ReserveBlickIO', // Usually your GitHub org/user name.
+  organizationName: 'ReserveBlockIO', // Usually your GitHub org/user name.
   projectName: 'rbx-wiki', // Usually your repo name.
 
   // Even if you don't use internalization, you can use this field to set useful
@@ -109,10 +109,7 @@ const config = {
           {
             title: 'More',
             items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
+             
               {
                 label: 'GitHub',
                 to: 'https://github.com/ReserveBlockIO',
@@ -120,7 +117,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} RBXWiki. Built with Docusaurus.`,
+        copyright: `© ${new Date().getFullYear()} ReserveBlock`,
       },
       colorMode: {
         defaultMode: 'dark',
