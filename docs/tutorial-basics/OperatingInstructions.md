@@ -67,7 +67,7 @@ You can click the `Manage Wallets` button at the bottom of the dropdown menu to 
 In the top center of the Dashboard, there are some general tools that can be accessed.
 
 **Print Addresses**: Will print out all your addresses contained in your wallet to the `Status Log` below.
-**Print Validator**: Will print out your validator address (if you are validating).
+**Print Validators**: Will print out your validator address (if you are validating).
 **MOTHER**: `Monitor Of THe Roster` [*Advanced Feature*] A feature to monitor validators you are running remotely in one place.
 **Create HD Wallet**: [*Advanced Feature*] A feature for creating a `Hierarchical Deterministic` wallet.
 **Encrypt Wallet** : [*Advanced Feature*] A feature to encrpyt your keys. Enabling this will require you to input your password every time you want to create a transaction.
