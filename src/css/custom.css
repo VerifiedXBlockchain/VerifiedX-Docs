@@ -60,3 +60,17 @@
     background-size: contain;
 }
 
+.navbar__link-large {
+  font-size: 16px;
+
+  position: relative;
+  top: -4px;
+}
+.navbar__link-small {
+  font-size: 13px;
+  padding-left: 0;
+  margin-left:0;
+  position: relative;
+  top: -2px;
+  letter-spacing: 1px;
+}

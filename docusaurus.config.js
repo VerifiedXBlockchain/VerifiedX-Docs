@@ -4,6 +4,9 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
+
+
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'RBXWiki',
@@ -26,6 +29,10 @@ const config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
+
+   stylesheets: [
+    "~node_modules/font-awesome/font-awesome.min.css",
+  ],
 
   presets: [
     [
@@ -62,30 +69,29 @@ const config = {
           src: 'img/rbxwiki.png',
         },
         items: [
-          {to: 'https://www.reserveblock.io/#learn', label: 'Learn', position: 'left'},
-          { to: 'https://www.reserveblock.io/#masternodes', label: 'Masternodes',position: 'left',},
-          { to: 'https://www.reserveblock.io/#wallet', label: 'Wallet',position: 'left',},
-          { to: 'https://www.reserveblock.io/#network', label: 'Network',position: 'left',},
-          { to: 'https://www.reserveblock.io/#build', label: 'Build',position: 'left',},
-          { to: 'https://www.reserveblock.io/#community', label: 'Community',position: 'left',},
-          { to: 'https://www.reserveblock.io/#press', label: 'Press',position: 'left',},
-          {type: 'doc', docId: 'intro',position: 'left',label: 'Wiki',},
-          { to: 'https://wallet.rbx.network/#./', label: 'Web Wallet',position: 'right',},
-          { to: 'https://www.reserveblock.io/static/media/ReserveBlockLitePaper.f08596443b119bc51d6d.pdf', label: 'Litepaper',position: 'right',},
-          { to: 'https://www.reserveblock.io/static/media/RBX_Blockchain_Whitepaper.b1e396cdd4fc51f5a2e6.pdf', label: 'Whitepaper',position: 'right',},
-          { to: 'https://www.reserveblock.io/disclaimer', label: 'Disclaimer',position: 'right',},
-          { href: 'https://github.com/ReserveBlockIO', label: 'GitHub',position: 'right',},
+          {to: 'https://www.reserveblock.io/#learn', label: 'Learn', position: 'left',className:"navbar__link-large"},
+          { to: 'https://www.reserveblock.io/#masternodes', label: 'Masternodes',position: 'left',className:"navbar__link-large"},
+          { to: 'https://www.reserveblock.io/#wallet', label: 'Wallet',position: 'left',className:"navbar__link-large"},
+          { to: 'https://www.reserveblock.io/#network', label: 'Network',position: 'left',className:"navbar__link-large"},
+          { to: 'https://www.reserveblock.io/#build', label: 'Build',position: 'left',className:"navbar__link-large"},
+          { to: 'https://www.reserveblock.io/#community', label: 'Community',position: 'left',className:"navbar__link-large"},
+          { to: 'https://www.reserveblock.io/#press', label: 'Press',position: 'left',className:"navbar__link-large"},
+          {type: 'doc', docId: 'intro',position: 'left',label: 'Wiki', className:"navbar__link-large"},
+          { to: 'https://wallet.rbx.network/', label: 'Web Wallet', position: 'right', className:"navbar__link-small"},
+          { to: 'https://www.reserveblock.io/static/media/ReserveBlockLitePaper.f08596443b119bc51d6d.pdf', label: 'Litepaper',position: 'right',className:"navbar__link-small"},
+          { to: 'https://www.reserveblock.io/static/media/RBX_Blockchain_Whitepaper.b1e396cdd4fc51f5a2e6.pdf', label: 'Whitepaper',position: 'right',className:"navbar__link-small"},
+          { to: 'https://www.reserveblock.io/disclaimer', label: 'Disclaimer',position: 'right',className:"navbar__link-small"},
         ],
       },
       footer: {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'General',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/intro',
+                label: 'Learn',
+                to: 'https://www.reserveblock.io/#learn',
               },
             ],
           },
