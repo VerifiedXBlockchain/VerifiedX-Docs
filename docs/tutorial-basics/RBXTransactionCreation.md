@@ -1,8 +1,4 @@
-﻿RBX Transaction and Signature Creation | 2023
-
----
-
-![](media/rbx-reserve-block-logo.png)
+﻿# RBX Transaction and Signature Creation
 
 ## Summary:
 
@@ -12,7 +8,7 @@ If you have any issues please reach out to the community through discord or your
 
 - #### [Discord](https://discord.com/invite/PnS2HRETDh)
 
-- #### [PWebsite](https://www.reserveblock.io/)
+- #### [Website](https://www.reserveblock.io/)
 
 - #### [Explorer](https://rbx.network/)
 
