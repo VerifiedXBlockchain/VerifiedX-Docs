@@ -88,40 +88,36 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'General',
+            title: 'GENERAL',
             items: [
-              {
-                label: 'Learn',
-                to: 'https://www.reserveblock.io/#learn',
-              },
+              {label: 'Learn', to: 'https://www.reserveblock.io/#learn',},
+              {label: 'Masternodes', to: 'https://www.reserveblock.io/#masternodes',},
+              {label: 'Wallet', to: 'https://www.reserveblock.io/#wallet',},
             ],
           },
           {
-            title: 'Community',
+            title: 'DEVELOP',
             items: [
-              {
-                label: 'Telegram',
-                to: 'https://t.me/reserveblock',
-              },
-              {
-                label: 'Discord',
-                to: 'https://discord.com/invite/PnS2HRETDh',
-              },
-              {
-                label: 'Twitter',
-                to: 'https://twitter.com/ReserveBlockIO',
-              },
+              {label: 'Network', to: 'https://www.reserveblock.io/#network',},
+              {label: 'Build', to: 'https://www.reserveblock.io/#build',},
+              {label: 'Community', to: 'https://www.reserveblock.io/#community',},
             ],
           },
           {
-            title: 'More',
+            title: 'FAQS',
             items: [
-             
-              {
-                label: 'GitHub',
-                to: 'https://github.com/ReserveBlockIO',
-              },
+              {label: 'General',to: 'https://www.reserveblock.io/faq#general',},
+              {label: 'Masternodes',to: 'https://www.reserveblock.io/faq#masternodes',},
+              {label: 'Datanodes',to: 'https://www.reserveblock.io/faq#datanodes',},
             ],
+          },
+          {
+            title: 'ABOUT',
+            items: [
+              {label: 'Disclaimer',to: 'https://www.reserveblock.io/disclaimer',},
+              {label: 'Litepaper',to: 'https://www.reserveblock.io/static/media/ReserveBlockLitePaper.f08596443b119bc51d6d.pdf',},
+              {label: 'Contact',to: 'mailto:dev@reserveblock.io'},
+            ]
           },
         ],
         copyright: `© ${new Date().getFullYear()} ReserveBlock`,
