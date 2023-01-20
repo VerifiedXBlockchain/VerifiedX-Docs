@@ -4,10 +4,13 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
+
+
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'ReserveBlock Docs',
-  tagline: 'Your BlockYour Data YOUR NFT',
+  title: 'RBXWiki',
+  tagline: 'Your Block Your Data YOUR NFT',
   url: 'https://reserveblock.io',
   baseUrl: '/',
   onBrokenLinks: 'warn',
@@ -16,8 +19,8 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'ReserveBlockIO', // Usually your GitHub org/user name.
+  projectName: 'rbx-wiki', // Usually your repo name.
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -27,26 +30,23 @@ const config = {
     locales: ['en'],
   },
 
+   stylesheets: [
+    "~node_modules/font-awesome/font-awesome.min.css",
+  ],
+
   presets: [
     [
       'classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          // editUrl:
-          //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          editUrl:
+            'https://github.com/ReserveBlockIO/rbx-wiki/tree/main',
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          // editUrl:
-          //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
+     
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -62,6 +62,7 @@ const config = {
           hideable: true,
         },
       },
+    
       navbar: {
 
         logo: {
@@ -69,42 +70,29 @@ const config = {
           src: 'img/rbxwiki.png',
         },
         items: [
-       
-          {to: 'https://www.reserveblock.io/#learn', label: 'Learn', position: 'left'},
-          { to: 'https://www.reserveblock.io/#masternodes', label: 'Masternodes',position: 'left',},
-          { to: 'https://www.reserveblock.io/#wallet', label: 'Wallet',position: 'left',},
-          { to: 'https://www.reserveblock.io/#network', label: 'Network',position: 'left',},
-          { to: 'https://www.reserveblock.io/#build', label: 'Build',position: 'left',},
-          { to: 'https://www.reserveblock.io/#community', label: 'Community',position: 'left',},
-          { to: 'https://www.reserveblock.io/#press', label: 'Press',position: 'left',},
-          {
-            type: 'doc',
-            docId: 'intro',
-            position: 'left',
-            label: 'Wiki',
-          },
-          { to: 'https://wallet.rbx.network/#./', label: 'Web Wallet',position: 'right',},
-          { to: 'https://www.reserveblock.io/static/media/ReserveBlockLitePaper.f08596443b119bc51d6d.pdf', label: 'Litepaper',position: 'right',},
-          { to: 'https://www.reserveblock.io/static/media/RBX_Blockchain_Whitepaper.b1e396cdd4fc51f5a2e6.pdf', label: 'Whitepaper',position: 'right',},
-          { to: 'https://www.reserveblock.io/disclaimer', label: 'Disclaimer',position: 'right',},
-
-          {
-            href: 'https://github.com/facebook/docusaurus',
-            label: 'GitHub',
-            position: 'right',
-          },
-      
+          {to: 'https://www.reserveblock.io/#learn', label: 'Learn', position: 'left',className:"navbar__link-large"},
+          { to: 'https://www.reserveblock.io/#masternodes', label: 'Masternodes',position: 'left',className:"navbar__link-large"},
+          { to: 'https://www.reserveblock.io/#wallet', label: 'Wallet',position: 'left',className:"navbar__link-large"},
+          { to: 'https://www.reserveblock.io/#network', label: 'Network',position: 'left',className:"navbar__link-large"},
+          { to: 'https://www.reserveblock.io/#build', label: 'Build',position: 'left',className:"navbar__link-large"},
+          { to: 'https://www.reserveblock.io/#community', label: 'Community',position: 'left',className:"navbar__link-large"},
+          { to: 'https://www.reserveblock.io/#press', label: 'Press',position: 'left',className:"navbar__link-large"},
+          {type: 'doc', docId: 'intro',position: 'left',label: 'Wiki', className:"navbar__link-large"},
+          { to: 'https://wallet.rbx.network/', label: 'Web Wallet', position: 'right', className:"navbar__link-small"},
+          { to: 'https://www.reserveblock.io/static/media/ReserveBlockLitePaper.f08596443b119bc51d6d.pdf', label: 'Litepaper',position: 'right',className:"navbar__link-small"},
+          { to: 'https://www.reserveblock.io/static/media/RBX_Blockchain_Whitepaper.b1e396cdd4fc51f5a2e6.pdf', label: 'Whitepaper',position: 'right',className:"navbar__link-small"},
+          { to: 'https://www.reserveblock.io/disclaimer', label: 'Disclaimer',position: 'right',className:"navbar__link-small"},
         ],
       },
       footer: {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'General',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/intro',
+                label: 'Learn',
+                to: 'https://www.reserveblock.io/#learn',
               },
             ],
           },
@@ -112,44 +100,41 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+                label: 'Telegram',
+                to: 'https://t.me/reserveblock',
               },
               {
                 label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
+                to: 'https://discord.com/invite/PnS2HRETDh',
               },
               {
                 label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                to: 'https://twitter.com/ReserveBlockIO',
               },
             ],
           },
           {
             title: 'More',
             items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
+             
               {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                to: 'https://github.com/ReserveBlockIO',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `© ${new Date().getFullYear()} ReserveBlock`,
       },
       colorMode: {
         defaultMode: 'dark',
         disableSwitch: true,
-        respectPrefersColorScheme: true,
+        respectPrefersColorScheme: false,
       },
-      // prism: {
-      //   theme: lightCodeTheme,
-      //   darkTheme: darkCodeTheme,
-      // },
+      prism: {
+        additionalLanguages:["csharp"]
+      }
+          
     }),
 };
 
