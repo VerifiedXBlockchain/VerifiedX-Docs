@@ -1,3 +1,7 @@
+---
+sidebar_position: 2
+---
+
 # RBX Build Instructions
 
 The following instructions will cover building and running the RBX on Windows, Linux, and Mac.

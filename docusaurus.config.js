@@ -29,6 +29,7 @@ const config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
+  
 
    stylesheets: [
     "~node_modules/font-awesome/font-awesome.min.css",
@@ -54,15 +55,20 @@ const config = {
     ],
   ],
 
+  
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       docs: {
         sidebar: {
           hideable: true,
+          
         },
       },
-    
+
+      
+     
       navbar: {
 
         logo: {
@@ -84,6 +90,7 @@ const config = {
           { to: 'https://www.reserveblock.io/disclaimer', label: 'Disclaimer',position: 'right',className:"navbar__link-small"},
         ],
       },
+      
       footer: {
         style: 'dark',
         links: [
@@ -114,7 +121,7 @@ const config = {
           {
             title: 'ABOUT',
             items: [
-              {label: 'Disclaimer',to: 'https://www.reserveblock.io/disclaimer',},
+              {label: 'Disclaimer',to: 'https://www.reserveblock.io/disclaimer'},
               {label: 'Litepaper',to: 'https://www.reserveblock.io/static/media/ReserveBlockLitePaper.f08596443b119bc51d6d.pdf',},
               {label: 'Contact',to: 'mailto:dev@reserveblock.io'},
             ]
@@ -130,6 +137,7 @@ const config = {
       prism: {
         additionalLanguages:["csharp"]
       }
+      
           
     }),
 };

@@ -11,7 +11,7 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: 'CLI Documenation',
-    url: "#",
+    url: "/docs/category/cli",
     description: (
       <>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, natus. Consequatur excepturi quas fuga blanditiis laboriosam ab, aliquid odit reiciendis doloremque voluptatibus.
@@ -20,7 +20,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'GUI Documentation',
-    url: "#",
+    url: "/docs/category/gui",
 
     description: (
       <>
@@ -31,7 +31,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Integration Documentation',
-    url: "#",
+    url: "/docs/category/integration",
 
     description: (
       <>

@@ -1,9 +1,8 @@
 {
-    "label": "CLI",
-    "position": 2,
-    "link": {
-      "type": "generated-index",
-      "description": "Learn to use the CLI"
-    }
+  "label": "CLI",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Learn to use the CLI"
   }
-  
+}

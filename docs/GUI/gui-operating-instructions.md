@@ -1,3 +1,7 @@
+---
+sidebar_position: 3
+---
+
 # RBXWallet GUI Operating Instructions
 
 This is the operating instructions for the RBXWallet GUI. Whether running on `Windows` or `Mac`, the details will remain the same unless otherwise specified.
