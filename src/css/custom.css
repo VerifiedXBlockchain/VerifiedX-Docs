@@ -31,6 +31,7 @@
   --ifm-navbar-background-color: #000;
   --ifm-navbar-link-color:#84e9fd;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-footer-background-color: #031745;
 }
 
 
@@ -39,7 +40,6 @@
   background-image: url("/static/img/poster.jpg");
 }
 .navbar__item {
-  font-family: Adriatic,sans-serif;
   letter-spacing: 2px;
   padding-top: 14px;
 }
@@ -48,7 +48,9 @@
   position: relative;
   top: -8px;
 }
-
+.body, html{
+  font-family: Adriatic,sans-serif;
+}
 .navbar__logo:before {
     display: inline-block;
     position: relative;
@@ -73,4 +75,34 @@
   position: relative;
   top: -2px;
   letter-spacing: 1px;
+}
+
+.footer{
+  letter-spacing: 1px;
+  background-color: rgb(2, 10, 33);
+  border-top: 4px solid rgba(126, 239, 255, 0.2);
+  display: block;
+  box-sizing: border-box;
+}
+
+.footer__title{
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 1.25rem;
+  text-align: center!important;
+
+}
+
+.footer__item{
+  color: rgb(255, 255, 255);
+    text-decoration: none;
+    letter-spacing: 1px;
+    font-size: 16px;
+    line-height: 32px;
+    text-align: center!important;
+}
+.footer__copyright{
+  color: #6c757d!important;
 }

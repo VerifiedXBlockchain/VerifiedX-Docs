@@ -1,3 +1,7 @@
+---
+sidebar_position: 2
+---
+
 # RBXWallet GUI Download & Installation Instructions
 
 This is the download and install instructions for the RBXWallet GUI.

@@ -1,4 +1,8 @@
-# RBX Address creation
+---
+sidebar_position: 3
+---
+
+# RBX Address Creation
 
 ## Summary:
 
