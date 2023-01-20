@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# RBX Build Instructions!
+# RBX Build Instructions
 
 The following instructions will cover building and running the RBX on Windows, Linux, and Mac.
 The most important step is to install .net core 6.
