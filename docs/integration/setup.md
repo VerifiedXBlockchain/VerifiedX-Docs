@@ -54,7 +54,7 @@ The wallet is a multi-threaded application. Normal performance has been consiste
 
 The wallet main connection port 3338 must be configured to at least allow outgoing. If you do not want people connecting to you simply do not open that port for any incoming connections.
 
-## Compile your onw CLI
+## Compile your own CLI
 
 If you are wanting to compile your own CLI from source here is how to do this.  
 The instructions below can be found here: [Build Instructions](/docs/Get-started/RBXBuildInstructions)
@@ -482,8 +482,8 @@ The wallet must be left open for items to continue running. If using Linux and S
 Screen example:
 screen dotnet ReserveBlockCore.dll
 
-ctrl A & ctrl D
-exits session
+> `ctrl A & ctrl D`
+> to detach from the screen session.
 
 > when returning to return you type `screen -r` and press enter.
 
