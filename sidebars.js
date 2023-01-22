@@ -20,7 +20,7 @@ const sidebars = {
     {
       type: 'doc',
       id: 'intro', // document ID
-      label: 'Introduction', // sidebar label
+      label: 'ReserveBlock Introduction', // sidebar label
     },
     {
       type: 'category',
