@@ -32,6 +32,7 @@
   --ifm-navbar-link-color:#84e9fd;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --ifm-footer-background-color: #031745;
+  --ifm-link-color: #84e9fd;
 }
 
 
@@ -106,3 +107,5 @@
 .footer__copyright{
   color: #6c757d!important;
 }
+
+
