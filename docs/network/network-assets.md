@@ -20,8 +20,8 @@ sidebar_position: 1
 
 | Name        | Weights                       | Download
 |-------------|-------------------------------|---------
- Adriatic     | Light/Medium/Bold             | [Download](/network-assets/adriatic.zip)
- Oswald       | Light/Regular/Medium/SemiBold | [Download](/network-assets/oswald.zip)
+ Adriatic     | Light/Medium/Bold             | [Download](./assets/adriatic.zip)
+ Oswald       | Light/Regular/Medium/SemiBold | [Download](./assets/oswald.zip)
 
 ## Logos
 Click to download the files.
