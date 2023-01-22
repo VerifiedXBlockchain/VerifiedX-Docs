@@ -21,7 +21,7 @@ sidebar_position: 1
 | Name        | Weights                       | Download
 |-------------|-------------------------------|---------
  Adriatic     | Light/Medium/Bold             | <a target="_blank" download="Adriatic.zip" href="https://firebasestorage.googleapis.com/v0/b/rbx-storage.appspot.com/o/Adriatic.zip?alt=media&token=8da3aac5-a6ca-4df8-a0bb-cc746b5afd20">Download</a>
- Oswald       | Light/Regular/Medium/SemiBold | <a target="_blank" download="Oswald.zip" href="https://firebasestorage.googleapis.com/v0/b/rbx-storage.appspot.com/o/Oswald.zip?alt=media&token=5352b365-bbff-492a-aa0a-3ff973f4d8c9>Download</a>
+ Oswald       | Light/Regular/Medium/SemiBold | <a target="_blank" download="Oswald.zip" href="https://firebasestorage.googleapis.com/v0/b/rbx-storage.appspot.com/o/Oswald.zip?alt=media&token=5352b365-bbff-492a-aa0a-3ff973f4d8c9">Download</a>
 
 ## Logos
 Click to download the files.
