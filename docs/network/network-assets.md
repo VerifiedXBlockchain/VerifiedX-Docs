@@ -28,34 +28,42 @@ Click to download the files.
 
 ### RBX Wordmark
 
-<a href="/network-assets/rbx-metallic.png" target="_blank" download="rbx-metallic.png"><img src="/network-assets/rbx-metallic.png" width="400" /></a>
+<a href="/network-assets/rbx-metallic.png" target="_blank" download="rbx-metallic.png"><img src="/network-assets/rbx-metallic.png" width="200" /></a>
 
 *RBX Metallic*
 
-<a href="/network-assets/rbx-blue.png" target="_blank" download="rbx-blue.png"><img src="/network-assets/rbx-blue.png" width="400" /></a>
+<a href="/network-assets/rbx-blue.png" target="_blank" download="rbx-blue.png"><img src="/network-assets/rbx-blue.png" width="200" /></a>
 
 *RBX Blue*
 
-<a href="/network-assets/rbx-white.png" target="_blank" download="rbx-white.png"><img src="/network-assets/rbx-white.png" width="400" /></a>
+<a href="/network-assets/rbx-white.png" target="_blank" download="rbx-white.png"><img src="/network-assets/rbx-white.png" width="200" /></a>
 
 *RBX White*
 
-<a href="/network-assets/rbx-black.png" target="_blank" download="rbx-black.png"><img src="/network-assets/rbx-black.png" width="400" /></a>
+<a href="/network-assets/rbx-black.png" target="_blank" download="rbx-black.png"><img src="/network-assets/rbx-black.png" width="200" /></a>
 
 *RBX Black*
 
-<a href="/network-assets/rbx-holo.png" target="_blank" download="rbx-holo.png"><img src="/network-assets/rbx-holo.png" width="400" /></a>
+<a href="/network-assets/rbx-metallic-cube.png" target="_blank" download="rbx-metallic-cube.png"><img src="/network-assets/rbx-metallic-cube.png" width="200" /></a>
 
 *RBX Holo*
 
-### Cube
+<!-- <a href="/network-assets/rbx-holo.png" target="_blank" download="rbx-holo.png"><img src="/network-assets/rbx-holo.png" width="200" /></a>
 
-<a href="/network-assets/rbx-cube.png" target="_blank" download="rbx-cube.png"><img src="/network-assets/rbx-cube.png" width="400" /></a>
+*RBX Holo Alt* -->
 
-*Cube*
+### Holo Block
 
-### Reserve Block Wordmark
+<a href="/network-assets/rbx-cube.png" target="_blank" download="rbx-cube.png"><img src="/network-assets/rbx-cube.png" width="200" /></a>
+
+*Holo Block*
+
+<a href="/network-assets/rbx-cube-animated.gif" target="_blank" download="rbx-cube-animated.gif"><img src="/network-assets/rbx-cube-animated.gif" width="200" /></a>
+
+*Holo Block Animated*
+
+### ReserveBlock Wordmark
 
 <a href="/network-assets/reserve-block-wordmark.png" target="_blank" download="reserve-block-wordmark.png"><img src="/network-assets/reserve-block-wordmark.png" width="400" /></a>
 
-*Reserve Block Wordmark*
+*ReserveBlock Wordmark*
