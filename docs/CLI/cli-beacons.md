@@ -4,8 +4,6 @@ sidebar_position: 5
 
 # RBX Beacons
 
-![](media/rbx-reserve-block-logo.png)
-
 ## Summary
 
 The purpose of this document is to teach you how to create a beacon from within the RBX CLI. Please note with this process you are never needed to expose your private key to the wallet or anywhere outside your own building application.

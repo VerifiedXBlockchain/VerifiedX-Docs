@@ -4,8 +4,6 @@ sidebar_position: 4
 
 # RBX Adjudicators
 
-![](media/rbx-reserve-block-logo.png)
-
 ## Summary
 
 The purpose of the document is to go over the adjudicators, how to request a vote to become, and what happens when you become one. Please note with this process you are never needed to expose your private key to the wallet or anywhere outside your own building application.
