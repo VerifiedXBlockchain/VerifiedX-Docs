@@ -82,7 +82,6 @@ const config = {
           { to: 'https://www.reserveblock.io/#network', label: 'Network',position: 'left',className:"navbar__link-large"},
           { to: 'https://www.reserveblock.io/#build', label: 'Build',position: 'left',className:"navbar__link-large"},
           { to: 'https://www.reserveblock.io/#community', label: 'Community',position: 'left',className:"navbar__link-large"},
-          { to: 'https://www.reserveblock.io/#press', label: 'Press',position: 'left',className:"navbar__link-large"},
           {type: 'doc', docId: 'intro',position: 'left',label: 'Wiki', className:"navbar__link-large"},
           { to: 'https://wallet.rbx.network/', label: 'Web Wallet', position: 'right', className:"navbar__link-small"},
           { to: 'https://www.reserveblock.io/static/media/ReserveBlockLitePaper.f08596443b119bc51d6d.pdf', label: 'Litepaper',position: 'right',className:"navbar__link-small"},
