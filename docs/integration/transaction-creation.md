@@ -9,18 +9,6 @@ sidebar_position: 4
 
 The purpose of this document is to teach you how to create a transaction and sign the transaction to then broadcast over the RBX network. Please note with this process you are never needed to expose your private key to the wallet or anywhere outside your own building application. At the end of this document in the extra section is how you can send a TX if your private key is associated with a wallet.
 
-If you have any issues please reach out to the community through discord or your respective telegram channels.
-
-- #### [Discord](https://discord.com/invite/PnS2HRETDh)
-
-- #### [Website](https://www.reserveblock.io/)
-
-- #### [Explorer](https://rbx.network/)
-
-- #### [Explorer API](https://data.rbx.network/docs/)
-
-- #### [Trillium Dev IDE](https://trillium.rbx.network/)
-
 ## How to create an RBX Transaction
 
 To first create a transaction you must understand how the transaction class is made. Below is the class in its full form and the enums associated with it.

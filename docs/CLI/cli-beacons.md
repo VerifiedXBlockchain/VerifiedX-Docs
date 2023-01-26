@@ -2,19 +2,11 @@
 sidebar_position: 5
 ---
 
-# RBX Beacons
+# Beacons
 
 ## Summary
 
 The purpose of this document is to teach you how to create a beacon from within the RBX CLI. Please note with this process you are never needed to expose your private key to the wallet or anywhere outside your own building application.
-
-If you have any issues please reach out to the community through discord or your respective telegram channels.
-
-- #### [Discord](https://discord.com/invite/PnS2HRETDh)
-
-- #### [Website](https://www.reserveblock.io/)
-
-- #### [Explorer](https://rbx.network/)
 
 Creating a beacon is a rather easy process and by the end of this document you will have all the necessary information to become your own beacon.
 

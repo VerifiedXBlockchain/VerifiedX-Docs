@@ -10,4 +10,4 @@ sidebar_position: 7
 
 ### 2. How do I create a web wallet?
 
-> The web wallet can be created by first accessing the Web Wallet link on the **[ReserveBlock.io](https://www.reserveblock.io/)** site. Once on the Web Wallet page, you may log in with a previously created wallet or create a new wallet and address.
+> The web wallet can be created by first accessing the Web Wallet link on the **[https://wallet.rbx.network](https://wallet.rbx.network)**. Once on the Web Wallet page, you may log in with a previously created wallet or create a new wallet and address.

@@ -1,20 +1,12 @@
 ---
-sidebar_position: 4
+sidebar_position: 6
 ---
 
-# RBX Adjudicators
+# Adjudicators
 
 ## Summary
 
 The purpose of the document is to go over the adjudicators, how to request a vote to become, and what happens when you become one. Please note with this process you are never needed to expose your private key to the wallet or anywhere outside your own building application.
-
-If you have any issues please reach out to the community through discord or your respective telegram channels.
-
-- #### [Discord](https://discord.com/invite/PnS2HRETDh)
-
-- #### [Website](https://www.reserveblock.io/)
-
-- #### [Explorer](https://rbx.network/)
 
 Becoming an adjudicator is something open to all. This document will describe the steps in what must be done to become an adjudicator as well as the requirements to be voted in as one.
 

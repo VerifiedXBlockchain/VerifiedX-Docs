@@ -10,18 +10,6 @@ The purpose of this document is to teach you how a RBX address is
 created. This will walk you through from the starting step to the very
 end which is a human readable address.
 
-If you have any issues please reach out to the community through discord or your respective telegram channels.
-
-- #### [Discord](https://discord.com/invite/PnS2HRETDh)
-
-- #### [Website](https://www.reserveblock.io/)
-
-- #### [Explorer](https://rbx.network/)
-
-- #### [Explorer API](https://data.rbx.network/docs/)
-
-- #### [Trillium Dev IDE](https://trillium.rbx.network/)
-
 ## How to create an RBX Address
 
 **The correct way to create a RBX address is to use well tested, opensource, peer reviewed wallet software.** The manually handling keys can and has resulted in fund loss over and over again. Unlike other centralized systems, losses in RBX are usually unrecoverable. Please proceed at your own risk.

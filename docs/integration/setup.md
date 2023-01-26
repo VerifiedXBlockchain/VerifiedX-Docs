@@ -10,17 +10,6 @@ This document is intended to be used by all third-party integrators including, b
 
 This document will outline the core CLI functions and give recommended practices. Please note that you should always follow the highest levels of security based on your own environment. This document is merely a guide to get you up and running.
 
-If you have any issues please reach out to the community through discord or your respective telegram channels.
-
-- #### [Discord](https://discord.com/invite/PnS2HRETDh)
-
-- #### [Website](https://www.reserveblock.io/)
-
-- #### [Explorer](https://rbx.network/)
-
-- #### [Explorer API](https://data.rbx.network/docs/)
-
-- #### [Trillium Dev IDE](https://trillium.rbx.network/)
 
 ## Wallet Information
 
@@ -600,4 +589,4 @@ If you have any needs or specific questions it's recommended to reach out over d
 ## Conclusion
 
 This document will get most integrations started in the right direction, however, please don’t hesitate to reach out to the RBX community and devs through discord or if you are currently talking to anyone through other social channels please reach out to them there with any questions.
-![](media/rbx-reserve-block-logo.png)
+

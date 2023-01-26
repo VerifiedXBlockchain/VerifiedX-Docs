@@ -1,8 +1,8 @@
 ---
-sidebar_position: 6
+sidebar_position: 4
 ---
 
-# CLI Config
+# CLI Configuration
 
 
 The CLI configuration file will be found in `~/RBX/Config/config.txt`.
