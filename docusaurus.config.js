@@ -10,7 +10,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'RBXWiki',
-  tagline: 'Your Block Your Data YOUR NFT',
+  tagline: 'Democratizing Tokenization For Everyone',
   url: 'https://reserveblock.io',
   baseUrl: '/',
   onBrokenLinks: 'warn',

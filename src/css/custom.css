@@ -37,8 +37,9 @@
 
 
 
+
 .hero{
-  background-image: url("/static/img/poster.jpg");
+  background-color: transparent;
 }
 .navbar__item {
   letter-spacing: 2px;

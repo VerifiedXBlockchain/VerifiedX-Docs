@@ -10,6 +10,13 @@
   overflow: hidden;
 }
 
+
+.main {
+  background-image: url("/static/img/poster.jpg");
+  background-attachment: fixed;
+
+}
+
 @media screen and (max-width: 996px) {
   .heroBanner {
     padding: 2rem;
@@ -25,9 +32,32 @@
 
 .heroTitle {
   color: #fff;
+
 }
 
 .heroSubtitle {
   color: var(--color-brand-secondary);
   font-weight: 500;
+}
+
+.heroTitle {
+  display: flex;
+  justify-content: center;
+}
+
+.cube {
+  height: 100px;
+}
+
+.cubeImg {
+  height: 100%;
+  mix-blend-mode: screen;
+}
+
+.wordmark {
+  height: 100px;
+}
+
+.wordmarkImg {
+  height: 100%;
 }
