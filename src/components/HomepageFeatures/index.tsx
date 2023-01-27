@@ -10,28 +10,29 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'CLI Documenation',
-    url: "/docs/CLI",
+    title: 'GUI Documentation',
+    url: "/docs/GUI/",
+
     description: (
       <>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, natus. Consequatur excepturi quas fuga blanditiis laboriosam ab, aliquid odit reiciendis doloremque voluptatibus.
+
       </>
     ),
   },
   {
-    title: 'GUI Documentation',
-    url: "/docs/GUI",
-
+    title: 'CLI Documenation',
+    url: "/docs/CLI/",
     description: (
       <>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, natus. Consequatur excepturi quas fuga blanditiis laboriosam ab, aliquid odit reiciendis doloremque voluptatibus.
-
       </>
     ),
   },
+
   {
     title: 'Integration Documentation',
-    url: "/docs/integration",
+    url: "/docs/integration/",
 
     description: (
       <>
@@ -42,7 +43,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Frequently Asked Questions',
-    url: "/docs/faqs",
+    url: "/docs/faqs/",
 
     description: (
       <>

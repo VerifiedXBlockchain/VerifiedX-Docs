@@ -40,7 +40,7 @@ export default function Home(): JSX.Element {
     <Layout
       title={`Home`}
       description="Description will go into a meta tag in <head />">
-      {/* <div style={{ backgroundImage: '/static/img/poster.jpg' }}> */}
+
       <div className={clsx(styles.main)}>
 
         <HomepageHeader />
@@ -48,6 +48,8 @@ export default function Home(): JSX.Element {
           <HomepageFeatures />
         </main>
       </div>
+
+
     </Layout>
   );
 }
