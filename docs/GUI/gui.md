@@ -9,7 +9,7 @@ sidebar_position: 1
 
 Use the CLI on Windows or MacOS to interact with the network.
 
-## Video Tutorials
+## Video Tutorial
 
 This video will walk you through downloading, installing, and operating the RBX Core Wallet GUI on your MacOS or Windows machine.
 
