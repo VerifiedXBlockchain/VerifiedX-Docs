@@ -32,7 +32,8 @@
   --ifm-navbar-link-color:#84e9fd;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --ifm-footer-background-color: #031745;
-  --ifm-link-color: #84e9fd;
+  --ifm-link-color: #fff;
+  --ifm-heading-color: #84e9fd;
 }
 
 
@@ -110,3 +111,15 @@
 }
 
 
+.markdown a {
+  text-decoration: underline;
+  letter-spacing: 1px;
+  /* font-weight: bold; */
+  font-weight: 600;
+  font-family: sans-serif;
+  transition: color .4s;
+}
+
+.markdown a:hover {
+  color: #84e9fd;
+}

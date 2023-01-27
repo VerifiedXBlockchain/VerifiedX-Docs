@@ -20,10 +20,10 @@ The network aims to help solve current individual adoption challenges of blockch
 
 --
 
-1. [GUI Docs](./GUI)
+1. [GUI Docs](./GUI/)
 
-2. [CLI Docs](./CLI)
+2. [CLI Docs](./CLI/)
 
-3. [Integration Docs](./integration)
+3. [Integration Docs](./integration/)
 
-4. [FAQs](./FAQs)
+4. [FAQs](./FAQs/)

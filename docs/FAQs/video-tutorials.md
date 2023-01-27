@@ -1,12 +1,11 @@
 ---
-sidebar_position: 1
+sidebar_position: 9
 ---
 
-# CLI Overview
+# Video Tutorials
 
-Use the CLI on Windows, MacOS, or Linux to interact with the network.
 
-## Video Tutorials
+## CLI
 
 ### CLI Linux Install Instructions
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ycYxaCBPZjI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -15,13 +14,29 @@ Use the CLI on Windows, MacOS, or Linux to interact with the network.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/-jsnScVgrVM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-## Documentation
 
-1. [Build Instructions](./cli-build-instructions)
+## GUI
 
-2. [Configuration](./cli-config)
+### GUI Install & Operating Instructions
 
-3. [Beacons](./cli-beacons)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/QBhrBN0xhjE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-4. [Adjudicators](./cli-adjudicators)
+### Wallet Encryption
+> Video activating soon
+
+### HD Wallets
+> Video activating soon
+
+### MOTHER
+> Video activating soon
+
+### Smart Contracts 
+> Video activating soon
+
+### Beacons
+> Video activating soon
+
+### Validator Voting
+> Video activating soon
+
 

@@ -19,3 +19,5 @@ sidebar_position: 0
 7. [Web Wallet FAQs](./web-wallet-faq)
 
 8. [Developer FAQs](./developer-faq)
+
+9. [Video Tutorials](./video-tutorials)
