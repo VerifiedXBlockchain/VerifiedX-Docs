@@ -7,7 +7,7 @@ sidebar_position: 1
 
 ### The Graphical User Interface
 
-Use the CLI on Windows or MacOS to interact with the network.
+Use the GUI on Windows or MacOS to interact with the network.
 
 ## Video Tutorial
 

@@ -15,7 +15,7 @@ const FeatureList: FeatureItem[] = [
 
     description: (
       <>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, natus. Consequatur excepturi quas fuga blanditiis laboriosam ab, aliquid odit reiciendis doloremque voluptatibus.
+        Use the GUI on Windows or MacOS to interact with the network through a graphical user interface.
 
       </>
     ),
@@ -25,7 +25,7 @@ const FeatureList: FeatureItem[] = [
     url: "/docs/CLI/",
     description: (
       <>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, natus. Consequatur excepturi quas fuga blanditiis laboriosam ab, aliquid odit reiciendis doloremque voluptatibus.
+        Use the CLI on Windows, MacOS, or Linux to interact with the network through the command line interface.
       </>
     ),
   },
@@ -36,18 +36,18 @@ const FeatureList: FeatureItem[] = [
 
     description: (
       <>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, natus. Consequatur excepturi quas fuga blanditiis laboriosam ab, aliquid odit reiciendis doloremque voluptatibus.
+        Learn about integrating with the RBX network.
 
       </>
     ),
   },
   {
-    title: 'Frequently Asked Questions',
+    title: 'FAQs',
     url: "/docs/faqs/",
 
     description: (
       <>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis, natus. Consequatur excepturi quas fuga blanditiis laboriosam ab, aliquid odit reiciendis doloremque voluptatibus.
+        Read our frequently asked questions.
 
       </>
     ),
@@ -65,7 +65,7 @@ function Feature({ title, description, url }: FeatureItem) {
 
         <div className="text--center padding-horiz--md">
           <h2>{title}</h2>
-          <p>{description}</p>
+          <p style={{ fontSize: 18, lineHeight: 1.2, paddingLeft: 42, paddingRight: 42, }}>{description}</p>
         </div>
         <div className="text--center">
           <a className="button button--secondary button--lg" href={url}>Launch</a>
