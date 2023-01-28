@@ -46,6 +46,8 @@
   display: flex;
   justify-content: center;
   margin-left: -100px;
+
+ 
 }
 
 .cube {
@@ -59,8 +61,21 @@
 
 .wordmark {
   height: 100px;
+ 
 }
 
 .wordmarkImg {
   height: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+.heroTitle {
+  margin-left: -50px;
+}
+  .cube {
+    height: 50px;
+  }
+    .wordmark {
+      height: 50px;
+    }
 }
