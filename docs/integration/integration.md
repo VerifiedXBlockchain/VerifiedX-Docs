@@ -11,3 +11,5 @@ This section covers integrating the RBX network as a third-party.
 2. [Creating Addresses](./address-creation)
 
 3. [Creating Transactions](./transaction-creation)
+
+4. [Swagger Docs](./swagger)

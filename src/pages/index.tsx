@@ -23,11 +23,11 @@ function HomepageHeader() {
         </h1>
         <p className={clsx('hero__subtitle', styles.heroSubtitle)}>{siteConfig.tagline}</p>
         <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
+          <a
+            className="button button-3d-white"
+            href="/docs/intro">
             Get Started
-          </Link>
+          </a>
         </div>
       </div>
     </header >
