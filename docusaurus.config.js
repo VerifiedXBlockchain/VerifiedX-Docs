@@ -146,7 +146,7 @@ const config = {
     }),
     scripts: [
       {
-        src: "/scripts/links.js?v=2",
+        src: "/scripts/links.js?v=3",
         async: true,
       }
       

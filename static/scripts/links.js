@@ -4,8 +4,10 @@ function navLinks() {
 
     var desktopLinks = document.querySelectorAll("a.navbar__item");
     var mobileLinks = document.querySelectorAll(".menu__list-item a");
-    var footerLinks = document.querySelectorAll("footer a")
-    var allLinks = [...desktopLinks, ...mobileLinks, footerLinks];
+    var footerLinks = document.querySelectorAll(".footer__link-item");
+
+
+    var allLinks = [...desktopLinks, ...mobileLinks, ...footerLinks];
 
 
     var links = [];
