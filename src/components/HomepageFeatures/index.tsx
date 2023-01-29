@@ -37,6 +37,29 @@ const FeatureList: FeatureItem[] = [
     description: (
       <>
         Learn about integrating with the RBX network.
+        <br /> &nbsp;
+
+      </>
+    ),
+  },
+  {
+    title: 'Video Tutorials',
+    url: "/docs/FAQs/video-tutorials/",
+
+    description: (
+      <>
+        Learn more about installing and operating the RBX GUI and CLI through a collection of video tutorials.
+
+      </>
+    ),
+  },
+  {
+    title: 'Whitepaper v2',
+    url: "docs/documents/whitepaper-v2/",
+
+    description: (
+      <>
+        Read the ReserveBlock Whitepaper v2.
 
       </>
     ),
@@ -52,6 +75,7 @@ const FeatureList: FeatureItem[] = [
       </>
     ),
   },
+
 ];
 
 function Feature({ title, description, url }: FeatureItem) {

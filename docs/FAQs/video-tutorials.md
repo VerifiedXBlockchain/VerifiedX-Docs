@@ -21,23 +21,28 @@ sidebar_position: 9
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/QBhrBN0xhjE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
 
+
+### Database Snapshots
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PAQTRGpBNEI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
+
 ### Wallet Encryption
-> Video activating soon
+<iframe width="560" height="315" src="https://www.youtube.com/embed/LUesQJdFgcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
 
 ### HD Wallets
-> Video activating soon
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tIsUHfrqIh0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
 
 ### MOTHER
-> Video activating soon
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AT-_gS0sVb0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
 
 ### Smart Contracts 
-> Video activating soon
+<iframe width="560" height="315" src="https://www.youtube.com/embed/T2NDuantd5w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
 
 ### Beacons
-> Video activating soon
+<iframe width="560" height="315" src="https://www.youtube.com/embed/mzqGwhlPmk8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
 
-### Validator Voting
-> Video activating soon
+<!-- ### Validator Voting
+> Video activating soon -->
 
 
 :::note TIP
