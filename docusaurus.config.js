@@ -103,7 +103,7 @@ const config = {
             items: [
               {label: 'Learn', to: 'https://www.reserveblock.io/#learn',},
               {label: 'Masternodes', to: 'https://www.reserveblock.io/#masternodes',},
-              {label: 'Wallet', to: 'https://www.reserveblock.io/#wallet',},
+              {label: 'RBX Wallet', to: 'https://www.reserveblock.io/#wallet',},
             ],
           },
           {
@@ -117,16 +117,16 @@ const config = {
           {
             title: 'FAQS',
             items: [
-              {label: 'General',to: 'https://www.reserveblock.io/faq#general',},
-              {label: 'Masternodes',to: 'https://www.reserveblock.io/faq#masternodes',},
-              {label: 'Datanodes',to: 'https://www.reserveblock.io/faq#datanodes',},
+              {label: 'General',to: '/docs/FAQs/general-faq/',},
+              {label: 'Core Wallet',to: '/docs/FAQs/core-wallet-faq/',},
+              {label: 'Masternodes',to: '/docs/FAQs/masternode-faq/',},
             ],
           },
           {
             title: 'ABOUT',
             items: [
               {label: 'Disclaimer',to: 'https://www.reserveblock.io/disclaimer'},
-              {label: 'Litepaper',to: 'https://www.reserveblock.io/static/media/ReserveBlockLitePaper.f08596443b119bc51d6d.pdf',},
+              {label: 'Whitepaper v2',to: '/docs/documents/whitepaper-v2/',},
               {label: 'Contact',to: 'mailto:dev@reserveblock.io'},
             ]
           },
