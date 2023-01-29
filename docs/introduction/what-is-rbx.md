@@ -20,10 +20,14 @@ The network aims to help solve current individual adoption challenges of blockch
 
 --
 
-1. [GUI Docs](/docs/GUI/)
+1. [GUI Documentation](/docs/GUI/)
 
-2. [CLI Docs](/docs/CLI/)
+2. [CLI Documentation](/docs/CLI/)
 
-3. [Integration Docs](/docs/integration/)
+3. [Integration Documentation](/docs/integration/)
+
+4. [Video Tutorials](/docs/FAQs/video-tutorials/)
+
+4. [Whitepaper v2](/docs/documents/whitepaper-v2/)
 
 4. [FAQs](/docs/FAQs/)
