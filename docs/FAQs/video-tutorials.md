@@ -17,17 +17,17 @@ sidebar_position: 9
 
 > [GUI Install & Operating Instructions](/docs/GUI/gui-install-instructions#video-tutorial)
 
-> [Database Snapshots](/docs/GUI/gui-operating-instructions#snapshots)
+> [Database Snapshots](/docs/GUI/gui-advanced-instructions#database-snapshots)
 
-> [Wallet Encryption](/docs/GUI/gui-operating-instructions#encrypt-wallet)
+> [Wallet Encryption](/docs/GUI/gui-advanced-instructions#wallet-encryption)
 
-> [HD Wallets](/docs/GUI/gui-operating-instructions#create-hd-wallet)
+> [HD Wallets](/docs/GUI/gui-advanced-instructions#hd-wallets)
 
-> [MOTHER](/docs/GUI/gui-operating-instructions#mother)
+> [MOTHER](/docs/GUI/gui-advanced-instructions#mother)
 
-> [Smart Contracts](/docs/GUI/gui-operating-instructions#smart-contracts)
+> [Smart Contracts](/docs/GUI/gui-advanced-instructions#smart-contracts)
 
-> [Beacons](/docs/GUI/gui-operating-instructions#beacons)
+> [Beacons](/docs/GUI/gui-advanced-instructions#beacons)
 
 
 

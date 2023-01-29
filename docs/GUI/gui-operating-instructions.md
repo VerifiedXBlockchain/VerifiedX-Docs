@@ -54,22 +54,6 @@ To get started, you will need a keypair. You can either generate a new one or im
 
 ---
 
-### Snapshots
-
-To reach block height quicker, you can download a database snapshot from Github. 
-
-Download the snapshot and follow the video tutorial below to learn how to import a snapshot.
-
-:::danger Important
-Be sure to backup your private key(s) beforehand and this process requires a wipe of your database files.
-:::
-
-[Download Snapshot](https://github.com/ReserveBlockIO/ReserveBlockSnapshot/tags)
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/PAQTRGpBNEI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
-
----
-
 ## Interface
 
 The RBX GUI is broken into 3 columns. 
@@ -125,17 +109,13 @@ Will print out your validator address (if you are validating).
 ##### MOTHER
 `Monitor Of The Roster` [*Advanced Feature*] A feature to monitor validators you are running remotely in one place.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/AT-_gS0sVb0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
-
 ##### Create HD Wallet 
 [*Advanced Feature*] A feature for creating a `Hierarchical Deterministic` wallet.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/tIsUHfrqIh0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
 
 ##### Encrypt Wallet
 [*Advanced Feature*] A feature to encrpyt your keys. Enabling this will require you to input your password every time you want to create a transaction.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/LUesQJdFgcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
 
 ##### Show Debug Data 
 Launches a window displaying debug data.
@@ -232,7 +212,6 @@ You can create an RBX Domain through the ADNR service. This allows you to receiv
 
 ### Smart Contracts
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/T2NDuantd5w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
 
 
 <img src={require('./media/smart-contract-editor.jpg').default} width="600" />
@@ -247,7 +226,6 @@ This is where all your NFTs will be listed. Please read further in the [NFTs](#)
 
 ### Beacons
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/mzqGwhlPmk8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
 
 <img src={require('./media/beacons.jpg').default} width="600" />
 
@@ -269,3 +247,20 @@ Create a beacon if you want to be the owner of the relay of assets. Setup your w
 
 #### P2P Auctions
 *Activating Soon*. This is where you'll be able to setup collections and sell/auction them on the network.
+
+
+---
+
+### Database Snapshots
+
+To reach block height quicker, you can download a database snapshot from Github. 
+
+Download the snapshot and follow the video tutorial below to learn how to import a snapshot.
+
+:::danger Important
+Be sure to backup your private key(s) beforehand and this process requires a wipe of your database files.
+:::
+
+[Video Tutorial](/docs/GUI/gui-advanced-instructions#database-snapshots)
+
+[Download Snapshot](https://github.com/ReserveBlockIO/ReserveBlockSnapshot/tags)
