@@ -2,7 +2,10 @@
 
 function navLinks() {
 
-    var allLinks = document.querySelectorAll("a.navbar__item");
+    var desktopLinks = document.querySelectorAll("a.navbar__item");
+    var mobileLinks = document.querySelectorAll(".menu__list-item a");
+    var allLinks = [...desktopLinks, ...mobileLinks];
+
 
     var links = [];
     for(var link of allLinks) {
@@ -24,4 +27,16 @@ function navLinks() {
 
 window.onload = function() {
   navLinks();
+
+  setTimeout(() => {
+    navLinks();
+  }, 1000)
+
+  setTimeout(() => {
+    navLinks();
+  }, 2000)
+
+  setTimeout(() => {
+    navLinks();
+  }, 3000)
 }
