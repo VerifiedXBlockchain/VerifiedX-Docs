@@ -13,7 +13,7 @@ Trillium is a curly-bracket language, but can also execute in a scripting functi
 With Trillium a developer can create NFT driven smart contracts for uses such as royalty enforcement, evolving needs, multi asset collections, soulboundnd items, and many other utility uses as it is agnostic to use-case entirely. 
 
 #### Trillium Syntax Example
-```
+```js
 function helloWorld(name : string) : string
 {
     var result = "Hello " + name
@@ -21,7 +21,6 @@ function helloWorld(name : string) : string
 }
 
 helloWorld("Trillium")
-
 ```
 > Output: `Hello Trillium`
 
