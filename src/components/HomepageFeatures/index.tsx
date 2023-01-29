@@ -89,7 +89,7 @@ function Feature({ title, description, url }: FeatureItem) {
 
         <div className="text--center padding-horiz--md">
           <h2>{title}</h2>
-          <p style={{ fontSize: 18, lineHeight: 1.2, paddingLeft: 42, paddingRight: 42, }}>{description}</p>
+          <p style={{ fontSize: 18, lineHeight: 1.2, paddingLeft: 42, paddingRight: 42, minHeight: 66 }}>{description}</p>
         </div>
         <div className="text--center">
           <a className="button button-3d-white" href={url}>Launch</a>
