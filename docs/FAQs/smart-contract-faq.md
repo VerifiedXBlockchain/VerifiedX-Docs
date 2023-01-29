@@ -73,3 +73,8 @@ sidebar_position: 7
 ### 17. What are the current Gas fees?
 
 > There are no gas fees on the RBX network. The network is a near-zero fee ecosystem and gassless.
+
+:::note TIP
+**Not seeing the answer your looking for? Just ask the community!**
+> <a href="https://discord.com/invite/PnS2HRETDh">Join Discord</a>
+:::

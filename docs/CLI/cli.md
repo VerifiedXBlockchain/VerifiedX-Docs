@@ -9,11 +9,11 @@ Use the CLI on Windows, MacOS, or Linux to interact with the network.
 ## Video Tutorials
 
 ### CLI Linux Install Instructions
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ycYxaCBPZjI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ycYxaCBPZjI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
 
 ### CLI Operating Instructions
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/-jsnScVgrVM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-jsnScVgrVM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
 
 ## Documentation
 

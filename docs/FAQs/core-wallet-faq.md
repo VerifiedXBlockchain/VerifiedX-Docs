@@ -21,3 +21,9 @@ sidebar_position: 2
 ### 4. If I started validating on the GUI wallet and I switch to the CLI wallet, do I need to activate my validator again?
 
 > No, any action taken on either wallet will reflect on both. If you start validating on the CLI wallet, and you open the GUI wallet, your validator will be active as it was on the CLI.
+
+
+:::note TIP
+**Not seeing the answer your looking for? Just ask the community!**
+> <a href="https://discord.com/invite/PnS2HRETDh">Join Discord</a>
+:::

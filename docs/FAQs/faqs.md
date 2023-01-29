@@ -21,3 +21,10 @@ sidebar_position: 0
 8. [Developer FAQs](./developer-faq)
 
 9. [Video Tutorials](./video-tutorials)
+
+
+
+:::note Tip
+**Not seeing the answer your looking for? Just ask the community!**
+> <a href="https://discord.com/invite/PnS2HRETDh">Join Discord</a>
+:::

@@ -86,4 +86,9 @@ sidebar_position: 1
 
 ## 20. If I am a masternode can I vote for changes or improvements on the network?
 
-> Yes, any active validator who has crafted at least one block may submit a topic for voting by all peers. All validators are who govern the network and shape its future. Non-validators, such as developers, may introduce a proposal to the network through the community discord channel and engage with the community to lobby a node to sponsor a topic for submission on the network for voting. All topics are viewed real-time through the RBX core wallet as well as votes, with both completely on-chain, creating an archive.
+> Yes, any active validator who has crafted at least one block may submit a topic for voting by all peers. Validators are the ones who govern the network and shape its future. Non-validators, such as developers, may introduce a proposal to the network through the community discord channel and engage with the community to lobby a node to sponsor a topic for submission on the network for voting. All topics are viewed real-time through the RBX core wallet as well as votes, with both completely on-chain, creating an archive.
+
+:::note TIP
+**Not seeing the answer your looking for? Just ask the community!**
+> <a href="https://discord.com/invite/PnS2HRETDh">Join Discord</a>
+:::

@@ -27,3 +27,9 @@ sidebar_position: 8
 ## 6. Where can developer docs and resources be found?
 
 > Docs and tutorials will be available (along with current updates) on the RBX site, however most resources can also be found on the RBX GitHub & developer channels on the Discord.
+
+
+:::note Tip
+**Not seeing the answer your looking for? Just ask the community!**
+> <a href="https://discord.com/invite/PnS2HRETDh">Join Discord</a>
+:::

@@ -51,3 +51,8 @@ sidebar_position: 5
 ## 12. Will a user need to disable the computers firewall when acting as a masternode?
 
 > NO.
+
+:::note TIP
+**Not seeing the answer your looking for? Just ask the community!**
+> <a href="https://discord.com/invite/PnS2HRETDh">Join Discord</a>
+:::

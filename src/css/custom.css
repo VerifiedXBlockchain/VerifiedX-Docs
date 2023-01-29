@@ -177,3 +177,35 @@
   box-shadow: #d6d6e7 0 3px 7px inset;
   transform: translateY(2px);
 }
+
+.social-link {
+  width: 18px;
+  height: 18px;
+  text-indent: -9999px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-top: 8px;
+  margin-right: 8px;
+  transition: opacity .3s;
+
+}
+
+.social-link:hover{
+  opacity: 0.8;
+}
+
+.social-link-twitter {
+  background-image:url(/img/twitter.png);
+}
+
+.social-link-discord {
+  background-image:url(/img/discord.png);
+}
+
+.social-link-telegram {
+  background-image:url(/img/telegram.png);
+}
+
+.social-link-github {
+  background-image:url(/img/github.png);
+}

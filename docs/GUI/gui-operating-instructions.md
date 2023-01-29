@@ -154,6 +154,7 @@ View all transactions that pertain to your wallets. You view all the details abo
 This is where you can enable your machine/wallet as a validator. It's important to note that:
 - Only one validator per address is allowed.
 - Only one validator per IP address is allowed.
+- Static IP addresses are recommended to prevent missed tasks if/when your IP address is renewed on a dynamic IP. 
 - It's recommended you open port `3338` as an incoming port. If this is a home network, you'll need to setup port forwarding from your router to the specific local IP address of your machine.
 > If the network determines you have multiple validators using the same address or IP address, a red warning will be displayed at the top of the GUI with instructions on how to correct it.
 

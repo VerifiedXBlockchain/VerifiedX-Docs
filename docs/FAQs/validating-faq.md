@@ -63,3 +63,8 @@ sidebar_position: 6
 ### 11. How many rewards should I expect to be rewarded per node?
 
 > All rewards are random, but connection uptime and a proper wallet maintenance schedule will give a node a better chance at block rewards but not an advantage over any other.
+
+:::note TIP
+**Not seeing the answer your looking for? Just ask the community!**
+> <a href="https://discord.com/invite/PnS2HRETDh">Join Discord</a>
+:::

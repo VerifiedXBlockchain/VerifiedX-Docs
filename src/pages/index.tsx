@@ -25,7 +25,7 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <a
             className="button button-3d-white"
-            href="/docs/intro">
+            href="/docs/introduction/what-is-rbx">
             Get Started
           </a>
         </div>

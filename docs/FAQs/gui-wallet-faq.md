@@ -91,3 +91,8 @@ sidebar_position: 3
 ### 22. What is the difference between a “Created Beacon” and a “Remote Beacon”?
 
 > When a user creates a beacon, the wallet will participate in acting as a relay with media transfer on the RBX network, however it is not required, and a user may send media to any peer without having their own beacon at all. Adding a remote beacon is for any user who wishes to add a known beacon they prefer to serve as their relay when receiving media, which again is not a requirement when receiving, this is only a preference.
+
+:::note TIP
+**Not seeing the answer your looking for? Just ask the community!**
+> <a href="https://discord.com/invite/PnS2HRETDh">Join Discord</a>
+:::

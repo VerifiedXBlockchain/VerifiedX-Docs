@@ -47,7 +47,7 @@ const FeatureList: FeatureItem[] = [
 
     description: (
       <>
-        Read our frequently asked questions.
+        Read the network's frequently asked questions.
 
       </>
     ),
