@@ -6,6 +6,12 @@ sidebar_position: 3
 
 This is the operating instructions for the RBXWallet GUI. Whether running on `Windows` or `Mac`, the details will remain the same unless otherwise specified.
 
+:::tip Video Tutorial
+This topic is also covered with a video tutorial on the previous page.
+
+[Watch Video](/docs/GUI/gui-install-instructions#video-tutorial)
+:::
+
 ## Overview
 
 When you load the wallet, it will begin to sync with peers on the network. You can see how many peers you are connected to in the right side bar [`x/8 Peers (In / Out)`]. Your local block height is displayed below in the `Spy Glass` (dark box below). To find out what the network's block height is, visit the [Explorer](https://rbx.network/).
@@ -45,6 +51,22 @@ To get started, you will need a keypair. You can either generate a new one or im
 3. Paste in your existing Private Key and click `Submit`.
 
 > You can also create and HD wallet OR encrypt your wallet but those topics will be covered in the Advanced Operating instructions.
+
+---
+
+### Snapshots
+
+To reach block height quicker, you can download a database snapshot from Github. 
+
+Download the snapshot and follow the video tutorial below to learn how to import a snapshot.
+
+:::danger Important
+Be sure to backup your private key(s) beforehand and this process requires a wipe of your database files.
+:::
+
+[Download Snapshot](https://github.com/ReserveBlockIO/ReserveBlockSnapshot/tags)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PAQTRGpBNEI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
 
 ---
 
@@ -88,31 +110,47 @@ You can click the `Manage Wallets` button at the bottom of the dropdown menu to 
 
 <img src={require('./media/recent-transactions.jpg').default} width="400" />
 
-##### General Tools
+#### General Tools
 
 In the top center of the Dashboard, there are some general tools that can be accessed.
 
 <img src={require('./media/general-tools.jpg').default} width="600" />
 
-**Print Addresses**: Will print out all your addresses contained in your wallet to the `Status Log` below.
+##### Print Addresses 
+Will print out all your addresses contained in your wallet to the `Status Log` below.
 
-**Print Validators**: Will print out your validator address (if you are validating).
+##### Print Validators 
+Will print out your validator address (if you are validating).
 
-**MOTHER**: `Monitor Of The Roster` [*Advanced Feature*] A feature to monitor validators you are running remotely in one place.
+##### MOTHER
+`Monitor Of The Roster` [*Advanced Feature*] A feature to monitor validators you are running remotely in one place.
 
-**Create HD Wallet**: [*Advanced Feature*] A feature for creating a `Hierarchical Deterministic` wallet.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AT-_gS0sVb0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
 
-**Encrypt Wallet** : [*Advanced Feature*] A feature to encrpyt your keys. Enabling this will require you to input your password every time you want to create a transaction.
+##### Create HD Wallet 
+[*Advanced Feature*] A feature for creating a `Hierarchical Deterministic` wallet.
 
-**Show Debug Data**: Launches a window displaying debug data.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tIsUHfrqIh0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
 
-**Open DB Folder**: Will open your local databases/configration folder in explorer (Windows) or finder (MacOS).
+##### Encrypt Wallet
+[*Advanced Feature*] A feature to encrpyt your keys. Enabling this will require you to input your password every time you want to create a transaction.
 
-**Open Log**: Will open your local log file in your default text editing program.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/LUesQJdFgcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
 
-**Backup**: Feature to backup your keys and/or your NFT media.
+##### Show Debug Data 
+Launches a window displaying debug data.
 
-**Restart CLI**: Will restart the CLI in the background without closing the GUI.
+##### Open DB Folder 
+Will open your local databases/configration folder in explorer (Windows) or finder (MacOS).
+
+##### Open Log 
+Will open your local log file in your default text editing program.
+
+##### Backup 
+Feature to backup your keys and/or your NFT media.
+
+##### Restart CLI 
+Will restart the CLI in the background without closing the GUI.
 
 ### Send
 
@@ -194,10 +232,12 @@ You can create an RBX Domain through the ADNR service. This allows you to receiv
 
 ### Smart Contracts
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/T2NDuantd5w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
+
+
 <img src={require('./media/smart-contract-editor.jpg').default} width="600" />
 
-
-This is where you can compile Smart Contracts and mint them into NFTs. Please read further in the [Smart Contract Creation](#) section.
+This is where you can compile Smart Contracts and mint them into NFTs.
 
 ### NFTs
 This is where all your NFTs will be listed. Please read further in the [NFTs](#) section.
@@ -207,10 +247,13 @@ This is where all your NFTs will be listed. Please read further in the [NFTs](#)
 
 ### Beacons
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/mzqGwhlPmk8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
+
 <img src={require('./media/beacons.jpg').default} width="600" />
 
 
 This allows you host or add non-default media beacons.
+
 
 #### Add Remote Beacon
 
