@@ -8,7 +8,7 @@ sidebar_position: 2
 
 
 <a href="/documents/RBX_Blockchain_Whitepaper.pdf" download="RBX_Blockchain_Whitepaper.pdf" target="_blank">
-    <img src={require('./media/whitepaper-v1.jpg').default} width="300" />
+    <img src={require('./media/whitepaperv1.jpg').default} width="300" />
     <div>Click to Download</div>
 </a>
 
