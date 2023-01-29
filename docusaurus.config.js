@@ -144,6 +144,13 @@ const config = {
       
           
     }),
+    scripts: [
+      {
+        src: "/scripts/links.js",
+        async: true,
+      }
+      
+    ]
 };
 
 module.exports = config;
