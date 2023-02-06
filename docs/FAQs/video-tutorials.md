@@ -17,8 +17,6 @@ sidebar_position: 9
 
 > [GUI Install & Operating Instructions](/docs/GUI/gui-install-instructions#video-tutorial)
 
-> [Database Snapshots](/docs/GUI/gui-advanced-instructions#database-snapshots)
-
 > [Wallet Encryption](/docs/GUI/gui-advanced-instructions#wallet-encryption)
 
 > [HD Wallets](/docs/GUI/gui-advanced-instructions#hd-wallets)

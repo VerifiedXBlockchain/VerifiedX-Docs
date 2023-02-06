@@ -253,15 +253,11 @@ Create a beacon if you want to be the owner of the relay of assets. Setup your w
 
 ### Database Snapshots
 
-To reach block height quicker, you can download a database snapshot from Github. 
+To reach block height quicker, you can download a database snapshot. The GUI now supports automated snapshot importing if you are far enough behind in blocks.
 
-Download the snapshot and follow the video tutorial below to learn how to import a snapshot.
-
+Download the snapshot and follow the video tutorial below to learn how to import a snapshot. You will be prompted on startup if you meet the snapshot criteria. 
 
 :::danger Important
-Be sure to backup your private key(s) beforehand and this process requires a wipe of your database files. After backing up, be sure to DELETE the files within your `RBX/Databases` folder rather than just OVERWRITE them.
+Be sure to backup your private key(s) beforehand and this process requires a wipe of your database files.
 :::
 
-[Video Tutorial](/docs/GUI/gui-advanced-instructions#database-snapshots)
-
-[Download Snapshot](https://github.com/ReserveBlockIO/ReserveBlockSnapshot/tags)
