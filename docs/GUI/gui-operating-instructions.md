@@ -257,10 +257,9 @@ To reach block height quicker, you can download a database snapshot from Github.
 
 Download the snapshot and follow the video tutorial below to learn how to import a snapshot.
 
-> Be sure to DELETE the files within your `RBX/Databases` rather than just OVERWRITE them.
 
 :::danger Important
-Be sure to backup your private key(s) beforehand and this process requires a wipe of your database files.
+Be sure to backup your private key(s) beforehand and this process requires a wipe of your database files. After backing up, be sure to DELETE the files within your `RBX/Databases` folder rather than just OVERWRITE them.
 :::
 
 [Video Tutorial](/docs/GUI/gui-advanced-instructions#database-snapshots)
