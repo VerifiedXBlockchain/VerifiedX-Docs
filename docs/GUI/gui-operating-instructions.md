@@ -261,3 +261,5 @@ Download the snapshot and follow the video tutorial below to learn how to import
 Be sure to backup your private key(s) beforehand and this process requires a wipe of your database files.
 :::
 
+> [Video Tutorial](/docs/GUI/gui-advanced-instructions#ota-and-snapshot-automator)
+

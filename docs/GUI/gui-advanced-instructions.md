@@ -4,6 +4,9 @@ sidebar_position: 4
 
 # GUI Advanced Operating Instructions
 
+## OTA and Snapshot Automator
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YAo4wos2glE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
+
 ## Wallet Encryption
 <iframe width="560" height="315" src="https://www.youtube.com/embed/LUesQJdFgcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
 
