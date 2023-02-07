@@ -115,12 +115,12 @@ The CLI configuration file will be found in `~/RBX/Config/config.txt`.
 	+ b.	Ex: AllowedExtensionsTypes=pdf,doc,xls
 	+ c.	This will remove extension types to the already defined list and will allow any NFT assets with these known extension types to be downloaded
 	
-22. 	MotherAddress (default is null)
+22.     MotherAddress (default is null)
 	+ a. Type string
 	+ b. Ex: 111.222.333.444
 	+ c. The IP address of the wallet you are hosting MOTHER on
 
-23. 	MotherPassword (default is null)
+23.     MotherPassword (default is null)
 	+ a. Type string
 	+ b. Ex: MyPassword
 	+ c. The password set when configuring MOTHER
