@@ -11,7 +11,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'RBXWiki',
   tagline: 'Democratizing Tokenization For Everyone',
-  url: 'https://reserveblock.io',
+  url: 'https://wiki.reserveblock.io',
   baseUrl: '/',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
