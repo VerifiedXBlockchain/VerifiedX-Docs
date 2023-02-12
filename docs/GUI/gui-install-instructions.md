@@ -12,7 +12,7 @@ This is the download and install instructions for the RBXWallet GUI.
 
 ## Downloading
 
-Visit this [Github Link](https://github.com/ReserveBlockIO/rbx-wallet-gui/releases/tag/beta3.2) to download the latest install files. Scroll to the bottom of the page and choose the appropriate file.
+Visit this [Github Link](https://github.com/ReserveBlockIO/rbx-wallet-gui/releases/latest) to download the latest install files. Scroll to the bottom of the page and choose the appropriate file.
 
 ![](media/gui-download.jpg)
 
