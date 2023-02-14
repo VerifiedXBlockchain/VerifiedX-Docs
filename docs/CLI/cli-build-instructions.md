@@ -37,6 +37,35 @@ Linux Install For Ubuntu 22.04:
 
 You are done! You should now see a wallet running! Some common errors are usually related to file permissions. Please ensure you have given proper permission to the newly created RBX folder
 
+### Dotnet Conflicts
+
+If you see an error like this, it means your have a conflict with dotnet versions.
+```
+A fatal error occurred. The folder [/usr/share/dotnet/host/fxr] does not exist
+```
+To fix, run the following commands:
+```
+sudo apt remove dotnet*
+sudo apt remove aspnetcore*
+sudo apt remove netstandard*
+
+sudo nano /etc/apt/preferences.d/99microsoft-dotnet.pref
+```
+
+Then paste in the following and save/exit nano:
+```
+Package: *
+Pin: origin "packages.microsoft.com"
+Pin-Priority: 1001
+```
+
+Then run:
+```
+sudo apt update
+sudo apt install dotnet-sdk-6.0
+```
+
+
 ## Windows
 
 Install the latest dotnet sdk from here: https://dotnet.microsoft.com/en-us/download/dotnet/6.0
