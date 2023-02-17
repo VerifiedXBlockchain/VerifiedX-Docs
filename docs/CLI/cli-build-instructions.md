@@ -16,16 +16,14 @@ In the last step for _dotnet ReserveBlockCore(.dll or .exe or blank)_ if that do
 Linux Install For Ubuntu 22.04:
 
 1. wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-   sudo dpkg -i packages-microsoft-prod.deb
-   rm packages-microsoft-prod.deb
-2. sudo apt-get update && \
-   sudo apt-get install -y dotnet-sdk-6.0
-3. sudo apt-get update && \
-   sudo apt-get install -y aspnetcore-runtime-6.0
-4. run `dotnet --version`. You should see a version number of 6.0.xxx
-5. `mkdir rbx` - Makes a direction for RBX
-6. cd rbx
-7. a) Clone the repo with git. `git clone https://github.com/ReserveBlockIO/ReserveBlock-Core.git`
+2. sudo dpkg -i packages-microsoft-prod.deb
+3. rm packages-microsoft-prod.deb
+4. sudo apt-get update && sudo apt-get install -y dotnet-sdk-6.0
+5. sudo apt-get update && sudo apt-get install -y aspnetcore-runtime-6.0
+6. run `dotnet --version`. You should see a version number of 6.0.xxx
+7. `mkdir rbx` - Makes a direction for RBX
+8. cd rbx
+9. a) Clone the repo with git. `git clone https://github.com/ReserveBlockIO/ReserveBlock-Core.git`
 
    b) Download the already packaged release https://github.com/ReserveBlockIO/ReserveBlock-Core/releases/. If you do this please navigate to folder you downloaded binaries from and skip to step 12.
 
