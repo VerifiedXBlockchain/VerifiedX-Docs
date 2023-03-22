@@ -25,7 +25,7 @@ Basic Payload Example:
    "SmartContractAsset": {
       "AssetId": "00000000-0000-0000-0000-000000000000",
       "Name": "welness.jpg",
-      "AssetAuthorName": "TS123",
+      "AssetAuthorName": "Author's Name",
       "Location": "/path/to/asset.jpg",
       "Extension": "jpg",
       "FileSize": 1024,
@@ -49,11 +49,11 @@ Response Example:
          "Name": "Test",
          "Description": "Hello world",
          "MinterAddress": "Rabc123...",
-         "MinterName": "TS123",
+         "MinterName": "Minter's Name",
          "SmartContractAsset": {
             "AssetId": "00000000-0000-0000-0000-000000000000",
             "Name": "welness.jpg",
-            "AssetAuthorName": "TS123",
+            "AssetAuthorName": "Author's Name",
             "Location": "/path/to/asset.jpg",
             "Extension": "jpg",
             "FileSize": 1024,
@@ -146,7 +146,7 @@ You can combine all three features into a single smart contract, but you can not
             "FeatureFeatures": [
                 {
                     "AssetId": "00000000-0000-0000-0000-000000000000",
-                    "AssetAuthorName": "Author Name",
+                    "AssetAuthorName": "Author's Name",
                     "Location": "/path/to/asset1.jpg",
                     "Extension": "jpg",
                     "FileSize": 1024,
@@ -154,7 +154,7 @@ You can combine all three features into a single smart contract, but you can not
                 },
                 {
                     "AssetId": "00000000-0000-0000-0000-000000000000",
-                    "AssetAuthorName": "Author Name",
+                    "AssetAuthorName": "Author's Name",
                     "Location": "/path/to/asset2.jpg",
                     "Extension": "jpg",
                     "FileSize": 1024,
@@ -185,7 +185,7 @@ You can combine all three features into a single smart contract, but you can not
                     "IsCurrentState": false,
                     "SmartContractAsset": {
                         "AssetId": "00000000-0000-0000-0000-000000000000",
-                        "AssetAuthorName": "Author Name",
+                        "AssetAuthorName": "Author's Name",
                         "Location": "/path/to/asset1.jpg",
                         "Extension": "jpg",
                         "FileSize": 1024,
@@ -202,7 +202,7 @@ You can combine all three features into a single smart contract, but you can not
                     "IsCurrentState": false,
                     "SmartContractAsset": {
                         "AssetId": "00000000-0000-0000-0000-000000000000",
-                        "AssetAuthorName": "Author Name",
+                        "AssetAuthorName": "Author's Name",
                         "Location": "/path/to/asset2.jpg",
                         "Extension": "jpg",
                         "FileSize": 1024,
@@ -234,7 +234,7 @@ You can combine all three features into a single smart contract, but you can not
                     "IsCurrentState": false,
                     "SmartContractAsset": {
                         "AssetId": "00000000-0000-0000-0000-000000000000",
-                        "AssetAuthorName": "Author Name",
+                        "AssetAuthorName": "Author's Name",
                         "Location": "/path/to/asset1.jpg",
                         "Extension": "jpg",
                         "FileSize": 1024,
@@ -266,7 +266,7 @@ You can combine all three features into a single smart contract, but you can not
                     "IsCurrentState": false,
                     "SmartContractAsset": {
                         "AssetId": "00000000-0000-0000-0000-000000000000",
-                        "AssetAuthorName": "Author Name",
+                        "AssetAuthorName": "Author's Name",
                         "Location": "/path/to/asset1.jpg",
                         "Extension": "jpg",
                         "FileSize": 1024,
