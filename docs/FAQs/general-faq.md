@@ -18,7 +18,7 @@ sidebar_position: 1
 
 ## 4. Do you need to own crypto to use rbx network?
 
-> A user will need to have a small amount of RBX to mint or do a transaction at the nominal near zero fees or assure the minimum 1,000 RBX to become a node as a validator on the network and provide governance. RBX is also the network’s native currency.
+> A user will need to have a small amount of RBX to mint or do a transaction at the nominal near zero fees or assure the minimum 12,000 RBX to become a node as a validator on the network and provide governance. RBX is also the network’s native currency.
 
 ## 5. Is there a desktop app for the rbx network?
 

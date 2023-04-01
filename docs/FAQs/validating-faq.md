@@ -8,7 +8,7 @@ sidebar_position: 6
 
 ### 1. How do I start validating with the CLI wallet?
 
-> To start validating a user must have the minimum requirements of 1,000 RBX, a machine such as a laptop, a unique IP address and the current version of the core wallet with a unique RBX address. A user may enter the number corresponding to the command Startup Node and follow the steps on the screen to activate your validator.
+> To start validating a user must have the minimum requirements of 12,000 RBX, a machine such as a laptop, a unique IP address and the current version of the core wallet with a unique RBX address. A user may enter the number corresponding to the command Startup Node and follow the steps on the screen to activate your validator.
 
 ### 2. How can I check if my validator is active?
 
@@ -22,7 +22,7 @@ sidebar_position: 6
 
 ### 1. What are the requirements to Validate?
 
-> To validate a user must have an active RBX account with a minimum of 1000 RBX and meet the other same requirements as operating a validator with the CLI.
+> To validate a user must have an active RBX account with a minimum of 12,000 RBX and meet the other same requirements as operating a validator with the CLI.
 
 ### 2. How do I activate my validator?
 
