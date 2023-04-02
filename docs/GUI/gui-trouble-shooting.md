@@ -35,6 +35,24 @@ You may have a corrupt database file. Ensure your private keys(s) are backed up,
 
 5. Launch your GUI.
 
+### Could be a permission issue (Windows)
+
+On some versions of windows, you may run into permission problems with the core CLI launching the API. To solve this issue you'll want to set both the GUI and the CLI to run as adminstrator:
+
+1. Navigate to `C:\Program Files (x87)\RBXWallet\`
+
+2. Right click on `RBXWallet.exe` and choose `Properties`
+> If you don't see `RBXWallet.exe` it's likely because you don't have extensions visible on your machine. Instead, just look for `RBXWallet`.
+
+3. Go to the compatability tab and click `Change settings for all users`
+
+4. Enable the checkbox for `Run this program as administrator` and click OK, and then OK again.
+
+5. Navigate into the `RBXCore` folder and repeat the same step for `ReserveBlockCore.exe`
+> If you don't have hidden files enabled, you will see three files called `ReserveBlockCore`. You'll want to use the one that has the RBX cube icon.
+
+6. Then launch the GUI as normal and everything should work as expected.
+
 ### It's still not working.
 
 We've determined it is not due to a rogue process nor a corrupted database. What we'll try next is seeing if we can manually launch the CLI.

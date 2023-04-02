@@ -50,6 +50,24 @@ Once downloaded (likely to your `Downloads` folder) you'll need to run the insta
 
 > If you are having trouble running it, try right clicking on the icon and choose `Run as administrator`.
 
+#### Windows 11 Enterprise
+On some versions of windows, you may run into permission problems with the core CLI launching the API. To solve this issue you'll want to set both the GUI and the CLI to run as adminstrator:
+
+1. Navigate to `C:\Program Files (x87)\RBXWallet\`
+
+2. Right click on `RBXWallet.exe` and choose `Properties`
+> If you don't see `RBXWallet.exe` it's likely because you don't have extensions visible on your machine. Instead, just look for `RBXWallet`.
+
+3. Go to the compatability tab and click `Change settings for all users`
+
+4. Enable the checkbox for `Run this program as administrator` and click OK, and then OK again.
+
+5. Navigate into the `RBXCore` folder and repeat the same step for `ReserveBlockCore.exe`
+> If you don't have hidden files enabled, you will see three files called `ReserveBlockCore`. You'll want to use the one that has the RBX cube icon.
+
+6. Then launch the GUI as normal and everything should work as expected.
+
+
 ### MacOS
 
 1. Double click the installer file which will open a window in the bottom left corner of your screen.
@@ -63,6 +81,9 @@ Once downloaded (likely to your `Downloads` folder) you'll need to run the insta
 4. For subsequent launches of the wallet, you can find it in your `/Applications` folder on your computer.
 
 <img src={require('./media/mac-install-2.jpg').default} width="400" />
+
+
+
 
 
 
