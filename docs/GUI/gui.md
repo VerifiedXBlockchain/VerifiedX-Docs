@@ -25,3 +25,10 @@ Download and Install the application for your operating system (Windows or MacOS
 Learn how to operate the application.
 
 [Operating Instructions](./gui-operating-instructions)
+
+
+#### P2P Auctions
+
+Learn about P2P auctions in the RBX network.
+
+[P2P Auctions](./p2p-auctions)

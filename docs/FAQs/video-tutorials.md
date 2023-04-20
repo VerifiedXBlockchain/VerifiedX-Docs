@@ -29,6 +29,7 @@ sidebar_position: 9
 
 > [Beacons](/docs/GUI/gui-advanced-instructions#beacons)
 
+> [P2P Auctions](/docs/GUI/p2p-auctions#video-tutorial)
 
 
 
