@@ -12,7 +12,7 @@ This section covers integrating the RBX network as a third-party.
 
 3. [Creating Transactions](./transaction-creation)
 
-4. [Smart Contracts](./smart-contracts)
+4. [Smart Contracts](./smart-contracts/)
 
 5. [Trillium](./trillium)
 

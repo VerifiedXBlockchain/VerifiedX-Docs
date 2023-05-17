@@ -1,6 +1,8 @@
 ---
 sidebar_position: 2
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Compiling & Minting
 
@@ -74,21 +76,41 @@ Response Example:
 Code Example
 
 <Tabs>
-<TabItem value="node" label="NodeJS">
+<TabItem value="js" label="NodeJS">
 
 ```js
-a
+const payload = {}; // JSON Payload from above
+const url = "http://localhost:7292/scapi/scv1/CreateSmartContract";
+const request = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+});
 
+const data = await request.json();
+console.log(data);
+
+if(data["Success"] == true){
+    // Success
+}
 ```
 
 </TabItem>
 
-<TabItem value="python" label="Python">
+<TabItem value="py" label="Python">
 
 ```python
+import requests
 
+payload = {}  # JSON Payload from above
+url = "http://localhost:7292/scapi/scv1/CreateSmartContract"
+response = requests.post(url, json=payload)
 
+data = response.json()
+print(data)
 
+if data.get("Success"):
+    # Success
 ```
 
 </TabItem>
