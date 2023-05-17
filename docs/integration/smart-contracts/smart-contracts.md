@@ -7,18 +7,18 @@ sidebar_position: 5
 
 This section covers Smart Contracts.
 
-1. [Compiling & Minting](./smart-contracts/compiling-and-minting)
+1. [Compiling & Minting](./compiling-and-minting)
 
-2. [Tranferring NFTs](./smart-contracts/transferring)
+2. [Tranferring NFTs](./transferring)
 
-3. [Burning NFTs](./smart-contracts/burning)
+3. [Burning NFTs](./burning)
 
-4. [Evolving NFTs](./smart-contracts/evolving)
+4. [Evolving NFTs](./evolving)
 
-5. [Auction Houses](./smart-contracts/auction-house)
+5. [Auction Houses](./auction-house)
 
-6. [Collections](./smart-contracts/collections)
+6. [Collections](./collections)
 
-6. [Listings](./smart-contracts/listings)
+6. [Listings](./listings)
 
-6. [Bids](./smart-contracts/bids)
+6. [Bids](./bids)

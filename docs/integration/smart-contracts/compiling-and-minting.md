@@ -71,6 +71,29 @@ Response Example:
 
 ```
 
+Code Example
+
+<Tabs>
+<TabItem value="node" label="NodeJS">
+
+```js
+a
+
+```
+
+</TabItem>
+
+<TabItem value="python" label="Python">
+
+```python
+
+
+
+```
+
+</TabItem>
+</Tabs>
+
 ## Minting
 
 API Endpoint:
