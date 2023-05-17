@@ -2,6 +2,9 @@
 sidebar_position: 7
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Listings
 
 ## Create / Update Listing
@@ -13,26 +16,46 @@ POST http://localhost:7292/dstapi/DSTV1/SaveListing
 ```
 
 Params:
+
 ```json
 {
-    "Id": 0,
-    "CollectionId": 1,
-    "SmartContractUID": "SC_ID_HERE",
-    "AddressOwner": "Rabc123...",
-    "BuyNowPrice": 10,
-    "IsBuyNowOnly": false,
-    "RequireBalanceCheck": true,
-    "FloorPrice": 25,
-    "ReservePrice": 30,
-    "StartDate": "YYYY-MM-DDTHH:mm:ss.sssZ",
-    "EndDate": "YYYY-MM-DDTHH:mm:ss.sssZ",
+  "Id": 0,
+  "CollectionId": 1,
+  "SmartContractUID": "SC_ID_HERE",
+  "AddressOwner": "Rabc123...",
+  "BuyNowPrice": 10,
+  "IsBuyNowOnly": false,
+  "RequireBalanceCheck": true,
+  "FloorPrice": 25,
+  "ReservePrice": 30,
+  "StartDate": "YYYY-MM-DDTHH:mm:ss.sssZ",
+  "EndDate": "YYYY-MM-DDTHH:mm:ss.sssZ"
 }
 ```
+
 > Use ID of `0` if it's a new listing. For updating, use the existing ID of that listing.
 
+Code Example
+
+<Tabs>
+<TabItem value="js" label="NodeJS">
+
+```js
+const listed = list();
+```
+
+</TabItem>
+
+<TabItem value="py" label="Python">
+
+```python
+  list(Please)
+```
+
+</TabItem>
+</Tabs>
 
 ## List Listings
-
 
 API Endpoint:
 
@@ -44,7 +67,28 @@ URL Params:
 
 `collectionId`: The ID of the collection
 
+Code Example
+
+<Tabs>
+<TabItem value="js" label="NodeJS">
+
+```js
+const listed = list();
+```
+
+</TabItem>
+
+<TabItem value="py" label="Python">
+
+```python
+  list(Please)
+```
+
+</TabItem>
+</Tabs>
+
 Response:
+
 ```json
 {
     "Success": true,
@@ -67,12 +111,13 @@ URL Params:
 `id`: ID of the listing
 
 Response:
+
 ```json
 {
     "Success": true,
     "Listing": {
         ...
-    } 
+    }
 }
 ```
 
@@ -89,12 +134,12 @@ URL Params:
 `id`: ID of the listing
 
 Response:
+
 ```json
 {
-    "Success": true,
+  "Success": true
 }
 ```
-
 
 ## Delete Listing
 
@@ -109,8 +154,9 @@ URL Params:
 `id`: ID of the listing
 
 Response:
+
 ```json
 {
-    "Success": true,
+  "Success": true
 }
 ```
