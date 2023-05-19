@@ -19,6 +19,5 @@ This section covers Smart Contracts.
 
 6. [Collections](./collections)
 
-6. [Listings](./listings)
+7. [Listings](./listings)
 
-6. [Bids](./bids)
