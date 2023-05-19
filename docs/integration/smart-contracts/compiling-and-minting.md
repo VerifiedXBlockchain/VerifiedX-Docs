@@ -79,20 +79,42 @@ Code Example
 <TabItem value="js" label="NodeJS">
 
 ```js
-const payload = {}; // JSON Payload from above
-const url = "http://localhost:7292/scapi/scv1/CreateSmartContract";
-const request = await fetch(url, {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(payload),
-});
+const compileNft = async () => {
 
-const data = await request.json();
-console.log(data);
+    const payload = {
+        "Name": "Smart Contract Name",
+        "MinterName": "Minter's Name",
+        "Description": "Description Goes Here",
+        "SmartContractAsset": {
+            "AssetId": "00000000-0000-0000-0000-000000000000",
+            "Name": "file.jpg",
+            "AssetAuthorName": "Author's Name",
+            "Location": "/path/to/file.jpg",
+            "Extension": "jpg",
+            "FileSize": 488734,
+        },
+        "IsPublic": false,
+        "SmartContractUID": "00000000-0000-0000-0000-000000000000",
+        "Features": [],
+        "MinterAddress": "xDnL4MCGtgHu85JJHdN1fkXinHzKaqVQ59"
+    };
 
-if (data["Success"] == true) {
-  // Success
-}
+    const url = `${CLI_BASE_URL}/scapi/scv1/CreateSmartContract`;
+    const request = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    });
+
+    const data = await request.json();
+
+    if(data[0]["Success"] == true){
+        return data[0]['SmartContract']['SmartContractUID'];
+    }
+
+    return null;
+};
+
 ```
 
 </TabItem>
@@ -101,16 +123,37 @@ if (data["Success"] == true) {
 
 ```python
 import requests
+import json
 
-payload = {}  # JSON Payload from above
-url = "http://localhost:7292/scapi/scv1/CreateSmartContract"
-response = requests.post(url, json=payload)
+def compile_nft():
+    payload = {
+        "Name": "Smart Contract Name",
+        "MinterName": "Minter's Name",
+        "Description": "Description Goes Here",
+        "SmartContractAsset": {
+            "AssetId": "00000000-0000-0000-0000-000000000000",
+            "Name": "file.jpg",
+            "AssetAuthorName": "Author's Name",
+            "Location": "/path/to/file.jpg",
+            "Extension": "jpg",
+            "FileSize": 488734,
+        },
+        "IsPublic": False,
+        "SmartContractUID": "00000000-0000-0000-0000-000000000000",
+        "Features": [],
+        "MinterAddress": "xDnL4MCGtgHu85JJHdN1fkXinHzKaqVQ59"
+    }
 
-data = response.json()
-print(data)
+    url = f"{CLI_BASE_URL}/scapi/scv1/CreateSmartContract"
+    headers = {"Content-Type": "application/json"}
+    response = await requests.post(url, headers=headers, data=json.dumps(payload))
 
-if data.get("Success"):
-    # Success
+    data = response.json()
+
+    if data[0]["Success"] == True:
+        return data[0]["SmartContract"]["SmartContractUID"]
+
+    return None
 ```
 
 </TabItem>
