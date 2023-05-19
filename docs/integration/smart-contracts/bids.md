@@ -2,10 +2,12 @@
 sidebar_position: 8
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Bids
 
 ## List Bids
-
 
 API Endpoint:
 
@@ -16,9 +18,28 @@ GET http://localhost:7292/dstapi/DSTV1/GetListingBids/{listingId}/0
 URL Params:
 
 `listingId`: ID of the listing
+Code Example
 
+<Tabs>
+<TabItem value="js" label="NodeJS">
+
+```js
+const bid = bid();
+```
+
+</TabItem>
+
+<TabItem value="py" label="Python">
+
+```python
+  bid(Please)
+```
+
+</TabItem>
+</Tabs>
 
 Response:
+
 ```json
 {
     "Success": true,
@@ -55,29 +76,28 @@ URL Params:
 
 `bidId`: ID of the bid
 
-
 Response:
+
 ```json
 {
-    "Success": true,
-    "Bid":   {
-        "Id": "0000-0000...",
-        "BidAddress": "Rabc123...",
-        "BidSignature": "...",
-        "BidAmount": 10,
-        "BidSendTime": 1684246774,
-        "IsBuyNow": false,
-        "IsProcessed": true,
-        "ListingId": 1,
-        "CollectionId": 1,
-        "PurchaseKey": "abc123",
-        "BidStatus": 0,
-        "BidSendReceive": 0,
-        "RawBid": false
-    },
+  "Success": true,
+  "Bid": {
+    "Id": "0000-0000...",
+    "BidAddress": "Rabc123...",
+    "BidSignature": "...",
+    "BidAmount": 10,
+    "BidSendTime": 1684246774,
+    "IsBuyNow": false,
+    "IsProcessed": true,
+    "ListingId": 1,
+    "CollectionId": 1,
+    "PurchaseKey": "abc123",
+    "BidStatus": 0,
+    "BidSendReceive": 0,
+    "RawBid": false
+  }
 }
 ```
-
 
 ## Send Bid
 
@@ -90,6 +110,7 @@ POST http://localhost:7292/dstapi/DSTV1/SendBuyNowBid
 ```
 
 Params:
+
 ```json
 {
     "Id": "00000000-0000-0000-0000-000000000000",
@@ -108,8 +129,8 @@ Params:
 },
 ```
 
-
 Response:
+
 ```json
 {
     "Success": true,
@@ -118,7 +139,6 @@ Response:
     }
 }
 ```
-
 
 ### Auction Bid
 
@@ -129,6 +149,7 @@ POST http://localhost:7292/dstapi/DSTV1/SendBid
 ```
 
 Params:
+
 ```json
 {
     "Id": "00000000-0000-0000-0000-000000000000",
@@ -147,8 +168,28 @@ Params:
 },
 ```
 
+Code Example
+
+<Tabs>
+<TabItem value="js" label="NodeJS">
+
+```js
+const bid = bid();
+```
+
+</TabItem>
+
+<TabItem value="py" label="Python">
+
+```python
+  bid(Please)
+```
+
+</TabItem>
+</Tabs>
 
 Response:
+
 ```json
 {
     "Success": true,
