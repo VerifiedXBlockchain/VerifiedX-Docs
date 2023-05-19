@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 ## Create / Update Listing
 
-API Endpoint:
+#### API Enpoint:
 
 ```
 POST http://localhost:7292/dstapi/DSTV1/SaveListing
@@ -35,7 +35,7 @@ Params:
 
 > Use ID of `0` if it's a new listing. For updating, use the existing ID of that listing.
 
-Code Example
+#### Code Example
 
 <Tabs>
 <TabItem value="js" label="NodeJS">
@@ -102,17 +102,28 @@ def save_listing(collection_id, listing_id=0):
 
 ## List Listings
 
-API Endpoint:
+#### API Enpoint:
 
 ```
 GET http://localhost:7292/dstapi/DSTV1/GetCollectionListings/{collectionId}
 ```
 
-URL Params:
+#### URL Params:
 
 `collectionId`: The ID of the collection
 
-Code Example
+#### Response:
+
+```json
+{
+    "Success": true,
+    "Listings": [
+        ...
+    ]
+}
+```
+
+#### Code Example
 
 <Tabs>
 <TabItem value="js" label="NodeJS">
@@ -159,30 +170,30 @@ def list_listings(collection_id):
 </TabItem>
 </Tabs>
 
-Response:
-
-```json
-{
-    "Success": true,
-    "Listings": [
-        ...
-    ]
-}
-```
-
 ## Retrieve Listing
 
-API Endpoint:
+#### API Enpoint:
 
 ```
 GET http://localhost:7292/dstapi/DSTV1/GetListing/{id}
 ```
 
-URL Params:
+#### URL Params:
 
 `id`: ID of the listing
 
-Code Example
+#### Response:
+
+```json
+{
+    "Success": true,
+    "Listing": {
+        ...
+    }
+}
+```
+
+#### Code Example
 
 <Tabs>
 <TabItem value="js" label="NodeJS">
@@ -229,30 +240,19 @@ def retrieve_listing(listing_id):
 </TabItem>
 </Tabs>
 
-Response:
-
-```json
-{
-    "Success": true,
-    "Listing": {
-        ...
-    }
-}
-```
-
 ## Cancel Listing
 
-API Endpoint:
+#### API Enpoint:
 
 ```
 GET http://localhost:7292/dstapi/DSTV1/CancelListing/{id}
 ```
 
-URL Params:
+#### URL Params:
 
 `id`: ID of the listing
 
-Response:
+#### Response:
 
 ```json
 {
@@ -262,17 +262,25 @@ Response:
 
 ## Delete Listing
 
-API Endpoint:
+#### API Enpoint:
 
 ```
 GET http://localhost:7292/dstapi/DSTV1/DeleteListing/{id}
 ```
 
-URL Params:
+#### URL Params:
 
 `id`: ID of the listing
 
-Code Example
+#### Response:
+
+```json
+{
+  "Success": true
+}
+```
+
+#### Code Example
 
 <Tabs>
 <TabItem value="js" label="NodeJS">
@@ -304,11 +312,3 @@ def delete_listing(listing_id):
 
 </TabItem>
 </Tabs>
-
-Response:
-
-```json
-{
-  "Success": true
-}
-```

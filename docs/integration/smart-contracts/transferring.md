@@ -21,7 +21,7 @@ Transfer with media backup URL:
 GET http://localhost:7292/scapi/scv1/TransferNFT/{id}/{address}/{backupUrl}
 ```
 
-URL Params:
+#### URL Params:
 
 `id`: The smart contract identifier
 
@@ -29,7 +29,16 @@ URL Params:
 
 `backupUrl`: URL to an off-network backup url of the media (optional)
 
-Code Example
+#### Response:
+
+```json
+{
+  "Result": "Success",
+  "Message": "NFT Transfer has been started."
+}
+```
+
+#### Code Example
 
 <Tabs>
 <TabItem value="js" label="NodeJS">
@@ -60,12 +69,3 @@ def transfer_nft(smart_contract_uid, address):
 
 </TabItem>
 </Tabs>
-
-Response:
-
-```json
-{
-  "Result": "Success",
-  "Message": "NFT Transfer has been started."
-}
-```

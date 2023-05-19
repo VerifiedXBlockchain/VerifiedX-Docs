@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 ## Create Shop
 
-API Endpoint:
+#### API Enpoint:
 
 ```
 POST http://localhost:7292/dstapi/DSTV1/SaveDecShop
@@ -28,7 +28,16 @@ Request Params:
 }
 ```
 
-Code Example
+#### Response:
+
+```json
+{
+  "Success": true,
+  "Message": "Decentralized Auction Shop has been created with name Shop Name"
+}
+```
+
+#### Code Example
 
 <Tabs>
 <TabItem value="js" label="NodeJS">
@@ -84,24 +93,24 @@ def create_shop():
 </TabItem>
 </Tabs>
 
-Response:
-
-```json
-{
-  "Success": true,
-  "Message": "Decentralized Auction Shop has been created with name Shop Name"
-}
-```
-
 ## Publish Shop to Network
 
-API Endpoint:
+#### API Enpoint:
 
 ```
 GET http://localhost:7292/dstapi/DSTV1/GetPublishDecShop
 ```
 
-Code Example
+#### Response:
+
+```json
+{
+  "Success": true
+}
+```
+
+#### Code Example
+
 <Tabs>
 <TabItem value="js" label="NodeJS">
 
@@ -136,23 +145,26 @@ const publishShop = async () => {
 </TabItem>
 </Tabs>
 
-Response:
-
-```json
-{
-  "Success": true
-}
-```
-
 ## Get My Shop
 
-API Endpoint:
+#### API Enpoint:
 
 ```
 GET http://localhost:7292/dstapi/DSTV1/GetDecShop
 ```
 
-Code Example
+#### Response:
+
+```json
+{
+    "Success": true,
+    "DecShop": {
+        ...
+    }
+}
+```
+
+#### Code Example
 
 <Tabs>
 <TabItem value="js" label="NodeJS">
@@ -191,20 +203,9 @@ def retrieve_shop():
 </TabItem>
 </Tabs>
 
-Response:
-
-```json
-{
-    "Success": true,
-    "DecShop": {
-        ...
-    }
-}
-```
-
 ## Update Shop
 
-API Endpoint:
+#### API Enpoint:
 
 ```
 POST http://localhost:7292/dstapi/DSTV1/SaveDecShop
@@ -223,7 +224,7 @@ Request Params:
 }
 ```
 
-Response:
+#### Response:
 
 ```json
 {
@@ -236,13 +237,14 @@ Response:
 
 ## Toggle Offline/Online
 
-API Endpoint:
+#### API Enpoint:
 
 ```
 GET http://localhost:7292/dstapi/DSTV1/GetSetShopStatus
 ```
 
-Code Example
+#### Code Example
+
 <Tabs>
 <TabItem value="js" label="NodeJS">
 
@@ -286,13 +288,13 @@ const toggleShopOnline = async () => {
 
 ## Delete Shop from Network
 
-API Endpoint:
+#### API Enpoint:
 
 ```
 GET http://localhost:7292/dstapi/DSTV1/GetDeleteDecShop
 ```
 
-Code Example
+#### Code Example
 
 <Tabs>
 <TabItem value="js" label="NodeJS">
@@ -326,13 +328,13 @@ def delete_network_shop():
 
 ## Delete Shop Locally
 
-API Endpoint:
+#### API Enpoint:
 
 ```
 GET http://localhost:7292/dstapi/DSTV1/GetDeleteLocalDecShop
 ```
 
-Code Example
+#### Code Example
 
 <Tabs>
 <TabItem value="js" label="NodeJS">
@@ -366,13 +368,14 @@ def delete_shop():
 
 ## Retrieve Network Shop
 
-API Endpoint:
+#### API Enpoint:
 
 ```
 GET http://localhost:7292/dstapi/DSTV1/GetNetworkDecShopInfo/{url}
 ```
 
-Code Example
+#### Code Example
+
 <Tabs>
 <TabItem value="js" label="NodeJS">
 
@@ -410,11 +413,11 @@ def retrieve_network_shop(shop_url):
 </TabItem>
 </Tabs>
 
-URL Params:
+#### URL Params:
 
 `url`: URL of the shop (ie. rbx://tutorial-shop)
 
-Response:
+#### Response:
 
 ```json
 {

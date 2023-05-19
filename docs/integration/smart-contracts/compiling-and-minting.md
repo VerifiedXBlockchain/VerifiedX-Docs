@@ -13,7 +13,7 @@ Compiling and Minting a smart contract is fairly streightforward. The first step
 
 ## Compiling
 
-API Endpoint:
+#### API Enpoint:
 
 ```
 POST http://localhost:7292/scapi/scv1/CreateSmartContract
@@ -73,7 +73,7 @@ Response Example:
 ]
 ```
 
-Code Example
+#### Code Example
 
 <Tabs>
 <TabItem value="js" label="NodeJS">
@@ -159,13 +159,19 @@ def compile_nft():
 
 ## Minting
 
-API Endpoint:
+#### API Enpoint:
 
 ```
 GET http://localhost:7292/scapi/scv1/MintSmartContract/{SMART_CONTRACT_UID}
 ```
 
-Code Example
+Response Example:
+
+```
+"Smart contract has been published to mempool"
+```
+
+#### Code Example
 
 <Tabs>
 <TabItem value="js" label="NodeJS">
@@ -203,12 +209,6 @@ def mint_nft(smart_contract_uid):
 
 </TabItem>
 </Tabs>
-
-Response Example:
-
-```
-"Smart contract has been published to mempool"
-```
 
 ## Adding Features
 
@@ -419,7 +419,7 @@ Once the smart contract is compile and minted, it will be available to read back
 GET http://localhost:7292/scapi/scv1/GetAllSmartContracts/{PAGE}
 ```
 
-Code Example
+#### Code Example
 
 <Tabs>
 <TabItem value="js" label="NodeJS">
@@ -474,7 +474,7 @@ def list_nfts(page=1):
 GET http://localhost:7292/scapi/scv1/GetAllSmartContracts/{PAGE}/{QUERY}
 ```
 
-Code Example
+#### Code Example
 
 <Tabs>
 <TabItem value="js" label="NodeJS">
@@ -529,7 +529,7 @@ def search_nfts(query, page=1):
 GET http://localhost:7292/scapi/scv1/GetSingleSmartContract/{SMART_CONTRACT_UID}
 ```
 
-Code Example
+#### Code Example
 
 <Tabs>
 <TabItem value="js" label="NodeJS">

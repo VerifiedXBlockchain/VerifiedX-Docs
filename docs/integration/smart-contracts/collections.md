@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 ## Create / Update Collection
 
-API Endpoint:
+#### API Enpoint:
 
 ```
 POST http://localhost:7292/dstapi/DSTV1/SaveCollection
@@ -29,7 +29,7 @@ Params:
 
 > Use ID of `0` if it's a new collection. For updating, use the existing ID of that collection.
 
-Code Example
+#### Code Example
 
 <Tabs>
 <TabItem value="js" label="NodeJS">
@@ -86,13 +86,31 @@ def save_collection(id=0):
 
 ## List Collections
 
-API Endpoint:
+#### API Enpoint:
 
 ```
 GET http://localhost:7292/dstapi/DSTV1/GetAllCollections
 ```
 
-Code Example
+#### Response:
+
+```json
+{
+    "Success": true,
+    "Collections": [
+        {
+           "Id": 1,
+            "Name": "My Collection",
+            "Description": "My description goes here...",
+            "CollectionLive": true,
+            "IsDefault": false
+        },
+        ...
+    ]
+}
+```
+
+#### Code Example
 
 <Tabs>
 <TabItem value="js" label="NodeJS">
@@ -139,37 +157,34 @@ def list_collections():
 </TabItem>
 </Tabs>
 
-Response:
-
-```json
-{
-    "Success": true,
-    "Collections": [
-        {
-           "Id": 1,
-            "Name": "My Collection",
-            "Description": "My description goes here...",
-            "CollectionLive": true,
-            "IsDefault": false
-        },
-        ...
-    ]
-}
-```
-
 ## Retrieve Collection
 
-API Endpoint:
+#### API Enpoint:
 
 ```
 GET http://localhost:7292/dstapi/DSTV1/GetCollection/{id}
 ```
 
-URL Params:
+#### URL Params:
 
 `id`: ID of the collection
 
-Code Example
+#### Response:
+
+```json
+{
+  "Success": true,
+  "Collection": {
+    "Id": 1,
+    "Name": "My Collection",
+    "Description": "My description goes here...",
+    "CollectionLive": true,
+    "IsDefault": false
+  }
+}
+```
+
+#### Code Example
 
 <Tabs>
 <TabItem value="js" label="NodeJS">
@@ -216,34 +231,27 @@ def retrieve_collection(collection_id):
 </TabItem>
 </Tabs>
 
-Response:
-
-```json
-{
-  "Success": true,
-  "Collection": {
-    "Id": 1,
-    "Name": "My Collection",
-    "Description": "My description goes here...",
-    "CollectionLive": true,
-    "IsDefault": false
-  }
-}
-```
-
 ## Delete Collection
 
-API Endpoint:
+#### API Enpoint:
 
 ```
 GET http://localhost:7292/dstapi/DSTV1/DeleteCollection/{id}
 ```
 
-URL Params:
+#### URL Params:
 
 `id`: ID of the collection
 
-Code Example
+#### Response:
+
+```json
+{
+  "Success": true
+}
+```
+
+#### Code Example
 
 <Tabs>
 <TabItem value="js" label="NodeJS">
@@ -275,11 +283,3 @@ def delete_collection(collection_id):
 
 </TabItem>
 </Tabs>
-
-Response:
-
-```json
-{
-  "Success": true
-}
-```
