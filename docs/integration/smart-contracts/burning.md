@@ -23,7 +23,14 @@ Code Example
 <TabItem value="js" label="NodeJS">
 
 ```js
-const burned = burn();
+const burnNft = async (smartContractUid) => {
+  const url = `${CLI_BASE_URL}/scapi/scv1/Burn/${smartContractUid}`;
+  const request = await fetch(url);
+
+  const data = await request.json();
+
+  return data["Hash"];
+};
 ```
 
 </TabItem>

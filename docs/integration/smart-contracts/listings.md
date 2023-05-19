@@ -41,7 +41,32 @@ Code Example
 <TabItem value="js" label="NodeJS">
 
 ```js
-const listed = list();
+const saveListing = async (collectionId, listingId = 0) => {
+  const payload = {
+    Id: listingId,
+    CollectionId: collectionId,
+    SmartContractUID: "a9dda3fd088d4d72a35380957b3a3742:1684502628",
+    AddressOwner: "xDnL4MCGtgHu85JJHdN1fkXinHzKaqVQ59",
+    BuyNowPrice: 10,
+    IsBuyNowOnly: false,
+    RequireBalanceCheck: true,
+    FloorPrice: 25,
+    ReservePrice: 30,
+    StartDate: "2023-05-01T00:00:00.000Z",
+    EndDate: "2023-06-01T00:00:00.000Z",
+  };
+
+  const url = `${CLI_BASE_URL}/dstapi/DSTV1/SaveListing`;
+  const request = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  const data = await request.json();
+
+  return data["Success"];
+};
 ```
 
 </TabItem>
@@ -73,7 +98,22 @@ Code Example
 <TabItem value="js" label="NodeJS">
 
 ```js
-const listed = list();
+const listListings = async (collectionId) => {
+  const url = `${CLI_BASE_URL}/dstapi/DSTV1/GetCollectionListings/${collectionId}`;
+  const request = await fetch(url);
+
+  const data = await request.json();
+
+  if (!data) {
+    return null;
+  }
+
+  if (data["Success"] == true) {
+    return data["Listings"];
+  }
+
+  return null;
+};
 ```
 
 </TabItem>
@@ -109,6 +149,41 @@ GET http://localhost:7292/dstapi/DSTV1/GetListing/{id}
 URL Params:
 
 `id`: ID of the listing
+
+Code Example
+
+<Tabs>
+<TabItem value="js" label="NodeJS">
+
+```js
+const retrieveListing = async (listingId) => {
+  const url = `${CLI_BASE_URL}/dstapi/DSTV1/GetListing/${listingId}`;
+  const request = await fetch(url);
+
+  const data = await request.json();
+
+  if (!data) {
+    return null;
+  }
+
+  if (data["Success"] == true) {
+    return data["Listing"];
+  }
+
+  return null;
+};
+```
+
+</TabItem>
+
+<TabItem value="py" label="Python">
+
+```python
+  list(Please)
+```
+
+</TabItem>
+</Tabs>
 
 Response:
 
@@ -152,6 +227,33 @@ GET http://localhost:7292/dstapi/DSTV1/DeleteListing/{id}
 URL Params:
 
 `id`: ID of the listing
+
+Code Example
+
+<Tabs>
+<TabItem value="js" label="NodeJS">
+
+```js
+const deleteListing = async (listingId) => {
+  const url = `${CLI_BASE_URL}/dstapi/DSTV1/DeleteListing/${listingId}`;
+  const request = await fetch(url);
+
+  const data = await request.json();
+
+  return data["Success"] == true;
+};
+```
+
+</TabItem>
+
+<TabItem value="py" label="Python">
+
+```python
+  transfer(Please)
+```
+
+</TabItem>
+</Tabs>
 
 Response:
 

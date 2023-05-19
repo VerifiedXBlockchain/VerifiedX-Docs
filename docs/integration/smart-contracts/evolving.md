@@ -6,8 +6,8 @@ sidebar_position: 4
 
 For NFTs that have the minter-controlled evolution feature enabled, they can be evolved by the minter even if they are no longer the owner.
 
-
 API Endpoint:
+
 ```
 GET http://localhost:7292/scapi/scv1/EvolveSpecific/{id}/{address}/{stage}
 ```
@@ -20,13 +20,38 @@ URL Params
 
 `stage`: the stage to evolve to (the original stage is `0`)
 
+Code Example
 
-Response:
-```json
-{
-    "Result": "Success",
-    "Message": "NFT Evolve transaction has been sent."
-}
+<Tabs>
+<TabItem value="js" label="NodeJS">
+
+```js
+const evolveNft = async (smartContractUid, address, stage) => {
+  const url = `${CLI_BASE_URL}/scapi/scv1/EvolveSpecific/${smartContractUid}/${address}/${stage}`;
+  const request = await fetch(url);
+
+  const data = await request.json();
+
+  return data["Hash"];
+};
 ```
 
+</TabItem>
 
+<TabItem value="py" label="Python">
+
+```python
+  burn(Please)
+```
+
+</TabItem>
+</Tabs>
+
+Response:
+
+```json
+{
+  "Result": "Success",
+  "Message": "NFT Evolve transaction has been sent."
+}
+```

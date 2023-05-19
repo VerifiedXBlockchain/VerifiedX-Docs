@@ -35,7 +35,26 @@ Code Example
 <TabItem value="js" label="NodeJS">
 
 ```js
-const collected = collect();
+const saveCollection = async (id = 0) => {
+  const payload = {
+    Id: id,
+    Name: "My Collection",
+    Description: "My description goes here...",
+    CollectionLive: true,
+    IsDefault: false,
+  };
+
+  const url = `${CLI_BASE_URL}/dstapi/DSTV1/SaveCollection`;
+  const request = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  const data = await request.json();
+
+  return data["Success"];
+};
 ```
 
 </TabItem>
@@ -57,6 +76,41 @@ API Endpoint:
 GET http://localhost:7292/dstapi/DSTV1/GetAllCollections
 ```
 
+Code Example
+
+<Tabs>
+<TabItem value="js" label="NodeJS">
+
+```js
+const listCollections = async () => {
+  const url = `${CLI_BASE_URL}/dstapi/DSTV1/GetAllCollections`;
+  const request = await fetch(url);
+
+  const data = await request.json();
+
+  if (!data) {
+    return null;
+  }
+
+  if (data["Success"] == true) {
+    return data["Collections"];
+  }
+
+  return null;
+};
+```
+
+</TabItem>
+
+<TabItem value="py" label="Python">
+
+```python
+  collect(Please)
+```
+
+</TabItem>
+</Tabs>
+
 Response:
 
 ```json
@@ -75,13 +129,40 @@ Response:
 }
 ```
 
+## Retrieve Collection
+
+API Endpoint:
+
+```
+GET http://localhost:7292/dstapi/DSTV1/GetCollection/{id}
+```
+
+URL Params:
+
+`id`: ID of the collection
+
 Code Example
 
 <Tabs>
 <TabItem value="js" label="NodeJS">
 
 ```js
-const collected = collect();
+const retrieveCollection = async (collectionId) => {
+  const url = `${CLI_BASE_URL}/dstapi/DSTV1/GetCollection/${collectionId}`;
+  const request = await fetch(url);
+
+  const data = await request.json();
+
+  if (!data) {
+    return null;
+  }
+
+  if (data["Success"] == true) {
+    return data["Collection"];
+  }
+
+  return null;
+};
 ```
 
 </TabItem>
@@ -94,18 +175,6 @@ const collected = collect();
 
 </TabItem>
 </Tabs>
-
-## Retrieve Collection
-
-API Endpoint:
-
-```
-GET http://localhost:7292/dstapi/DSTV1/GetCollection/{id}
-```
-
-URL Params:
-
-`id`: ID of the collection
 
 Response:
 
@@ -133,6 +202,33 @@ GET http://localhost:7292/dstapi/DSTV1/DeleteCollection/{id}
 URL Params:
 
 `id`: ID of the collection
+
+Code Example
+
+<Tabs>
+<TabItem value="js" label="NodeJS">
+
+```js
+const deleteCollection = async (collectionId) => {
+  const url = `${CLI_BASE_URL}/dstapi/DSTV1/DeleteCollection/${collectionId}`;
+  const request = await fetch(url);
+
+  const data = await request.json();
+
+  return data["Success"] == true;
+};
+```
+
+</TabItem>
+
+<TabItem value="py" label="Python">
+
+```python
+  collect(Please)
+```
+
+</TabItem>
+</Tabs>
 
 Response:
 

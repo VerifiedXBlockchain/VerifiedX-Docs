@@ -35,7 +35,13 @@ Code Example
 <TabItem value="js" label="NodeJS">
 
 ```js
-const transfer = transfer();
+const transferNft = async (smartContractUid, address) => {
+  const url = `${CLI_BASE_URL}/scapi/scv1/TransferNFT/${smartContractUid}/${address}`;
+  const request = await fetch(url);
+
+  const data = await request.json();
+  return data["Result"] == "Success";
+};
 ```
 
 </TabItem>

@@ -1,6 +1,7 @@
 ---
 sidebar_position: 2
 ---
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -13,6 +14,7 @@ Compiling and Minting a smart contract is fairly streightforward. The first step
 ## Compiling
 
 API Endpoint:
+
 ```
 POST http://localhost:7292/scapi/scv1/CreateSmartContract
 ```
@@ -21,56 +23,54 @@ Basic Payload Example:
 
 ```json
 {
-   "Name": "Smart Contract Name",
-   "MinterName": "Minter's Name",
-   "Description": "Description Goes Here",
-   "SmartContractAsset": {
-      "AssetId": "00000000-0000-0000-0000-000000000000",
-      "Name": "welness.jpg",
-      "AssetAuthorName": "Author's Name",
-      "Location": "/path/to/asset.jpg",
-      "Extension": "jpg",
-      "FileSize": 1024,
-   },
-   "IsPublic": false,
-   "SmartContractUID": "00000000-0000-0000-0000-000000000000",
-   "Features": [],
-   "MinterAddress": "Rabc123..."
+  "Name": "Smart Contract Name",
+  "MinterName": "Minter's Name",
+  "Description": "Description Goes Here",
+  "SmartContractAsset": {
+    "AssetId": "00000000-0000-0000-0000-000000000000",
+    "Name": "welness.jpg",
+    "AssetAuthorName": "Author's Name",
+    "Location": "/path/to/asset.jpg",
+    "Extension": "jpg",
+    "FileSize": 1024
+  },
+  "IsPublic": false,
+  "SmartContractUID": "00000000-0000-0000-0000-000000000000",
+  "Features": [],
+  "MinterAddress": "Rabc123..."
 }
-
 ```
 
-
 Response Example:
+
 ```json
 [
-   {
-      "Success": true,
-      "SmartContract": {
-         "Id": 63,
-         "Name": "Test",
-         "Description": "Hello world",
-         "MinterAddress": "Rabc123...",
-         "MinterName": "Minter's Name",
-         "SmartContractAsset": {
-            "AssetId": "00000000-0000-0000-0000-000000000000",
-            "Name": "welness.jpg",
-            "AssetAuthorName": "Author's Name",
-            "Location": "/path/to/asset.jpg",
-            "Extension": "jpg",
-            "FileSize": 1024,
-        },
-         "IsPublic": false,
-         "SmartContractUID": "a4a245fba5a282da1bf02a72cf267aab:123456789",
-         "IsMinter": true,
-         "IsPublished": false,
-         "Features": []
+  {
+    "Success": true,
+    "SmartContract": {
+      "Id": 63,
+      "Name": "Test",
+      "Description": "Hello world",
+      "MinterAddress": "Rabc123...",
+      "MinterName": "Minter's Name",
+      "SmartContractAsset": {
+        "AssetId": "00000000-0000-0000-0000-000000000000",
+        "Name": "welness.jpg",
+        "AssetAuthorName": "Author's Name",
+        "Location": "/path/to/asset.jpg",
+        "Extension": "jpg",
+        "FileSize": 1024
       },
-      "SmartContractCode": "--SMART CONTRACT CODE (string)--",
-      "Transaction": "-- TRANSACTION (dict) --"
-   }
+      "IsPublic": false,
+      "SmartContractUID": "a4a245fba5a282da1bf02a72cf267aab:123456789",
+      "IsMinter": true,
+      "IsPublished": false,
+      "Features": []
+    },
+    "SmartContractCode": "--SMART CONTRACT CODE (string)--",
+    "Transaction": "-- TRANSACTION (dict) --"
+  }
 ]
-
 ```
 
 Code Example
@@ -82,16 +82,16 @@ Code Example
 const payload = {}; // JSON Payload from above
 const url = "http://localhost:7292/scapi/scv1/CreateSmartContract";
 const request = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(payload),
 });
 
 const data = await request.json();
 console.log(data);
 
-if(data["Success"] == true){
-    // Success
+if (data["Success"] == true) {
+  // Success
 }
 ```
 
@@ -119,11 +119,43 @@ if data.get("Success"):
 ## Minting
 
 API Endpoint:
+
 ```
 GET http://localhost:7292/scapi/scv1/MintSmartContract/{SMART_CONTRACT_UID}
 ```
 
+Code Example
+
+<Tabs>
+<TabItem value="js" label="NodeJS">
+
+```js
+const mintNft = async (smartContractUid) => {
+  const url = `${CLI_BASE_URL}/scapi/scv1/MintSmartContract/${smartContractUid}`;
+  const request = await fetch(url);
+
+  const data = await request.text();
+  if (data == "Smart contract has been published to mempool") {
+    return true;
+  }
+
+  return false;
+};
+```
+
+</TabItem>
+
+<TabItem value="py" label="Python">
+
+```python
+  bid(Please)
+```
+
+</TabItem>
+</Tabs>
+
 Response Example:
+
 ```
 "Smart contract has been published to mempool"
 ```
@@ -146,6 +178,7 @@ You can combine all three features into a single smart contract, but you can not
 ### Royalty
 
 #### Percent
+
 ```json
 {
     ...
@@ -163,6 +196,7 @@ You can combine all three features into a single smart contract, but you can not
 ```
 
 #### Flat
+
 ```json
 {
     ...
@@ -178,7 +212,6 @@ You can combine all three features into a single smart contract, but you can not
     ]
 }
 ```
-
 
 ### Multi Asset
 
@@ -211,7 +244,7 @@ You can combine all three features into a single smart contract, but you can not
 }
 ```
 
-### Evolving 
+### Evolving
 
 #### Minter Controlled Evolution
 
@@ -326,22 +359,123 @@ You can combine all three features into a single smart contract, but you can not
 }
 ```
 
-
 ### Retrieving Data
 
 Once the smart contract is compile and minted, it will be available to read back through the API
 
 #### Listing
+
 ```
 GET http://localhost:7292/scapi/scv1/GetAllSmartContracts/{PAGE}
 ```
 
+Code Example
+
+<Tabs>
+<TabItem value="js" label="NodeJS">
+
+```js
+const listNfts = async (page = 1) => {
+  const url = `${CLI_BASE_URL}/scapi/scv1/GetAllSmartContracts/${page}`;
+  const request = await fetch(url);
+
+  const data = await request.json();
+
+  if (!data) {
+    return null;
+  }
+
+  if (data["Count"] == 0) {
+    console.log("No NFTs found");
+    return [];
+  }
+
+  return data["Results"];
+};
+```
+
+</TabItem>
+
+<TabItem value="py" label="Python">
+
+```python
+  bid(Please)
+```
+
+</TabItem>
+</Tabs>
+
 #### Searching
+
 ```
 GET http://localhost:7292/scapi/scv1/GetAllSmartContracts/{PAGE}/{QUERY}
 ```
 
+Code Example
+
+<Tabs>
+<TabItem value="js" label="NodeJS">
+
+```js
+const searchNfts = async (query, page = 1) => {
+  const url = `${CLI_BASE_URL}/scapi/scv1/GetAllSmartContracts/${page}/${query}`;
+  const request = await fetch(url);
+
+  const data = await request.json();
+
+  if (!data) {
+    return null;
+  }
+
+  if (data["Count"] == 0) {
+    console.log("No NFTs found");
+    return [];
+  }
+
+  return data["Results"];
+};
+```
+
+</TabItem>
+
+<TabItem value="py" label="Python">
+
+```python
+  bid(Please)
+```
+
+</TabItem>
+</Tabs>
+
 #### Retrieve
+
 ```
 GET http://localhost:7292/scapi/scv1/GetSingleSmartContract/{SMART_CONTRACT_UID}
 ```
+
+Code Example
+
+<Tabs>
+<TabItem value="js" label="NodeJS">
+
+```js
+const retrieveNft = async (smartContractUid) => {
+  const url = `${CLI_BASE_URL}/scapi/scv1/GetSingleSmartContract/${smartContractUid}`;
+  const request = await fetch(url);
+
+  const data = await request.json();
+  if (data.length < 1) return null;
+  return data[0];
+};
+```
+
+</TabItem>
+
+<TabItem value="py" label="Python">
+
+```python
+  bid(Please)
+```
+
+</TabItem>
+</Tabs>
