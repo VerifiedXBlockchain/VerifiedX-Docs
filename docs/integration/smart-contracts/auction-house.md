@@ -29,9 +29,7 @@ Response:
 ```json
 {
     "Success": true,
-    "DecShop": {
-        ...
-    }
+    "Message": "Decentralized Auction Shop has been created with name Shop Name"
 }
 ```
 
@@ -70,15 +68,19 @@ Response:
 
 API Endpoint:
 ```
-GET http://localhost:7292/dstapi/DSTV1/GetUpdateDecShop
+POST http://localhost:7292/dstapi/DSTV1/SaveDecShop
 ```
 
 Request Params:
 
 ```json
 {
-    "Name": "Shop Name Updated",
-    "Description": "My shop's description...",
+     "Name": "Updated Shop Name",
+    "DecShopURL": "tutorial-shop",
+    "Description": "My updated shop's description...",
+    "OwnerAddress": "xDnL4MCGtgHu85JJHdN1fkXinHzKaqVQ59",
+    "DecShopHostingType": 0,
+    "AutoUpdateNetworkDNS": true,
 }
 ```
 
