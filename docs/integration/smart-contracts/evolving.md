@@ -41,7 +41,13 @@ const evolveNft = async (smartContractUid, address, stage) => {
 <TabItem value="py" label="Python">
 
 ```python
-  burn(Please)
+def evolve_nft(smart_contract_uid, address, stage):
+    url = f"{CLI_BASE_URL}/scapi/scv1/EvolveSpecific/{smart_contract_uid}/{address}/{stage}"
+    response = requests.get(url)
+    data = response.json()
+
+    return data["Hash"]
+
 ```
 
 </TabItem>

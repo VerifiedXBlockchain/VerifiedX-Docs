@@ -62,7 +62,23 @@ const createShop = async () => {
 <TabItem value="py" label="Python">
 
 ```python
-  create(Please)
+def create_shop():
+    payload = {
+        "Name": "Shop Name",
+        "DecShopURL": "tutorial-shop",
+        "Description": "My shop's description...",
+        "OwnerAddress": "xDnL4MCGtgHu85JJHdN1fkXinHzKaqVQ59",
+        "DecShopHostingType": 0,
+        "AutoUpdateNetworkDNS": True
+    }
+
+    url = f"{CLI_BASE_URL}/dstapi/DSTV1/SaveDecShop"
+    headers = {"Content-Type": "application/json"}
+
+    response = await requests.post(url, json=payload, headers=headers)
+    data = await response.json()
+
+    return data["Success"]
 ```
 
 </TabItem>
@@ -107,7 +123,14 @@ const publishShop = async () => {
 <TabItem value="py" label="Python">
 
 ```python
-  create(Please)
+ def publish_shop():
+    url = f"{CLI_BASE_URL}/dstapi/DSTV1/GetPublishDecShop"
+    response = await requests.get(url)
+    data = await response.json()
+
+    print(data)
+
+    return data["Success"]
 ```
 
 </TabItem>
@@ -135,7 +158,18 @@ Code Example
 <TabItem value="js" label="NodeJS">
 
 ```js
-const gotten = get();
+const retrieveShop = async () => {
+  const url = `${CLI_BASE_URL}/dstapi/DSTV1/GetDecShop`;
+  const request = await fetch(url);
+
+  const data = await request.json();
+
+  if (data["Success"] == true) {
+    return data["DecShop"];
+  }
+
+  return null;
+};
 ```
 
 </TabItem>
@@ -143,7 +177,15 @@ const gotten = get();
 <TabItem value="py" label="Python">
 
 ```python
-  get(Please)
+def retrieve_shop():
+    url = f"{CLI_BASE_URL}/dstapi/DSTV1/GetDecShop"
+    response = requests.get(url)
+    data = response.json()
+
+    if data["Success"] == True:
+        return data["DecShop"]
+
+    return None
 ```
 
 </TabItem>
@@ -226,7 +268,17 @@ const toggleShopOnline = async () => {
 <TabItem value="py" label="Python">
 
 ```python
-  create(Please)
+ def toggle_shop_online():
+    url = f"{CLI_BASE_URL}/dstapi/DSTV1/GetSetShopStatus"
+    response = requests.get(url)
+    data = response.json()
+
+    print(data)
+
+    if data["Success"] == True:
+        return data["Message"].replace("Is Offline? ", "") == "True"
+
+    return None
 ```
 
 </TabItem>
@@ -261,7 +313,12 @@ const deleteNetworkShop = async () => {
 <TabItem value="py" label="Python">
 
 ```python
-  get(Please)
+def delete_network_shop():
+    url = f"{CLI_BASE_URL}/dstapi/DSTV1/GetDeleteDecShop"
+    response = requests.get(url)
+    data = response.json()
+
+    return data["Success"] == True
 ```
 
 </TabItem>
@@ -296,7 +353,12 @@ const deleteShop = async () => {
 <TabItem value="py" label="Python">
 
 ```python
-  get(Please)
+def delete_shop():
+    url = f"{CLI_BASE_URL}/dstapi/DSTV1/GetDeleteLocalDecShop"
+    response = requests.get(url)
+    data = response.json()
+
+    return data["Success"] == True
 ```
 
 </TabItem>
@@ -334,7 +396,15 @@ const retrieveNetworkShop = async (shopUrl) => {
 <TabItem value="py" label="Python">
 
 ```python
-  create(Please)
+def retrieve_network_shop(shop_url):
+    url = f"{CLI_BASE_URL}/dstapi/DSTV1/GetNetworkDecShopInfo/{shop_url}"
+    response = requests.get(url)
+    data = response.json()
+
+    if data["Success"] == True:
+        return data["DecShop"]
+
+    return None
 ```
 
 </TabItem>

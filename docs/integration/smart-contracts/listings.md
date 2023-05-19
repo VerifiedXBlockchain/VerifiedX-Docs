@@ -74,7 +74,27 @@ const saveListing = async (collectionId, listingId = 0) => {
 <TabItem value="py" label="Python">
 
 ```python
-  list(Please)
+def save_listing(collection_id, listing_id=0):
+    payload = {
+        "Id": listing_id,
+        "CollectionId": collection_id,
+        "SmartContractUID": "a9dda3fd088d4d72a35380957b3a3742:1684502628",
+        "AddressOwner": "xDnL4MCGtgHu85JJHdN1fkXinHzKaqVQ59",
+        "BuyNowPrice": 10,
+        "IsBuyNowOnly": False,
+        "RequireBalanceCheck": True,
+        "FloorPrice": 25,
+        "ReservePrice": 30,
+        "StartDate": "2023-05-01T00:00:00.000Z",
+        "EndDate": "2023-06-01T00:00:00.000Z"
+    }
+
+    url = f"{CLI_BASE_URL}/dstapi/DSTV1/SaveListing"
+    response = requests.post(url, headers={"Content-Type": "application/json"}, json=payload)
+    data = response.json()
+
+    return data["Success"]
+
 ```
 
 </TabItem>
@@ -121,7 +141,19 @@ const listListings = async (collectionId) => {
 <TabItem value="py" label="Python">
 
 ```python
-  list(Please)
+def list_listings(collection_id):
+    url = f"{CLI_BASE_URL}/dstapi/DSTV1/GetCollectionListings/{collection_id}"
+    response = requests.get(url)
+    data = response.json()
+
+    if not data:
+        return None
+
+    if data["Success"] == True:
+        return data["Listings"]
+
+    return None
+
 ```
 
 </TabItem>
@@ -179,7 +211,19 @@ const retrieveListing = async (listingId) => {
 <TabItem value="py" label="Python">
 
 ```python
-  list(Please)
+def retrieve_listing(listing_id):
+    url = f"{CLI_BASE_URL}/dstapi/DSTV1/GetListing/{listing_id}"
+    response = requests.get(url)
+    data = response.json()
+
+    if not data:
+        return None
+
+    if data["Success"] == True:
+        return data["Listing"]
+
+    return None
+
 ```
 
 </TabItem>
@@ -249,7 +293,13 @@ const deleteListing = async (listingId) => {
 <TabItem value="py" label="Python">
 
 ```python
-  transfer(Please)
+def delete_listing(listing_id):
+    url = f"{CLI_BASE_URL}/dstapi/DSTV1/DeleteListing/{listing_id}"
+    response = requests.get(url)
+    data = response.json()
+
+    return data["Success"] == True
+
 ```
 
 </TabItem>

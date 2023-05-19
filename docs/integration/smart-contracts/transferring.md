@@ -49,7 +49,13 @@ const transferNft = async (smartContractUid, address) => {
 <TabItem value="py" label="Python">
 
 ```python
-  transfer(Please)
+def transfer_nft(smart_contract_uid, address):
+    url = f"{CLI_BASE_URL}/scapi/scv1/TransferNFT/{smart_contract_uid}/{address}"
+    response = requests.get(url)
+    data = response.json()
+
+    return data["Result"] == "Success"
+
 ```
 
 </TabItem>

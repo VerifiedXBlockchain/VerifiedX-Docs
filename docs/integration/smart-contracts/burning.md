@@ -38,7 +38,12 @@ const burnNft = async (smartContractUid) => {
 <TabItem value="py" label="Python">
 
 ```python
-  burn(Please)
+def burn_nft(smart_contract_uid):
+    url = f"{CLI_BASE_URL}/scapi/scv1/Burn/{smart_contract_uid}"
+    response = requests.get(url)
+    data = response.json()
+
+    return data["Hash"]
 ```
 
 </TabItem>

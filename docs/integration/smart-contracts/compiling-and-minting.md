@@ -80,41 +80,39 @@ Code Example
 
 ```js
 const compileNft = async () => {
+  const payload = {
+    Name: "Smart Contract Name",
+    MinterName: "Minter's Name",
+    Description: "Description Goes Here",
+    SmartContractAsset: {
+      AssetId: "00000000-0000-0000-0000-000000000000",
+      Name: "file.jpg",
+      AssetAuthorName: "Author's Name",
+      Location: "/path/to/file.jpg",
+      Extension: "jpg",
+      FileSize: 488734,
+    },
+    IsPublic: false,
+    SmartContractUID: "00000000-0000-0000-0000-000000000000",
+    Features: [],
+    MinterAddress: "xDnL4MCGtgHu85JJHdN1fkXinHzKaqVQ59",
+  };
 
-    const payload = {
-        "Name": "Smart Contract Name",
-        "MinterName": "Minter's Name",
-        "Description": "Description Goes Here",
-        "SmartContractAsset": {
-            "AssetId": "00000000-0000-0000-0000-000000000000",
-            "Name": "file.jpg",
-            "AssetAuthorName": "Author's Name",
-            "Location": "/path/to/file.jpg",
-            "Extension": "jpg",
-            "FileSize": 488734,
-        },
-        "IsPublic": false,
-        "SmartContractUID": "00000000-0000-0000-0000-000000000000",
-        "Features": [],
-        "MinterAddress": "xDnL4MCGtgHu85JJHdN1fkXinHzKaqVQ59"
-    };
+  const url = `${CLI_BASE_URL}/scapi/scv1/CreateSmartContract`;
+  const request = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
 
-    const url = `${CLI_BASE_URL}/scapi/scv1/CreateSmartContract`;
-    const request = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-    });
+  const data = await request.json();
 
-    const data = await request.json();
+  if (data[0]["Success"] == true) {
+    return data[0]["SmartContract"]["SmartContractUID"];
+  }
 
-    if(data[0]["Success"] == true){
-        return data[0]['SmartContract']['SmartContractUID'];
-    }
-
-    return null;
+  return null;
 };
-
 ```
 
 </TabItem>
@@ -191,7 +189,16 @@ const mintNft = async (smartContractUid) => {
 <TabItem value="py" label="Python">
 
 ```python
-  bid(Please)
+def mint_nft(smart_contract_uid):
+    url = f"{CLI_BASE_URL}/scapi/scv1/MintSmartContract/{smart_contract_uid}"
+    response = requests.get(url)
+    data = response.text
+
+    if data == "Smart contract has been published to mempool":
+        return True
+
+    return False
+
 ```
 
 </TabItem>
@@ -442,7 +449,20 @@ const listNfts = async (page = 1) => {
 <TabItem value="py" label="Python">
 
 ```python
-  bid(Please)
+def list_nfts(page=1):
+    url = f"{CLI_BASE_URL}/scapi/scv1/GetAllSmartContracts/{page}"
+    response = requests.get(url)
+    data = response.json()
+
+    if not data:
+        return None
+
+    if data["Count"] == 0:
+        print("No NFTs found")
+        return []
+
+    return data["Results"]
+
 ```
 
 </TabItem>
@@ -484,7 +504,20 @@ const searchNfts = async (query, page = 1) => {
 <TabItem value="py" label="Python">
 
 ```python
-  bid(Please)
+def search_nfts(query, page=1):
+    url = f"{CLI_BASE_URL}/scapi/scv1/GetAllSmartContracts/{page}/{query}"
+    response = requests.get(url)
+    data = response.json()
+
+    if not data:
+        return None
+
+    if data["Count"] == 0:
+        print("No NFTs found")
+        return []
+
+    return data["Results"]
+
 ```
 
 </TabItem>
@@ -517,7 +550,16 @@ const retrieveNft = async (smartContractUid) => {
 <TabItem value="py" label="Python">
 
 ```python
-  bid(Please)
+def retrieve_nft(smart_contract_uid):
+    url = f"{CLI_BASE_URL}/scapi/scv1/GetSingleSmartContract/{smart_contract_uid}"
+    response = requests.get(url)
+    data = response.json()
+
+    if len(data) < 1:
+        return None
+
+    return data[0]
+
 ```
 
 </TabItem>

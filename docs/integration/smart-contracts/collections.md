@@ -62,7 +62,23 @@ const saveCollection = async (id = 0) => {
 <TabItem value="py" label="Python">
 
 ```python
-  collect(Please)
+def save_collection(id=0):
+    payload = {
+        "Id": id,
+        "Name": "My Collection",
+        "Description": "My description goes here...",
+        "CollectionLive": True,
+        "IsDefault": False
+    }
+
+    url = f"{CLI_BASE_URL}/dstapi/DSTV1/SaveCollection"
+    headers = {"Content-Type": "application/json"}
+
+    response = requests.post(url, json=payload, headers=headers)
+    data = response.json()
+
+    return data["Success"]
+
 ```
 
 </TabItem>
@@ -105,7 +121,19 @@ const listCollections = async () => {
 <TabItem value="py" label="Python">
 
 ```python
-  collect(Please)
+def list_collections():
+    url = f"{CLI_BASE_URL}/dstapi/DSTV1/GetAllCollections"
+    response = requests.get(url)
+    data = response.json()
+
+    if not data:
+        return None
+
+    if data["Success"] == True:
+        return data["Collections"]
+
+    return None
+
 ```
 
 </TabItem>
@@ -170,7 +198,19 @@ const retrieveCollection = async (collectionId) => {
 <TabItem value="py" label="Python">
 
 ```python
-  collect(Please)
+def retrieve_collection(collection_id):
+    url = f"{CLI_BASE_URL}/dstapi/DSTV1/GetCollection/{collection_id}"
+    response = requests.get(url)
+    data = response.json()
+
+    if not data:
+        return None
+
+    if data["Success"] == True:
+        return data["Collection"]
+
+    return None
+
 ```
 
 </TabItem>
@@ -224,7 +264,13 @@ const deleteCollection = async (collectionId) => {
 <TabItem value="py" label="Python">
 
 ```python
-  collect(Please)
+def delete_collection(collection_id):
+    url = f"{CLI_BASE_URL}/dstapi/DSTV1/DeleteCollection/{collection_id}"
+    response = requests.get(url)
+    data = response.json()
+
+    return data["Success"] == True
+
 ```
 
 </TabItem>
