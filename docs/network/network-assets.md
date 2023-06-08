@@ -33,7 +33,7 @@ Click to download the files.
 
 <small>
 <a href="/network-assets/rbx-metallic.png" target="_blank" download="rbx-metallic.png">[PNG]</a>&nbsp;&nbsp;
-<a href="/network-assets/rbx-metallic.svg" target="_blank" download="rbx-metallic.svg">[SVG]</a>
+<a href="/network-assets/rbx-metallic.svg?v=2" target="_blank" download="rbx-metallic.svg">[SVG]</a>
 </small><br />
 <i>RBX Metallic</i>
 </p>
@@ -45,7 +45,7 @@ Click to download the files.
 
 <small>
 <a href="/network-assets/rbx-blue.png" target="_blank" download="rbx-blue.png">[PNG]</a>&nbsp;&nbsp;
-<a href="/network-assets/rbx-blue.svg" target="_blank" download="rbx-blue.svg">[SVG]</a>
+<a href="/network-assets/rbx-blue.svg?v=2" target="_blank" download="rbx-blue.svg">[SVG]</a>
 </small><br />
 <i>RBX Blue</i>
 </p>
@@ -57,7 +57,7 @@ Click to download the files.
 
 <small>
 <a href="/network-assets/rbx-white.png" target="_blank" download="rbx-white.png">[PNG]</a>&nbsp;&nbsp;
-<a href="/network-assets/rbx-white.svg" target="_blank" download="rbx-white.svg">[SVG]</a>
+<a href="/network-assets/rbx-white.svg?v=2" target="_blank" download="rbx-white.svg">[SVG]</a>
 </small><br />
 <i>RBX White</i>
 </p>
@@ -67,7 +67,7 @@ Click to download the files.
 <p>
 <small>
 <a href="/network-assets/rbx-black.png" target="_blank" download="rbx-black.png">[PNG]</a>&nbsp;&nbsp;
-<a href="/network-assets/rbx-black.svg" target="_blank" download="rbx-black.svg">[SVG]</a>
+<a href="/network-assets/rbx-black.svg?v=2" target="_blank" download="rbx-black.svg">[SVG]</a>
 </small><br />
 <i>RBX Black</i>
 </p>
