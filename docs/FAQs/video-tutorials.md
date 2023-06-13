@@ -23,6 +23,8 @@ sidebar_position: 9
 
 > [HD Wallets](/docs/GUI/gui-advanced-instructions#hd-wallets)
 
+> [Reserve (Protected) Accounts](/docs/GUI/gui-advanced-instructions#reserve-protected-accounts)
+
 > [MOTHER](/docs/GUI/gui-advanced-instructions#mother)
 
 > [Smart Contracts](/docs/GUI/gui-advanced-instructions#smart-contracts)
