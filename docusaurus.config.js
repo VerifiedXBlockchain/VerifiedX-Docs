@@ -87,7 +87,7 @@ const config = {
           { to: 'https://twitter.com/ReserveBlockIO', label: 'Twitter', position: 'right', className:"navbar__link-small social-link social-link-twitter"},
           { to: 'https://discord.com/invite/PnS2HRETDh', label: 'Twitter', position: 'right', className:"navbar__link-small social-link social-link-discord"},
           { to: 'https://github.com/ReserveBlockIO', label: 'Twitter', position: 'right', className:"navbar__link-small social-link social-link-github"},
-          { to: 'https://t.me/reserveblockofficial', label: 'Twitter', position: 'right', className:"navbar__link-small social-link social-link-telegram"},
+          // { to: 'https://t.me/reserveblockofficial', label: 'Twitter', position: 'right', className:"navbar__link-small social-link social-link-telegram"},
 
           { to: 'https://wallet.rbx.network/', label: 'Web Wallet', position: 'right', className:"navbar__link-small"},
           { to: '/docs/documents/whitepaper-v2', label: 'Whitepaper v2',position: 'right',className:"navbar__link-small"},
