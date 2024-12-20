@@ -83,7 +83,7 @@ function Feature({ title, description, url }: FeatureItem) {
     <div className={clsx('col col--6')}>
       <div style={{ height: 32 }} />
 
-      <div style={{ backgroundColor: "rgba(0,0,0,.7)", borderRadius: 8 }}>
+      <div style={{ backgroundColor: "rgba(21, 22, 24, 0.9)", borderRadius: 12, border: '1px solid #192835', boxShadow: '0px 0px 10px #192834', }}>
         <div style={{ height: 32 }} />
 
 
@@ -92,7 +92,7 @@ function Feature({ title, description, url }: FeatureItem) {
           <p style={{ fontSize: 18, lineHeight: 1.2, paddingLeft: 42, paddingRight: 42, minHeight: 66 }}>{description}</p>
         </div>
         <div className="text--center">
-          <a className="button button-3d-white" href={url}>Launch</a>
+          <a className="button" href={url}>Launch</a>
         </div>
         <div style={{ height: 32 }} />
 

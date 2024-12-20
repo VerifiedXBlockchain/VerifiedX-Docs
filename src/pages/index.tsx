@@ -1,6 +1,5 @@
 import React from 'react';
 import clsx from 'clsx';
-import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
@@ -19,13 +18,13 @@ function HomepageHeader() {
             <img src="/img/cube.gif" className={clsx(styles.cubeImg)} />
           </div>
           <div className={clsx(styles.wordmark)}>
-            <img src="/img/rbxwiki.png" className={clsx(styles.wordmarkImg)} />
+            <img src="/img/vfx-docs.png" className={clsx(styles.wordmarkImg)} />
           </div>
         </h1>
         <p className={clsx('hero__subtitle', styles.heroSubtitle)}>{siteConfig.tagline}</p>
         <div className={styles.buttons}>
           <a
-            className="button button-3d-white"
+            className="button"
             href="/docs/introduction/what-is-rbx/">
             Get Started
           </a>
@@ -40,7 +39,7 @@ export default function Home(): JSX.Element {
   return (
     <Layout
       title={`Home`}
-      description="Democratizing Tokenization For Everyone">
+      description="Tokenized Commerce and Self-Custody for Everyone.">
 
       <div className={clsx(styles.main)}>
 

@@ -9,9 +9,9 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'RBXWiki',
-  tagline: 'Democratizing Tokenization For Everyone',
-  url: 'https://wiki.reserveblock.io',
+  title: 'VerifiedX Docs',
+  tagline: 'Tokenized Commerce and Self-Custody for Everyone.',
+  url: 'https://docs.verifiedx.io',
   baseUrl: '/',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
@@ -19,8 +19,8 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'ReserveBlockIO', // Usually your GitHub org/user name.
-  projectName: 'rbx-wiki', // Usually your repo name.
+  organizationName: 'VerifiedXBlockchain', // Usually your GitHub org/user name.
+  projectName: 'VerifiedX-Docs', // Usually your repo name.
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -29,9 +29,9 @@ const config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
-  
 
-   stylesheets: [
+
+  stylesheets: [
     "~node_modules/font-awesome/font-awesome.min.css",
   ],
 
@@ -45,9 +45,9 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/ReserveBlockIO/rbx-wiki/tree/main',
+            'https://github.com/VerifiedXBlockchain/VerifiedX-Docs/tree/main',
         },
-     
+
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -55,7 +55,7 @@ const config = {
     ],
   ],
 
-  
+
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -63,75 +63,75 @@ const config = {
       docs: {
         sidebar: {
           hideable: true,
-          
+
         },
       },
 
-      
-     
+
+
       navbar: {
 
         logo: {
           alt: 'RBXWiki',
-          src: 'img/rbxwiki.png',
+          src: 'img/vfx-docs.png',
         },
         items: [
-          {to: 'https://www.reserveblock.io/#learn', label: 'Learn', position: 'left',className:"navbar__link-large"},
-          { to: 'https://www.reserveblock.io/#masternodes', label: 'Masternodes',position: 'left',className:"navbar__link-large"},
-          { to: 'https://www.reserveblock.io/#wallet', label: 'Wallet',position: 'left',className:"navbar__link-large"},
-          { to: 'https://www.reserveblock.io/#network', label: 'Network',position: 'left',className:"navbar__link-large"},
-          { to: 'https://www.reserveblock.io/#build', label: 'Build',position: 'left',className:"navbar__link-large"},
-          { to: '/docs/introduction/what-is-rbx',position: 'left',label: 'Wiki', className:"navbar__link-large"},
-          { to: 'https://www.reserveblock.io/#community', label: 'Community',position: 'left',className:"navbar__link-large"},
+          // { to: 'https://www.reserveblock.io/#learn', label: 'Learn', position: 'left', className: "navbar__link-large" },
+          // { to: 'https://www.reserveblock.io/#masternodes', label: 'Masternodes', position: 'left', className: "navbar__link-large" },
+          // { to: 'https://www.reserveblock.io/#wallet', label: 'Wallet', position: 'left', className: "navbar__link-large" },
+          // { to: 'https://www.reserveblock.io/#network', label: 'Network', position: 'left', className: "navbar__link-large" },
+          // { to: 'https://www.reserveblock.io/#build', label: 'Build', position: 'left', className: "navbar__link-large" },
+          // { to: '/docs/introduction/what-is-rbx', position: 'left', label: 'Wiki', className: "navbar__link-large" },
+          // { to: 'https://www.reserveblock.io/#community', label: 'Community', position: 'left', className: "navbar__link-large" },
 
-          { to: 'https://twitter.com/ReserveBlockIO', label: 'Twitter', position: 'right', className:"navbar__link-small social-link social-link-twitter"},
-          { to: 'https://discord.com/invite/PnS2HRETDh', label: 'Twitter', position: 'right', className:"navbar__link-small social-link social-link-discord"},
-          { to: 'https://github.com/ReserveBlockIO', label: 'Twitter', position: 'right', className:"navbar__link-small social-link social-link-github"},
-          // { to: 'https://t.me/reserveblockofficial', label: 'Twitter', position: 'right', className:"navbar__link-small social-link social-link-telegram"},
+          // { to: 'https://twitter.com/ReserveBlockIO', label: 'Twitter', position: 'right', className: "navbar__link-small social-link social-link-twitter" },
+          // { to: 'https://discord.com/invite/PnS2HRETDh', label: 'Twitter', position: 'right', className: "navbar__link-small social-link social-link-discord" },
+          // { to: 'https://github.com/ReserveBlockIO', label: 'Twitter', position: 'right', className: "navbar__link-small social-link social-link-github" },
+          // // { to: 'https://t.me/reserveblockofficial', label: 'Twitter', position: 'right', className:"navbar__link-small social-link social-link-telegram"},
 
-          { to: 'https://wallet.rbx.network/', label: 'Web Wallet', position: 'right', className:"navbar__link-small"},
-          { to: '/docs/documents/whitepaper-v2', label: 'Whitepaper v2',position: 'right',className:"navbar__link-small"},
-          { to: 'https://www.reserveblock.io/disclaimer', label: 'Disclaimer',position: 'right',className:"navbar__link-small"},
+          // { to: 'https://wallet.rbx.network/', label: 'Web Wallet', position: 'right', className: "navbar__link-small" },
+          // { to: '/docs/documents/whitepaper-v2', label: 'Whitepaper v2', position: 'right', className: "navbar__link-small" },
+          // { to: 'https://www.reserveblock.io/disclaimer', label: 'Disclaimer', position: 'right', className: "navbar__link-small" },
         ],
       },
-      
+
       footer: {
         style: 'dark',
         links: [
-          {
-            title: 'GENERAL',
-            items: [
-              {label: 'Learn', to: 'https://www.reserveblock.io/#learn',},
-              {label: 'Masternodes', to: 'https://www.reserveblock.io/#masternodes',},
-              {label: 'RBX Wallet', to: 'https://www.reserveblock.io/#wallet',},
-            ],
-          },
-          {
-            title: 'DEVELOP',
-            items: [
-              {label: 'Network', to: 'https://www.reserveblock.io/#network',},
-              {label: 'Build', to: 'https://www.reserveblock.io/#build',},
-              {label: 'Community', to: 'https://www.reserveblock.io/#community',},
-            ],
-          },
-          {
-            title: 'FAQS',
-            items: [
-              {label: 'General',to: '/docs/FAQs/general-faq/',},
-              {label: 'Core Wallet',to: '/docs/FAQs/core-wallet-faq/',},
-              {label: 'Masternodes',to: '/docs/FAQs/masternode-faq/',},
-            ],
-          },
-          {
-            title: 'ABOUT',
-            items: [
-              {label: 'Disclaimer',to: 'https://www.reserveblock.io/disclaimer'},
-              {label: 'Whitepaper v2',to: '/docs/documents/whitepaper-v2/',},
-              {label: 'Contact',to: 'mailto:dev@reserveblock.io'},
-            ]
-          },
+          // {
+          //   title: 'GENERAL',
+          //   items: [
+          //     { label: 'Learn', to: 'https://www.reserveblock.io/#learn', },
+          //     { label: 'Masternodes', to: 'https://www.reserveblock.io/#masternodes', },
+          //     { label: 'RBX Wallet', to: 'https://www.reserveblock.io/#wallet', },
+          //   ],
+          // },
+          // {
+          //   title: 'DEVELOP',
+          //   items: [
+          //     { label: 'Network', to: 'https://www.reserveblock.io/#network', },
+          //     { label: 'Build', to: 'https://www.reserveblock.io/#build', },
+          //     { label: 'Community', to: 'https://www.reserveblock.io/#community', },
+          //   ],
+          // },
+          // {
+          //   title: 'FAQS',
+          //   items: [
+          //     { label: 'General', to: '/docs/FAQs/general-faq/', },
+          //     { label: 'Core Wallet', to: '/docs/FAQs/core-wallet-faq/', },
+          //     { label: 'Masternodes', to: '/docs/FAQs/masternode-faq/', },
+          //   ],
+          // },
+          // {
+          //   title: 'ABOUT',
+          //   items: [
+          //     { label: 'Disclaimer', to: 'https://www.reserveblock.io/disclaimer' },
+          //     { label: 'Whitepaper v2', to: '/docs/documents/whitepaper-v2/', },
+          //     { label: 'Contact', to: 'mailto:dev@reserveblock.io' },
+          //   ]
+          // },
         ],
-        copyright: `© ${new Date().getFullYear()} ReserveBlock`,
+        copyright: `© ${new Date().getFullYear()} VerifiedX`,
       },
       colorMode: {
         defaultMode: 'dark',
@@ -139,18 +139,18 @@ const config = {
         respectPrefersColorScheme: false,
       },
       prism: {
-        additionalLanguages:["csharp"]
+        additionalLanguages: ["csharp"]
       }
-      
-          
+
+
     }),
-    scripts: [
-      {
-        src: "/scripts/links.js?v=3",
-        async: true,
-      }
-      
-    ]
+  scripts: [
+    {
+      src: "/scripts/links.js?v=3",
+      async: true,
+    }
+
+  ]
 };
 
 module.exports = config;

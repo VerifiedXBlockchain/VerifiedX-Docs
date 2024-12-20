@@ -12,12 +12,12 @@
 
 
 .main {
-  background-image: url("/static/img/poster.jpg");
-  background-attachment: fixed;
+  background-image: url("/static/img/background-1.jpg");
   background-size: cover;
-  min-height: calc(100vh - 200px);
 
 }
+
+
 
 @media screen and (max-width: 996px) {
   .heroBanner {
@@ -45,9 +45,9 @@
 .heroTitle {
   display: flex;
   justify-content: center;
-  margin-left: -100px;
+  flex-direction: column;
 
- 
+
 }
 
 .cube {
@@ -60,8 +60,9 @@
 }
 
 .wordmark {
-  height: 100px;
- 
+  margin-top: 12px;
+  height: 60px;
+
 }
 
 .wordmarkImg {
@@ -69,13 +70,15 @@
 }
 
 @media only screen and (max-width: 600px) {
-.heroTitle {
-  margin-left: -50px;
-}
+  .heroTitle {
+    margin-left: -50px;
+  }
+
   .cube {
     height: 50px;
   }
-    .wordmark {
-      height: 50px;
-    }
+
+  .wordmark {
+    height: 50px;
+  }
 }

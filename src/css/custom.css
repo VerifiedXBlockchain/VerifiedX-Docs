@@ -4,6 +4,9 @@
  * work well for content-centric websites.
  */
 
+
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap');
+
 /* You can override the default Infima variables here. */
 :root {
   --ifm-color-primary: #2e8555;
@@ -16,7 +19,7 @@
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --color-brand-primary: #031745;
-  --color-brand-secondary: #82e4fb;
+  --color-brand-secondary: #73c4fa;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -29,20 +32,21 @@
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
   --ifm-navbar-background-color: #000;
-  --ifm-navbar-link-color:#84e9fd;
+  --ifm-navbar-link-color: #73c4fa;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --ifm-footer-background-color: #031745;
   --ifm-link-color: #fff;
-  --ifm-heading-color: #84e9fd;
+  --ifm-heading-color: #73c4fa;
 }
 
 
 
 
 
-.hero{
+.hero {
   background-color: transparent;
 }
+
 .navbar__item {
   letter-spacing: 2px;
   padding-top: 14px;
@@ -50,20 +54,28 @@
 
 .navbar__logo {
   position: relative;
-  top: -8px;
+  top: 5px;
 }
-.body, html{
-  font-family: Adriatic,sans-serif;
+
+.navbar__logo img {
+  height: 20px;
+  margin-left: 50px;
 }
+
+.body,
+html {
+  font-family: 'Mukta', sans-serif;
+}
+
 .navbar__logo:before {
-    display: inline-block;
-    position: relative;
-    top: 4px;
-    width: 40px;
-    height: 40px;
-    content: '';
-    background-image:url(/static/img/cube.gif);
-    background-size: contain;
+  display: inline-block;
+  position: absolute;
+  top: -10px;
+  width: 40px;
+  height: 40px;
+  content: '';
+  background-image: url(/static/img/cube.gif);
+  background-size: contain;
 }
 
 .navbar__link-large {
@@ -72,16 +84,17 @@
   position: relative;
   top: -4px;
 }
+
 .navbar__link-small {
   font-size: 13px;
   padding-left: 0;
-  margin-left:0;
+  margin-left: 0;
   position: relative;
   top: -2px;
   letter-spacing: 1px;
 }
 
-.footer{
+.footer {
   letter-spacing: 1px;
   background-color: rgb(2, 10, 33);
   border-top: 4px solid rgba(126, 239, 255, 0.2);
@@ -89,26 +102,27 @@
   box-sizing: border-box;
 }
 
-.footer__title{
+.footer__title {
   color: rgba(255, 255, 255, 0.7);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 3px;
   font-size: 1.25rem;
-  text-align: center!important;
+  text-align: center !important;
 
 }
 
-.footer__item{
+.footer__item {
   color: rgb(255, 255, 255);
-    text-decoration: none;
-    letter-spacing: 1px;
-    font-size: 16px;
-    line-height: 32px;
-    text-align: center!important;
+  text-decoration: none;
+  letter-spacing: 1px;
+  font-size: 16px;
+  line-height: 32px;
+  text-align: center !important;
 }
-.footer__copyright{
-  color: #6c757d!important;
+
+.footer__copyright {
+  color: #6c757d !important;
 }
 
 
@@ -123,6 +137,28 @@
 
 .markdown a:hover {
   color: #84e9fd;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.7rem 1.5rem 0.5rem 1.5rem;
+  background-color: #fff;
+  color: #000;
+  font-weight: 500;
+  border: none;
+  border-radius: 9999px;
+  /* Makes it a pill shape */
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  /* Smooth hover effect */
+}
+
+.button:hover {
+  background-color: #333;
+  /* Dark gray */
+  color: #fff;
+  /* White text */
 }
 
 
@@ -191,22 +227,22 @@
 
 }
 
-.social-link:hover{
+.social-link:hover {
   opacity: 0.8;
 }
 
 .social-link-twitter {
-  background-image:url(/img/twitter.png);
+  background-image: url(/img/twitter.png);
 }
 
 .social-link-discord {
-  background-image:url(/img/discord.png);
+  background-image: url(/img/discord.png);
 }
 
 .social-link-telegram {
-  background-image:url(/img/telegram.png);
+  background-image: url(/img/telegram.png);
 }
 
 .social-link-github {
-  background-image:url(/img/github.png);
+  background-image: url(/img/github.png);
 }
