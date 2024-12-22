@@ -7,7 +7,7 @@ sidebar_position: 1
 Use the Core CLI on Windows, MacOS, or Linux to interact with the network.
 
 
-## Documentation
+## Table of Contents
 
 1. [Build Instructions](./build-instructions)
 

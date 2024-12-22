@@ -72,7 +72,7 @@ const config = {
       navbar: {
 
         logo: {
-          alt: 'RBXWiki',
+          alt: 'VFX Docs',
           src: 'img/vfx-docs.png',
         },
         items: [
