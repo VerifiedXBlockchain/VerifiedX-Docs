@@ -9,72 +9,72 @@ type FeatureItem = {
 };
 
 const FeatureList: FeatureItem[] = [
-  {
-    title: 'GUI Documentation',
-    url: "/docs/GUI/",
+  // {
+  //   title: 'GUI Documentation',
+  //   url: "/docs/GUI/",
 
+  //   description: (
+  //     <>
+  //       Use the GUI on Windows or MacOS to interact with the network through a graphical user interface.
+
+  //     </>
+  //   ),
+  // },
+  {
+    title: 'Core CLI Documenation',
+    url: "/docs/core/",
     description: (
       <>
-        Use the GUI on Windows or MacOS to interact with the network through a graphical user interface.
-
+        Use the Core CLI on Windows, MacOS, or Linux to interact with the network through the command line interface.
       </>
     ),
   },
-  {
-    title: 'CLI Documenation',
-    url: "/docs/CLI/",
-    description: (
-      <>
-        Use the CLI on Windows, MacOS, or Linux to interact with the network through the command line interface.
-      </>
-    ),
-  },
 
-  {
-    title: 'Integration Documentation',
-    url: "/docs/integration/",
+  // {
+  //   title: 'Integration Documentation',
+  //   url: "/docs/integration/",
 
-    description: (
-      <>
-        Learn about integrating with the RBX network.
-        <br /> &nbsp;
+  //   description: (
+  //     <>
+  //       Learn about integrating with the RBX network.
+  //       <br /> &nbsp;
 
-      </>
-    ),
-  },
-  {
-    title: 'Video Tutorials',
-    url: "/docs/FAQs/video-tutorials/",
+  //     </>
+  //   ),
+  // },
+  // {
+  //   title: 'Video Tutorials',
+  //   url: "/docs/FAQs/video-tutorials/",
 
-    description: (
-      <>
-        Learn more about installing and operating the RBX GUI and CLI through a collection of video tutorials.
+  //   description: (
+  //     <>
+  //       Learn more about installing and operating the RBX GUI and CLI through a collection of video tutorials.
 
-      </>
-    ),
-  },
-  {
-    title: 'Whitepaper v2',
-    url: "docs/documents/whitepaper-v2/",
+  //     </>
+  //   ),
+  // },
+  // {
+  //   title: 'Whitepaper v2',
+  //   url: "docs/documents/whitepaper-v2/",
 
-    description: (
-      <>
-        Read the ReserveBlock Whitepaper v2.
+  //   description: (
+  //     <>
+  //       Read the ReserveBlock Whitepaper v2.
 
-      </>
-    ),
-  },
-  {
-    title: 'FAQs',
-    url: "/docs/faqs/",
+  //     </>
+  //   ),
+  // },
+  // {
+  //   title: 'FAQs',
+  //   url: "/docs/faqs/",
 
-    description: (
-      <>
-        Read the network's frequently asked questions.
+  //   description: (
+  //     <>
+  //       Read the network's frequently asked questions.
 
-      </>
-    ),
-  },
+  //     </>
+  //   ),
+  // },
 
 ];
 
