@@ -9,19 +9,9 @@ type FeatureItem = {
 };
 
 const FeatureList: FeatureItem[] = [
-  // {
-  //   title: 'GUI Documentation',
-  //   url: "/docs/GUI/",
 
-  //   description: (
-  //     <>
-  //       Use the GUI on Windows or MacOS to interact with the network through a graphical user interface.
-
-  //     </>
-  //   ),
-  // },
   {
-    title: 'Core CLI Documenation',
+    title: 'Core CLI Docs',
     url: "/docs/core/",
     description: (
       <>
@@ -29,7 +19,17 @@ const FeatureList: FeatureItem[] = [
       </>
     ),
   },
+  {
+    title: 'Switchblade GUI Docs',
+    url: "/docs/gui/",
 
+    description: (
+      <>
+        Use the Switchblade GUI on Windows, MacOS, and web to interact with the network through a graphical user interface.
+
+      </>
+    ),
+  },
   // {
   //   title: 'Integration Documentation',
   //   url: "/docs/integration/",
