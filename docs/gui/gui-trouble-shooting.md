@@ -13,9 +13,11 @@ This guide will help you debug common problems and should be reviewed before req
 Generally, this means the CLI is having trouble starting. This usually happens if the CLI is already running.
 The first thing you should try is simply restarting your computer and then relaunching the GUI. This will eliminate the possibility of a rogue CLI process running.
 
-### I restarted, but I'm still having this problem.
+### I have restarted, but I'm still having this problem.
 
 You may have a corrupt database file. Ensure your private keys(s) are backed up, the follow these steps:
+
+> Note: We have decided to keep the original network's name as the location of the DB folder to make it backwards compatible. This may be migrated in the future.
 
 1. Close your wallet.
 
@@ -26,6 +28,7 @@ You may have a corrupt database file. Ensure your private keys(s) are backed up,
     b. Check your Task Manager (Windows) or Activity Monitor (MacOS) for a process called ReserveBlockCore and end it. Please note that this is a background process and you may need to switch to the advanced mode. If you are not familiar with how to do this, use option `a` above instead.
 
 3. Navigate to your RBX Folder
+
 
     a. Windows: This will be located in `C:\Users\{username}\AppData\Local`. Note, you may need to enable `Hidden Files` to see the AppData folder in your user directory.
 
@@ -39,17 +42,17 @@ You may have a corrupt database file. Ensure your private keys(s) are backed up,
 
 On some versions of windows, you may run into permission problems with the core CLI launching the API. To solve this issue you'll want to set both the GUI and the CLI to run as adminstrator:
 
-1. Navigate to `C:\Program Files (x87)\RBXWallet\`
+1. Navigate to `C:\Program Files (x87)\VFXWallet\`
 
-2. Right click on `RBXWallet.exe` and choose `Properties`
-> If you don't see `RBXWallet.exe` it's likely because you don't have extensions visible on your machine. Instead, just look for `RBXWallet`.
+2. Right click on `VFXWallet.exe` and choose `Properties`
+> If you don't see `VFXWallet.exe` it's likely because you don't have extensions visible on your machine. Instead, just look for `VFXWallet`.
 
 3. Go to the compatability tab and click `Change settings for all users`
 
 4. Enable the checkbox for `Run this program as administrator` and click OK, and then OK again.
 
 5. Navigate into the `RBXCore` folder and repeat the same step for `ReserveBlockCore.exe`
-> If you don't have hidden files enabled, you will see three files called `ReserveBlockCore`. You'll want to use the one that has the RBX cube icon.
+> If you don't have hidden files enabled, you will see three files called `ReserveBlockCore`. You'll want to use the one that has the VFX cube icon.
 
 6. Then launch the GUI as normal and everything should work as expected.
 
@@ -61,9 +64,9 @@ We've determined it is not due to a rogue process nor a corrupted database. What
 
 2. Launch ReserveBlockCore
 
-    a. Windows: navigate to `C:\Program Files (x86)\RBXWallet\RBXCore`. Then, launch `ReserveBlockCore.exe`. Note: you may not see `.exe` depending on your Windows' settings.
+    a. Windows: navigate to `C:\Program Files (x86)\VFXWallet\RBXCore`. Then, launch `ReserveBlockCore.exe`. Note: you may not see `.exe` depending on your Windows' settings.
 
-    b. MacOS: navigate to `/Applications` and right click on `RBXWallet.app` and then choose `Show Package Contents`. Open up `Contents > Resources > RBXCore` and then launch `ReserveBlockCore`.
+    b. MacOS: navigate to `/Applications` and right click on `VFXWallet.app` and then choose `Show Package Contents`. Open up `Contents > Resources > RBXCore` and then launch `ReserveBlockCore`.
 
 3. You should see the CLI booting up and blocks coming in. If an error message occurs, check the following:
 
@@ -88,7 +91,7 @@ We've determined it is not due to a rogue process nor a corrupted database. What
 
 ## Incorrect Balance
 
-Usually this is because you haven't reached the local block height where the transaction occurred. Compare your local block height to the [Network Explorer](https://rbx.network).
+Usually this is because you haven't reached the local block height where the transaction occurred. Compare your local block height to the [Network Explorer](https://spyglass.verifiedx.io).
 
 It's also possible you haven't imported the correct key(s). Double check those.
 
@@ -100,7 +103,7 @@ As mentioned during the snapshot import process, you must backup your keys befor
 
 1. Close your wallet.
 
-2. Navigate to your RBX folder and there will be a sibling folder to it called `RBX_BACKUP_{timestamp}`. 
+2. Navigate to where your RBX folder and there will be a sibling folder to it called `VFX_BACKUP_{timestamp}`. 
 
 3. You can simply delete the current `RBX` folder and then rename the backup one to `RBX`.
 
@@ -109,5 +112,5 @@ As mentioned during the snapshot import process, you must backup your keys befor
 
 :::note TIP
 **Not seeing the answer your looking for? Just ask the community!**
-> <a href="https://discord.com/invite/PnS2HRETDh">Join Discord</a>
+> <a href="https://discord.gg/7cd5ebDQCj">Join Discord</a>
 :::

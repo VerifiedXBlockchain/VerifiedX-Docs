@@ -85,7 +85,7 @@ const config = {
           // { to: 'https://www.reserveblock.io/#community', label: 'Community', position: 'left', className: "navbar__link-large" },
 
           // { to: 'https://twitter.com/ReserveBlockIO', label: 'Twitter', position: 'right', className: "navbar__link-small social-link social-link-twitter" },
-          // { to: 'https://discord.com/invite/PnS2HRETDh', label: 'Twitter', position: 'right', className: "navbar__link-small social-link social-link-discord" },
+          // { to: 'https://discord.gg/7cd5ebDQCj', label: 'Twitter', position: 'right', className: "navbar__link-small social-link social-link-discord" },
           // { to: 'https://github.com/ReserveBlockIO', label: 'Twitter', position: 'right', className: "navbar__link-small social-link social-link-github" },
           // // { to: 'https://t.me/reserveblockofficial', label: 'Twitter', position: 'right', className:"navbar__link-small social-link social-link-telegram"},
 

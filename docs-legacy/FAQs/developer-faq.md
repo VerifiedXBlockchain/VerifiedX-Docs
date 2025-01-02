@@ -31,5 +31,5 @@ sidebar_position: 8
 
 :::note Tip
 **Not seeing the answer your looking for? Just ask the community!**
-> <a href="https://discord.com/invite/PnS2HRETDh">Join Discord</a>
+> <a href="https://discord.gg/7cd5ebDQCj">Join Discord</a>
 :::

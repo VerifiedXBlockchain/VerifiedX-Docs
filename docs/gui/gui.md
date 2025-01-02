@@ -18,17 +18,38 @@ Use the GUI on Windows or MacOS to interact with the network.
 
 Download and Install the application for your operating system (Windows or MacOS).
 
-[Installation Instructions](./gui-install-instructions)
+[Installation Instructions](./gui-installation)
 
 #### Using the Application
 
 Learn how to operate the application.
 
-[Operating Instructions](./gui-operating-instructions)
+[First Launch](./gui-first-launch)
+
+[Dashboard Overview](./gui-dashboard-overview)
 
 
-#### P2P Auctions
+#### Features
 
-Learn about P2P auctions in the RBX network.
+[Vault Accounts](./gui-vault-accounts)
 
-[P2P Auctions](./p2p-auctions)
+[Domains](./gui-domains)
+
+[Sending & Receiving](./gui-sending-receiving)
+
+[Transactions](./gui-transactions)
+
+[Verified Bitcoin (vBTC)](./gui-vbtc)
+
+[Fungible Tokens](./gui-fungible-tokens)
+
+[Smart Contracts & NFTs](./gui-smart-contracts)
+
+[P2P Auctions](./gui-p2p-auctions)
+
+[HD Accounts](./gui-hd-accounts)
+
+[Web Wallet](./gui-web-wallet)
+
+[Advanced System Operations](./gui-system-operations)
+
