@@ -3,13 +3,13 @@ sidebar_position: 4
 ---
 
 
-# RBX Transaction & Signature Creation
+# VFX Transaction & Signature Creation
 
 ## Summary:
 
 The purpose of this document is to teach you how to create a transaction and sign the transaction to then broadcast over the RBX network. Please note with this process you are never needed to expose your private key to the wallet or anywhere outside your own building application. At the end of this document in the extra section is how you can send a TX if your private key is associated with a wallet.
 
-## How to create an RBX Transaction
+## How to create an VFX Transaction
 
 To first create a transaction you must understand how the transaction class is made. Below is the class in its full form and the enums associated with it.
 
@@ -50,9 +50,9 @@ public class Transaction {
 - **Id** - This field is auto generated and you do not need to do anything with
 
 - **Hash** - This is created by the wallet once a full TX is prepared. A hash consist of the follow pieces of information: `Timestamp + FromAddress + ToAddress + Amount + Fee + Nonce + TransactionType + Data`
-- **ToAddress** - This is the RBX address in which the transaction is being sent to
-- **FromAddress** - This is the RBX address in which the transaction is being sent from.
-- **Amount** - This is the amount of RBX that is being sent in a transaction
+- **ToAddress** - This is the VFX address in which the transaction is being sent to
+- **FromAddress** - This is the VFX address in which the transaction is being sent from.
+- **Amount** - This is the amount of VFX that is being sent in a transaction
 - **Nonce** - This is the transaction counter for a given address. As transactions are sent this counter is increased by 1
 - **Fee** - This is the near zero atomic fee that is associated with a transaction and is calculated through the wallet.
 - **Timestamp** - This is a unix timestamp in seconds

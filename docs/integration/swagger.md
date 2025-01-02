@@ -10,6 +10,6 @@ The swagger API playground can be found at <a href="http://localhost:7292/swagge
 > You will need to enable the API through the CLI (`10` on the main menu) or by passing the `enableapi` flag when starting the CLI. 
 
 
-## Explorer Swagger
+## Spyglass (Network Explorer) Swagger
 
-You can visit the explorer's swagger at this URL: <a href="https://data.rbx.network/docs">https://data.rbx.network/docs</a>
+You can visit the explorer's swagger at this URL: <a href="https://data.verifiedx.io/docs">https://data.verifiedx.io/docs</a>

@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# RBX Integration Setup
+# VFX Integration Setup
 
 ## Summary
 
@@ -13,13 +13,13 @@ This document will outline the core CLI functions and give recommended practices
 
 ## Wallet Information
 
-Currently RBX has both a GUI and CLI wallet. These wallets will run in all environments **(windows, linux, and mac)**.
-The RBX Core was built with **.Net 6 and C#.**
-The RBX GUI was built with **Flutter/Dart**
+Currently VFX has both a GUI and CLI wallet. These wallets will run in all environments **(windows, linux, and mac)**.
+The VFX Core was built with **.Net 6 and C#.**
+The VFX GUI was built with **Flutter/Dart**
 
 > .Net 6 can be found here: <https://dotnet.microsoft.com/en-us/download/dotnet/6.0>
 
-> The recommended IDE for RBX is Visual Studio 2022, or Visual Code.
+> The recommended IDE for VFX is Visual Studio 2022, or Visual Code.
 
 > It is recommended for production level environments to run the CLI and communicate through the API. For personal use the GUI wallet is more than suitable.
 
@@ -30,12 +30,12 @@ GUI - <https://github.com/ReserveBlockIO/rbx-wallet-gui/releases>
 If you are wanting to build from source, please choose the correct repo from here:
 **https://github.com/ReserveBlockIO**
 
-RBX wallet generates addresses based on the ECDSA curve.
+VFX wallet generates addresses based on the ECDSA curve.
 
 Mainnet addresses start with an `R`.
 Testnet addresses start with an `x`.
 
-For the RBX P2P Layer, the wallet is using SignalR. More information on SignalR can be found here: **https://dotnet.microsoft.com/en-us/apps/aspnet/signalr**
+For the VFX P2P Layer, the wallet is using SignalR. More information on SignalR can be found here: **https://dotnet.microsoft.com/en-us/apps/aspnet/signalr**
 
 For Beacons and Asset transfer the wallet is using its own modified version of a TCP listener with a socket handler. This allows the two functions to work together but not interfere with each at the same time.
 
@@ -46,7 +46,7 @@ The wallet main connection port 3338 must be configured to at least allow outgoi
 ## Compile your own CLI
 
 If you are wanting to compile your own CLI from source here is how to do this.  
-The instructions below can be found here: [Build Instructions](/docs/Get-started/RBXBuildInstructions)
+The instructions below can be found here: [Build Instructions](/docs/core/build-instructions)
 
 ### Linux
 

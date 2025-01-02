@@ -2,17 +2,17 @@
 sidebar_position: 3
 ---
 
-# RBX Address Creation
+# VFX Address Creation
 
 ## Summary:
 
-The purpose of this document is to teach you how a RBX address is
+The purpose of this document is to teach you how a VFX address is
 created. This will walk you through from the starting step to the very
 end which is a human readable address.
 
-## How to create an RBX Address
+## How to create an VFX Address
 
-**The correct way to create a RBX address is to use well tested, opensource, peer reviewed wallet software.** The manually handling keys can and has resulted in fund loss over and over again. Unlike other centralized systems, losses in RBX are usually unrecoverable. Please proceed at your own risk.
+**The correct way to create a VFX address is to use well tested, opensource, peer reviewed wallet software.** The manually handling keys can and has resulted in fund loss over and over again. Unlike other centralized systems, losses in VFX are usually unrecoverable. Please proceed at your own risk.
 
 Here is a brief overview of how address generation works, for
 informational purposes:
@@ -22,7 +22,7 @@ informational purposes:
   `18e14a7b6a307f426a94f8114701e7c8e774e7f9a47e2c2035db29a206321725`
 
 1.  Take the corresponding public key generated with it and add '04' hex
-    identifier. RBX private keys are created from Ecdsa multiplication of
+    identifier. VFX private keys are created from Ecdsa multiplication of
     `(curve.G, secret, curve.N, curve.A, curve.P)`. In code it appears as
     this:
 
@@ -83,7 +83,7 @@ informational purposes:
     `3699e7d4`
 
 1.  Add the 4 checksum bytes from stage 7 at the end of extended
-    RIPEMD-160 hash from stage 4. This is the 25-byte binary RBX Address.
+    RIPEMD-160 hash from stage 4. This is the 25-byte binary VFX Address.
 
     `3c010966776006953d5567439e5e39f86a0d273bee3699e7d4`
 

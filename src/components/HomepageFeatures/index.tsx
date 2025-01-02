@@ -30,51 +30,51 @@ const FeatureList: FeatureItem[] = [
       </>
     ),
   },
-  // {
-  //   title: 'Integration Documentation',
-  //   url: "/docs/integration/",
+  {
+    title: 'Integration Documentation',
+    url: "/docs/integration/",
 
-  //   description: (
-  //     <>
-  //       Learn about integrating with the RBX network.
-  //       <br /> &nbsp;
+    description: (
+      <>
+        Learn about integrating with the VFX network.
+        <br /> &nbsp;
 
-  //     </>
-  //   ),
-  // },
-  // {
-  //   title: 'Video Tutorials',
-  //   url: "/docs/FAQs/video-tutorials/",
+      </>
+    ),
+  },
+  {
+    title: 'Video Tutorials',
+    url: "/docs/video-tutorials/",
 
-  //   description: (
-  //     <>
-  //       Learn more about installing and operating the RBX GUI and CLI through a collection of video tutorials.
+    description: (
+      <>
+        Learn more about installing and operating the RBX GUI and CLI through a collection of video tutorials.
 
-  //     </>
-  //   ),
-  // },
-  // {
-  //   title: 'Whitepaper v2',
-  //   url: "docs/documents/whitepaper-v2/",
+      </>
+    ),
+  },
+  {
+    title: 'Network Assets',
+    url: "docs/network-assets/",
 
-  //   description: (
-  //     <>
-  //       Read the ReserveBlock Whitepaper v2.
+    description: (
+      <>
+        Read the ReserveBlock Whitepaper v2.
 
-  //     </>
-  //   ),
-  // },
-  // {
-  //   title: 'FAQs',
-  //   url: "/docs/faqs/",
+      </>
+    ),
+  },
+  {
+    title: 'Documents',
+    url: "/docs/documents/",
 
-  //   description: (
-  //     <>
-  //       Read the network's frequently asked questions.
+    description: (
+      <>
+        Download and read the whitepaper and other documents.
 
-  //     </>
-  //   ),
-  // },
+      </>
+    ),
+  },
 
 ];
 
