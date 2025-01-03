@@ -59,7 +59,7 @@ const FeatureList: FeatureItem[] = [
 
     description: (
       <>
-        Read the ReserveBlock Whitepaper v2.
+        Download and use VerifiedX's brand assets and style guide.
 
       </>
     ),

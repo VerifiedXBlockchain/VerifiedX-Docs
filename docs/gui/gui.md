@@ -24,9 +24,7 @@ Download and Install the application for your operating system (Windows or MacOS
 
 Learn how to operate the application.
 
-[First Launch](./gui-first-launch)
-
-[Dashboard Overview](./gui-dashboard-overview)
+[First Launch & Dashboard Overview](./gui-first-launch)
 
 
 #### Features

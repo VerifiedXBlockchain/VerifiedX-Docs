@@ -4,6 +4,9 @@ sidebar_position: 7
 
 # Sending and Receiving Funds
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rQzdGvsL-XI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
+
+
 ### Sending Funds
 1. **Select Source Address**:
    - Choose the wallet address from which you want to send funds.

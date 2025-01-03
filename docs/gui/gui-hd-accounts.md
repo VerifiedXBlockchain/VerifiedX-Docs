@@ -5,6 +5,9 @@ sidebar_position: 13
 
 # HD Accounts
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PYPMb0XsFhc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
+
+
 ### Overview
 Hierarchical Deterministic (HD) accounts generate multiple addresses from a single recovery phrase.
 

@@ -6,6 +6,9 @@ sidebar_position: 5
 
 Vault Accounts are a standout feature of VerifiedX Switchblade, offering advanced on-chain security for your digital assets.
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/CKESyVoQPpE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
+
+
 ### Overview
 Vault Accounts act as secure, on-chain storage with features like:
 - **Time-Locked Transactions**: Delay fund transfers until a specified date and time.
