@@ -51,3 +51,7 @@ Learn how to operate the application.
 
 [Advanced System Operations](./gui-system-operations)
 
+
+#### Trouble Shooting
+
+[GUI Trouble Shooting](./gui-trouble-shooting)
