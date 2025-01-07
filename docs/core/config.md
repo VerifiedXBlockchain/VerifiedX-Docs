@@ -82,7 +82,7 @@ The CLI configuration file will be found in `~/RBX/Config/config.txt`.
 
 15.	ValidatorName (default is new guid)
 	+ a.	Type string
-	+ b.	Ex: ValidatorName=MyValidatorRBX1
+	+ b.	Ex: ValidatorName=MyValidator1
 	+ c.	This is the name for the above validator that will be used. Once validator has been imported once then these settings won’t do anything and can be removed or left there. 
 
 16.	NFTTimeout (default is 15 secs)

@@ -415,7 +415,7 @@ def retrieve_network_shop(shop_url):
 
 #### URL Params:
 
-`url`: URL of the shop (ie. rbx://tutorial-shop)
+`url`: URL of the shop (ie. vfx://tutorial-shop)
 
 #### Response:
 

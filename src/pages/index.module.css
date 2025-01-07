@@ -12,9 +12,9 @@
 
 
 .main {
-  background-image: url("/static/img/background-1.jpg");
-  background-size: cover;
-
+  /* background-image: url("/static/img/background-1.jpg"); */
+  /* background-size: cover; */
+  background: #111;
 }
 
 

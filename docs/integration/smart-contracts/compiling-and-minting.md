@@ -254,7 +254,7 @@ You can combine all three features into a single smart contract, but you can not
         {
             "FeatureName": 1,
             "FeatureFeatures":{
-                "RoyaltyAmount": 5, // 5 RBX
+                "RoyaltyAmount": 5, // 5 VFX
                 "RoyaltyPayToAddress": "Rabc123...",
                 "RoyaltyType": 0
             }

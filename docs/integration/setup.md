@@ -24,7 +24,7 @@ The VFX GUI was built with **Flutter/Dart**
 > It is recommended for production level environments to run the CLI and communicate through the API. For personal use the GUI wallet is more than suitable.
 
 **You can find pre-compiled binaries here:**  
-CLI - <https://github.com/ReserveBlockIO/ReserveBlock-Core/releases>  
+CLI - <https://github.com/VerifiedXBlockchain/VerifiedX-Core/releases>  
 GUI - <https://github.com/ReserveBlockIO/rbx-wallet-gui/releases>
 
 If you are wanting to build from source, please choose the correct repo from here:
@@ -57,8 +57,8 @@ inux Install For Ubuntu 22.04:
 3. run `dotnet --version`. You should see a version number of 6.0.xxx
 4. `mkdir rbx` - Makes a direction for RBX
 5. cd rbx
-6. - Clone the repo with git. `git clone https://github.com/ReserveBlockIO/ReserveBlock-Core.git`
-   - Download the already packaged release https://github.com/ReserveBlockIO/ReserveBlock-Core/releases/. If you do this please navigate to the folder you downloaded binaries from and skip to step 12.
+6. - Clone the repo with git. `git clone https://github.com/VerifiedXBlockchain/VerifiedX-Core.git`
+   - Download the already packaged release https://github.com/VerifiedXBlockchain/VerifiedX-Core/releases/. If you do this please navigate to the folder you downloaded binaries from and skip to step 12.
 7. `cd ReserveBlock-Core`
 8. `dotnet build` - There should be 0 (zero) errors.
 9. `dotnet publish -c Release -r linux-x64 --output ./rbxpublished`
@@ -78,8 +78,8 @@ You are done! You should now see a wallet running! Some common errors are usuall
 
 2. Create a directory for RBX and then open command prompt in admin and navigate to that directory.
 3. Please ensure you have a working version of git installed.
-4. - Clone the repo with git. `git clone https://github.com/ReserveBlockIO/ReserveBlock-Core.git`
-   - Download the already packaged release https://github.com/ReserveBlockIO/ReserveBlock-Core/releases/. If you do this please navigate to the folder you downloaded binaries from and skip to step 8.
+4. - Clone the repo with git. `git clone https://github.com/VerifiedXBlockchain/VerifiedX-Core.git`
+   - Download the already packaged release https://github.com/VerifiedXBlockchain/VerifiedX-Core/releases/. If you do this please navigate to the folder you downloaded binaries from and skip to step 8.
 5. `cd ReserveBlock-Core`
 6. `dotnet build` - There should be 0 (zero) errors.
 7. `dotnet publish -c Release -r win-x64 --output ./rbxpublished`
@@ -92,8 +92,8 @@ You are done! You should now see a wallet running! Some common errors are usuall
 1. Install the latest dotnet sdk from here: **https://dotnet.microsoft.com/en-us/download/dotnet/6.0** Once that is installed follow steps below.
 2. Create a directory for RBX and then open command prompt in admin and navigate to that directory.
 3. Please ensure you have a working version of git installed.
-4. - Clone the repo with git. `git clone https://github.com/ReserveBlockIO/ReserveBlock-Core.git`
-   - Download the already packaged release **https://github.com/ReserveBlockIO/ReserveBlock-Core/releases/**. If you do this please navigate to the folder you downloaded binaries from and skip to step 8.
+4. - Clone the repo with git. `git clone https://github.com/VerifiedXBlockchain/VerifiedX-Core.git`
+   - Download the already packaged release **https://github.com/VerifiedXBlockchain/VerifiedX-Core/releases/**. If you do this please navigate to the folder you downloaded binaries from and skip to step 8.
 5. `cd ReserveBlock-Core`
 6. `dotnet build` - There should be 0 (zero) errors.
 7. `dotnet publish -c Release -r osx-x64 --output ./rbxpublished`
@@ -235,7 +235,7 @@ An example config setup could appear like this:
 ![](media/config-example.png)
 
 > This information is updated whenever new features are added and can be found here:
-> **https://github.com/ReserveBlockIO/ReserveBlock-Core/blob/main/ConfigSetup.md**
+> **https://github.com/VerifiedXBlockchain/VerifiedX-Core/blob/main/ConfigSetup.md**
 
 ## RPC Interface Connection
 
@@ -442,15 +442,16 @@ Testnet can be activated two ways:
 ![](media/testnetCli.png)
 
 Please be sure you are on testnet so as to not make any mistakes with your mainnet accounts.
-RBX addresses on testnet will ALWAYS start with an `x`. For Example:
+VFX addresses on testnet will ALWAYS start with an `x`. For Example:
 `xC1zNn7596TC4Bcyn1vE88pj12hfieqCoa`
 
 The primary testnet faucet will come from this address (subject to change): `xMpa8DxDLdC9SQPcAFBc2vqwyPsoFtrWyC`
 
-There are two ways to get funds from the faucet:
+There are three ways to get funds from the faucet:
 
-1. Message the discord channel titled `Testnet Faucet` with your RBX address and funds will be sent.
+1. Message the discord channel titled `Testnet Faucet` with your VFX address and funds will be sent.
 2. Reach out to your point of contact through your current chat tool (telegram, skype, email, etc.) and ask them to send funds to a request testnet address.
+3. Use the testnet faucet via the explorer (https://spyglass-testnet.verifiedx.io/faucet)
 
 It is advised to begin with testnet to ensure all functions are working with your environment before moving over to mainnet.
 
@@ -458,7 +459,7 @@ It is advised to begin with testnet to ensure all functions are working with you
 
 ![](media/cliMenu.png)
 
-The RBX CLI is recommended for most enterprise or third-party integrators as it runs headless and the most efficiently.
+The VFX CLI is recommended for most enterprise or third-party integrators as it runs headless and the most efficiently.
 
 The CLI is still rather robust and the main menu options are seen above, and more options can be discovered by typing /help and pressing enter.
 
@@ -480,21 +481,21 @@ screen dotnet ReserveBlockCore.dll
 
 ### Summary
 
-This section will outline the best practices for setting up an RBX wallet in your environment. While many of these features are optional it is recommended to leverage as many, if not all, as you can.
+This section will outline the best practices for setting up an VFX wallet in your environment. While many of these features are optional it is recommended to leverage as many, if not all, as you can.
 
 The section will cover the config.txt setup, password setup, and how to use the API in some common and general scenarios that will fit most environments.
 
-The RBX Architecture very closely follows the philosophies and principles of Bitcoin so integration will also very similarly mimic that. This was done by design to ease the burden of the solution and the fact it is a layer 1.
+The VFX Architecture very closely follows the philosophies and principles of Bitcoin so integration will also very similarly mimic that. This was done by design to ease the burden of the solution and the fact it is a layer 1.
 
 ### Build the Project
 
-Depending on your environment you will find build instructions for Windows, Linux, and Mac here: **https://github.com/ReserveBlockIO/ReserveBlock-Core/blob/main/RBXBuildInstructions.md**
+Depending on your environment you will find build instructions for Windows, Linux, and Mac here: **https://github.com/VerifiedXBlockchain/VerifiedX-Core/blob/main/RBXBuildInstructions.md**
 
-Follow the instructions and you can either build the project from source to ensure you are receiving a clean version of the program, or you can build from a binary posted in the release section here: **https://github.com/ReserveBlockIO/ReserveBlock-Core/releases**
+Follow the instructions and you can either build the project from source to ensure you are receiving a clean version of the program, or you can build from a binary posted in the release section here: **https://github.com/VerifiedXBlockchain/VerifiedX-Core/releases**
 
 ### Configuration File Setup (Config.txt)
 
-A full list of configuration options can be seen here: **https://github.com/ReserveBlockIO/ReserveBlock-Core/blob/main/ConfigSetup.md**
+A full list of configuration options can be seen here: **https://github.com/VerifiedXBlockchain/VerifiedX-Core/blob/main/ConfigSetup.md**
 
 First you want to start up the wallet to generate a stock configuration file. Depending on your environment it will be located in the same folder the database folder is.
 
@@ -555,11 +556,11 @@ These are the most relevant config options:
 
 ## Optional APICallURL
 
-You can also set up an APICallURL. This will be a URL you input that the RBX wallet upon receiving any new incoming transaction the wallet will call out to this URL sending a json response following the transaction model. This will allow you to easily get incoming transactions in real time and immediately.
+You can also set up an APICallURL. This will be a URL you input that the VFX wallet upon receiving any new incoming transaction the wallet will call out to this URL sending a json response following the transaction model. This will allow you to easily get incoming transactions in real time and immediately.
 
 ## Setting Up Wallet & Private Key Encryption
 
-You can set up a wallet simply by opening the RBX wallet. From there you can generate an infinite number of addresses or set up a 24 word mnemonic to create an HD wallet.
+You can set up a wallet simply by opening the VFX wallet. From there you can generate an infinite number of addresses or set up a 24 word mnemonic to create an HD wallet.
 
 Recommend you backup your phrase offline or create it in an air gapped environment.
 It is strongly recommended you encrypt your private keys. This will protect you if your database files are stolen they will not be able to access funds as the private keys will be encrypted.
@@ -588,5 +589,5 @@ If you have any needs or specific questions it's recommended to reach out over d
 
 ## Conclusion
 
-This document will get most integrations started in the right direction, however, please don’t hesitate to reach out to the RBX community and devs through discord or if you are currently talking to anyone through other social channels please reach out to them there with any questions.
+This document will get most integrations started in the right direction, however, please don’t hesitate to reach out to the VFX community and devs through discord or if you are currently talking to anyone through other social channels please reach out to them there with any questions.
 

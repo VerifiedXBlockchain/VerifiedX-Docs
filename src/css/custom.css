@@ -67,6 +67,10 @@ html {
   font-family: 'Mukta', sans-serif;
 }
 
+.navbar {
+  box-shadow: 0 0 15px rgba(0, 0, 0, .3);
+}
+
 .navbar__logo:before {
   display: inline-block;
   position: absolute;
@@ -96,8 +100,8 @@ html {
 
 .footer {
   letter-spacing: 1px;
-  background-color: rgb(2, 10, 33);
-  border-top: 4px solid rgba(126, 239, 255, 0.2);
+  background-color: #000;
+  /* border-top: 4px solid rgba(126, 239, 255, 0.2); */
   display: block;
   box-sizing: border-box;
 }

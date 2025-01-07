@@ -17,3 +17,4 @@ Domains are customizable aliases for your wallet addresses, simplifying transact
 ### Use Cases
 - Simplify wallet interactions by sharing a domain instead of an address.
 - Host on-chain websites linked to your domain for decentralized publishing.
+- The network supports sending coin and tokens to a VFX domain instead of the address.

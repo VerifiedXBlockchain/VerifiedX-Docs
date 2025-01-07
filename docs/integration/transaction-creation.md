@@ -7,7 +7,7 @@ sidebar_position: 4
 
 ## Summary:
 
-The purpose of this document is to teach you how to create a transaction and sign the transaction to then broadcast over the RBX network. Please note with this process you are never needed to expose your private key to the wallet or anywhere outside your own building application. At the end of this document in the extra section is how you can send a TX if your private key is associated with a wallet.
+The purpose of this document is to teach you how to create a transaction and sign the transaction to then broadcast over the VFX network. Please note with this process you are never needed to expose your private key to the wallet or anywhere outside your own building application. At the end of this document in the extra section is how you can send a TX if your private key is associated with a wallet.
 
 ## How to create an VFX Transaction
 
@@ -56,7 +56,7 @@ public class Transaction {
 - **Nonce** - This is the transaction counter for a given address. As transactions are sent this counter is increased by 1
 - **Fee** - This is the near zero atomic fee that is associated with a transaction and is calculated through the wallet.
 - **Timestamp** - This is a unix timestamp in seconds
-- **Data** - This is the associated tx data for when a transaction is more than just a basic transfer of RBX (ex: NFTs, ADNRs, etc.). This can be left as _null_ if performing a basic RBX tx.
+- **Data** - This is the associated tx data for when a transaction is more than just a basic transfer of VFX (ex: NFTs, ADNRs, etc.). This can be left as _null_ if performing a basic VFX tx.
 - **Signature** - This is an ECDSA Signature where the message is always the Hash of the transaction.
 - **Height** - This is the block height a TX is associated with once crafted. This is auto populated and can be left as 0 when creating a TX.
 - **TransactionType** - This is from the enum above. If you are performing a basic TX then you would choose TransactionType.TX or 0.
@@ -189,7 +189,7 @@ Transaction tx3 = new Transaction{
   - `5msmMuPGKwpvtYofSdr6zk1AWG5Rz1vmf5z5DTVb6PYXibwovzkKM7Eg2BTQ5KDeUKwSyEAzHq9KjTFc1hyhfiFg`
   - `MEYCIQDd141oBoBfcznYAI05CnoCWVhEkMaBpthmqG8bLjusqgIhAOkywWZ2h0cYjcbFx6MT5Yc1pJmRdQvMzZdQP4O2O3QE` - This is the Base64 (toDer) signature script
   - `5msmMuPGKwpvtYofSdr6zk1AWG5Rz1vmf5z5DTVb6PYXibwovzkKM7Eg2BTQ5KDeUKwSyEAzHq9KjTFc1hyhfiFg` - this is the public key with a Base58 Encoding on it minus the hex identifier of ‘04’
-  - If you would like to see the method of signing it can be found here:**<https://github.com/ReserveBlockIO/ReserveBlock-Core/blob/main/ReserveBlockCore/EllipticCurve/Ecdsa.cs>**
+  - If you would like to see the method of signing it can be found here:**<https://github.com/VerifiedXBlockchain/VerifiedX-Core/blob/main/ReserveBlockCore/EllipticCurve/Ecdsa.cs>**
 
 - The method is **public static Signature sign(string message, PrivateKey privateKey)**
 

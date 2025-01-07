@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# RBX Integration Overview
+# VFX Integration Overview
 
 This section covers integrating the RBX network as a third-party.
 

@@ -31,12 +31,12 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
-    title: 'Integration Documentation',
+    title: 'Integration',
     url: "/docs/integration/",
 
     description: (
       <>
-        Learn about integrating with the VFX network.
+        Learn how to create custom integrations with the VFX network.
         <br /> &nbsp;
 
       </>
@@ -44,11 +44,11 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Video Tutorials',
-    url: "/docs/video-tutorials/",
+    url: "/docs/tutorials/video-tutorials/",
 
     description: (
       <>
-        Learn more about installing and operating the RBX GUI and CLI through a collection of video tutorials.
+        Learn more about installing and operating VFX Switchblade through a collection of video tutorials.
 
       </>
     ),

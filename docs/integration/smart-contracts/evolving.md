@@ -16,7 +16,7 @@ URL Params
 
 `id`: The smart contract identifier
 
-`address`: The current owner's RBX address
+`address`: The current owner's VFX address
 
 `stage`: the stage to evolve to (the original stage is `0`)
 

@@ -25,7 +25,7 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <a
             className="button"
-            href="/docs/introduction/what-is-rbx/">
+            href="/docs/introduction/">
             Get Started
           </a>
         </div>

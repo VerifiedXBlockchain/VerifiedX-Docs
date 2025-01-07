@@ -25,7 +25,7 @@ GET http://localhost:7292/scapi/scv1/TransferNFT/{id}/{address}/{backupUrl}
 
 `id`: The smart contract identifier
 
-`address`: The recipient's RBX address
+`address`: The recipient's VFX address
 
 `backupUrl`: URL to an off-network backup url of the media (optional)
 
