@@ -45,6 +45,8 @@ Learn how to operate the application.
 
 [P2P Auctions](./gui-p2p-auctions)
 
+[Validating](./gui-validating)
+
 [HD Accounts](./gui-hd-accounts)
 
 [Web Wallet](./gui-web-wallet)
