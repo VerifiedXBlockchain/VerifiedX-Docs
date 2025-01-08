@@ -16,4 +16,10 @@ This section covers integrating the RBX network as a third-party.
 
 5. [Trillium](./trillium)
 
-6. [Swagger Docs](./swagger)
+6. [Fungible Tokens](./fungible-tokens)
+
+7. [vBTC](./vbtc)
+
+8. [Testnet](./testnet)
+
+9. [Swagger Docs](./swagger)

@@ -15,10 +15,14 @@ API: `17292`.
 
 Thus, you would access swagger through this link: `http://localhost:17292/swagger`.
 
+Please note that all testnet addresses begin with an `x` instead of an `R`.
 
 Testnet Explorer: https://spyglass-testnet.verifiedx.io
 
 Testnet Faucet: https://spyglass-testnet.verifiedx.io/faucet
 
+For anything bitcoin related, VerifiedX uses [testnet4](https://mempool.space/testnet4) due to the 2024 time warp attack that crippled the testnet3 network.
+
+---
 
 The developers will welcome your questions in the Discord.
