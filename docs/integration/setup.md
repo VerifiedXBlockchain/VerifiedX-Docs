@@ -25,7 +25,7 @@ The VFX GUI was built with **Flutter/Dart**
 
 **You can find pre-compiled binaries here:**  
 CLI - <https://github.com/VerifiedXBlockchain/VerifiedX-Core/releases>  
-GUI - <https://github.com/ReserveBlockIO/rbx-wallet-gui/releases>
+GUI - <https://github.com/VerifiedXBlockchain/VerifiedX-GUI/releases>
 
 If you are wanting to build from source, please choose the correct repo from here:
 **https://github.com/ReserveBlockIO**
