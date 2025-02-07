@@ -18,7 +18,7 @@ POST http://localhost:7292/btcapi/BTCV2/TokenizeBitcoin
 ```json
 
     {
-        "RBXAddress": "", //owner address
+        "RBXAddress": "", //owner address for the smart contract
         "Name": "", //name of the token
         "Description": "", // description of the token
         "FileLocation": "", //absolute path to custom asset (or use `default` to use default vBTC network asset)
@@ -73,11 +73,52 @@ POST http://localhost:7292/btcapi/BTCV2/TokenizeBitcoin
 
 ## Listing vBTC Tokens
 
+Note: for most use cases you will likely want to use the GetTokenizationDetails endpoint (see below) as it will return balance information specific to a VFX address.
+
 ### API Endpoint
 
 ```
 GET http://localhost:7292/btcapi/BTCV2/GetTokenizedBTCList
 ```
+
+### Response:
+
+```json
+{
+    "TokenizedList": {
+        "Result": [
+            {
+                "Id": "",
+                "SmartContractUID": "",
+                "RBXAddress": "",
+                "DepositAddress": "",
+                "Balance": 0.0,
+                "MyBalance": 0.0,
+                "TokenName": "",
+                "TokenDescription": "",
+                "SmartContractMainId": "",
+                "IsPublished": true,
+            },
+            ...
+        ]
+    }
+}
+
+```
+
+---
+
+## Retrieving Token Details based on VFX Address
+
+### API Endpoint
+
+```
+GET http://localhost:7292/btcapi/BTCV2/GetTokenizationDetails/{VFX_ADDRESS}
+```
+
+### URL Params
+
+`VFX_ADDRESS`: The relevant VFX address (could be the smart contract owner or an address that owns vBTC)
 
 ### Response:
 
