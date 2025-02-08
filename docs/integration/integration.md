@@ -20,6 +20,8 @@ This section covers integrating the RBX network as a third-party.
 
 7. [vBTC](./vbtc)
 
+7. [vBTC Raw](./vbtc-raw)
+
 8. [Testnet](./testnet)
 
 9. [Swagger Docs](./swagger)
