@@ -108,7 +108,7 @@ This will return the compiled payload of the smart contract including the compre
 
 ### Step 4: Build Transaction
 
-This follows the same steps as creating any raw transaction. See [Transaction Creation](/transaction-creation) for further details, but here is a summary of the flow. You'll be essentiall building a transaction payload through a variety of steps. Other than the timestamp, nonce, and signature steps, you'll be passing the updated payload as POST data throughout each API call.
+This follows the same steps as creating any raw transaction. See [Transaction Creation](./transaction-creation) for further details, but here is a summary of the flow. You'll be essentiall building a transaction payload through a variety of steps. Other than the timestamp, nonce, and signature steps, you'll be passing the updated payload as POST data throughout each API call.
 
 
 1. Get the current timestamp:
@@ -153,7 +153,7 @@ Update the above payload with the "Fee" from above and then hit:
 
 5. Generate Signature
 
-Use the hash of the tx as the message and sign it with the owner's keypair. This is no different than generating a signature for any raw transaction. See [Transaction Creation](/transaction-creation) for more details.
+Use the hash of the tx as the message and sign it with the owner's keypair. This is no different than generating a signature for any raw transaction. See [Transaction Creation](./transaction-creation) for more details.
 
 6. Update Payload
 
