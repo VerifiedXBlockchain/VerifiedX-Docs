@@ -9,5 +9,6 @@ sidebar_position: 1
 
 [Whitepaper](./whitepaper)
 
-
 [vBTC Flow](./vbtc-flow)
+
+[Legacy Core Audit and Opinion](./legacy-audit)
