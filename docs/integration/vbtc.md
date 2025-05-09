@@ -172,3 +172,42 @@ POST http://localhost:7292/btcapi/BTCV2/WithdrawalCoin
 }
 
 ```
+
+
+## Transferring vBTC (with Multiple Inputs)
+
+### API Endpoint
+
+```
+POST http://localhost:7292/btcapi/BTCV2/TransferCoinMulti
+```
+
+### POST Data Params:
+
+```json
+{
+    "fromAddress": "", //the VFX address that will be sending the transaction
+    "toAddress": "", // the VFX address to transfer vBTC to
+    "vBTCInputs": [
+        {
+            "scuid": "", //the vBTC token's smart contract identifier
+            "fromAddress": "", // the VFX address the input will be taken from
+            "amount": 0.01 // the amount of vBTC to be used as an input
+        },
+        ... // repeat for as many inputs as needed
+    ]
+}
+
+```
+
+
+### Success Response
+
+```json
+{
+    "Success": true,
+    "Hash": "...",
+    "Message: "..."
+}
+
+```

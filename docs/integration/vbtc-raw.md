@@ -457,3 +457,45 @@ Response:
   "created_at": "2025-01-15T17:13:40Z"
 }
 ```
+
+
+
+## Transferring vBTC (with Multiple Inputs)
+
+This enables the ability to create a raw transaction for a vBTC transfer from multiple inputs
+
+> You must build this transaction in the same steps as any raw transaction (timestamp, nonce, fee, signature, etc.)
+
+
+### Generate message
+
+First you must generate a random string that is 12 characters long using only letters (uppercase and/or lowercase) and numbers (alpha numeric). This will be used in the data payload and signed for each input.
+
+### TX Details
+
+> The transaction type to use is `18`
+
+> The too address of the transaction is the VFX address the transfer is going to
+
+> The data for the tx is explained below
+
+### TX Data
+
+```json
+{
+  "Function": "TransferCoinMulti()",
+    "Inputs": [
+      {
+        "SCUID": "", //the vBTC token's smart contract identifier,
+        "FromAddress": "", // the VFX address the input will be taken from
+        "Amount": 0.05, // the amount of vBTC to be used as an input
+        "Signature": "", //Sign the generated message with the holders keypair
+      },
+      ... // repeat for as many inputs as needed
+    ],
+    "Amount": 0.1, // Total amount (sum of all inputs)
+    "SignatureInput": "", // The generated message created above
+}
+```
+
+
