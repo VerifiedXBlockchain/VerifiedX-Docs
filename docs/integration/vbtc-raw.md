@@ -471,6 +471,10 @@ This enables the ability to create a raw transaction for a vBTC transfer from mu
 
 First you must generate a random string that is 12 characters long using only letters (uppercase and/or lowercase) and numbers (alpha numeric). This will be used in the data payload and signed for each input.
 
+For each input your will sign a message using this random string as part of the message. The message will consist of that random string contcatinated with the to address and the input's from address like so:
+
+`"RANDOM_STRING" + "TO_ADDRESS" + "INPUT_FROM_ADDRESS"`
+
 ### TX Details
 
 > The transaction type to use is `18`
@@ -489,7 +493,7 @@ First you must generate a random string that is 12 characters long using only le
         "SCUID": "", //the vBTC token's smart contract identifier,
         "FromAddress": "", // the VFX address the input will be taken from
         "Amount": 0.05, // the amount of vBTC to be used as an input
-        "Signature": "", //Sign the generated message with the holders keypair
+        "Signature": "", //Sign the generated message (prev random string + to_address + from_address) with the holders keypair
       },
       ... // repeat for as many inputs as needed
     ],
