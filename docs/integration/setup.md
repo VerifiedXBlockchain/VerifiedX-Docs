@@ -59,7 +59,7 @@ inux Install For Ubuntu 22.04:
 5. cd rbx
 6. - Clone the repo with git. `git clone https://github.com/VerifiedXBlockchain/VerifiedX-Core.git`
    - Download the already packaged release https://github.com/VerifiedXBlockchain/VerifiedX-Core/releases/. If you do this please navigate to the folder you downloaded binaries from and skip to step 12.
-7. `cd ReserveBlock-Core`
+7. `cd VerifiedX-Core`
 8. `dotnet build` - There should be 0 (zero) errors.
 9. `dotnet publish -c Release -r linux-x64 --output ./rbxpublished`
    > Please note the `linux-x64` can be changed if you are on a different architecture like arm or x86.
@@ -80,7 +80,7 @@ You are done! You should now see a wallet running! Some common errors are usuall
 3. Please ensure you have a working version of git installed.
 4. - Clone the repo with git. `git clone https://github.com/VerifiedXBlockchain/VerifiedX-Core.git`
    - Download the already packaged release https://github.com/VerifiedXBlockchain/VerifiedX-Core/releases/. If you do this please navigate to the folder you downloaded binaries from and skip to step 8.
-5. `cd ReserveBlock-Core`
+5. `cd VerifiedX-Core`
 6. `dotnet build` - There should be 0 (zero) errors.
 7. `dotnet publish -c Release -r win-x64 --output ./rbxpublished`
    > please note the `win-x64` can be changed if you are on a different architecture
@@ -94,7 +94,7 @@ You are done! You should now see a wallet running! Some common errors are usuall
 3. Please ensure you have a working version of git installed.
 4. - Clone the repo with git. `git clone https://github.com/VerifiedXBlockchain/VerifiedX-Core.git`
    - Download the already packaged release **https://github.com/VerifiedXBlockchain/VerifiedX-Core/releases/**. If you do this please navigate to the folder you downloaded binaries from and skip to step 8.
-5. `cd ReserveBlock-Core`
+5. `cd VerifiedX-Core`
 6. `dotnet build` - There should be 0 (zero) errors.
 7. `dotnet publish -c Release -r osx-x64 --output ./rbxpublished`
    > please note the 'osx-x64' can be changed if you are on a different architecture like arm.

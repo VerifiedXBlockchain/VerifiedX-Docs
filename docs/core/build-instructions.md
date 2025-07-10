@@ -27,7 +27,7 @@ Linux Install For Ubuntu 22.04:
 
    b) Download the already packaged release https://github.com/VerifiedXBlockchain/VerifiedX-Core/releases/. If you do this please navigate to folder you downloaded binaries from and skip to step 12.
 
-8. `cd ReserveBlock-Core`
+8. `cd VerifiedX-Core`
 9. `dotnet build` - There should be 0 (zero) errors.
 10. `dotnet publish -c Release -r linux-x64 --output ./vfxpublished` \*\*please note the `linux-x64` can be changed if you are on a different architecture
 11. `cd vfxpublished`
@@ -73,7 +73,7 @@ Once that is installed follow steps below.
 2. Please ensure you have a working version of git installed.
 3. a) Clone the repo with git. `git clone https://github.com/VerifiedXBlockchain/VerifiedX-Core.git`
    b) Download the already packaged release https://github.com/VerifiedXBlockchain/VerifiedX-Core/releases/. If you do this please navigate to folder you downloaded binaries from and skip to step 8.
-4. `cd ReserveBlock-Core`
+4. `cd VerifiedX-Core`
 5. `dotnet build` - There should be 0 (zero) errors.
 6. `dotnet publish` -c Release -r win-x64 --output ./vfxpublished \*\*please note the `win-x64` can be changed if you are on a different architecture
 7. `cd vfxpublished`
@@ -88,7 +88,7 @@ Once that is installed follow steps below.
 2. Please ensure you have a working version of git installed.
 3. - Clone the repo with git. `git clone https://github.com/VerifiedXBlockchain/VerifiedX-Core.git`
    - Download the already packaged release https://github.com/VerifiedXBlockchain/VerifiedX-Core/releases/. If you do this please navigate to folder you downloaded binaries from and skip to step 8.
-4. cd ReserveBlock-Core
+4. cd VerifiedX-Core
 5. `dotnet build` - There should be 0 (zero) errors.
 6. `dotnet publish -c Release -r osx-x64 --output ./vfxpublished `\*\*please note the `osx-x64` can be changed if you are on a different architecture like arm.
 7. `cd vfxpublished`
