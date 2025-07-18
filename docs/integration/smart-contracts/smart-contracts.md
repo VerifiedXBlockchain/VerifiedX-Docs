@@ -5,7 +5,7 @@ sidebar_position: 5
 # Smart Contracts
 
 
-This section covers integration for RBX Smart Contracts with third party applications via the RBXCore CLI's API.
+This section covers integration for VFX Smart Contracts with third party applications via the Core CLI's API.
 
 ## Example Code
 

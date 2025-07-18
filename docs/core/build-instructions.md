@@ -21,7 +21,7 @@ Linux Install For Ubuntu 22.04:
 4. sudo apt-get update && sudo apt-get install -y dotnet-sdk-6.0
 5. sudo apt-get update && sudo apt-get install -y aspnetcore-runtime-6.0
 6. run `dotnet --version`. You should see a version number of 6.0.xxx
-7. `mkdir vfx` - Makes a direction for RBX
+7. `mkdir vfx` - Makes a direction for VFX
 8. cd vfx
 9. a) Clone the repo with git. `git clone https://github.com/VerifiedXBlockchain/VerifiedX-Core.git`
 
@@ -69,7 +69,7 @@ sudo apt install dotnet-sdk-6.0
 Install the latest dotnet sdk from here: https://dotnet.microsoft.com/en-us/download/dotnet/6.0
 Once that is installed follow steps below.
 
-1. Create a directory for RBX and then open command prompt in admin and navigate to that directory.
+1. Create a directory for VFX and then open command prompt in admin and navigate to that directory.
 2. Please ensure you have a working version of git installed.
 3. a) Clone the repo with git. `git clone https://github.com/VerifiedXBlockchain/VerifiedX-Core.git`
    b) Download the already packaged release https://github.com/VerifiedXBlockchain/VerifiedX-Core/releases/. If you do this please navigate to folder you downloaded binaries from and skip to step 8.
@@ -84,7 +84,7 @@ Once that is installed follow steps below.
 Install the latest dotnet sdk from here: https://dotnet.microsoft.com/en-us/download/dotnet/6.0
 Once that is installed follow steps below.
 
-1. Create a directory for RBX and then open command prompt in admin and navigate to that directory.
+1. Create a directory for VFX and then open command prompt in admin and navigate to that directory.
 2. Please ensure you have a working version of git installed.
 3. - Clone the repo with git. `git clone https://github.com/VerifiedXBlockchain/VerifiedX-Core.git`
    - Download the already packaged release https://github.com/VerifiedXBlockchain/VerifiedX-Core/releases/. If you do this please navigate to folder you downloaded binaries from and skip to step 8.

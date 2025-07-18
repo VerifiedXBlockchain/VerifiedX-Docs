@@ -55,8 +55,8 @@ inux Install For Ubuntu 22.04:
 1. `sudo apt-get update && sudo apt-get install -y dotnet-sdk-6.0`
 2. `sudo apt-get update && sudo apt-get install -y aspnetcore-runtime-6.0`
 3. run `dotnet --version`. You should see a version number of 6.0.xxx
-4. `mkdir rbx` - Makes a direction for RBX
-5. cd rbx
+4. `mkdir vfx` - Makes a direction for VFX
+5. cd vfx
 6. - Clone the repo with git. `git clone https://github.com/VerifiedXBlockchain/VerifiedX-Core.git`
    - Download the already packaged release https://github.com/VerifiedXBlockchain/VerifiedX-Core/releases/. If you do this please navigate to the folder you downloaded binaries from and skip to step 12.
 7. `cd VerifiedX-Core`
@@ -195,7 +195,7 @@ The point of this paper is to outline the config file setup and features it has.
 15. ValidatorName (default is new guid)
 
     - Type `string`
-    - Ex: `ValidatorName=MyValidatorRBX1`
+    - Ex: `ValidatorName=MyValidatorVFX1`
     - This is the name for the above validator that will be used. Once validator has been imported once then these settings won’t do anything and can be removed or left there.
 
 16. NFTTimeout (default is 15 secs)

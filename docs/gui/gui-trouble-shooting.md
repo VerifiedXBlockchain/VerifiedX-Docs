@@ -27,8 +27,7 @@ You may have a corrupt database file. Ensure your private keys(s) are backed up,
 
     b. Check your Task Manager (Windows) or Activity Monitor (MacOS) for a process called ReserveBlockCore and end it. Please note that this is a background process and you may need to switch to the advanced mode. If you are not familiar with how to do this, use option `a` above instead.
 
-3. Navigate to your RBX Folder
-
+3. Navigate to your DB Folder
 
     a. Windows: This will be located in `C:\Users\{username}\AppData\Local`. Note, you may need to enable `Hidden Files` to see the AppData folder in your user directory.
 
