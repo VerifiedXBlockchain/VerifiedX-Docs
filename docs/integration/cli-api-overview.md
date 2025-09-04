@@ -166,3 +166,7 @@ All endpoints are documented with Swagger/OpenAPI specifications for interactive
 5. **Async Operations**: Most operations are asynchronous for better performance
 
 This structure provides a comprehensive REST API surface for all ReserveBlock Core functionality, organized by domain-specific concerns.
+
+
+## API Endpoint Details
+Details about each endpoint can be found [here](./cli-api-details).
