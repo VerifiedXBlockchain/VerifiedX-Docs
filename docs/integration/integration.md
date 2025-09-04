@@ -20,10 +20,12 @@ This section covers integrating the RBX network as a third-party.
 
 7. [vBTC](./vbtc)
 
-7. [vBTC Raw](./vbtc-raw)
+8. [vBTC Raw](./vbtc-raw)
 
-8. [Testnet](./testnet)
+9. [Testnet](./testnet)
 
-9. [Swagger Docs](./swagger)
+10. [Swagger Docs](./swagger)
 
-9. [CLI API Overview](./cli-api-overview)
+11. [CLI API Overview](./cli-api-overview)
+
+12. [Web API](./web-api/)
