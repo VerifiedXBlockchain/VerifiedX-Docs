@@ -25,3 +25,5 @@ This section covers integrating the RBX network as a third-party.
 8. [Testnet](./testnet)
 
 9. [Swagger Docs](./swagger)
+
+9. [CLI API Overview](./cli-api-overview)

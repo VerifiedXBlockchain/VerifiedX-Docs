@@ -6,8 +6,10 @@ sidebar_position: 10
 
 ## CLI Swagger
 
-The swagger API playground can be found at <a href="http://localhost:7292/swagger">http://localhost:7292/swagger</a> on a machine running the CLI.
+The swagger API playground can be found at <a href="http://localhost:7292/swagger">http://localhost:7292/swagger</a> on a machine running the CLI (or <a href="http://localhost:17292/swagger">http://localhost:17292/swagger</a> for testnet).
 > You will need to enable the API through the CLI (`10` on the main menu) or by passing the `enableapi` flag when starting the CLI. 
+
+Read more about this [here](./cli-api-overview).
 
 
 ## Spyglass (Network Explorer) Swagger
