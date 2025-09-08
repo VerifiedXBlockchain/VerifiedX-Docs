@@ -28,4 +28,6 @@ This section covers integrating the RBX network as a third-party.
 
 11. [CLI API Overview](./cli-api-overview)
 
-12. [Web API](./web-api/)
+12. [Example Transactions](./example-transactions.md)
+
+13. [Web API](./web-api/)
