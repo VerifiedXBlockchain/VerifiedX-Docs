@@ -7,6 +7,8 @@ sidebar_position: 1
 
 [VerifiedX Deck](./slide-deck)
 
+[VerifiedX One-Sheet](./one-sheet)
+
 [Whitepaper](./whitepaper)
 
 [vBTC Flow](./vbtc-flow)
