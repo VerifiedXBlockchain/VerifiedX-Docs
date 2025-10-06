@@ -4,6 +4,8 @@ sidebar_position: 9
 
 # Testnet
 
+## CLI
+
 You can access testnet by running the CLI with the `testnet` flag.
 
 Testnet database files are stored as a sibling file to your mainnet db files with the suffix `test`.
@@ -15,7 +17,29 @@ API: `17292`.
 
 Thus, you would access swagger through this link: `http://localhost:17292/swagger`.
 
+
+## GUI
+
+You can launch the GUI in testnet mode by appending the `--testnet` flag through the command line when launching.
+
+### MacOS
+
+On MacOS, use this terminal command to launch into testnet:
+```shell
+/Applications/VFXWallet.app/Contents/MacOS/VFX\ Switchblade --testnet
+```
+
+### Windows
+On Windows, use this terminal command to launch into testnet:
+```shell
+"C:\Program Files\VFXWallet\VFXWallet.exe" --testnet
+```
+
+## Addresses
+
 Please note that all testnet addresses begin with an `x` instead of an `R`.
+
+## Important Links
 
 Testnet Explorer: https://spyglass-testnet.verifiedx.io
 
