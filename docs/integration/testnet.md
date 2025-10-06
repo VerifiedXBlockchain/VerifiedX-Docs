@@ -35,6 +35,8 @@ On Windows, use this terminal command to launch into testnet:
 "C:\Program Files\VFXWallet\VFXWallet.exe" --testnet
 ```
 
+> You can also update this in your shortcut's settings by right clicking to edit the properties, then updating the Target to the snippet above.
+
 ## Addresses
 
 Please note that all testnet addresses begin with an `x` instead of an `R`.
