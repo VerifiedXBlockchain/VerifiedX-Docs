@@ -13,4 +13,6 @@ sidebar_position: 1
 
 [vBTC Flow](./vbtc-flow)
 
+[Halborn Audit](./halborn-audit)
+
 [Legacy Core Audit and Opinion](./legacy-audit)
