@@ -1,5 +1,14 @@
 # Video Tutorials
 
+### VerifiedX for Everyone
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pMILXTfyhMA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
+
+### What is Self Custody?
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ge6YJL-HLF4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
+
 
 ### Installation Instructions
 
@@ -14,7 +23,6 @@
 ### Vault Accounts
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/CKESyVoQPpE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
-
 
 
 ### Domains
