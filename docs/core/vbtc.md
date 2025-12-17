@@ -42,6 +42,17 @@ The implementation of vBTC involves the following steps:
 
 - **Asset Preservation**: By tokenizing BTC, users can preserve the value of their assets while gaining access to the functionalities of the vfx network.
 
+
+## Documents
+
+[vBTC Flow](../documents/vbtc-flow)
+
+[vBTC DeFi](../documents/vbtc-defi)
+
+[vBTC One Sheet](../documents/vbtc-one-sheet)
+
+[vBTC Institutional](../documents/vbtc-institutional)
+
 ## Conclusion
 
 vBTC serves as a bridge between Bitcoin and the vfx network, allowing users to unlock the full potential of their Bitcoin holdings within a secure and efficient ecosystem. By tokenizing BTC, vBTC enhances the usability and versatility of Bitcoin, providing users with new opportunities for growth and engagement within the vfx network.
