@@ -50,12 +50,12 @@ The instructions below can be found here: [Build Instructions](/docs/core/build-
 
 ### Linux
 
-inux Install For Ubuntu 22.04:
+Linux Install For Ubuntu 22.04:
 
 1. `sudo apt-get update && sudo apt-get install -y dotnet-sdk-6.0`
 2. `sudo apt-get update && sudo apt-get install -y aspnetcore-runtime-6.0`
 3. run `dotnet --version`. You should see a version number of 6.0.xxx
-4. `mkdir vfx` - Makes a direction for VFX
+4. `mkdir vfx` - Makes a directory for VFX
 5. cd vfx
 6. - Clone the repo with git. `git clone https://github.com/VerifiedXBlockchain/VerifiedX-Core.git`
    - Download the already packaged release https://github.com/VerifiedXBlockchain/VerifiedX-Core/releases/. If you do this please navigate to the folder you downloaded binaries from and skip to step 12.
@@ -208,7 +208,7 @@ The point of this paper is to outline the config file setup and features it has.
 
     - Type `int`
     - Ex: `PasswordClearTime=5`
-    - This will control the clear time for an ecrypted wallets password
+    - This will control the clear time for an encrypted wallet's password
 
 18. AutoDownloadNFTAsset (default is true)
     - Type `Boolean`

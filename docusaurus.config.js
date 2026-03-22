@@ -10,7 +10,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'VerifiedX Docs',
-  tagline: 'Tokenized Commerce and Self-Custody for Everyone.',
+  tagline: 'The Financial Operating System for Bitcoin',
   url: 'https://docs.verifiedx.io',
   baseUrl: '/',
   onBrokenLinks: 'warn',
@@ -75,62 +75,12 @@ const config = {
           alt: 'VFX Docs',
           src: 'img/vfx-docs.png',
         },
-        items: [
-          // { to: 'https://www.reserveblock.io/#learn', label: 'Learn', position: 'left', className: "navbar__link-large" },
-          // { to: 'https://www.reserveblock.io/#masternodes', label: 'Masternodes', position: 'left', className: "navbar__link-large" },
-          // { to: 'https://www.reserveblock.io/#wallet', label: 'Wallet', position: 'left', className: "navbar__link-large" },
-          // { to: 'https://www.reserveblock.io/#network', label: 'Network', position: 'left', className: "navbar__link-large" },
-          // { to: 'https://www.reserveblock.io/#build', label: 'Build', position: 'left', className: "navbar__link-large" },
-          // { to: '/docs/introduction/what-is-rbx', position: 'left', label: 'Wiki', className: "navbar__link-large" },
-          // { to: 'https://www.reserveblock.io/#community', label: 'Community', position: 'left', className: "navbar__link-large" },
-
-          // { to: 'https://twitter.com/ReserveBlockIO', label: 'Twitter', position: 'right', className: "navbar__link-small social-link social-link-twitter" },
-          // { to: 'https://discord.gg/7cd5ebDQCj', label: 'Twitter', position: 'right', className: "navbar__link-small social-link social-link-discord" },
-          // { to: 'https://github.com/ReserveBlockIO', label: 'Twitter', position: 'right', className: "navbar__link-small social-link social-link-github" },
-          // // { to: 'https://t.me/reserveblockofficial', label: 'Twitter', position: 'right', className:"navbar__link-small social-link social-link-telegram"},
-
-          // { to: 'https://wallet.rbx.network/', label: 'Web Wallet', position: 'right', className: "navbar__link-small" },
-          // { to: '/docs/documents/whitepaper-v2', label: 'Whitepaper v2', position: 'right', className: "navbar__link-small" },
-          // { to: 'https://www.reserveblock.io/disclaimer', label: 'Disclaimer', position: 'right', className: "navbar__link-small" },
-        ],
+        items: [],
       },
 
       footer: {
         style: 'dark',
-        links: [
-          // {
-          //   title: 'GENERAL',
-          //   items: [
-          //     { label: 'Learn', to: 'https://www.reserveblock.io/#learn', },
-          //     { label: 'Masternodes', to: 'https://www.reserveblock.io/#masternodes', },
-          //     { label: 'RBX Wallet', to: 'https://www.reserveblock.io/#wallet', },
-          //   ],
-          // },
-          // {
-          //   title: 'DEVELOP',
-          //   items: [
-          //     { label: 'Network', to: 'https://www.reserveblock.io/#network', },
-          //     { label: 'Build', to: 'https://www.reserveblock.io/#build', },
-          //     { label: 'Community', to: 'https://www.reserveblock.io/#community', },
-          //   ],
-          // },
-          // {
-          //   title: 'FAQS',
-          //   items: [
-          //     { label: 'General', to: '/docs/FAQs/general-faq/', },
-          //     { label: 'Core Wallet', to: '/docs/FAQs/core-wallet-faq/', },
-          //     { label: 'Masternodes', to: '/docs/FAQs/masternode-faq/', },
-          //   ],
-          // },
-          // {
-          //   title: 'ABOUT',
-          //   items: [
-          //     { label: 'Disclaimer', to: 'https://www.reserveblock.io/disclaimer' },
-          //     { label: 'Whitepaper v2', to: '/docs/documents/whitepaper-v2/', },
-          //     { label: 'Contact', to: 'mailto:dev@reserveblock.io' },
-          //   ]
-          // },
-        ],
+        links: [],
         copyright: `© ${new Date().getFullYear()} VerifiedX`,
       },
       colorMode: {

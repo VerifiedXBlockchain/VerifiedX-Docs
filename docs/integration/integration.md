@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # VFX Integration Overview
 
-This section covers integrating the RBX network as a third-party.
+This section covers integrating the VFX network as a third-party.
 
 1. [Initial Setup](./setup)
 

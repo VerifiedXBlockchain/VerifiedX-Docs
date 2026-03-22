@@ -94,11 +94,11 @@ Usually this is because you haven't reached the local block height where the tra
 
 It's also possible you haven't imported the correct key(s). Double check those.
 
-In the case that it's still off, sometimes a state trei rebuild can help. You'll need to force quit `ReserveBlockCore` in your Task Manager (Windows) or Activity Monitor (MacOS) and then close the GUI. Restart the GUI and the state trei will rebuild.
+In the case that it's still off, sometimes a state tree rebuild can help. You'll need to force quit `ReserveBlockCore` in your Task Manager (Windows) or Activity Monitor (MacOS) and then close the GUI. Restart the GUI and the state tree will rebuild.
 
 ## I imported a snapshot and lost my keys
 
-As mentioned during the snapshot import process, you must backup your keys before proceeed as this process wipes your entire RBX folder. Luckily, a backup was created. 
+As mentioned during the snapshot import process, you must backup your keys before proceeding as this process wipes your entire RBX folder. Luckily, a backup was created. 
 
 1. Close your wallet.
 

@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 ## Overview
 
-Compiling and Minting a smart contract is fairly streightforward. The first step is to compile the smart contract based on a JSON payload which will return the information needed for the second step, minting the smart contract. Then you hit an endpoint to mint it which will broadcast the transaction.
+Compiling and Minting a smart contract is fairly straightforward. The first step is to compile the smart contract based on a JSON payload which will return the information needed for the second step, minting the smart contract. Then you hit an endpoint to mint it which will broadcast the transaction.
 
 ## Compiling
 

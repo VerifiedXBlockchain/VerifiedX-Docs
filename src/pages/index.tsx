@@ -21,7 +21,7 @@ function HomepageHeader() {
             <img src="/img/vfx-docs.png" className={clsx(styles.wordmarkImg)} />
           </div>
         </h1>
-        <p className={clsx('hero__subtitle', styles.heroSubtitle)}>{siteConfig.tagline}</p>
+        <p className={clsx('hero__subtitle', styles.heroSubtitle)} style={{ color: '#fff' }}>The Financial Operating System for <span style={{ color: '#F7931A' }}>Bitcoin</span></p>
         <div className={styles.buttons}>
           <a
             className="button"
@@ -39,7 +39,7 @@ export default function Home(): JSX.Element {
   return (
     <Layout
       title={`Home`}
-      description="Tokenized Commerce and Self-Custody for Everyone.">
+      description="The Financial Operating System for Bitcoin">
 
       <div className={clsx(styles.main)}>
 

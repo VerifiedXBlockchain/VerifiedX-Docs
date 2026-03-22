@@ -5,7 +5,7 @@ sidebar_position: 11
 
 # VFX CLI Core API Overview
 
-This document provides an overview of the different API namespaces and their purposes within the ReserveBlock Core Kestrel API.
+This document provides an overview of the different API namespaces and their purposes within the VFX Core Kestrel API.
 
 ## Core API Namespaces
 
@@ -165,7 +165,7 @@ All endpoints are documented with Swagger/OpenAPI specifications for interactive
 4. **Rate Limiting**: Some endpoints may have rate limiting implemented
 5. **Async Operations**: Most operations are asynchronous for better performance
 
-This structure provides a comprehensive REST API surface for all ReserveBlock Core functionality, organized by domain-specific concerns.
+This structure provides a comprehensive REST API surface for all VFX Core functionality, organized by domain-specific concerns.
 
 
 ## API Endpoint Details

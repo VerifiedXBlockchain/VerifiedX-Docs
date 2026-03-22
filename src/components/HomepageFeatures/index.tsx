@@ -64,7 +64,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Network Assets',
-    url: "docs/network-assets/",
+    url: "/docs/network-assets/",
 
     description: (
       <>

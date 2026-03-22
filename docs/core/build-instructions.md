@@ -21,7 +21,7 @@ Linux Install For Ubuntu 22.04:
 4. sudo apt-get update && sudo apt-get install -y dotnet-sdk-6.0
 5. sudo apt-get update && sudo apt-get install -y aspnetcore-runtime-6.0
 6. run `dotnet --version`. You should see a version number of 6.0.xxx
-7. `mkdir vfx` - Makes a direction for VFX
+7. `mkdir vfx` - Makes a directory for VFX
 8. cd vfx
 9. a) Clone the repo with git. `git clone https://github.com/VerifiedXBlockchain/VerifiedX-Core.git`
 

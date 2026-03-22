@@ -10,7 +10,7 @@ Trillium is a Turing complete language and object-oriented language for implemen
 
 Trillium is a curly-bracket language, but can also execute in a scripting function and is designed to not need any virtual machine or cluster to execute. It is influenced by C#, JavaScript, and Minsk.
 
-With Trillium a developer can create NFT driven smart contracts for uses such as royalty enforcement, evolving needs, multi asset collections, soulboundnd items, and many other utility uses as it is agnostic to use-case entirely. 
+With Trillium a developer can create NFT driven smart contracts for uses such as royalty enforcement, evolving needs, multi asset collections, soulbound items, and many other utility uses as it is agnostic to use-case entirely. 
 
 #### Trillium Syntax Example
 ```js
@@ -41,8 +41,8 @@ Trillium also has both a desktop and web-based IDE that anyone can test and depl
 
 ### tIDE
 
-Trillium Web IDE (tIDE) is an open-source web application for the ReserveBlock VFX community to interact and develop with. Trillium fosters a fast runtime compilation and execution of code with a straight forward and intuitive GUI. tIDE can be used for the entire process of contract development as well as act as an intuitive environment for learning Trillium.
+Trillium Web IDE (tIDE) is an open-source web application for the VerifiedX community to interact and develop with. Trillium fosters a fast runtime compilation and execution of code with a straightforward and intuitive GUI. tIDE can be used for the entire process of contract development as well as act as an intuitive environment for learning Trillium.
 
-Trillium was designed with NFTs specifically in mind and is a Turing complete language. Trillium IDE is the driving force smart contract language of the ReserveBlock VFX Project. It encompasses many other projects including VFX Core, VFX GUI, Trillium, VFX Explorer, and of course Trillium-IDE. 
+Trillium was designed with NFTs specifically in mind and is a Turing complete language. Trillium IDE is the driving force smart contract language of the VerifiedX Project. It encompasses many other projects including VFX Core, VFX GUI, Trillium, VFX Explorer, and of course Trillium-IDE. 
 
 > <a href="https://trillium.VFX.network">Launch Trillium IDE</a>.
