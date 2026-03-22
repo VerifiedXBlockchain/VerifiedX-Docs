@@ -250,3 +250,7 @@ html {
 .social-link-github {
   background-image: url(/img/github.png);
 }
+
+.sidebar-hidden {
+  display: none;
+}

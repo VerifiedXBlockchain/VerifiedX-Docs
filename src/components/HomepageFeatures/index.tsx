@@ -54,6 +54,15 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
+    title: 'VFX Ecosystem',
+    url: "/docs/introduction/institutional",
+    description: (
+      <>
+        Explore institutional infrastructure, custody integration, and compliance solutions built on VerifiedX.
+      </>
+    ),
+  },
+  {
     title: 'Network Assets',
     url: "docs/network-assets/",
 
@@ -76,6 +85,15 @@ const FeatureList: FeatureItem[] = [
     ),
   },
 
+  {
+    title: 'About VerifiedX',
+    url: "/docs/introduction/",
+    description: (
+      <>
+        Learn about the VerifiedX network, its mission, and how it works.
+      </>
+    ),
+  },
 ];
 
 function Feature({ title, description, url }: FeatureItem) {
