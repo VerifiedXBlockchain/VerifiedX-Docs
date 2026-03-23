@@ -2,6 +2,6 @@
 sidebar_position: 7
 ---
 
-# Butterfly & PulseXai
+# Butterfly & PulseXAI
 
 Activating Soon
