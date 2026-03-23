@@ -44,7 +44,7 @@ But Bitcoin has limitations — slow confirmation times, high fees during conges
 
 ### Documents & Resources
 
-- [VerifiedX Deck](/documents/VerifiedX.pdf)
+- [VerifiedX Deck](/docs/documents/slide-deck)
 - [VerifiedX One Sheet](/docs/documents/one-sheet)
 - [Whitepaper](/docs/documents/whitepaper)
 - [About vBTC](/docs/introduction/about-vbtc)
