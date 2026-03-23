@@ -50,4 +50,5 @@ But Bitcoin has limitations — slow confirmation times, high fees during conges
 - [About vBTC](/docs/introduction/about-vbtc)
 - [vBTC Institutional](/docs/documents/vbtc-institutional)
 - [vBTC DeFi](/docs/documents/vbtc-defi)
+- [vBTC Tech & Flow](https://vfx-resources.s3.us-east-1.amazonaws.com/vBTC-TechAndFlow.pdf)
 - [Halborn Audit](/docs/documents/halborn-audit)
