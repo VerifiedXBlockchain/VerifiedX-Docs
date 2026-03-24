@@ -321,4 +321,4 @@ From custody to execution to yield generation, every layer is designed to mainta
 
 ---
 
-<a href="https://ecosystem.verifiedx.io/" target="_blank" rel="noopener noreferrer" className="button" style={{textDecoration: 'none'}}>Launch VFX Ecosystem Console</a>
+<a href="/docs/introduction/vfx-ecosystem" className="button" style={{textDecoration: 'none'}}>VFX Ecosystem Console</a>
