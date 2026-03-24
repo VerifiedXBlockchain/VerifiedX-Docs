@@ -254,3 +254,37 @@ html {
 .sidebar-hidden {
   display: none;
 }
+
+.sidebar-btc a {
+  color: #F7931A !important;
+}
+
+.menu__link--active.menu__link--active {
+  color: #73C4FA !important;
+  font-weight: 700;
+  border-left: 3px solid #73C4FA;
+  padding-left: 9px;
+}
+
+.sidebar-btc .menu__link--active.menu__link--active {
+  color: #F7931A !important;
+  border-left-color: #F7931A;
+}
+
+.sidebar-prism a {
+  color: #B39DDB !important;
+}
+
+.sidebar-prism .menu__link--active.menu__link--active {
+  color: #B39DDB !important;
+  border-left-color: #B39DDB;
+}
+
+.sidebar-green a {
+  color: #1DB049 !important;
+}
+
+.sidebar-green .menu__link--active.menu__link--active {
+  color: #1DB049 !important;
+  border-left-color: #1DB049;
+}
