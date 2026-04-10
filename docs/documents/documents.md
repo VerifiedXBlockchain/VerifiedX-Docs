@@ -11,6 +11,8 @@ sidebar_position: 1
 
 [Whitepaper](./whitepaper)
 
+[vBTC Hero Doc](./vbtc-hero-doc)
+
 [vBTC Flow](./vbtc-flow)
 
 [vBTC DeFi](./vbtc-defi)
