@@ -21,6 +21,8 @@ sidebar_position: 1
 
 [vBTC Institutional](./vbtc-institutional)
 
+[Prism Privacy](/docs/introduction/prism-privacy)
+
 [Halborn Audit](./halborn-audit)
 
 [Legacy Core Audit and Opinion](./legacy-audit)
