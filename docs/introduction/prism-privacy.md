@@ -38,3 +38,12 @@ sidebar_class_name: sidebar-prism
     <img src={require('./media/prism-faq.png').default} width="300" />
     <div>Click to Download</div>
 </a>
+
+---
+
+## Technical Paper
+
+<a href="/documents/VFX_Privacy_Layer_Technical_Paper.pdf" download="VFX_Privacy_Layer_Technical_Paper.pdf" target="_blank">
+    <img src={require('./media/prism-technical-paper.png').default} width="300" />
+    <div>Click to Download</div>
+</a>
