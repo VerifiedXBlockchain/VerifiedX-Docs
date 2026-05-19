@@ -111,10 +111,7 @@ const sidebars = {
           dirName: 'roadmap'
         },
       ]
-    }
-
-
-
+    },
   ]
 
 };
