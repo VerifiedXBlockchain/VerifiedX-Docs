@@ -13,23 +13,25 @@ Use the Core CLI on Windows, MacOS, or Linux to interact with the network.
 
 2. [Configuration](./config)
 
-3. [Security](./security)
+3. [Run a Validator](./validator-guide)
 
-4. [Domains](./domains)
+4. [Security](./security)
 
-5. [Smart Contracts](./smart-contracts)
+5. [Domains](./domains)
 
-6. [Tokens](./tokens)
+6. [Smart Contracts](./smart-contracts)
 
-7. [Bitcoin](./bitcoin)
+7. [Tokens](./tokens)
 
-8. [vBTC](./vbtc)
+8. [Bitcoin](./bitcoin)
 
-9. [Beacons](./beacons)
+9. [vBTC](./vbtc)
 
-10. [Coinomics](./coinomics)
+10. [Beacons](./beacons)
 
-11. [Trilliam Web IDE](./trillium-web-ide)
+11. [Coinomics](./coinomics)
+
+12. [Trilliam Web IDE](./trillium-web-ide)
 
 
 
