@@ -12,7 +12,7 @@ To become a validator on the VerifiedX network, you’ll need:
 
 - 5,000 VFX (fully liquid and usable anytime). Note: the video above mentions 50k which was the correct amount at the time of recording.
 - A machine meeting the standard specs, with a static IP address. 
-- Three open ports for network connectivity. (`3338`, `3339`, and `7294` )
+- Four open ports for network connectivity. (`3338`, `3339`, `7294`, and `7295`)
 
 Your VFX remains liquid, meaning you can turn off your validator at any time and instantly transact with your funds without holding periods, without fees, and without penalties.
 
