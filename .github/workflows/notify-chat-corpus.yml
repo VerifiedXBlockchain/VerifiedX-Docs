@@ -1,0 +1,30 @@
+name: notify-chat-corpus
+
+# Tells the VFX Assistant (VerifiedX-Chat) that the public documentation
+# changed, so its knowledge corpus rebuilds within minutes instead of waiting
+# for the nightly job. Requires a repository secret CHAT_DISPATCH_TOKEN: a
+# fine-grained personal access token with "Contents: read and write" on
+# VerifiedXBlockchain/VerifiedX-Chat.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**"
+      - "static/documents/**"
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch docs-updated to VerifiedX-Chat
+        env:
+          TOKEN: ${{ secrets.CHAT_DISPATCH_TOKEN }}
+        run: |
+          if [ -z "$TOKEN" ]; then
+            echo "CHAT_DISPATCH_TOKEN is not set; skipping dispatch" && exit 0
+          fi
+          curl -sS -f -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $TOKEN" \
+            https://api.github.com/repos/VerifiedXBlockchain/VerifiedX-Chat/dispatches \
+            -d '{"event_type":"docs-updated","client_payload":{"sha":"${{ github.sha }}"}}'
