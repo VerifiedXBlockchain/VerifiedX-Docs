@@ -35,7 +35,7 @@ Returns a paginated list of all master nodes on the VFX network.
     {
       "id": 1,
       "name": "VFX-Node-01",
-      "address": "Rx1234567890abcdef...",
+      "address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
       "ip_address": "192.168.1.100",
       "port": 3338,
       "status": "active",
@@ -71,7 +71,7 @@ Returns detailed information about a specific master node.
 {
   "id": 1,
   "name": "VFX-Node-01",
-  "address": "Rx1234567890abcdef...",
+  "address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
   "ip_address": "192.168.1.100",
   "port": 3338,
   "status": "active",
@@ -118,7 +118,7 @@ Returns master node information by node name.
 {
   "id": 1,
   "name": "VFX-Node-01",
-  "address": "Rx1234567890abcdef...",
+  "address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
   "status": "active",
   "uptime": "99.8%",
   "location": {
@@ -142,7 +142,7 @@ Returns geographic distribution data for visualization on maps.
   "nodes": [
     {
       "name": "VFX-Node-01",
-      "address": "Rx1234567890abcdef...",
+      "address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
       "latitude": 40.7128,
       "longitude": -74.0060,
       "status": "active",

@@ -74,7 +74,7 @@ Returns a list of all VBTC tokens in the system.
     {
       "id": 1,
       "smart_contract_uid": "SC123...",
-      "vfx_address": "Rx1234567890abcdef...",
+      "vfx_address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
       "btc_amount": "0.001",
       "status": "active",
       "created_at": "2024-01-01T12:00:00Z"
@@ -101,14 +101,14 @@ Returns VBTC tokens associated with a specific VFX address.
     {
       "id": 1,
       "smart_contract_uid": "SC123...",
-      "vfx_address": "Rx1234567890abcdef...",
+      "vfx_address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
       "btc_amount": "0.001",
       "btc_address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
       "status": "active",
       "transfers": [
         {
-          "from_address": "Rx111...",
-          "to_address": "Rx222...",
+          "from_address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
+          "to_address": "RNiQrW3aBUWZhfadqKxPuN46iGaR13ox7P",
           "amount": "0.0005",
           "timestamp": "2024-01-01T12:00:00Z"
         }
@@ -133,7 +133,7 @@ Returns detailed information for a specific VBTC token.
 {
   "id": 1,
   "smart_contract_uid": "SC123...",
-  "vfx_address": "Rx1234567890abcdef...",
+  "vfx_address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
   "btc_amount": "0.001",
   "btc_address": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
   "status": "active",

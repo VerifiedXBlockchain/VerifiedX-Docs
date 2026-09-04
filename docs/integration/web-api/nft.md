@@ -37,8 +37,8 @@ Returns a paginated list of NFTs with filtering and search capabilities.
       "identifier": "NFT123...",
       "name": "Digital Artwork #1",
       "description": "A beautiful piece of digital art",
-      "owner_address": "Rx1234567890abcdef...",
-      "creator_address": "Rx9876543210fedcba...",
+      "owner_address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
+      "creator_address": "RNiQrW3aBUWZhfadqKxPuN46iGaR13ox7P",
       "collection": "Cool Art Collection",
       "image_url": "https://media.vfx.io/nft/image123.png",
       "thumbnail_url": "https://media.vfx.io/nft/thumb123.png",
@@ -102,8 +102,8 @@ Returns detailed information about a specific NFT.
   "identifier": "NFT123...",
   "name": "Digital Artwork #1",
   "description": "A beautiful piece of digital art",
-  "owner_address": "Rx1234567890abcdef...",
-  "creator_address": "Rx9876543210fedcba...",
+  "owner_address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
+  "creator_address": "RNiQrW3aBUWZhfadqKxPuN46iGaR13ox7P",
   "collection": {
     "name": "Cool Art Collection",
     "smart_contract_uid": "SC456..."
@@ -132,7 +132,7 @@ Returns detailed information about a specific NFT.
   },
   "royalty_info": {
     "percentage": 5.0,
-    "recipient": "Rx9876543210fedcba..."
+    "recipient": "RNiQrW3aBUWZhfadqKxPuN46iGaR13ox7P"
   },
   "listing": {
     "price": "200.0",
@@ -164,7 +164,7 @@ Returns the complete transaction history for an NFT.
       "type": "mint",
       "hash": "tx123...",
       "from_address": null,
-      "to_address": "Rx9876543210fedcba...",
+      "to_address": "RNiQrW3aBUWZhfadqKxPuN46iGaR13ox7P",
       "amount": null,
       "timestamp": "2024-01-01T12:00:00Z",
       "block_height": 12345
@@ -172,8 +172,8 @@ Returns the complete transaction history for an NFT.
     {
       "type": "transfer",
       "hash": "tx456...",
-      "from_address": "Rx9876543210fedcba...",
-      "to_address": "Rx1234567890abcdef...",
+      "from_address": "RNiQrW3aBUWZhfadqKxPuN46iGaR13ox7P",
+      "to_address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
       "amount": "150.0",
       "timestamp": "2024-01-15T14:30:00Z",
       "block_height": 12678
@@ -181,8 +181,8 @@ Returns the complete transaction history for an NFT.
     {
       "type": "sale",
       "hash": "tx789...",
-      "from_address": "Rx1234567890abcdef...",
-      "to_address": "Rx5555666677778888...",
+      "from_address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
+      "to_address": "RQKDU4UUCwbKXoydjknnH1y7Y3QYYHkvUz",
       "amount": "200.0",
       "timestamp": "2024-01-20T16:45:00Z",
       "block_height": 12890
@@ -204,7 +204,7 @@ Verifies ownership of an NFT using cryptographic signature.
   "signature": "signature_data_here...",
   "message": "I own this NFT",
   "nft_identifier": "NFT123...",
-  "address": "Rx1234567890abcdef..."
+  "address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR"
 }
 ```
 
@@ -212,7 +212,7 @@ Verifies ownership of an NFT using cryptographic signature.
 ```json
 {
   "verified": true,
-  "owner_address": "Rx1234567890abcdef...",
+  "owner_address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
   "nft_identifier": "NFT123...",
   "verification_timestamp": "2024-01-01T12:00:00Z"
 }

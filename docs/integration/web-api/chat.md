@@ -30,7 +30,7 @@ POST /api/chat/
   "results": [
     {
       "uuid": "123e4567-e89b-12d3-a456-426614174000",
-      "participants": ["Rx123...", "Rx456..."],
+      "participants": ["R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR", "RNiQrW3aBUWZhfadqKxPuN46iGaR13ox7P"],
       "shop": {
         "id": 1,
         "name": "My Shop",
@@ -49,7 +49,7 @@ POST /api/chat/
 **Request:**
 ```json
 {
-  "participants": ["Rx123...", "Rx456..."],
+  "participants": ["R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR", "RNiQrW3aBUWZhfadqKxPuN46iGaR13ox7P"],
   "shop_id": 1,
   "initial_message": "I'm interested in your NFT collection"
 }
@@ -69,7 +69,7 @@ DELETE /api/chat/{uuid}/
 ```json
 {
   "uuid": "123e4567-e89b-12d3-a456-426614174000",
-  "participants": ["Rx123...", "Rx456..."],
+  "participants": ["R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR", "RNiQrW3aBUWZhfadqKxPuN46iGaR13ox7P"],
   "shop": {
     "id": 1,
     "name": "My Shop",
@@ -78,7 +78,7 @@ DELETE /api/chat/{uuid}/
   "messages": [
     {
       "id": 1,
-      "sender": "Rx123...",
+      "sender": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
       "content": "Hello, is this item available?",
       "timestamp": "2024-01-01T12:00:00Z",
       "is_read": false
@@ -105,7 +105,7 @@ Find existing chat threads between participants.
 {
   "thread": {
     "uuid": "123e4567-e89b-12d3-a456-426614174000",
-    "participants": ["Rx123...", "Rx456..."],
+    "participants": ["R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR", "RNiQrW3aBUWZhfadqKxPuN46iGaR13ox7P"],
     "shop_id": 1
   }
 }
@@ -129,7 +129,7 @@ POST /api/chat/{thread_uuid}/message/
   "results": [
     {
       "id": 1,
-      "sender": "Rx123...",
+      "sender": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
       "content": "Hello, is this item available?",
       "timestamp": "2024-01-01T12:00:00Z",
       "is_read": false
@@ -143,7 +143,7 @@ POST /api/chat/{thread_uuid}/message/
 **Request:**
 ```json
 {
-  "sender": "Rx123...",
+  "sender": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
   "content": "Yes, it's still available. Would you like to make an offer?"
 }
 ```
@@ -167,7 +167,7 @@ Returns the latest messages across all threads for a user.
     {
       "id": 1,
       "thread_uuid": "123e4567-e89b-12d3-a456-426614174000",
-      "sender": "Rx456...",
+      "sender": "RNiQrW3aBUWZhfadqKxPuN46iGaR13ox7P",
       "content": "I'd like to buy this NFT",
       "timestamp": "2024-01-01T14:00:00Z",
       "is_read": false
