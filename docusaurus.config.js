@@ -98,8 +98,15 @@ const config = {
     {
       src: "/scripts/links.js?v=3",
       async: true,
-    }
-
+    },
+    // VFX Assistant chat widget: a floating launcher on every page that sends
+    // the current URL and title as context. Integration guide:
+    // https://github.com/VerifiedXBlockchain/vfx-chat/blob/main/docs/integration.md
+    {
+      src: "https://chat.verifiedx.io/widget.js",
+      defer: true,
+      "data-app": "docs",
+    },
   ]
 };
 
