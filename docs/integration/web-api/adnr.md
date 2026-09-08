@@ -33,7 +33,7 @@ Returns a paginated list of all ADNR domains, ordered by creation height (newest
   "results": [
     {
       "domain": "example",
-      "address": "Rx1234567890abcdef...",
+      "address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
       "is_btc": false,
       "btc_address": null,
       "create_transaction": {
@@ -59,7 +59,7 @@ Returns detailed information for a specific ADNR domain.
 ```json
 {
   "domain": "example",
-  "address": "Rx1234567890abcdef...",
+  "address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
   "is_btc": false,
   "btc_address": null,
   "create_transaction": {
@@ -109,7 +109,7 @@ If no domain is found:
 
 ## Notes
 
-- ADNR domains provide human-readable names for VFX addresses (e.g., "example.rbx" instead of "Rx1234...")
+- ADNR domains provide human-readable names for VFX addresses (e.g., "example.rbx" instead of "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR")
 - Some domains can be linked to Bitcoin addresses for cross-chain functionality
 - Domain names are case-insensitive
 - The `.rbx` suffix is implied and not stored in the domain field

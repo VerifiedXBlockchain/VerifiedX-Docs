@@ -23,7 +23,7 @@ Requests testnet VFX tokens to be sent to a specified address.
 **Request:**
 ```json
 {
-  "address": "Rx1234567890abcdef...",
+  "address": "xMpa8DxDLdC9SQPcAFBc2vqwyPsoFtrWyC",
   "amount": "100.0",
   "captcha_response": "03AGdBq26...",
   "email": "user@example.com"
@@ -61,7 +61,7 @@ Verifies the status of a faucet request and confirms delivery.
 ```json
 {
   "transaction_hash": "tx123...",
-  "address": "Rx1234567890abcdef..."
+  "address": "xMpa8DxDLdC9SQPcAFBc2vqwyPsoFtrWyC"
 }
 ```
 

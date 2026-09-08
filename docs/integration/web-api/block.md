@@ -35,13 +35,13 @@ Returns a paginated list of blocks, ordered by height (newest first).
     {
       "height": 12345,
       "hash": "block_hash_123...",
-      "validator_address": "Rx1234567890abcdef...",
+      "validator_address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
       "timestamp": "2024-01-01T12:00:00Z",
       "transaction_count": 15,
       "master_node": {
         "id": 1,
         "name": "MasterNode1",
-        "address": "Rx1234567890abcdef..."
+        "address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR"
       }
     }
   ]
@@ -63,14 +63,14 @@ Returns detailed information for a specific block by height.
 {
   "height": 12345,
   "hash": "block_hash_123...",
-  "validator_address": "Rx1234567890abcdef...",
+  "validator_address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
   "timestamp": "2024-01-01T12:00:00Z",
   "transaction_count": 15,
   "size": 1024,
   "master_node": {
     "id": 1,
     "name": "MasterNode1",
-    "address": "Rx1234567890abcdef..."
+    "address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR"
   },
   "transactions": [
     {
@@ -97,7 +97,7 @@ Returns detailed information for a specific block by hash.
 {
   "height": 12345,
   "hash": "block_hash_123...",
-  "validator_address": "Rx1234567890abcdef...",
+  "validator_address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
   "timestamp": "2024-01-01T12:00:00Z",
   "transaction_count": 15,
   "master_node": {
@@ -121,13 +121,13 @@ Returns a paginated list of blocks validated by a specific address.
 ```json
 {
   "count": 50,
-  "next": "http://localhost:8000/api/block/address/Rx123.../?page=2",
+  "next": "http://localhost:8000/api/block/address/R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR/?page=2",
   "previous": null,
   "results": [
     {
       "height": 12345,
       "hash": "block_hash_123...",
-      "validator_address": "Rx1234567890abcdef...",
+      "validator_address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
       "timestamp": "2024-01-01T12:00:00Z",
       "transaction_count": 15
     }

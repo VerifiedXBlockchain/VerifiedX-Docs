@@ -37,8 +37,8 @@ Returns a paginated list of transactions, ordered by most recent first.
     {
       "hash": "tx123456789abcdef...",
       "type": "TRANSFER",
-      "from_address": "Rx1234567890abcdef...",
-      "to_address": "Rx9876543210fedcba...",
+      "from_address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
+      "to_address": "RNiQrW3aBUWZhfadqKxPuN46iGaR13ox7P",
       "total_amount": "100.0",
       "total_fee": "0.001",
       "timestamp": "2024-01-01T12:00:00Z",
@@ -65,8 +65,8 @@ Returns detailed information about a specific transaction.
 {
   "hash": "tx123456789abcdef...",
   "type": "TRANSFER",
-  "from_address": "Rx1234567890abcdef...",
-  "to_address": "Rx9876543210fedcba...",
+  "from_address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
+  "to_address": "RNiQrW3aBUWZhfadqKxPuN46iGaR13ox7P",
   "total_amount": "100.0",
   "total_fee": "0.001",
   "timestamp": "2024-01-01T12:00:00Z",
@@ -80,17 +80,17 @@ Returns detailed information about a specific transaction.
   "signature": "sig123...",
   "inputs": [
     {
-      "address": "Rx1234567890abcdef...",
+      "address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
       "amount": "100.001"
     }
   ],
   "outputs": [
     {
-      "address": "Rx9876543210fedcba...",
+      "address": "RNiQrW3aBUWZhfadqKxPuN46iGaR13ox7P",
       "amount": "100.0"
     },
     {
-      "address": "Rx1234567890abcdef...",
+      "address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
       "amount": "0.0",
       "type": "fee"
     }
@@ -122,7 +122,7 @@ Returns transactions involving a specific address (as sender or recipient).
       "hash": "tx123456789abcdef...",
       "type": "TRANSFER",
       "direction": "sent",
-      "counterparty_address": "Rx9876543210fedcba...",
+      "counterparty_address": "RNiQrW3aBUWZhfadqKxPuN46iGaR13ox7P",
       "amount": "100.0",
       "fee": "0.001",
       "timestamp": "2024-01-01T12:00:00Z",
@@ -164,8 +164,8 @@ Returns all transactions in a specific block.
     {
       "hash": "tx123456789abcdef...",
       "type": "TRANSFER",
-      "from_address": "Rx1234567890abcdef...",
-      "to_address": "Rx9876543210fedcba...",
+      "from_address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
+      "to_address": "RNiQrW3aBUWZhfadqKxPuN46iGaR13ox7P",
       "total_amount": "100.0",
       "total_fee": "0.001",
       "position_in_block": 1

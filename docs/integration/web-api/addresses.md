@@ -28,7 +28,7 @@ Returns a paginated list of all addresses with basic information.
   "previous": null,
   "results": [
     {
-      "address": "Rx1234567890abcdef...",
+      "address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
       "balance": "1000.123456789",
       "adnr": {
         "domain": "example.rbx"
@@ -49,7 +49,7 @@ Returns the top 100 addresses by balance, sorted in descending order.
 ```json
 [
   {
-    "address": "Rx1234567890abcdef...",
+    "address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
     "balance": "50000.123456789",
     "received": "60000.0",
     "sent": "9999.876543211"
@@ -70,7 +70,7 @@ Returns detailed information for a specific address.
 **Response:**
 ```json
 {
-  "address": "Rx1234567890abcdef...",
+  "address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
   "balance": "1000.123456789",
   "balance_total": "1000.123456789",
   "balance_locked": "0.0",
@@ -102,7 +102,7 @@ Returns all fungible token balances for a specific address.
 **Response:**
 ```json
 {
-  "address": "Rx1234567890abcdef...",
+  "address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
   "tokens": [
     {
       "token": {
@@ -130,7 +130,7 @@ Returns address information for a given ADNR domain name.
 **Response:**
 ```json
 {
-  "address": "Rx1234567890abcdef...",
+  "address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
   "balance": "1000.123456789",
   "balance_total": "1000.123456789",
   "balance_locked": "0.0",
@@ -145,7 +145,7 @@ Returns address information for a given ADNR domain name.
 ## Notes
 
 - All balance amounts are returned as strings to preserve precision
-- Addresses starting with "Rx" are standard VFX addresses
+- Mainnet addresses start with `R`; testnet addresses start with `x`
 - Reserve Accounts have additional `activated` and `deactivated` fields
 - ADNR domains provide human-readable names for addresses
 - Token balances only include fungible tokens, not NFTs

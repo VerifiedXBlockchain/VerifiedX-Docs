@@ -34,7 +34,7 @@ POST /api/shop/
       "id": 1,
       "name": "Digital Art Gallery",
       "url": "rbx://digital-art-gallery",
-      "owner_address": "Rx1234567890abcdef...",
+      "owner_address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
       "description": "Premium digital artwork collection",
       "banner_image": "https://media.vfx.io/shop/banner1.png",
       "profile_image": "https://media.vfx.io/shop/profile1.png",
@@ -153,7 +153,7 @@ POST /api/shop/{shop_id}/collection/{collection_id}/listing/
       "smart_contract_uid": "NFT123...",
       "name": "Pixel Warrior #1",
       "description": "A brave digital warrior",
-      "owner_address": "Rx1234567890abcdef...",
+      "owner_address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
       "floor_price": "100.0",
       "buy_now_price": "150.0",
       "is_auction": true,
@@ -201,7 +201,7 @@ Places a bid on a listing.
 ```json
 {
   "listing": 1,
-  "address": "Rx1234567890abcdef...",
+  "address": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
   "amount": "125.0",
   "signature": "bid_signature_here...",
   "is_buy_now": false,

@@ -4,12 +4,56 @@ sidebar_position: 14
 
 # Web API: Raw
 
-The Raw API provides low-level blockchain operations and utilities for direct interaction with the VFX network, including transaction processing, smart contract operations, and cryptographic functions.
+The Raw API lets an application build, sign, and broadcast VFX transactions without running its own Core CLI node. Each endpoint forwards to the matching node endpoint (`/txapi/TXV1/...` on the explorer's node) and returns the node's response unchanged, so request and response bodies are the same JSON the node accepts. Private keys never leave the client: the client signs the transaction hash locally and submits the signed transaction.
+
+Testnet: `https://data-testnet.verifiedx.io/api/raw/` (testnet addresses start with `x`).
 
 ## Base URL
 ```
 /api/raw/
 ```
+
+## The transaction object
+
+Every transaction endpoint takes a JSON body with a single `transaction` field holding the node's transaction model, the same object described in [Transaction Creation](/docs/integration/transaction-creation):
+
+```json
+{
+  "transaction": {
+    "Hash": null,
+    "ToAddress": "RNiQrW3aBUWZhfadqKxPuN46iGaR13ox7P",
+    "FromAddress": "R9Ng1rDS2YgB7R2bJMU3RKzVXSriXLRsBR",
+    "Amount": 1.0,
+    "Nonce": 38,
+    "Fee": 0.0,
+    "Timestamp": 1788556164,
+    "Data": null,
+    "Signature": null,
+    "Height": 0,
+    "TransactionType": 0,
+    "TransactionRating": 1,
+    "TransactionStatus": null,
+    "UnlockTime": null
+  }
+}
+```
+
+Fields are filled in as the flow proceeds: `Fee` after the fee call, `Hash` after the hash call, `Signature` after signing. `Amount` is required on every call. A body without the `transaction` wrapper is rejected:
+
+```json
+HTTP 400
+{"transaction": ["This field is required."]}
+```
+
+## Flow
+
+1. `POST /api/raw/timestamp/` for the timestamp.
+2. `POST /api/raw/nonce/{address}/` for the sender's next nonce.
+3. Build the transaction with `Fee: 0` and `Hash: null`, then `POST /api/raw/fee/`.
+4. Set `Fee`, then `POST /api/raw/hash/`.
+5. Sign the hash locally (the signature format is described in [Transaction Creation](/docs/integration/transaction-creation)); set `Hash` and `Signature`.
+6. `POST /api/raw/verify/` (optional, recommended).
+7. `POST /api/raw/send/`.
 
 ## Endpoints
 
@@ -18,15 +62,11 @@ The Raw API provides low-level blockchain operations and utilities for direct in
 POST /api/raw/timestamp/
 ```
 
-Returns the current network timestamp for transaction creation.
+Returns the current Unix timestamp in seconds as a bare number.
 
 **Response:**
 ```json
-{
-  "timestamp": 1640995200,
-  "iso_format": "2024-01-01T12:00:00Z",
-  "block_height": 12345
-}
+1788556164
 ```
 
 ### Get Address Nonce
@@ -34,282 +74,140 @@ Returns the current network timestamp for transaction creation.
 POST /api/raw/nonce/{address}/
 ```
 
-Returns the current nonce for an address (used for transaction ordering).
+Returns the next nonce for an address as a bare number. `GET` is not accepted (405).
 
 **Parameters:**
 - `address` (string): The VFX address
 
 **Response:**
 ```json
-{
-  "address": "Rx1234567890abcdef...",
-  "nonce": 42,
-  "pending_transactions": 2
-}
+926
 ```
 
 ### Get Transaction Fee
 ```http
-POST /api/raw/tx-fee/
+POST /api/raw/fee/
 ```
 
-Calculates the required fee for a transaction.
+Body: the transaction object with `Fee: 0`.
 
-**Request:**
+**Response** (from the node's `GetRawTxFee`):
 ```json
-{
-  "transaction": "base64_encoded_transaction_data"
-}
-```
-
-**Response:**
-```json
-{
-  "fee": "0.001",
-  "size_bytes": 256,
-  "fee_rate": "0.000004",
-  "priority": "normal"
-}
+{"Result": "Success", "Message": "TX Fee Calculated", "Fee": 0.00000454}
 ```
 
 ### Get Transaction Hash
 ```http
-POST /api/raw/tx-hash/
+POST /api/raw/hash/
 ```
 
-Calculates the hash for a transaction before broadcasting.
+Body: the transaction object with the fee set.
 
-**Request:**
+**Response** (from the node's `GetTxHash`):
 ```json
-{
-  "transaction": "base64_encoded_transaction_data"
-}
-```
-
-**Response:**
-```json
-{
-  "hash": "tx123456789abcdef...",
-  "size": 256,
-  "valid": true
-}
+{"Result": "Success", "Message": "Hash Calculated.", "Hash": "e6eb50ff020bc259a3b7d6920dbc0fae1c4bdf3488fd88515dc4e7930e0e1d10"}
 ```
 
 ### Verify Transaction
 ```http
-POST /api/raw/tx-verify/
+POST /api/raw/verify/
 ```
 
-Verifies a transaction's validity without broadcasting it.
+Body: the complete, signed transaction object. Verifies without broadcasting.
 
-**Request:**
+**Response** (from the node's `VerifyRawTransaction`):
 ```json
-{
-  "transaction": "base64_encoded_transaction_data"
-}
+{"Result": "Success", "Message": "Transaction has been verified.", "Hash": "67d97333e5b62abfd6dc8d28a3200677a53b58526aecafd80190b13c5507083e"}
 ```
 
-**Response:**
+Failures return `"Result": "Fail"` with the node's message, for example:
 ```json
-{
-  "valid": true,
-  "errors": [],
-  "warnings": [
-    "Fee is higher than recommended"
-  ],
-  "estimated_confirmation_time": "30s"
-}
+{"Result": "Fail", "Message": "Transaction was not verified. Error: The timestamp of this transactions is too old to be sent now."}
 ```
 
 ### Send Transaction
 ```http
-POST /api/raw/tx-send/
+POST /api/raw/send/
 ```
 
-Broadcasts a transaction to the VFX network.
+Body: the complete, signed transaction object. Broadcasts it to the network.
 
-**Request:**
+**Response** (from the node's `SendRawTransaction`):
 ```json
-{
-  "transaction": "base64_encoded_transaction_data"
-}
-```
-
-**Response:**
-```json
-{
-  "success": true,
-  "hash": "tx123456789abcdef...",
-  "message": "Transaction broadcast successfully",
-  "estimated_confirmation": "2024-01-01T12:02:00Z"
-}
+{"Result": "Success", "Message": "Transaction has been broadcasted.", "Hash": "67d97333e5b62abfd6dc8d28a3200677a53b58526aecafd80190b13c5507083e"}
 ```
 
 ### Validate Signature
 ```http
-POST /api/raw/signature/{message}/{address}/{signature}/
+POST /api/raw/validate-signature/{message}/{address}/{signature}/
 ```
 
-Validates a cryptographic signature.
+Returns `true` with HTTP 200 when the signature is valid for the message and address, and `false` with HTTP 500 otherwise.
 
-**Parameters:**
-- `message` (string): The signed message
-- `address` (string): The signer's address
-- `signature` (string): The signature to validate
-
-**Response:**
-```json
-true
-```
-
-### Get Smart Contract
+### Smart Contract Compile Data
 ```http
-GET /api/raw/smart-contract/{id}/
+POST /api/raw/smart-contract-data/
 ```
 
-Retrieves smart contract data and code.
+Body: a smart contract payload as described in [Compiling and Minting](/docs/integration/smart-contracts/compiling-and-minting) (or [vBTC Raw](/docs/integration/vbtc-raw) for a vBTC token). Returns the node's compiled deploy data, which becomes the `Data` of the mint transaction. An asset `Location` other than `default` must be a URL the explorer can download, for example one returned by the [Media API](./media); the explorer places the file where the node can read it before compiling.
 
-**Parameters:**
-- `id` (string): Smart contract identifier
-
-**Response:**
-```json
-{
-  "id": "SC123...",
-  "code": "contract_code_here",
-  "abi": [
-    {
-      "name": "transfer",
-      "inputs": [
-        {
-          "name": "to",
-          "type": "address"
-        }
-      ]
-    }
-  ],
-  "owner": "Rx1234567890abcdef...",
-  "created_at": "2024-01-01T12:00:00Z"
-}
-```
-
-### Get Smart Contract Data
+### NFT Transfer, Evolve, and Burn Data
 ```http
-POST /api/raw/nft-data/
-```
-
-Retrieves or processes NFT smart contract data.
-
-**Request:**
-```json
-{
-  "smart_contract_id": "SC123...",
-  "method": "get_metadata",
-  "parameters": {}
-}
-```
-
-### NFT Transfer Data
-```http
-GET /api/raw/nft-transfer-data/{id}/{address}/{locator}/
-```
-
-Generates data required for NFT transfers.
-
-**Parameters:**
-- `id` (string): NFT identifier
-- `address` (string): Recipient address
-- `locator` (string): Transfer locator
-
-### NFT Evolve Data
-```http
+POST /api/raw/nft-transfer-data/{id}/{address}/{locator}/
 POST /api/raw/nft-evolve-data/{id}/{address}/{next_state}/
-```
-
-Generates data for NFT evolution/upgrade operations.
-
-### NFT Burn Data
-```http
 POST /api/raw/nft-burn-data/{id}/{address}/
 ```
 
-Generates data required to burn/destroy an NFT.
+Return the node's `Data` payload for the corresponding transaction (from `GetNftTransferData`, `GetNFTEvolveData`, and `GetNFTBurnData`). `id` is the smart contract identifier; `locator` comes from the beacon upload request below.
 
 ### Get Locators
 ```http
 GET /api/raw/locators/{id}/
 ```
 
-Returns available locators for an NFT or smart contract.
-
-**Response:**
-```json
-{
-  "locators": [
-    "locator_1",
-    "locator_2", 
-    "locator_3"
-  ],
-  "primary_locator": "locator_1"
-}
-```
+Returns the last known beacon locators for a smart contract (from the node's `GetLastKnownLocators`).
 
 ### Beacon Upload Request
 ```http
-GET /api/raw/beacon-upload-request/{id}/{to_address}/{signature}/
+GET /api/raw/beacon/upload/{id}/{to_address}/{signature}/
 ```
 
-Requests beacon upload permissions for decentralized storage.
+Starts a beacon upload of the contract's assets for a transfer. `signature` is the current owner's signature over the smart contract identifier.
+
+**Response:**
+```json
+{"success": true, "locator": "..."}
+```
+
+On failure: `{"success": false, "error": "Beacon upload request failed"}` with HTTP 500.
 
 ### Beacon Assets
 ```http
 GET /api/raw/beacon-assets/{id}/{locators}/{address}/{signature}/
 ```
 
-Manages beacon-stored assets and their retrieval.
+Asks the node to fetch the contract's assets from the beacon; the explorer then imports the media.
 
-## Transaction Types
-
-The Raw API supports various transaction types:
-- **Transfer**: Basic VFX token transfers
-- **Smart Contract**: Contract deployment and interaction
-- **NFT Operations**: Mint, transfer, burn NFTs
-- **Staking**: Validator staking operations
-- **Governance**: Voting and proposals
-
-## Security Notes
-
-- All transaction operations require proper cryptographic signatures
-- Private keys should never be sent to the API
-- Transactions are irreversible once confirmed
-- Always verify transaction details before broadcasting
-- Use the verify endpoint before sending transactions
-
-## Error Handling
-
-Common error responses:
+**Response:**
 ```json
-{
-  "error": "Invalid transaction format",
-  "code": 400,
-  "details": "Transaction encoding is malformed"
-}
+{"success": true}
 ```
 
+### Withdraw vBTC (raw)
+```http
+POST /api/raw/withdraw-vbtc/
+```
+
+Body: the pre-signed withdrawal payload accepted by the node's `btcapi/BTCV2/WithdrawalCoinRawTX` endpoint.
+
+**Response:**
 ```json
-{
-  "error": "Insufficient balance",
-  "code": 422,
-  "required": "10.5",
-  "available": "5.2"
-}
+{"success": true, "result": { "...": "node response" }}
 ```
 
 ## Notes
 
-- Raw API requires deep knowledge of VFX blockchain internals
-- Transaction data must be properly encoded before submission
-- Nonce management is critical for transaction ordering
-- Fee calculation depends on network congestion
-- Smart contract interactions may require specific ABI knowledge
-- Beacon operations are for decentralized file storage
+- Signing happens client-side. Never send private keys to the API.
+- The service normalizes `Amount` before forwarding hash, verify, and send calls, so `Amount` must be present.
+- Node error messages are returned as-is in `Message`.
+- Transactions are irreversible once confirmed. Verify before sending.
