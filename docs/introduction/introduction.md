@@ -48,6 +48,7 @@ But Bitcoin has limitations — slow confirmation times, high fees during conges
 - [VerifiedX One Sheet](/docs/documents/one-sheet)
 - [Whitepaper](/docs/documents/whitepaper)
 - [VFX Ecosystem Console](/docs/introduction/vfx-ecosystem)
+- [vBTC Ecosystem](/docs/introduction/vbtc-ecosystem)
 - [About vBTC](/docs/introduction/about-vbtc)
 - [vBTC Institutional](/docs/documents/vbtc-institutional)
 - [vBTC DeFi](/docs/documents/vbtc-defi)
