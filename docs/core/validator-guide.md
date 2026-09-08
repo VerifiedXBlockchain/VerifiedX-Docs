@@ -27,6 +27,7 @@ Callouts like this one mark what changes when targeting **testnet** instead of m
 | `3339` | Validator peer-to-peer | Open to the world |
 | `7294` | Validator API | Open to the world |
 | `7295` | Validator (FROST) port | Open to the world — **required for validating** |
+| `7296` | Validator (FROST) port over TLS | Open to the world — opened by the node next to `7295`, self-signed certificate |
 | `7292` | Wallet API (HTTP) | Keep closed — call it from the server itself |
 | `22` | SSH | Restrict to your own IP if possible |
 
@@ -40,13 +41,14 @@ sudo ufw allow 3338/tcp
 sudo ufw allow 3339/tcp
 sudo ufw allow 7294/tcp
 sudo ufw allow 7295/tcp
+sudo ufw allow 7296/tcp
 sudo ufw enable
 ```
 
 If your host provides a firewall or security groups, open the same ports there instead.
 
 :::note Testnet
-Testnet ports are `13338` and `13339` (peer-to-peer), `17294` (validator API), `17295` (validator/FROST port), and `17292` (wallet API — keep closed).
+Testnet ports are `13338` and `13339` (peer-to-peer), `17294` (validator API), `17295` (validator/FROST port), `17296` (FROST over TLS), and `17292` (wallet API — keep closed).
 :::
 
 ## 1. Prepare the server
@@ -376,6 +378,7 @@ After any restart, confirm the validator is still active (`/val`) and reactivate
 | Peer-to-peer ports | `3338`, `3339` | `13338`, `13339` |
 | Validator API port | `7294` | `17294` |
 | Validator (FROST) port | `7295` | `17295` |
+| Validator (FROST) port over TLS | `7296` | `17296` |
 | Data directory | `~/.local/share/RBX` | `~/.local/share/RBXTest` |
 | Chain databases | `.../RBX/Databases` | `.../RBXTest/DatabasesTestNet` |
 | Config file | `.../RBX/Config/config.txt` | `.../RBXTest/ConfigTestNet/config.txt` |

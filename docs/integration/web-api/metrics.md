@@ -4,200 +4,105 @@ sidebar_position: 11
 
 # Web API: Metrics
 
-The Metrics API provides endpoints for retrieving network statistics, performance metrics, and analytics data for the VFX blockchain.
+Network-level statistics. Three endpoint groups exist: `/api/metrics/` for chain totals and the current block time, `/api/network-metrics/` for block-cadence health, and `/api/circulation/` for the supply and burn figures used by the explorer and by supply trackers. All are `GET`, take no parameters, and are cached on the server for a few seconds.
 
-## Base URL
-```
-/api/metrics/
-```
-
-## Endpoints
-
-### Get Network Metrics
+## Network Metrics
 ```http
 GET /api/metrics/
 ```
 
-Returns comprehensive network statistics and performance metrics.
+**Response:**
+```json
+{
+  "latest_block": 7233302,
+  "active_validators": 96,
+  "total_transactions": 893028,
+  "total_burned": 2111.2838081813047,
+  "circulating_supply": 199997888.71619183,
+  "lifetime_supply": 199997888.71619183,
+  "block_time": 12.523809523809524
+}
+```
 
-**Query Parameters:**
-- `period`: Time period for metrics ('24h', '7d', '30d', 'all') - default: '24h'
-- `detailed`: Include detailed breakdowns (true/false) - default: false
+**Fields:**
+- `latest_block`: number of blocks indexed by the explorer, which tracks the current chain height
+- `active_validators`: master nodes currently in the active validator set
+- `total_transactions`: indexed transactions, excluding block-reward coinbase records
+- `total_burned`: VFX burned to date: all transaction fees plus the amounts burned by domain registrations, shop registrations, and vault (reserve account) activations
+- `circulating_supply`, `lifetime_supply`: 200,000,000 minus `total_burned`; both are the same figure because the supply is fixed and fully circulated
+- `block_time`: average seconds between blocks over the last five minutes (`0` when fewer than two blocks fall in that window)
+
+The `ordering`, `search`, `page`, and `limit` parameters shown for this endpoint in Swagger are ignored.
+
+## Block Cadence
+```http
+GET /api/network-metrics/
+```
 
 **Response:**
 ```json
 {
-  "network": {
-    "current_block_height": 125678,
-    "total_transactions": 1250000,
-    "total_addresses": 45000,
-    "active_addresses_24h": 2500,
-    "master_nodes_count": 250,
-    "master_nodes_active": 245
-  },
-  "transactions": {
-    "total_count": 1250000,
-    "count_24h": 8500,
-    "count_7d": 62000,
-    "avg_per_block": 12.5,
-    "types": {
-      "transfer": 850000,
-      "smart_contract": 200000,
-      "nft": 150000,
-      "reserve": 50000
-    }
-  },
-  "blocks": {
-    "total_blocks": 125678,
-    "blocks_24h": 2880,
-    "avg_block_time": "30.2s",
-    "avg_block_size": "1.2KB",
-    "missed_blocks_24h": 5
-  },
-  "economics": {
-    "total_supply": "50000000.0",
-    "circulating_supply": "35000000.0",
-    "locked_supply": "15000000.0",
-    "market_cap_usd": "175000000.0",
-    "total_fees_24h": "125.50"
-  },
-  "nfts": {
-    "total_nfts": 75000,
-    "minted_24h": 450,
-    "unique_collections": 2500,
-    "total_transfers": 125000
-  },
-  "tokens": {
-    "fungible_tokens": 150,
-    "total_holders": 25000,
-    "total_transfers": 500000
-  },
-  "updated_at": "2024-01-01T12:00:00Z"
+  "block_difference_average": 12.5,
+  "block_last_received": "2026-09-04T07:41:41Z",
+  "block_last_delay": 22,
+  "time_since_last_block": 10,
+  "blocks_averages": "3456/3456"
 }
 ```
 
-**Detailed Response (with `detailed=true`):**
+**Fields:**
+- `block_difference_average`: average interval between recent blocks, in seconds
+- `block_last_received`: when the explorer's node received the last block
+- `block_last_delay`: delay of the last block, in seconds
+- `time_since_last_block`: seconds since the last block at the time of the request
+- `blocks_averages`: a short text summary of block counts reported by the node's network information
+
+Values refresh at most every 10 seconds.
+
+## Circulation
+```http
+GET /api/circulation/
+```
+
+**Response:**
 ```json
 {
-  "network": {
-    "current_block_height": 125678,
-    "total_transactions": 1250000,
-    "total_addresses": 45000,
-    "active_addresses_24h": 2500,
-    "new_addresses_24h": 180,
-    "master_nodes": {
-      "total": 250,
-      "active": 245,
-      "syncing": 3,
-      "inactive": 2,
-      "geographical_distribution": {
-        "United States": 45,
-        "Germany": 32,
-        "Singapore": 28,
-        "Canada": 25
-      }
-    }
-  },
-  "performance": {
-    "tps_current": 15.8,
-    "tps_peak_24h": 45.2,
-    "network_hash_rate": "125.5 TH/s",
-    "difficulty": "1250000000",
-    "block_time_variance": "±2.1s"
-  },
-  "fee_analysis": {
-    "avg_fee": "0.001",
-    "median_fee": "0.0008",
-    "fee_percentiles": {
-      "25th": "0.0005",
-      "75th": "0.0015",
-      "95th": "0.005"
-    }
-  },
-  "transaction_details": {
-    "by_hour": [
-      {
-        "hour": "2024-01-01T00:00:00Z",
-        "count": 320,
-        "volume": "15000.0"
-      }
-    ],
-    "by_type": {
-      "transfer": {
-        "count": 6800,
-        "percentage": 80.0,
-        "avg_amount": "125.5"
-      },
-      "smart_contract": {
-        "count": 850,
-        "percentage": 10.0
-      }
-    }
-  }
+  "balance": 199997888.71619183,
+  "lifetime_supply": 199997888.71619183,
+  "fees_burned_sum": 2111.2838081813047,
+  "fees_burned": 2111,
+  "total_staked": 480000.0,
+  "active_master_nodes": 96,
+  "total_master_nodes": 19673,
+  "total_addresses": 23902,
+  "total_transactions": 893028,
+  "cli_version": "5.0.1.xxx-beta"
 }
 ```
 
-## Metrics Categories
+**Fields:**
+- `balance`: circulating supply in VFX
+- `lifetime_supply`: total supply after burns (equal to `balance`)
+- `fees_burned_sum`: exact VFX burned; `fees_burned`: the same figure as an integer
+- `total_staked`: VFX assured by active validators (5,000 VFX per active validator)
+- `active_master_nodes`, `total_master_nodes`: validators active now, and every validator address the explorer has recorded
+- `total_addresses`: addresses known to the explorer
+- `total_transactions`: indexed transactions
+- `cli_version`: a static string in the current service; do not use it to detect the Core release
 
-### Network Metrics
-- `current_block_height`: Latest block height
-- `total_transactions`: All-time transaction count
-- `total_addresses`: Unique addresses ever created
-- `active_addresses_24h`: Addresses with activity in last 24 hours
-- `master_nodes_count`: Total registered master nodes
-- `master_nodes_active`: Currently active master nodes
+Values refresh at most every 30 seconds.
 
-### Transaction Metrics
-- `total_count`: All-time transaction count
-- `count_24h/7d`: Recent transaction counts
-- `avg_per_block`: Average transactions per block
-- `types`: Breakdown by transaction type
+Two plain-text variants serve supply trackers:
 
-### Block Metrics
-- `total_blocks`: All-time block count
-- `blocks_24h`: Blocks produced in last 24 hours
-- `avg_block_time`: Average time between blocks
-- `avg_block_size`: Average block size in bytes
-- `missed_blocks_24h`: Blocks missed by validators
+```http
+GET /api/circulation/circulating/
+GET /api/circulation/lifetime/
+```
 
-### Economic Metrics
-- `total_supply`: Maximum possible token supply
-- `circulating_supply`: Tokens currently in circulation
-- `locked_supply`: Tokens locked in staking/reserves
-- `market_cap_usd`: Market capitalization in USD
-- `total_fees_24h`: Network fees collected in last 24 hours
-
-### Performance Metrics (Detailed)
-- `tps_current`: Current transactions per second
-- `tps_peak_24h`: Peak TPS in last 24 hours
-- `network_hash_rate`: Network computational power
-- `difficulty`: Current mining/validation difficulty
-- `block_time_variance`: Variation from target block time
-
-### Fee Analysis (Detailed)
-- `avg_fee`: Average transaction fee
-- `median_fee`: Median transaction fee
-- `fee_percentiles`: Fee distribution percentiles
-
-## Time Periods
-
-- `24h`: Last 24 hours
-- `7d`: Last 7 days  
-- `30d`: Last 30 days
-- `all`: All-time statistics
-
-## Update Frequency
-
-- Real-time metrics: Updated every minute
-- Aggregated metrics: Updated every 5-15 minutes
-- Historical metrics: Updated hourly
-- Complex calculations: Updated every 30 minutes
+Each returns the bare number, for example `199997888.71619183`.
 
 ## Notes
 
-- All monetary values are in VFX tokens unless specified
-- Percentages are calculated based on total counts for the specified period
-- Geographic distribution is based on master node IP geolocation
-- TPS (Transactions Per Second) includes all transaction types
-- Market cap requires external price data integration
-- Some metrics may have slight delays due to calculation complexity
+- Amounts are VFX as JSON numbers on these endpoints; most other endpoints return amounts as strings.
+- There are no hash-rate, difficulty, fee-percentile, or per-hour breakdown fields: the network uses Proof of Assurance, not mining, and the API does not aggregate fees by time.
+- Per-period metrics (24h, 7d, 30d) are not offered; compute them from the [Block](./block) and [Transaction](./transaction) endpoints.
