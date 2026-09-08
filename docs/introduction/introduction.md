@@ -15,7 +15,7 @@ VerifiedX (VFX) is an open-source decentralized universal Layer 1 blockchain and
 ### Network at a Glance
 
 - **Consensus:** Proof of Assurance (PoA)
-- **Block Time:** 10 seconds
+- **Block Time:** about 12 seconds (target 12 s; minimum 10 s, maximum 15 s)
 - **TPS:** 25,000 – 30,000 (scales with validator growth)
 - **Supply:** 200M fixed, fully circulated
 - **Effective Supply:** 132.7M (less burns, lost keys, bans, and treasury of 67.3M)
