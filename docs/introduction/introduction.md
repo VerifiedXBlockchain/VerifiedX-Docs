@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # About VerifiedX
 
-VerifiedX (VFX) is an open-source decentralized universal Layer 1 blockchain and Bitcoin-specific sidechain designed for tokenized self-custody, on-chain storage, peer-to-peer lending, and commerce for both digital and physical assets. It combines Bitcoin's ethos with high-performance scalability and everyday usability.
+VerifiedX (VFX) is the financial operating system for Bitcoin and intelligent real-world assets — pairing self-custodial ownership, instant settlement, programmable finance, native Bitcoin utility, and agentic financial infrastructure. Through products including vBTC, SwitchBlade, BFLY, and PulseXAI, VerifiedX connects institutions, users, and autonomous systems through a unified ecosystem. Its asset infrastructure is designed for real-world use with programmable features: protocol-enforced asset functionality, deterministic settlement, and automated financial flows.
 
 > "If Bitcoin is Cyber Manhattan, VerifiedX is the Statue of Liberty."
 
