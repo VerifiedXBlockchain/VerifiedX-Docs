@@ -10,10 +10,9 @@ sidebar_position: 2
 1. **Download**: Visit the VerifiedX website and download the DMG file appropriate for your system’s architecture (ARM or Intel).
 2. **Open the File**: Double-click the downloaded file to open it.
 3. **Install the Application**: Drag and drop the VerifiedX Switchblade app into your Applications folder.
-4. **Bypass Security Warnings**: If macOS prevents the app from opening:
-   - Right-click on the app and select “Open”.
-   - Confirm that you want to open the app in the security dialog that appears.
-5. **Adjust Security Preferences**: If you still encounter issues, navigate to `System Preferences > Security & Privacy > General`, and under “Allow apps downloaded from”, click “Open Anyway” for VerifiedX Switchblade.
+4. **Open the Application**: Open VFXWallet from the Applications folder. The first time, macOS confirms that the app was downloaded from the internet; select “Open”.
+
+The installer is signed and notarized by Apple, so no security settings need to be changed. Installers older than version 8.0.2 were not notarized; if macOS refuses to open one, download the current installer instead.
 
 ### Windows
 1. **Download**: Navigate to the VerifiedX website and download the EXE installer for your system.
