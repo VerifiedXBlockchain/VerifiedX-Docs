@@ -12,9 +12,9 @@ Access VerifiedX applications and wallet downloads.
 
 Download the SwitchBlade desktop wallet for your platform:
 
-- [MacOS (Apple Silicon)](https://github.com/VerifiedXBlockchain/VerifiedX-GUI/releases/download/8.0.2/VFX-OSX-ARM-Installer.dmg)
-- [MacOS (Intel)](https://github.com/VerifiedXBlockchain/VerifiedX-GUI/releases/download/8.0.2/VFX-OSX-Intel-Installer.dmg)
-- [Windows](https://github.com/VerifiedXBlockchain/VerifiedX-GUI/releases/download/8.0.2/VFXWalletSetup-64.exe)
+- [MacOS (Apple Silicon)](https://github.com/VerifiedXBlockchain/VerifiedX-GUI/releases/download/8.0.4/VFX-OSX-ARM-Installer.dmg)
+- [MacOS (Intel)](https://github.com/VerifiedXBlockchain/VerifiedX-GUI/releases/download/8.0.4/VFX-OSX-Intel-Installer.dmg)
+- [Windows](https://github.com/VerifiedXBlockchain/VerifiedX-GUI/releases/download/8.0.4/VFXWalletSetup-64.exe)
 
 For setup instructions, see the [Installation Guide](/docs/gui/gui-installation).
 
