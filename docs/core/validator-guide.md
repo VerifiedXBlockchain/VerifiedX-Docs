@@ -108,6 +108,10 @@ dotnet publish -c Release -r linux-arm64 --self-contained false --output ./publi
 
 The node now lives at `~/vfx-cli/published/ReserveBlockCore.dll`.
 
+The publish also copies the native FROST and PLONK libraries for your architecture next to the node. On `linux-arm64` it takes the arm64 builds of both. Before 9.0, an arm64 publish shipped the x86-64 PLONK library, so publish 9.0 fresh rather than reusing an older output folder. The FROST library is pinned to version `0.2.0-frost-real`. A node that loads any other version fails its startup check and stays out of vBTC key ceremonies and signings, so never copy native libraries in from another release.
+
+On first start the node downloads the PLONK parameters file, `vfx_plonk_v4.params` (about 400 MB), into `PlonkParams` in the data directory (`PlonkParamsTestNet` on testnet), and checks its SHA-256 before using it. Leave room and time for it. To use a copy you already have, set `VFX_PLONK_PARAMS_PATH` to its full path. A file that doesn't match the pinned hash is ignored and the published one is downloaded instead.
+
 :::note Testnet
 Check out the `testnet` branch instead of `main`.
 :::

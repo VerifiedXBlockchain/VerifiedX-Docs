@@ -93,3 +93,9 @@ Once that is installed follow steps below.
 6. `dotnet publish -c Release -r osx-x64 --output ./vfxpublished `\*\*please note the `osx-x64` can be changed if you are on a different architecture like arm.
 7. `cd vfxpublished`
 8. `dotnet ReserveBlockCore`
+
+## Native libraries and PLONK parameters
+
+The publish output includes the native FROST and PLONK libraries for the runtime you chose (`-r`), including arm64 builds for `linux-arm64`. Run the libraries that ship with the release: the FROST library is pinned to version `0.2.0-frost-real`, and a node that loads any other version stays out of vBTC key ceremonies and signings.
+
+On first start the node downloads `vfx_plonk_v4.params` (about 400 MB) into `PlonkParams` in its data directory and verifies its SHA-256. Set `VFX_PLONK_PARAMS_PATH` to the full path of an existing copy to skip the download. A copy that doesn't match the pinned hash is ignored.
