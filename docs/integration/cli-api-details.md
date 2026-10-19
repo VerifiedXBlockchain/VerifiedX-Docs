@@ -1243,7 +1243,7 @@ From the enforcement height a legacy vault is frozen: nothing debits its balance
 **Parameters:**
 - `scUID` (string, path) - The vault's smart contract UID  
 - `withdrawalRequestHash` (string, path) - The hash of the withdrawal request transaction  
-**Returns:** `{"Success": true, "Attested": true, "Withdrawal": {...}}`. For a vault the chain does not watch, `Success` is `false`, `Attested` is `false`, `Vault` gives its kind, and the withdrawal is completed with `CompleteWithdrawal` instead.
+**Returns:** `{"Success": true, "Attested": true, "Withdrawal": {...}}`. For a vault the chain does not watch, `Success` is `false`, `Attested` is `false`, `Vault` gives its kind, and the withdrawal is completed with `CompleteWithdrawal` instead. On a watched vault whose request isn't mined yet (or isn't on that vault), `Success` is `false`, `Attested` is `true` and `Withdrawal` is `null`. Try again once the request is mined.
 
 #### POST `/BumpWithdrawalFee`
 **Summary:** Raise the Bitcoin fee of a pinned withdrawal that is not confirming, signed by the requester's account on this node. The chain pins a replacement that spends the same coins; the higher fee comes out of the withdrawal's own amount  
