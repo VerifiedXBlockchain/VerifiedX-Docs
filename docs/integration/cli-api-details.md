@@ -1194,20 +1194,26 @@ This section covers the routes Core 9.0 adds to the vBTC V2 API: withdrawals fro
 
 ### Withdrawal Flows
 
-Check the vault's kind first with `GetVaultBitcoin/{scUID}` (`Vault.Attested`, `Vault.Legacy`, `Vault.Frozen`). Both kinds start the same way: `RequestWithdrawal`, or `GetRawRequestWithdrawalTxData` and `SendRawRequestWithdrawalTx` for an external key.
+Check the vault's kind first with `GET vbtcapi/VBTC/GetVaultBitcoin/{scUID}` (`Vault.Attested`, `Vault.Legacy`, `Vault.Frozen`). Both kinds start the same way: `POST vbtcapi/VBTC/RequestWithdrawal` when this node holds the requester's key, or `POST vbtcapi/VBTC/GetRawRequestWithdrawalTxData` then `POST vbtcapi/VBTC/SendRawRequestWithdrawalTx` for an external key.
 
 **Watched vault** (created from the recording height):
 1. Request the withdrawal. The vBTC is debited when the request is mined.
-2. The chain pins the Bitcoin transaction that pays it, and the vault's signers sign it. Follow it with `GetWithdrawalPin`. There is no completion transaction to send, and `CompleteWithdrawal` returns the pin's state instead of signing.
+2. The chain pins the Bitcoin transaction that pays it, and the vault's signers sign it. Follow it with `GET vbtcapi/VBTC/GetWithdrawalPin/{scUID}/{withdrawalRequestHash}` (the built-in wallet: `GET wallet/api/vbtc/withdraw/pin/{scUID}/{requestHash}`). There is no completion transaction to send, and `POST vbtcapi/VBTC/CompleteWithdrawal` returns the pin's state instead of signing.
 3. Bitcoin confirms the payment and the withdrawal is complete.
-4. If the payment isn't confirming, either bump it (`BumpWithdrawalFee`, a type-44 transaction; the higher fee comes out of the withdrawal) or release it (`ReleaseWithdrawal`, also type 44): the coins go back to the vault and the vBTC is refunded, less the release's Bitcoin fee. There is no cancellation and no validator vote.
+4. If the payment isn't confirming, either bump it (a type-44 transaction; the higher fee comes out of the withdrawal) or release it (also type 44): the coins go back to the vault and the vBTC is refunded, less the release's Bitcoin fee. There is no cancellation and no validator vote.
+
+   | | Bump | Release |
+   | --- | --- | --- |
+   | Node holds the requester's key | `POST vbtcapi/VBTC/BumpWithdrawalFee` | `POST vbtcapi/VBTC/ReleaseWithdrawal` |
+   | External key (build, sign `Hash`, send) | `POST vbtcapi/VBTC/GetRawBumpWithdrawalFeeTxData` then `POST vbtcapi/VBTC/SendRawBumpWithdrawalFeeTx` | `POST vbtcapi/VBTC/GetRawReleaseWithdrawalTxData` then `POST vbtcapi/VBTC/SendRawReleaseWithdrawalTx` |
+   | Built-in browser wallet (node's account) | `POST wallet/api/vbtc/withdraw/bumpfee` | `POST wallet/api/vbtc/withdraw/release` |
 
 A request still waiting for coins can run out; once its Bitcoin transaction is pinned it does not.
 
 **Legacy vault** (created before the recording height), until the enforcement height:
 1. Request the withdrawal.
-2. Complete it with `CompleteWithdrawal` (or `GetRawCompleteWithdrawalTxData` and `SendRawCompleteWithdrawalTx`), which signs and broadcasts the Bitcoin transaction and records the completion (type 28).
-3. To cancel, send `CancelWithdrawal` (type 29); validators vote on it (type 30).
+2. Complete it with `POST vbtcapi/VBTC/CompleteWithdrawal` (or `POST vbtcapi/VBTC/GetRawCompleteWithdrawalTxData` then `POST vbtcapi/VBTC/SendRawCompleteWithdrawalTx`), which signs and broadcasts the Bitcoin transaction and records the completion (type 28).
+3. To cancel, send `POST vbtcapi/VBTC/CancelWithdrawal` (type 29); validators vote on it (type 30).
 
 From the enforcement height a legacy vault is frozen: nothing debits its balance, and the completion, cancellation vote and bridge exit completion transactions are refused for every vault.
 
