@@ -1192,6 +1192,25 @@ This section covers the routes Core 9.0 adds to the vBTC V2 API: withdrawals fro
 
 **Watched and legacy vaults.** From the Bitcoin attestation recording height (`BitcoinAttestationRecordHeight`; block 1,172,000 on testnet, not yet set on mainnet), a newly created vault is *watched*: its deposits and withdrawals are recorded on chain from Bitcoin reports, and the owner's balance is its attested coins. A watched vault's withdrawal has no completion transaction and no cancellation vote. After the request is mined, the chain fixes ("pins") the Bitcoin transaction that pays it, and the withdrawal completes when Bitcoin confirms it. If it does not confirm, the requester can raise its fee (bump) or give it up (release), both as a `VBTC_V2_COIN_PIN` (type 44) transaction. Vaults created before that height are *legacy*. They keep the earlier request, complete and cancel flow until the enforcement height (`BitcoinAttestationHeight`; block 1,192,500 on testnet, the recording height plus 90,000 blocks on mainnet). From then on they are frozen, and withdrawal completion and the cancellation vote are refused for every vault. `GetVaultBitcoin` tells you which kind a vault is.
 
+### Withdrawal Flows
+
+Check the vault's kind first with `GetVaultBitcoin/{scUID}` (`Vault.Attested`, `Vault.Legacy`, `Vault.Frozen`). Both kinds start the same way: `RequestWithdrawal`, or `GetRawRequestWithdrawalTxData` and `SendRawRequestWithdrawalTx` for an external key.
+
+**Watched vault** (created from the recording height):
+1. Request the withdrawal. The vBTC is debited when the request is mined.
+2. The chain pins the Bitcoin transaction that pays it, and the vault's signers sign it. Follow it with `GetWithdrawalPin`. There is no completion transaction to send, and `CompleteWithdrawal` returns the pin's state instead of signing.
+3. Bitcoin confirms the payment and the withdrawal is complete.
+4. If the payment isn't confirming, either bump it (`BumpWithdrawalFee`, a type-44 transaction; the higher fee comes out of the withdrawal) or release it (`ReleaseWithdrawal`, also type 44): the coins go back to the vault and the vBTC is refunded, less the release's Bitcoin fee. There is no cancellation and no validator vote.
+
+A request still waiting for coins can run out; once its Bitcoin transaction is pinned it does not.
+
+**Legacy vault** (created before the recording height), until the enforcement height:
+1. Request the withdrawal.
+2. Complete it with `CompleteWithdrawal` (or `GetRawCompleteWithdrawalTxData` and `SendRawCompleteWithdrawalTx`), which signs and broadcasts the Bitcoin transaction and records the completion (type 28).
+3. To cancel, send `CancelWithdrawal` (type 29); validators vote on it (type 30).
+
+From the enforcement height a legacy vault is frozen: nothing debits its balance, and the completion, cancellation vote and bridge exit completion transactions are refused for every vault.
+
 ### Bitcoin Attestation
 
 #### GET `/GetBitcoinAttestationStatus`
