@@ -14,7 +14,7 @@ Callouts like this one mark what changes when targeting **testnet** instead of m
 
 ## What you'll need
 
-- **5,000 VFX.** Your VFX stays fully liquid — there is no lockup and no penalty; you can stop validating and transact with your funds at any time. We recommend sending 5,001 VFX so a transaction fee never dips you below the 5,000 floor.
+- **5,000 VFX.** From the validator bond height (`ValidatorBondHeight`; block 1,171,999 on testnet, not yet set on mainnet), the 5,000 VFX is bonded: it cannot be sent while you are a registered validator, and it unlocks 1,200 blocks after your validator exit transaction is mined (see [Stopping and updating](#10-stopping-and-updating)). Anything above 5,000 VFX stays spendable. There is no penalty. Before that height your VFX stays fully liquid. We recommend sending 5,001 VFX so a transaction fee never dips you below the 5,000 floor.
 - **A server.** Ubuntu 22.04 LTS, 2 vCPU, 4 GB RAM, 40 GB+ SSD, with a static public IP. Both x64 and ARM64 work. The mainnet chain is roughly 15 GB as of mid-2026 and growing, so leave disk headroom.
 - **Open ports.** See the table below.
 - **A wallet holding your VFX** (for example [Switchblade](../gui/gui-installation)) to fund the validator address from.
@@ -331,10 +331,28 @@ The CLI continuously self-checks its validator ports. If your node becomes unrea
 
 ## 10. Stopping and updating
 
-**Stop validating** — your funds stay liquid and are spendable immediately:
+**Stop validating:**
 
 - Console: type `11` (stop masternode), or
 - API: `curl -s -H "apitoken: YOUR_API_TOKEN" http://localhost:7292/api/V1/TurnOffValidator/YOUR_VFX_ADDRESS`
+
+From the validator bond height, both send the validator exit transaction before the node stops, and print whether it was sent. The validator stops counting on chain at once, and its 5,000 VFX stake unlocks 1,200 blocks (about four and a half hours) after the exit is mined. Before the bond height no stake is locked and no exit is sent: your funds are spendable immediately.
+
+Going quiet unlocks nothing. A validator whose node is down or unreachable stays bonded until an exit is mined. To exit an address this wallet holds, whether or not the node is validating with it:
+
+```bash
+curl -s -X POST -H "apitoken: YOUR_API_TOKEN" http://localhost:7292/vbtcapi/VBTC/ExitValidator/YOUR_VFX_ADDRESS
+```
+
+The response carries `ExitTxHash` and the bond. A registration or heartbeat mined during the wait, for example from restarting validation, resumes the bond. If the validator holds key shares of vBTC vaults, keep its node and key shares after the exit: those vaults' withdrawals still need its signature.
+
+Check a bond at any time, for any address:
+
+```bash
+curl -s -H "apitoken: YOUR_API_TOKEN" http://localhost:7292/vbtcapi/VBTC/GetValidatorBond/YOUR_VFX_ADDRESS
+```
+
+`Bond.Bonded`, `Bond.Spendable`, `Bond.ExitHeight` and `Bond.UnlocksAtHeight` show whether the stake is locked, what you can send now, and when it frees. `Bond.RuleActive` is `false` before the bond height.
 
 **Update the node** with a build-then-swap, so a broken build can never take your validator down:
 
@@ -385,3 +403,4 @@ After any restart, confirm the validator is still active (`/val`) and reactivate
 | Snapshot | `?network=mainnet` | `?network=testnet` |
 | Explorer | [spyglass.verifiedx.io](https://spyglass.verifiedx.io) | [spyglass-testnet.verifiedx.io](https://spyglass-testnet.verifiedx.io) |
 | Getting funds | 5,000 VFX from your wallet | [Faucet](https://spyglass-testnet.verifiedx.io/faucet) |
+| Validator bond from block | not set yet | `1171999` |
