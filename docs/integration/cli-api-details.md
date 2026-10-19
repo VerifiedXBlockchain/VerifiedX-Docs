@@ -389,13 +389,29 @@ This document provides comprehensive documentation for all API endpoints in the 
 - `name` (string, path) - ADNR name  
 **Returns:** ADNR creation result
 
-#### GET `/TransferAdnr/{toAddress}/{btcFromAddress}/{btcToAddress}`
+#### GET `/SignAdnrTransferAcceptance/{btcAddress}/{name}/{newOwner}`
+**Summary:** Sign, as the receiver, that a `.btc` name may be transferred to one of this wallet's Bitcoin addresses for a VFX owner  
+**Parameters:**
+- `btcAddress` (string, path) - This wallet's Bitcoin address that will receive the name; its key must be in this wallet and the wallet must be unlocked  
+- `name` (string, path) - The name, with or without `.btc`  
+- `newOwner` (string, path) - The VFX address that will own the name  
+**Returns:** `{"Success": true, "Message": "Signed.", "BTCToMessage": "...", "BTCToSignature": "..."}`. `BTCToMessage` is `<unix seconds>:<newOwner>:<name>.btc`, and `BTCToSignature` is the receiving Bitcoin key's signature of it. Give both to the sender for `TransferAdnr`. The acceptance is valid for 24 hours from its timestamp.
+
+#### GET `/TransferAdnr/{toAddress}/{btcFromAddress}/{btcToAddress}?btcToMessage={message}&btcToSignature={signature}`
 **Summary:** Transfer Bitcoin ADNR  
 **Parameters:**
 - `toAddress` (string, path) - Target VFX address  
 - `btcFromAddress` (string, path) - Source Bitcoin address  
 - `btcToAddress` (string, path) - Target Bitcoin address  
+- `btcToMessage` (string, query, optional) - The receiver's acceptance message, from `SignAdnrTransferAcceptance`  
+- `btcToSignature` (string, query, optional) - The receiver's acceptance signature over `btcToMessage`  
 **Returns:** Transfer result
+
+From the BTC-name signer height (`BtcNameSignerOwnsAddressHeight`), a transfer must carry the receiving Bitcoin address's signed acceptance of the name for the new owner. The height is set in Core 9.0 but not yet active on testnet or mainnet; before it, the two query parameters are ignored.
+
+- **Same wallet:** when the key for `btcToAddress` is in this wallet, leave both parameters out. The node signs the acceptance itself.
+- **Cross-wallet:** the receiver calls `SignAdnrTransferAcceptance` on their own node and sends the sender the message and signature. The sender passes both, URL-encoded, as `btcToMessage` and `btcToSignature`. The SwitchBlade wallet carries the pair as one copyable acceptance code, `<message>|<signature>`.
+- The transfer is refused if the acceptance names a different owner or name, is not signed by the key of `btcToAddress`, or is more than 24 hours old.
 
 #### GET `/DeleteAdnr/{btcFromAddress}`
 **Summary:** Delete Bitcoin ADNR  
