@@ -5,6 +5,10 @@ sidebar_class_name: sidebar-btc
 
 # vBTC Raw Integration Guide
 
+:::caution V1 vBTC is retired
+This page describes V1 vBTC (arbiter tokenization: `btcapi/BTCV2/TokenizeBitcoin`, `WithdrawalCoin` and `WithdrawalCoinRawTX`, transaction types 17 to 21). V1 was retired at block 7,400,500 on mainnet (block 1,002,979 on testnet). From that height the network accepts no new V1 token, transfer or withdrawal, and no transaction may touch an existing V1 contract, so V1 balances are frozen as they stand. vBTC V2 (`vbtcapi/VBTC`) is unaffected. This page is kept for reference only.
+:::
+
 While integrating with the CLI online simplifies the management of vBTC tokens, some integrations may require offline handling using raw transactions (i.e., a CLI without included keys).
 
 This guide outlines the four supported vBTC interactions:
