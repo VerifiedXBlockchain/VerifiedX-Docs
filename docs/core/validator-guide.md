@@ -160,6 +160,8 @@ What the startup flags do:
 - `openapi` — binds the API on all interfaces instead of localhost only. With `7292` closed in your firewall this changes nothing day to day, but it lets you open the port later for remote management without restarting the node. Drop it if you will only ever call the API from the server itself.
 - `apitoken=...` — requires the `apitoken` header on every API call.
 
+From Core 9.0 the values of `apitoken=` and `encpass=` are taken exactly as you type them: mixed case is kept, and so is any `=` inside the value (`apitoken=AbC123==` gives the token `AbC123==`). Earlier releases lowercased them and cut them at a second `=`. If you started an older node with a mixed-case or `=`-containing token, your API calls must now send the token exactly as given. A token from `openssl rand -hex 16` is lowercase with no `=`, so nothing changes for it.
+
 Attach to watch the console, and detach again with `Ctrl+A` then `D` — do **not** press `Ctrl+C`, that kills the node:
 
 ```bash
