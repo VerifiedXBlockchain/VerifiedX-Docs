@@ -431,13 +431,11 @@ func main() {
 
 ## Testnet Information
 
-Testnet Information
-Testnet can be activated two ways:
+Start the node with the `testnet` argument to run it on testnet:
 
-1. Passing in testnet as an argument when starting a wallet.
-   - Ex: `reserveblockcore.exe testnet`
-2. Enabling it in the config.
-   - Ex: `TestNet=true`
+- Ex: `reserveblockcore.exe testnet`
+
+The `testnet` start argument is the only way to select testnet. Do not set `TestNet=true` or `TestNetName` in `config.txt` yourself: a node started without the `testnet` argument whose `config.txt` selects testnet exits at startup with an error telling you to use the argument instead.
 
 ![](media/testnetCli.png)
 
