@@ -342,7 +342,7 @@ The CLI continuously self-checks its validator ports. If your node becomes unrea
 - Console: type `11` (stop masternode), or
 - API: `curl -s -H "apitoken: YOUR_API_TOKEN" http://localhost:7292/api/V1/TurnOffValidator/YOUR_VFX_ADDRESS`
 
-From the validator bond height, both send the validator exit transaction before the node stops, and print whether it was sent. The validator stops counting on chain at once, and its 5,000 VFX stake unlocks 1,200 blocks (about four and a half hours) after the exit is mined. Before the bond height no stake is locked and no exit is sent: your funds are spendable immediately.
+From the validator bond height, both send the validator exit transaction before the node stops, and print whether it was sent. The validator stops counting on chain at once, and its 5,000 VFX stake unlocks 1,200 blocks (about four hours at 12 seconds a block) after the exit is mined. Before the bond height no stake is locked and no exit is sent: your funds are spendable immediately.
 
 Going quiet unlocks nothing. A validator whose node is down or unreachable stays bonded until an exit is mined. To exit an address this wallet holds, whether or not the node is validating with it:
 

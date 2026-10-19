@@ -1190,7 +1190,7 @@ From the BTC-name signer height (`BtcNameSignerOwnsAddressHeight`), a transfer m
 
 This section covers the routes Core 9.0 adds to the vBTC V2 API: withdrawals from vaults the chain watches, the Bitcoin attestation reads, and the validator bond. The rest of the controller is not documented here yet.
 
-**Watched and legacy vaults.** From the Bitcoin attestation recording height (`BitcoinAttestationRecordHeight`; block 1,172,000 on testnet, not yet set on mainnet), a newly created vault is *watched*: its deposits and withdrawals are recorded on chain from Bitcoin reports, and the owner's balance is its attested coins. A watched vault's withdrawal has no completion transaction and no cancellation vote. After the request is mined, the chain fixes ("pins") the Bitcoin transaction that pays it, and the withdrawal completes when Bitcoin confirms it. Until it is pinned, the requester can cancel it, and the cancel takes effect when mined. If it does not confirm, the requester can raise its fee (bump) or give it up (release), both as a `VBTC_V2_COIN_PIN` (type 44) transaction. Vaults created before that height are *legacy*. They keep the earlier request, complete and cancel flow until the enforcement height (`BitcoinAttestationHeight`; block 1,192,500 on testnet, the recording height plus 90,000 blocks on mainnet). From then on they are frozen, and withdrawal completion and the cancellation vote are refused for every vault. `GetVaultBitcoin` tells you which kind a vault is.
+**Watched and legacy vaults.** From the Bitcoin attestation recording height (`BitcoinAttestationRecordHeight`; block 1,172,000 on testnet, not yet set on mainnet), a newly created vault is *watched*: its deposits and withdrawals are recorded on chain from Bitcoin reports, and the owner's balance is its attested coins. A watched vault's withdrawal has no completion transaction and no cancellation vote. After the request is mined, the chain fixes ("pins") the Bitcoin transaction that pays it, and the withdrawal completes when Bitcoin confirms it. Until it is pinned, the requester can cancel it, and the cancel takes effect when mined. If it does not confirm, the requester can raise its fee (bump) or give it up (release), both as a `VBTC_V2_COIN_PIN` (type 44) transaction. Vaults created before that height are *legacy*. They keep the earlier request, complete and cancel flow until the enforcement height (`BitcoinAttestationHeight`; block 1,192,500 on testnet, the recording height plus 90,000 blocks on mainnet). From then on they are frozen, and withdrawal completion (type 28), the cancellation vote (type 30), bridge exit completion (type 41) and bridge exit failure (type 42) are refused for every vault. `GetVaultBitcoin` tells you which kind a vault is.
 
 ### Withdrawal Flows
 
@@ -1216,7 +1216,7 @@ A request still waiting for coins can run out, and its vBTC is then refunded as 
 2. Complete it with `POST vbtcapi/VBTC/CompleteWithdrawal` (or `POST vbtcapi/VBTC/GetRawCompleteWithdrawalTxData` then `POST vbtcapi/VBTC/SendRawCompleteWithdrawalTx`), which signs and broadcasts the Bitcoin transaction and records the completion (type 28).
 3. To cancel, send `POST vbtcapi/VBTC/CancelWithdrawal` (type 29); validators vote on it (type 30).
 
-From the enforcement height a legacy vault is frozen: nothing debits its balance, and the completion, cancellation vote and bridge exit completion transactions are refused for every vault.
+From the enforcement height a legacy vault is frozen: nothing debits its balance, and withdrawal completion (type 28), the cancellation vote (type 30), bridge exit completion (type 41) and bridge exit failure (type 42) are refused for every vault.
 
 ### Bitcoin Attestation
 
@@ -1228,7 +1228,7 @@ From the enforcement height a legacy vault is frozen: nothing debits its balance
 **Summary:** A vault's Bitcoin as consensus holds it: the deposit script, every unspent coin and what holds it, the totals the owner's balance is computed from, and the withdrawals still open  
 **Parameters:**
 - `scUID` (string, path) - The vault's smart contract UID  
-**Returns:** `Vault` (the kind: `Attested`, `Legacy`, `FreezeHeight`, `Frozen`) and `Bitcoin` (null for a vault the chain does not watch, with the reason in `Message`)
+**Returns:** `Vault` (the kind: `Attested`, `Legacy`, `FreezeHeight`, `Frozen`) and `Bitcoin`. For a vault the chain does not watch, `Success` is `false`, `Bitcoin` is `null` and `Message` gives the reason; `Vault` is still filled in
 
 #### GET `/GetBridgeExit/{baseBurnTxHash}`
 **Summary:** The bridge exit the chain holds for a Base burn: waiting, pinned, complete or failed, and for an exit on watched vaults each vault's part with its Bitcoin transaction  
@@ -1243,7 +1243,7 @@ From the enforcement height a legacy vault is frozen: nothing debits its balance
 **Parameters:**
 - `scUID` (string, path) - The vault's smart contract UID  
 - `withdrawalRequestHash` (string, path) - The hash of the withdrawal request transaction  
-**Returns:** `{"Success": true, "Attested": true, "Withdrawal": {...}}`. For a legacy vault, `Attested` is `false` and the withdrawal is completed with `CompleteWithdrawal` instead.
+**Returns:** `{"Success": true, "Attested": true, "Withdrawal": {...}}`. For a vault the chain does not watch, `Success` is `false`, `Attested` is `false`, `Vault` gives its kind, and the withdrawal is completed with `CompleteWithdrawal` instead.
 
 #### POST `/BumpWithdrawalFee`
 **Summary:** Raise the Bitcoin fee of a pinned withdrawal that is not confirming, signed by the requester's account on this node. The chain pins a replacement that spends the same coins; the higher fee comes out of the withdrawal's own amount  
@@ -1282,7 +1282,16 @@ From the enforcement height a legacy vault is frozen: nothing debits its balance
 ```
 **Returns:** `{"Success": true, "Hash": "...", "Message": "..."}`
 
-The node's built-in browser wallet has the same three operations at `GET /wallet/api/vbtc/withdraw/pin/{scUID}/{requestHash}`, `POST /wallet/api/vbtc/withdraw/bumpfee` and `POST /wallet/api/vbtc/withdraw/release` (body `scUID`, `ownerAddress`, `requestHash`, `feeRate`), signed by the node's account.
+The node's built-in browser wallet has the same three operations at `GET /wallet/api/vbtc/withdraw/pin/{scUID}/{requestHash}`, `POST /wallet/api/vbtc/withdraw/bumpfee` and `POST /wallet/api/vbtc/withdraw/release`, signed by the node's account. The bump and release body is camel-case, and `feeRate` is a string; a JSON number is rejected with `400`:
+
+```json
+{
+  "scUID": "...",
+  "ownerAddress": "...", // the requester
+  "requestHash": "...",
+  "feeRate": "12"
+}
+```
 
 ### Validator Bond
 
