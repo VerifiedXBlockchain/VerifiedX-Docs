@@ -423,6 +423,10 @@ From the BTC-name signer height (`BtcNameSignerOwnsAddressHeight`), a transfer m
 
 ### vBTC (Tokenized Bitcoin)
 
+:::caution V1 vBTC is retired
+These are the V1 vBTC routes. V1 was retired at block 7,400,500 on mainnet (block 1 on the testnet since its October 2026 restart): the network accepts no new V1 token, transfer or withdrawal, and V1 balances are frozen. vBTC V2 is under [`vbtcapi/VBTC`](#15-vbtc-v2-api-90-additions); see [vBTC](./vbtc.md).
+:::
+
 #### POST `/TokenizeBitcoin`
 **Summary:** Create vBTC tokens from Bitcoin  
 **Request Body:** Tokenization parameters  
@@ -1188,9 +1192,9 @@ From the BTC-name signer height (`BtcNameSignerOwnsAddressHeight`), a transfer m
 **Base Routes:** `vbtcapi/VBTC`, `vbtcapi/VBTC/{somePassword?}`  
 **Controller:** VBTCController  
 
-This section covers the routes Core 9.0 adds to the vBTC V2 API: withdrawals from vaults the chain watches, the Bitcoin attestation reads, and the validator bond. The rest of the controller is not documented here yet.
+This section covers the routes Core 9.0 adds to the vBTC V2 API: withdrawals from vaults the chain watches, the Bitcoin attestation reads, and the validator bond. The whole vault lifecycle (creation, deposits, transfers, ownership, withdrawals including the multi-vault withdrawal, legacy vaults and S3C) is documented with examples on the [vBTC](./vbtc.md) page, and the external-signer flow on [vBTC Raw Integration](./vbtc-raw.md).
 
-**Watched and legacy vaults.** From the Bitcoin attestation recording height (`BitcoinAttestationRecordHeight`; block 1,172,000 on testnet, not yet set on mainnet), a newly created vault is *watched*: its deposits and withdrawals are recorded on chain from Bitcoin reports, and the owner's balance is its attested coins. A watched vault's withdrawal has no completion transaction and no cancellation vote. After the request is mined, the chain fixes ("pins") the Bitcoin transaction that pays it, and the withdrawal completes when Bitcoin confirms it. Until it is pinned, the requester can cancel it, and the cancel takes effect when mined. If it does not confirm, the requester can raise its fee (bump) or give it up (release), both as a `VBTC_V2_COIN_PIN` (type 44) transaction. Vaults created before that height are *legacy*. They keep the earlier request, complete and cancel flow until the enforcement height (`BitcoinAttestationHeight`; block 1,192,500 on testnet, the recording height plus 90,000 blocks on mainnet). From then on they are frozen, and withdrawal completion (type 28), the cancellation vote (type 30), bridge exit completion (type 41) and bridge exit failure (type 42) are refused for every vault. `GetVaultBitcoin` tells you which kind a vault is.
+**Watched and legacy vaults.** From the Bitcoin attestation recording height (`BitcoinAttestationRecordHeight`; block 400 on testnet since its October 2026 restart, set at the 9.0 release on mainnet), a newly created vault is *watched*: its deposits and withdrawals are recorded on chain from Bitcoin reports, and the owner's balance is its attested coins. A watched vault's withdrawal has no completion transaction and no cancellation vote. After the request is mined, the chain fixes ("pins") the Bitcoin transaction that pays it, and the withdrawal completes when Bitcoin confirms it. Until it is pinned, the requester can cancel it, and the cancel takes effect when mined. If it does not confirm, the requester can raise its fee (bump) or give it up (release), both as a `VBTC_V2_COIN_PIN` (type 44) transaction. Vaults created before that height are *legacy*. They keep the earlier request, complete and cancel flow until the enforcement height (`BitcoinAttestationHeight`; block 401 on testnet, set at the 9.0 release on mainnet, about two weeks after the recording height). From then on they are frozen, and withdrawal completion (type 28), the cancellation vote (type 30), bridge exit completion (type 41) and bridge exit failure (type 42) are refused for every vault. `GetVaultBitcoin` tells you which kind a vault is.
 
 ### Withdrawal Flows
 
