@@ -14,7 +14,9 @@ The vBTC V2 technical specification has been withdrawn while it is revised for t
 - Distributed key generation shares are now encrypted to each validator's registered FROST public key; plaintext shares are refused.
 - A vBTC V2 contract created before the remediation is trusted to its creator: the coordinator of its key ceremony could have reconstructed the vault key. Contracts created after the attestation rules activate are bound to a validator-attested key.
 
-A revised edition will be published once the attestation design is final. Integrators should rely on the Core API reference and the current release notes until then.
+- Core 9.0 adds Bitcoin attestation: the chain records each vault's Bitcoin, and a vault created from the recording height is watched. Its withdrawals are paid by a Bitcoin transaction the chain fixes, with no completion transaction and no cancellation vote, and vaults created before that height are frozen at the enforcement height.
+
+A revised edition will be published. Until then, integrators should rely on [vBTC](/docs/integration/vbtc), [vBTC Raw Integration](/docs/integration/vbtc-raw), the Core API reference and the current release notes.
 :::
 
 ---
