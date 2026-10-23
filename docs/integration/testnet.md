@@ -47,7 +47,11 @@ Testnet Explorer: https://spyglass-testnet.verifiedx.io
 
 Testnet Faucet: https://spyglass-testnet.verifiedx.io/faucet
 
-For anything bitcoin related, VerifiedX uses [testnet4](https://mempool.space/testnet4) due to the 2024 time warp attack that crippled the testnet3 network.
+For anything Bitcoin related, the VerifiedX testnet uses the VerifiedX signet, a private Bitcoin signet run by the VerifiedX team. It replaces Bitcoin testnet4.
+
+Bitcoin Signet Explorer: https://signet.verifiedx.io
+
+Bitcoin addresses look the same as on other Bitcoin test networks (`tb1…`). There is no public signet faucet: ask the VerifiedX team in the Discord for test BTC.
 
 ---
 
