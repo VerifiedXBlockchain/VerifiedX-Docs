@@ -47,7 +47,7 @@ HashPreimage = Timestamp + FromAddress + ToAddress + Amount + Fee + Nonce + Tran
 
 with no separators, `TransactionType` as its name (for example `VBTC_V2_WITHDRAWAL_REQUEST`), and `Data` exactly as returned. A reserve (`xRBX`) transfer appends its `UnlockTime`.
 
-1. **Recompute the hash.** Where the route returns `HashPreimage` (vault creation, multi-vault transfer, multi-vault withdrawal), hash it and compare with `Hash`, and check that the preimage starts with `Timestamp` and `FromAddress` and contains `Data` verbatim. The other routes return the fields that make up the preimage; `Amount` and `Fee` enter it as the node's decimal text (`0.0` for zero), which a JSON parser may not reproduce, so compare field by field if you can't rebuild the text exactly.
+1. **Recompute the hash.** Where the route returns `HashPreimage` (vault creation, multi-vault transfer, multi-vault withdrawal), hash it and compare with `Hash`, and check that the preimage starts with `Timestamp` and `FromAddress` and contains `Data` verbatim. The single transfer, fee-raise and release builders return every field of the preimage. The single withdrawal-request and cancel builders leave out `ToAddress` and `Amount`, which are always the sender's address and `0.0`. `Amount` and `Fee` enter the preimage as the node's decimal text (`0.0` for zero), which a JSON parser may not reproduce, so compare field by field if you can't rebuild the text exactly.
 2. **Read `Data`** and check that it says what you asked for: the action's `Function`, the vault (`ContractUID`), the amount or allocation, the Bitcoin address and the fee rate. The sections below list what to check for each action.
 3. **Check `FromAddress`** is the address whose key you are about to use, and `Fee` (in VFX) is what you expect.
 
@@ -75,7 +75,7 @@ The node runs its full transaction check on the signed build, then broadcasts it
 - With the sender's other transactions still waiting to be mined it would overspend: `Not broadcast: together with this address's transactions still waiting to be mined it would overspend (…). Submit it again once they are mined.`
 - `Hash, Signature, and PublicKey are required`.
 
-Each `SendRaw…` route accepts only what its own build route made (a withdrawal request can't be sent through the transfer route, nor a fee raise as a release). Submit vBTC builds through these routes, not the general `txapi/TXV1` raw routes.
+The withdrawal-request, cancel, completion, fee-raise and release `SendRaw…` routes accept only their own build type, and a fee raise can't be sent as a release or the reverse. The transfer and vault-creation routes don't check the type, so always submit a build through its matching route. Submit vBTC builds through these routes, not the general `txapi/TXV1` raw routes.
 
 The builders take the sender's next nonce from chain state when they build. Build and submit one transaction at a time per address, and build the next once the previous one is in a block, unless the route lets you pass `Nonce`.
 

@@ -455,7 +455,7 @@ Answered from chain state by any node. A withdrawal moves through these states:
 | `Pinned` | Its Bitcoin transaction is fixed and its coins are held for it. The signers sign and broadcast it | Raise the fee, or release |
 | `Settled` | Bitcoin shows its transaction, buried: paid | |
 | `Cancelled` | Cancelled by its requester while waiting; vBTC refunded | |
-| `Expired` | Never pinned within 360 VFX blocks of its request; vBTC refunded | |
+| `Expired` | Not pinned by its `ExpiresAtVfxHeight`: 360 VFX blocks after its request, or later while it waits to take over coins held by a withdrawal paying a lower fee rate; vBTC refunded | |
 | `Void` | A coin it held was spent by another transaction, so it can never confirm; vBTC refunded | |
 | `Released` | Its coins went back to the vault at the requester's wish; vBTC refunded less that transaction's Bitcoin fee | |
 
@@ -508,7 +508,7 @@ Answered from chain state by any node. A withdrawal moves through these states:
 
 - The pin is in the node's answer from the block that mines the request. The explorer API learns it later, so follow withdrawals through the node.
 - `BitcoinTxid` is the newest live transaction; `SettledTxid` the one that paid. `Transactions` lists every transaction pinned for the withdrawal, oldest first. They spend the same coins, so at most one can ever confirm.
-- `CoinsCanBeTakenFromVfxHeight`: if the withdrawal has not confirmed by this block (2,160 VFX blocks, about 7.2 hours, after its newest transaction was pinned), another withdrawal of the vault paying a higher fee rate may be pinned on its coins. If that one confirms, this withdrawal is closed as `Void` and refunded.
+- `CoinsCanBeTakenFromVfxHeight`: if the withdrawal has not confirmed by this block (2,160 VFX blocks, about 7.2 hours, after its first Bitcoin transaction was pinned; a fee raise restarts the count only if it at least doubles the fee rate, and a release never does), another withdrawal of the vault paying a higher fee rate may be pinned on its coins. If that one confirms, this withdrawal is closed as `Void` and refunded.
 - A request not mined yet, or a hash that isn't on this vault: `"Success": false, "Attested": true, "Withdrawal": null, "Message": "No such withdrawal request is recorded on this vault. If it was just sent, it has not been mined yet."` Ask again after the next block.
 - A legacy vault: `"Success": false, "Attested": false` with `Vault` and `This vault is not one the chain watches (it was created before Bitcoin attestation). Its withdrawals are completed with CompleteWithdrawal.`
 
@@ -792,7 +792,7 @@ A legacy vault was created before the attestation recording height. Its Bitcoin 
 
 **From the enforcement height** the vault is frozen:
 
-- Nothing debits a balance on it: no transfer, withdrawal, bridge lock or bridge exit, for the owner or any holder. Bitcoin deposited to it is not credited.
+- Nothing debits a balance on it: no transfer, withdrawal, bridge lock or bridge exit, for the owner or any holder. Bitcoin deposited to it is not credited. Two settlements still move vBTC between holders inside it, leaving its total unchanged: a reserve's delayed send that falls due, and a reserve's recovery sweep; the new holder can take nothing off the vault.
 - Withdrawal completions (type 28), cancellation votes (type 30), bridge exit completions (type 41) and bridge exit failures (type 42) are refused for every vault.
 - A withdrawal already requested from a legacy vault is completed or settled by hand. It is not cancelled by vote.
 - Validators keep their key shares for legacy vaults; no retirement or re-key deletes them.
@@ -820,7 +820,7 @@ A node started with its browser wallet serves the same operations, signed by the
 | --- | --- |
 | `GET /wallet/api/vbtc/{address}` | The address's vaults |
 | `POST /wallet/api/vbtc/withdraw/request` | `scUID`, `ownerAddress` (the requester), `btcAddress`, `amount`, `feeRate` (default 10) |
-| `GET /wallet/api/vbtc/withdraw/pin/{scUID}/{requestHash}` | As `GetWithdrawalPin` |
+| `GET /wallet/api/vbtc/withdraw/pin/{scUID}/{requestHash}` | `{success, withdrawal, message}`, where `withdrawal` is the object `GetWithdrawalPin` returns |
 | `GET /wallet/api/vbtc/withdraw/status/{scUID}` | The vault's withdrawal status |
 | `POST /wallet/api/vbtc/withdraw/cancel` | `scUID`, `ownerAddress`, `requestHash` |
 | `POST /wallet/api/vbtc/withdraw/bumpfee` | `scUID`, `ownerAddress`, `requestHash`, `feeRate` |
