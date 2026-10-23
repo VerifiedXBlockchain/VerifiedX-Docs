@@ -5,506 +5,351 @@ sidebar_class_name: sidebar-btc
 
 # vBTC Raw Integration Guide
 
-:::caution V1 vBTC is retired
-This page describes V1 vBTC (arbiter tokenization: `btcapi/BTCV2/TokenizeBitcoin`, `WithdrawalCoin` and `WithdrawalCoinRawTX`, transaction types 17 to 21). V1 was retired at block 7,400,500 on mainnet (block 1,002,979 on testnet). From that height the network accepts no new V1 token, transfer or withdrawal, and no transaction may touch an existing V1 contract, so V1 balances are frozen as they stand. vBTC V2 (`vbtcapi/VBTC`) is unaffected. This page is kept for reference only.
-:::
+This guide is for integrations whose VFX keys never reach the node: web wallets, exchange signers, HSMs. A node builds each vBTC transaction unsigned, the client checks it and signs its hash, and the node verifies and broadcasts the signed transaction. The node needs no account, key or balance of yours.
 
-While integrating with the CLI online simplifies the management of vBTC tokens, some integrations may require offline handling using raw transactions (i.e., a CLI without included keys).
+It describes vBTC V2 on Core 9.0. Read [vBTC](./vbtc.md) first for the concepts (vaults, owners and holders, watched and legacy vaults, networks and heights, transaction types): this page covers what differs when you sign outside the node. All routes are under `/vbtcapi/VBTC` on the node's API (`http://localhost:7292`, testnet `17292`); send the `apitoken` header if the node requires one.
 
-This guide outlines the four supported vBTC interactions:
+## How the raw routes work
 
-### 1. Minting a vBTC Smart Contract
-A vBTC token is a specialized smart contract that tokenizes Bitcoin. Each smart contract generates a deposit address for sending BTC via the Bitcoin network. The contract owner controls the BTC funds within the token but lacks access to its private key. Therefore, transferring or withdrawing requires interaction with the VFX network.
+Every action that sends a VFX transaction follows the same four steps.
 
-### 2. Transferring vBTC to Another VFX Address
-This transaction occurs entirely on the VFX network. The token owner or any VFX address holding vBTC can transfer tokens to another address instantly with minimal fees.
+### 1. Build
 
-### 3. Withdrawing vBTC to a Bitcoin Address
-This process involves both the Bitcoin and VFX networks. Withdrawing converts vBTC back into BTC (fully or partially) and sends it to any Bitcoin address.
+Call the action's `GetRaw…` route. It checks the request against the same rules block validation applies and answers either with a refusal (`"Success": false` and a `Message`) or with the unsigned transaction:
 
-### 4. Transferring Smart Contract Ownership
-This VFX network transaction assigns a new address as the smart contract owner. Any new funds sent to the deposit address will belong to the new owner. Note: transferring ownership does not transfer the existing vBTC balance.
-
-## Managing vBTC Tokens with Raw Transactions
-
-> **Note:** A CLI is required for some steps, but no address/accounts or balances are needed.
-
-### Compiling and Minting a Raw vBTC Transaction
-
----
-
-### Step 1: Initiate Smart Contract UID, Deposit Address, and PublicKeyProofs
-
-The first thing that needs to be done is determining important details required by this smart contract type. The CLI has a built in API endpoint to provide the SmartContractUID, DepositAddress, and ProofJson.
-
-
-#### URL:
-```
-GET `btcapi/BTCV2/GetTokenizationDetails/{VFX_ADDRESS}`
-```
-
-#### URL Params:
-
-`VFX_ADDRESS` the owner of the token's address.
-
-#### Response
 ```json
 {
-  "SmartContractUID": "...",
-  "DepositAddress": "...",
-  "ProofJson": "...",
+  "Success": true,
+  "Hash": "39ff6b9b…a22b",
+  "Timestamp": 1792774390,
+  "FromAddress": "<signer>",
+  "ToAddress": "<signer or recipient>",
+  "Amount": 0.0,
+  "Fee": 0.00001375,
+  "Nonce": 2,
+  "TransactionType": "VBTC_V2_WITHDRAWAL_REQUEST",
+  "Data": "{\"Function\":\"VBTCWithdrawalRequestMultiV2()\",…}",
+  "HashPreimage": "1792774390<signer><signer>0.00.000013752VBTC_V2_WITHDRAWAL_REQUEST{\"Function\":…}",
+  "Message": "Sign the Hash field and submit via SendRawRequestWithdrawalTx. …"
 }
-
 ```
 
-You'll want to store these values as they will be used in the next steps.
+The build is kept on that node for about 65 minutes. Submit it to the same node.
 
----
+### 2. Check before signing
 
-### Step 2: Build Payload:
+Never sign a hash you have not checked. The hash is:
 
-Contruct a smart contract payload like this.
+```
+Hash = SHA-256( lowercase hex of SHA-256( HashPreimage as UTF-8 ) ), as lowercase hex
+HashPreimage = Timestamp + FromAddress + ToAddress + Amount + Fee + Nonce + TransactionType + Data
+```
+
+with no separators, `TransactionType` as its name (for example `VBTC_V2_WITHDRAWAL_REQUEST`), and `Data` exactly as returned. A reserve (`xRBX`) transfer appends its `UnlockTime`.
+
+1. **Recompute the hash.** Where the route returns `HashPreimage` (vault creation, multi-vault transfer, multi-vault withdrawal), hash it and compare with `Hash`, and check that the preimage starts with `Timestamp` and `FromAddress` and contains `Data` verbatim. The other routes return the fields that make up the preimage; `Amount` and `Fee` enter it as the node's decimal text (`0.0` for zero), which a JSON parser may not reproduce, so compare field by field if you can't rebuild the text exactly.
+2. **Read `Data`** and check that it says what you asked for: the action's `Function`, the vault (`ContractUID`), the amount or allocation, the Bitcoin address and the fee rate. The sections below list what to check for each action.
+3. **Check `FromAddress`** is the address whose key you are about to use, and `Fee` (in VFX) is what you expect.
+
+### 3. Sign
+
+Sign `Hash` (the hex string, as UTF-8 text) with the sender's key, ECDSA over secp256k1, exactly as for any VFX transaction (see [Transaction Creation](./transaction-creation.md)). The signature is the DER signature in Base64, a `.`, and the public key (64 bytes, without the `04` prefix) in Base58.
+
+### 4. Submit
+
+Post to the matching `SendRaw…` route:
 
 ```json
 {
-  "SmartContractUID": "...", // SmartContractUID from step 1
-  "Name": "My vBTC Token",
-  "MinterName": "Minter Name / Owner Address",
-  "Description": "My vBTC Token Description",
-  "SmartContractAsset": {
-    "AssetId": "00000000-0000-0000-0000-000000000000", // leave this as a blank guid
-    "Name": "My vBTC Token", // or can be related to the image asset
-    "AssetAuthorName": "Owner Address", // owner address / name or related to image asset
-    "Location": "default", // use "default" for the default vBTC icon OR include an absolute file path that the Core CLI has access to. Note: custom images should be no more than 32x32 pixels as this is stored on chain
-    "Extension": "png", // extension of the asset (use `png` for default icon)
-    "FileSize": 6778 // file size of the asset (use `6778` for default icon)
-  },
-  "Features": [
-    {
-      "FeatureName": 3,
-      "FeatureFeatures": {
-        "AssetName": "Bitcoin",
-        "AssetTicker": "BTC",
-        "DepositAddress": "...", /// DepositAddress from step 1
-        "PublicKeyProofs": "...", // ProofJson from step 1
-        "ImageBase": "default"
-      }
-    }
+  "Hash": "<the Hash the build returned>",
+  "Signature": "<Base64 DER signature>.<Base58 public key>",
+  "PublicKey": "<the signer's public key>"
+}
+```
+
+The node runs its full transaction check on the signed build, then broadcasts it:
+
+- `{"Success": true, "Hash": "…", "Message": "Withdrawal request transaction broadcast successfully."}`
+- A bad signature: `Transaction verification failed: Signature Failed to verify.` The build is kept, so sign again and resubmit the same hash.
+- An unknown or already used hash: `No pending transaction found for hash …. Call GetRawRequestWithdrawalTxData first.`, or `Transaction … was already submitted.`
+- With the sender's other transactions still waiting to be mined it would overspend: `Not broadcast: together with this address's transactions still waiting to be mined it would overspend (…). Submit it again once they are mined.`
+- `Hash, Signature, and PublicKey are required`.
+
+Each `SendRaw…` route accepts only what its own build route made (a withdrawal request can't be sent through the transfer route, nor a fee raise as a release). Submit vBTC builds through these routes, not the general `txapi/TXV1` raw routes.
+
+The builders take the sender's next nonce from chain state when they build. Build and submit one transaction at a time per address, and build the next once the previous one is in a block, unless the route lets you pass `Nonce`.
+
+## Reading state without a node wallet
+
+The read routes answer from chain state, so any node answers for any address or vault:
+
+- Balances: `GET GetAllVBTCBalances/{address}`, `GET GetVBTCBalance/{address}/{scUID}`.
+- A vault: `GET GetContractDetails/{scUID}`, `GET GetVaultBitcoin/{scUID}`, `GET GetMPCDepositAddress/{scUID}`.
+- A withdrawal: `GET GetWithdrawalPin/{scUID}/{withdrawalRequestHash}` and, for every share of a request, `GET GetWithdrawalRequestShares/{withdrawalRequestHash}`.
+- The network: `GET GetBitcoinAttestationStatus`.
+
+The answers are described on the [vBTC](./vbtc.md#reading-balances-and-vaults) page.
+
+`POST PrepareCompleteWithdrawalRaw` also tells a raw client where a withdrawal stands. On a watched vault it prepares nothing and returns the completion answer (`Attested: true`, `Status`, `Paid`, `NothingToDo`, `NotMinedYet`, `PinnedBTCTransactionHash`, `BTCTransactionHash` and the `Withdrawal` object); on a legacy vault it prepares a FROST signing session (see [Legacy vaults](#legacy-vaults)). Read `Attested` to tell the two apart.
+
+```json
+{ "OwnerAddress": "<requester>", "SmartContractUID": "<contract UID>", "WithdrawalRequestHash": "<request hash>" }
+```
+
+## Create a vault
+
+A vault is created by its owner in two parts: a key ceremony among the validators, authorised by the owner's signatures, and the creation transaction (type 25).
+
+1. **Prepare the ceremony.** `POST PrepareMPCCeremonyRaw` with `{"OwnerAddress": "<owner>"}`. The node checks that enough validators are reachable and returns the messages to sign:
+
+   ```json
+   {
+     "Success": true,
+     "CeremonyId": "<32 hex>:<unix time>",
+     "SessionId": "<guid>",
+     "OwnerAddress": "<owner>",
+     "ValidatorCount": 13,
+     "Threshold": 51,
+     "StartMessage": "<sessionId>.<owner>.<timestamp>",
+     "StartTimestamp": 1792760000,
+     "ShareDistributionMessage": "<sessionId>.<owner>.<timestamp + 1>",
+     "ShareDistributionTimestamp": 1792760001,
+     "RetrySessions": [ { "SessionId": "…", "StartMessage": "…", "StartTimestamp": 0, "ShareDistributionMessage": "…", "ShareDistributionTimestamp": 0 } ]
+   }
+   ```
+
+2. **Sign** `StartMessage` and `ShareDistributionMessage` with the owner's key (the same signature format). Check that each message names your owner address. Sign the `RetrySessions` messages too: they let the ceremony run again without a validator that fails it. Without them it runs once.
+3. **Run it.** `POST ExecuteMPCCeremonyRaw`:
+
+   ```json
+   {
+     "OwnerAddress": "<owner>",
+     "CeremonyId": "<ceremony id>",
+     "SessionId": "<session id>",
+     "StartTimestamp": 1792760000,
+     "StartSignature": "<signature>",
+     "ShareDistributionTimestamp": 1792760001,
+     "ShareDistributionSignature": "<signature>",
+     "RetrySessions": [ { "SessionId": "…", "StartTimestamp": 0, "StartSignature": "…", "ShareDistributionTimestamp": 0, "ShareDistributionSignature": "…" } ]
+   }
+   ```
+
+   Errors: `Invalid start signature`, `Invalid share distribution signature`, `Invalid retry session signature (…)`, `Active ceremony already in progress.`
+4. **Wait.** Poll `GET GetCeremonyStatus/{ceremonyId}` until `Status` is `Completed` (or `Failed`, with `ErrorMessage`). Use `ContractUID` from that answer.
+5. **Build the creation.** `POST GetRawCreateContractTxData` on the same node (the ceremony's result is held in that node's memory):
+
+   ```json
+   { "OwnerAddress": "<owner>", "CeremonyId": "<ceremony id>", "Name": "Treasury vault", "Description": "", "Ticker": "vBTC" }
+   ```
+
+   The answer has `Hash`, `HashPreimage`, `SmartContractUID`, `DepositAddress`, `DepositAddressConfirmed: false` and the transaction's fields. **Check:** `TransactionType` is `VBTC_V2_CONTRACT_CREATE`, `FromAddress` and `ToAddress` are the owner, `Amount` is 0, and `Data` is `[{"Function":"Mint()","ContractUID":"<the ceremony's contract UID>",…}]`.
+6. **Sign and submit** with `POST SendRawCreateContractTx`: `vBTC contract creation transaction broadcast successfully.`
+7. **Get the deposit address** with `GET GetMPCDepositAddress/{scUID}` once the creation is in a block. Do not deposit before this route returns the address.
+
+`CreateVBTCContractRaw` is not an external-signer route: it verifies a signed request but then signs the creation with the owner's account on the node.
+
+## Transfer vBTC
+
+### From one vault
+
+1. `POST GetRawTransferVBTCData`:
+
+   ```json
+   { "SmartContractUID": "<contract UID>", "FromAddress": "<sender>", "ToAddress": "<recipient>", "Amount": 0.00003 }
+   ```
+
+2. **Check:** `TransactionType` is `VBTC_V2_TRANSFER`, `Amount` (the VFX amount) is 0, and `Data` is `{"Function":"TransferVBTCV2()","ContractUID":…,"FromAddress":<sender>,"ToAddress":<recipient>,"Amount":<vBTC amount>}`. For a reserve (`xRBX`) sender, `IsReserveSend` is `true` and `UnlockTime` is part of the hash: the transfer is held for 24 hours and can be called back until then.
+3. Sign and submit with `POST SendRawTransferVBTCTx`.
+
+Refusals at build: `Insufficient balance. Available: …, Requested: …`, `Reserve accounts cannot send vBTC to another Reserve Account.`
+
+### From several vaults (bulk transfer)
+
+1. `POST GetRawTransferVBTCMultiData`:
+
+   ```json
+   {
+     "FromAddress": "<sender>",
+     "ToAddress": "<recipient>",
+     "TotalAmount": 0.00012,
+     "Inputs": [ { "SCUID": "<vault A UID>", "Amount": 0.00008 }, { "SCUID": "<vault B UID>", "Amount": 0.00004 } ],
+     "Nonce": null
+   }
+   ```
+
+   Pass `Inputs` yourself where you can: the node checks them against chain state. Without `Inputs` the node plans the split from the vaults it knows. `Nonce` is optional; without it the node uses the next one.
+2. **Check:** `HashPreimage` hashes to `Hash`; `Function` is `TransferVBTCMultiV2()` (or `TransferVBTCV2()` when one vault covers the total, `IsMultiContract: false`); `Allocations` sum to `TotalAmount`; `Data` names your recipient.
+3. Sign and submit with `POST SendRawTransferVBTCTx`.
+
+At most 25 vaults per transfer, amounts with at most 8 decimals, no reserve senders and no shielded recipient.
+
+## Transfer ownership
+
+Ownership moves with a smart-contract transfer (type 18, `TKNZ_TX`) built through the general raw transaction routes.
+
+1. `GET /vbtcapi/VBTC/GetVBTCOwnershipTransferData/{scUID}/{toAddress}/NA` returns the transaction's `Data`: `[{"Function":"Transfer()","ContractUID":…,"ToAddress":<new owner>,"Data":…,"Locators":"NA","MD5List":"NA"}]`. While the network uses the default vBTC image no beacon upload is needed and the locator is `NA`.
+2. Build a transaction with `TransactionType` 18, `FromAddress` the current owner, `ToAddress` the new owner, `Amount` 0 and that `Data`, then use `txapi/TXV1/GetRawTxFee`, `GetTxHash`, sign, `VerifyRawTransaction` and `SendRawTransaction` as in [Transaction Creation](./transaction-creation.md).
+
+The new owner takes over the vault's vBTC that no holder holds.
+
+## Withdraw to Bitcoin
+
+### Request
+
+1. `POST GetRawRequestWithdrawalTxData`:
+
+   ```json
+   {
+     "SmartContractUID": "<contract UID>",
+     "RequestorAddress": "<holder>",
+     "BTCAddress": "bc1q…",
+     "Amount": 0.00002,
+     "FeeRate": 3,
+     "UniqueId": null
+   }
+   ```
+
+2. **Check before signing:** `TransactionType` is `VBTC_V2_WITHDRAWAL_REQUEST`; `FromAddress` is the holder; `Data` is `{"Function":"VBTCWithdrawalRequest()","ContractUID":<vault>,"RequestorAddress":<holder>,"BTCAddress":<your destination, exactly>,"Amount":<amount>,"FeeRate":<rate>,"UniqueId":…}`. Validate the Bitcoin address yourself for the right network. Work out what the destination will receive: `Amount` less `FeeRate × 154` sats (more if the vault needs several coins), which must leave at least 546 sats.
+3. Sign and submit with `POST SendRawRequestWithdrawalTx`. The transaction's hash is the withdrawal's `RequestHash` from now on.
+
+Refusals at build: `Fee rate must be greater than zero`, the fee-floor message (`… cannot pay a Bitcoin withdrawal at … sat/vB. …`), `Insufficient balance. Available: …, Requested: …`, and at submit the consensus refusals listed on the [vBTC](./vbtc.md#errors-you-can-hit-on-a-withdrawal) page (address not on this network, fee rate above 5,000, less than 546 sats left, a frozen vault).
+
+`RequestWithdrawalRaw` is not part of this flow: it only records a request on that node and puts nothing on chain.
+
+### Follow it
+
+On a watched vault nothing more needs to be sent. In the block that mines the request the chain pins the Bitcoin transaction that pays it; the vault's signers sign it and broadcast it; it completes when Bitcoin confirms it. Follow it with `GET GetWithdrawalPin/{scUID}/{requestHash}` (or `PrepareCompleteWithdrawalRaw`): `State` goes from `Waiting` or `Pinned` to `Settled`, or to `Cancelled`, `Expired`, `Void` or `Released` with the vBTC refunded. Until the request is mined the answer is `Success: false, Attested: true, Withdrawal: null`; ask again after the next block.
+
+The node reports a withdrawal's pin in the same block as the request. The explorer API shows it only after a later Bitcoin report, so follow withdrawals through the node.
+
+### Cancel while waiting
+
+While `State` is `Waiting` (`CanCancel: true`) the requester can cancel at once, with no vote:
+
+1. `POST GetRawCancelWithdrawalTxData` with `{"SmartContractUID": "<vault>", "RequestorAddress": "<requester>", "WithdrawalRequestHash": "<request hash>"}`.
+2. **Check:** `TransactionType` is `VBTC_V2_WITHDRAWAL_CANCEL`, `Data` is `{"Function":"VBTCWithdrawalCancel()","ContractUID":<vault>,"WithdrawalRequestHash":<request hash>}`, and `Attested: true` (the message says no vote is held).
+3. Sign and submit with `POST SendRawCancelWithdrawalTx`. When it is mined the withdrawal closes as `Cancelled` and the vBTC is back.
+
+The builder refuses before you sign when the cancel can't be accepted: `Only the original requestor can cancel.`, `Cannot cancel an already completed withdrawal.`, and once the withdrawal is pinned `This withdrawal's Bitcoin transaction is fixed and may already be signed, so it cannot be cancelled. It completes when Bitcoin confirms it.` (with the `Withdrawal` object). `CancelWithdrawalRaw` does not cancel anything: it answers with the message to use these routes.
+
+### Raise the fee
+
+When a pinned withdrawal is not confirming (`CanRaiseFee: true`):
+
+1. `POST GetRawBumpWithdrawalFeeTxData`:
+
+   ```json
+   { "SmartContractUID": "<vault>", "RequestorAddress": "<requester>", "WithdrawalRequestHash": "<request hash>", "FeeRate": 8 }
+   ```
+
+2. **Check:** `TransactionType` is `VBTC_V2_COIN_PIN` (`TransactionTypeId` 44), `FromAddress` and `ToAddress` are the requester, `Amount` is 0, and `Data` is `{"Function":"VBTCWithdrawalFeeBump()","ContractUID":<vault>,"WithdrawalRequestHash":<request hash>,"FeeRate":<new rate>}`. The new rate must be above the `FeeRate` the withdrawal pays now. The higher fee comes out of the withdrawal: the destination receives less.
+3. Sign and submit with `POST SendRawBumpWithdrawalFeeTx`. When it is mined, the chain pins a replacement that spends the same coins; follow it with `GetWithdrawalPin`.
+
+### Release
+
+When a pinned withdrawal is not confirming and the requester would rather have the vBTC back (`CanRelease: true`):
+
+1. `POST GetRawReleaseWithdrawalTxData` with the same body as a fee raise.
+2. **Check:** as for a fee raise, with `Function` `VBTCWithdrawalRelease()`. The release's Bitcoin fee comes out of the refund.
+3. Sign and submit with `POST SendRawReleaseWithdrawalTx`. When it is mined, the chain pins a Bitcoin transaction returning the coins to the vault; when Bitcoin shows it, the withdrawal closes as `Released` and the vBTC is refunded less that fee. If one of the withdrawal's payments confirms first, it is paid instead.
+
+Both builders check the request against the rule block validation applies and refuse with the reason and the `Withdrawal` object, for example `The new fee rate must be above the 3 sat/vB the withdrawal's newest Bitcoin transaction pays.` or `This withdrawal has no Bitcoin transaction yet. Cancel it and request again with the fee rate you want.` A fee raise sent to the release route, or the reverse, is refused: `This transaction is a fee bump; submit it with SendRawBumpWithdrawalFeeTx.`
+
+## Multi-vault withdrawal
+
+This is how an exchange or any holder with vBTC on several vaults withdraws a total amount to one Bitcoin address. One VFX transaction (type 27, `VBTCWithdrawalRequestMultiV2()`) opens the withdrawal; each vault in it is a **share**, paid by its own Bitcoin transaction from that vault. The requester pays one miner fee per share, out of that share, and shares settle independently, so a withdrawal can be partly paid. A total that one vault covers is built as an ordinary single withdrawal. At most 10 vaults per request.
+
+### Build
+
+`POST GetRawRequestWithdrawalMultiTxData`:
+
+```json
+{
+  "RequestorAddress": "<holder>",
+  "BTCAddress": "bc1q…",
+  "TotalAmount": 0.00006,
+  "FeeRate": 2,
+  "Inputs": [
+    { "SCUID": "<vault A UID>", "Amount": 0.00003 },
+    { "SCUID": "<vault B UID>", "Amount": 0.00003 }
   ],
-  "MinterAddress": "...", // the owner of the token's address
-  "SCVersion": 1
+  "UniqueId": null
 }
-
 ```
 
----
-
-#### Step 3: Compile Smart Contract
-
-Use the payload constructed above as well as the following URL.
-
-```
-GET txapi/txv1/GetSCMintDeployData/
-```
-
-This will return the compiled payload of the smart contract including the compressed trillium code.
-
----
-
-### Step 4: Build Transaction
-
-This follows the same steps as creating any raw transaction. See [Transaction Creation](./transaction-creation) for further details, but here is a summary of the flow. You'll be essentiall building a transaction payload through a variety of steps. Other than the timestamp, nonce, and signature steps, you'll be passing the updated payload as POST data throughout each API call.
-
-
-1. Get the current timestamp:
-
-`GET /txapi/txV1/GetTimestamp`
-
-2. Get address nonce:
-
-`GET /txapi/txV1/GetAddressNonce/{VFX_ADDRESS}`
-
-3. Build initial tx and get fee
-
-
-Post Data Payload:
-
-```json
-  {
-    "Hash": "", // leave blank for now
-    "ToAddress": "",
-      "FromAddress": "...", // owner address
-      "TransactionType": 17,
-      "Amount": 0,
-      "Nonce": "...", // nonce from above
-      "Fee": 0,
-      "Timestamp": 1739029967, // timestamp from above
-      "Signature": "", // leave blank for now
-      "Height": 0,
-      "Data": "...", // data from step 3
-      "UnlockTime": null,
-  }
-```
-
-URL: 
-
-`POST /txapi/txV1/GetRawTxFee`
-
-4. Get Hash
-
-Update the above payload with the "Fee" from above and then hit:
-
-`POST /txapi/txV1/GetTxHash`
-
-5. Generate Signature
-
-Use the hash of the tx as the message and sign it with the owner's keypair. This is no different than generating a signature for any raw transaction. See [Transaction Creation](./transaction-creation) for more details.
-
-6. Update Payload
-
-Update the payload to include the `Hash` and `Signature` from the above steps.
-
-7. Verify Transaction (optional)
-
-`POST /txapi/txV1/VerifyRawTransaction`
-
-8. Send Transaction
-
-`POST /txapi/txV1/SendRawTransaction`
-
-This will return `{"Success" true, "Hash": ..., "Message": "..."}`.
-
-
----
-
-
-> Here is a completed example payload for the verify/send API call(s):
-
-```json
-
-{
-  "Hash": "9de731e704967bb0adb58cd10118e9b6c05230059f87abbef6fbdcb82e5cdbea",
-  "ToAddress": "RNiQrW3aBUWZhfadqKxPuN46iGaR13ox7P",
-  "FromAddress": "RNiQrW3aBUWZhfadqKxPuN46iGaR13ox7P",
-  "TransactionType": 17,
-  "Amount": 0,
-  "Nonce": 27,
-  "Fee": 0.00005145,
-  "Timestamp": 1736792656,
-  "Signature": "MEUCIQClsm8adW701Y5LpPMumaZUKP4u4QBVLjbzEC0TUqnyaAIgfoymEVBziTFKJkXptdxjQ5HKggVKh4o40JCE/YBdNgY=.4Ei1rMebDngFsA7BNgFsHPSCVXtqViybxX61VnvTD4J4TJhR9cc1vrh1947Y59S3bKor4nNnENybExPektmLi2ZQ",
-  "Height": 0,
-  "Data": [
-    {
-      "Function": "Mint()",
-      "ContractUID": "2442522a3fd34270b77a64b07eb34b7f:1736792655",
-      "Data": "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",
-      "MD5List": "defaultvBTC.png::150b90aa9d06f7e4fc5703ca6d7f01db"
-    }
-  ],
-  "UnlockTime": null
-}
-
-```
-
----
-
-## Transferring vBTC
-
-This is the mechinism for transferring a partial (or whole) vBTC balance from one VFX address to another. 
-
-> Whether this is coming from the smart contract owner or just another VFX address who holds a balance, the process remains the same.
-
-For this, you simply need to create and broadcast raw transaction with the below payload. 
-
-> Of course, you must build this transaction in the same steps as any raw transaction (timestamp, nonce, fee, signature, etc.)
-
-```json
-
-{
-  "Hash": "...",
-  "ToAddress": "...", // recipient address
-  "FromAddress": "...", // sender address
-  "TransactionType": 18, // Use 18 as this tx type
-  "Amount": 0,
-  "Nonce": 1,
-  "Fee": 0.00005145,
-  "Timestamp": 1736792656,
-  "Signature": "...",
-  "Height": 0,
-  "Data": [
-     {
-        "Function": "TransferCoin()",
-        "ContractUID": "", // Smart Contract UID
-        "Amount": 0.01, // amount of vBTC to transfer
-      }
-  ]
-}
- 
-```
-Then hit the following API endpoint:
-
-`POST /txapi/txV1/SendRawTransaction`
-
-This will return `{"Success" true, "Hash": ..., "Message": "..."}`.
-
-
----
-
-## Withdrawing vBTC 
-
-This is the mechinism for withdrawing vBTC (converting vBTC back to BTC and sending it to a BTC address). 
-
-> Whether this is coming from the smart contract owner or just another VFX address who holds a balance, the process remains the same.
-
-This follows the same flow as any raw transaction except you'll need to create a separate signature using the following message:
-
-`{sender_address}.{timestamp}.{uniqueId}`
-
-The unique ID is something you will generate and must be 16 characters long and only contain alpha characters (upper and/or lowercase)
-
-`AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz`
-
-Sign this message and save it for the following step.
-
-Now you need to create and broadcast raw transaction with the below payload. 
-
-> Once again, you must build this transaction in the same steps as any raw transaction (timestamp, nonce, fee, signature, etc.)
-
-```json
-
-{
-  "Hash": "...",
-  "ToAddress": "...", // recipient address
-  "FromAddress": "...", // sender address
-  "TransactionType": 18, // Use 18 as this tx type
-  "Amount": 0,
-  "Nonce": 1,
-  "Fee": 0.00005145,
-  "Timestamp": 1736792656,
-  "Signature": "...",
-  "Height": 0,
-  "Data": [
-     {
-      "SmartContractUID": "...",
-      "Amount": 0.001, 
-      "VFXAddress": "...",
-      "BTCToAddress": "...", // where the BTC will be withdrawn too
-      "Timestamp": 1736792656,
-      "UniqueId": "...", // unique id created above
-      "VFXSignature": "", // signature created using `{sender_address}.{timestamp}.{uniqueId}` message above
-      "ChosenFeeRate": 10, // sats per byte fee rate 
-      "IsTest": false,
-      }
-  ]
-}
- 
-```
-Then hit the following API endpoint:
-
-`POST /txapi/txV1/SendRawTransaction`
-
-This will return `{"Success" true, "Hash": ..., "Message": "..."}`. Keep the tx hash handy for the next step.
-
-
-The final step is to broadcast a simple transaction on the VFX network to finalize the withdrawl. Follow the standard steps to build a TX and see the relevent `Type`, `ToAddress`, and `Data` required.
-
+Pass `Inputs` (each vault and the amount to draw from it) whenever you can: the node checks them against chain state, so any node can build for any holder. Without `Inputs` the node allocates the total itself, largest available balance first, from the vaults it can see.
 
 ```json
 {
-  "Hash": "...",
-  "ToAddress": "TW_Base", // token withdrawl base
-  "FromAddress": "...", // VFX address of the one performing the tx
-  "TransactionType": 21, // Use 21 as this tx type
-  "Amount": 0,
-  "Nonce": 1,
-  "Fee": 0.00005145,
-  "Timestamp": 1736792656,
-  "Signature": "...",
-  "Height": 0,
-  "Data": [
-    {
-    "Function": "TokenizedWithdrawalComplete()", // this function
-    "ContractUID": "...", // Smart Contract UID
-    "UniqueId": "...",  // unique id created above
-    "TransactionHash": "...", // hash of the Withdraw tx above
-    }
-  ]
-}
-
-```
-
-
-
-
---- 
-
-## Transferring Smart Contract Ownership
-
-> Note: transferring the ownership of the token does not transfer the vBTC balance of the existing owner.
-
----
-
-Transferring a vBTC smart contract to a new address is the same process as transferring an NFT or any other smart contract.
-
-
-### Step 1: Create a Beacon Upload Request
-
-First, sign a message using the current owner's keypair. The message is the SCUID of the smart contract.
-
-Next, create a beacon upload request (for media transfer)
-
-URL:
-
-`GET txapi/txV1/CreateBeaconUploadRequest/{SCUID}/{TO_ADDRESS}/{SIGNATURE}`
-
-URL Params:
-
-`SCUID` - the smart contract identified
-`TO_ADDRESS` - the address the SC will be transferred to
-`SIGNATURE` - the signature create above
-
-This will return a string of the beacon locator which will be used in the next step.
-
-### Step 2: Get the transfer data required
-
-URL:
-`GET txapi/txV1/GetNftTransferData/{SCUID}/{TO_ADDRESS}/{LOCATOR}`
-
-URL Params:
-
-`SCUID` - the smart contract identified
-`TO_ADDRESS` - the address the SC will be transferred to
-`LOCATOR` - the locator string received above
-
-
-### Step 3: Create and Broadcast the TX
-
-> Once again, you must build this transaction in the same steps as any raw transaction (timestamp, nonce, fee, signature, etc.)
-
-```json
-{
-  "Hash": "...",
-  "ToAddress": "...", // recipient address
-  "FromAddress": "...", // sender address
-  "TransactionType": 18, // Use 18 as this tx type
-  "Amount": 0,
-  "Nonce": 1,
-  "Fee": 0.00005145,
-  "Timestamp": 1736792656,
-  "Signature": "...",
-  "Height": 0,
-  "Data": {...} // data received in the previous step
+  "Success": true,
+  "Hash": "39ff6b9b…a22b",
+  "Timestamp": 1792774390,
+  "FromAddress": "<holder>",
+  "Fee": 0.00001375,
+  "Nonce": 2,
+  "TransactionType": "VBTC_V2_WITHDRAWAL_REQUEST",
+  "Data": "{\"Function\":\"VBTCWithdrawalRequestMultiV2()\",\"RequestorAddress\":\"<holder>\",\"BTCAddress\":\"bc1q…\",\"TotalAmount\":0.00006,\"FeeRate\":2,\"Inputs\":[{\"SCUID\":\"<vault A UID>\",\"Amount\":0.00003},{\"SCUID\":\"<vault B UID>\",\"Amount\":0.00003}],\"UniqueId\":null}",
+  "HashPreimage": "…",
+  "Function": "VBTCWithdrawalRequestMultiV2()",
+  "IsMultiContract": true,
+  "Allocations": [ { "SCUID": "<vault A UID>", "Amount": 0.00003 }, { "SCUID": "<vault B UID>", "Amount": 0.00003 } ],
+  "BitcoinTransactions": 2,
+  "TotalAmount": 0.00006,
+  "Destination": "bc1q…",
+  "Message": "Sign the Hash field and submit via SendRawRequestWithdrawalTx. …"
 }
 ```
 
-And that's all required to transfer full ownership of the token.
+On a watched vault, ignore the part of `Message` that asks you to complete each contract: the vault's signers pay every share.
 
-> Reminder: transferring the ownership of the token does not transfer the vBTC balance of the existing owner.
+### Check before signing
 
+1. **Hash.** SHA-256 of the lowercase hex of SHA-256(`HashPreimage`) equals `Hash`. The preimage starts with `Timestamp` and the holder's address (as `FromAddress` and `ToAddress`) and ends with `Data` exactly as returned.
+2. **Allocation.** `Data.Inputs` (and `Allocations`) name the vaults and amounts you intended, each vault once, and add up to `TotalAmount`.
+3. **Destination.** `Data.BTCAddress` is your destination exactly, valid for the network. Check it yourself before you build.
+4. **Fees.** `Data.FeeRate` is the rate you meant. Each share pays `FeeRate × 154` sats or more out of its own amount, so the destination receives `TotalAmount` less `BitcoinTransactions` fees, and every share must leave at least 546 sats after its fee. `Fee` is the VFX fee of the request.
+5. **Signer.** `FromAddress` is the holder whose key you are using.
 
+### Sign and submit
 
-## Balances
+Sign `Hash` with the holder's key and submit with `POST SendRawRequestWithdrawalTx`, as for a single withdrawal. On testnet a two-share request at 2 sat/vB was mined in the next block, each share pinned in that block to its own Bitcoin transaction (2,692 sats to the destination, 308 sats fee each), and both closed paid when Bitcoin confirmed them.
 
-With a raw/offline integration of vBTC balances will need to be tracked manually. 
+### Follow each share
 
-The logic is as follows:
+- `GET GetWithdrawalRequestShares/{requestHash}` lists the shares once the request is mined: each vault, amount, `Status`, `IsCompleted`, `Paid`, `Refunded` and `BTCTxHash`, and the totals `PaidCount`, `RefundedCount`, `AllPaid`.
+- `GET GetWithdrawalPin/{shareVaultUID}/{requestHash}` gives one share's state, its pinned Bitcoin transaction and what can be done with it. A share goes through the same states as a single withdrawal.
 
-- On the BTC network, watch the deposit address's balance for both inputs and outputs.
+To raise the fee of, release or cancel one share, use the routes above with that share's vault UID as `SmartContractUID` and the request hash as `WithdrawalRequestHash`. Each is one transaction for one share; the other shares are not touched.
 
-- On the VFX network, watch for any transactions of type `18` with the `Function` of `TransferCoin()`
+You don't need `CompleteWithdrawalMulti` or `PrepareCompleteWithdrawalRaw`/`ExecuteCompleteWithdrawalRaw` for shares on watched vaults: they send nothing for them.
 
-- The TransferCoin txs will include an `Amount` in the `Data` as well as a `ToAddress` in the root of the transaction.
+### Refusals at build
 
-- You'll want to follow these to see where the funds flow to and track the updated balances (subtracting from the FromAddress and andding to the ToAddress)
+| Situation | Message |
+| --- | --- |
+| `Inputs` don't add up | `TotalAmount must equal the sum of input amounts for multi-contract vBTC withdrawal.` |
+| A vault listed twice | `Multi-contract vBTC withdrawal inputs must reference distinct contracts.` |
+| An input above the holder's balance on that vault | `Insufficient vBTC balance for withdrawal input …. Available: …, Requested: …` |
+| No `Inputs` and not enough across the vaults | `Insufficient combined vBTC balance. Available: …, Requested: …` |
+| The holder has nothing | `No spendable vBTC balance found for this address.` |
+| More than 8 decimals | `TotalAmount cannot have more than 8 decimal places` |
+| More than 10 vaults | `Multi-contract vBTC withdrawal exceeds the maximum of 10 inputs.` |
+| A share too small for its fee | `Multi-contract vBTC withdrawal input …: … BTC cannot pay a Bitcoin withdrawal at … sat/vB. …` |
+| Fee rate 0 | `FeeRate must be greater than zero` |
+| Not a Bitcoin address on this network | `The withdrawal's Bitcoin address is not an address on this network: …` |
+| A reserve holder | `Reserve accounts cannot request BTC withdrawals. Move the vBTC to a normal VFX address first.` |
 
+## Legacy vaults
 
-Alternatively, you can use this URL on the VFX explorer to get the live balance of any token as well as the balance owner's addresses / amounts.
+On a vault created before the attestation recording height, until the enforcement height, a withdrawal is completed by its requester after the request is mined:
 
+1. `POST PrepareCompleteWithdrawalRaw` (`OwnerAddress` = the requester, `SmartContractUID`, `WithdrawalRequestHash`) returns `SessionId`, `StartMessage`, `ShareDistributionMessage`, their timestamps, `InputCount` and `StartMessages` (one per Bitcoin input), plus the withdrawal's `Amount`, `BTCDestination` and `FeeRate` to confirm. `Unpayable: true` means the request can never be paid at its fee rate: cancel it.
+2. Sign every message in `StartMessages` and `ShareDistributionMessage`, and `POST ExecuteCompleteWithdrawalRaw` with `StartSignature`, `ShareDistributionSignature`, `StartSignatures` and the confirmed fields. The validators sign the Bitcoin transaction and the node returns `SignedBTCTxHex`.
+3. Broadcast `SignedBTCTxHex` to Bitcoin. If `CompleteAfterConfirmation` is `true`, wait for its first confirmation.
+4. Record the completion: `POST GetRawCompleteWithdrawalTxData` (`SmartContractUID`, `FromAddress`, `WithdrawalRequestHash`, `BTCTransactionHash`, `Amount`, `BTCDestination`), sign, and `POST SendRawCompleteWithdrawalTx` (type 28, no fee).
 
-```
-GET https://data.verifiedx.io/api/btc/vbtc/detail/{SC_UID}
-GET https://data-testnet.verifiedx.io/api/btc/vbtc/detail/{SC_UID} # for testnet
-```
+A cancel on a legacy vault is the same type 29 transaction, after which the vault's validators vote (type 30). From the enforcement height a legacy vault is frozen: transfers, withdrawals and cancels on it are refused, and types 28 and 30 are refused for every vault.
 
-Response:
+## V1 vBTC is retired
 
-```json
-{
-  "sc_identifier": "...",
-  "name": "Name Goes Here",
-  "description": "Description Goes Here",
-  "owner_address": "...",
-  "image_url": "https://vfx-resources.s3.amazonaws.com/defaultvBTC.gif",
-  "deposit_address": "3698tYZvbDhA5HWenS9n5BjsvM6q46fqqZ",
-  "public_key_proofs": "...",
-  "global_balance": 0.00178, // global balance of token
-  "addresses": {  // dictionary of addresses: balances
-    "RQKDU4UUCwbKXoydjknnH1y7Y3QYYHkvUz": 0.00178 
-  },
-  "smart_contract": {
-    "identifier": "...",
-    "name": "Name Goes Here",
-    "description": "Description Goes Here",
-    "minter_address": "...",
-    "owner_address": "...",
-    "minter_name": "...",
-    "smart_contract_data": "...",
-    "primary_asset_name": "vBTC Token",
-    "primary_asset_size": 6778,
-    "minted_at": "2025-01-15T17:13:40Z",
-    "mint_transaction": "...",
-    "burn_transaction": null,
-    "is_burned": false,
-    "data": "...",
-    "asset_urls": {},
-    "is_listed": false
-  },
-  "created_at": "2025-01-15T17:13:40Z"
-}
-```
-
-
-
-## Transferring vBTC (with Multiple Inputs)
-
-This enables the ability to create a raw transaction for a vBTC transfer from multiple inputs
-
-> You must build this transaction in the same steps as any raw transaction (timestamp, nonce, fee, signature, etc.)
-
-
-### Generate message
-
-First you must generate a random string that is 12 characters long using only letters (uppercase and/or lowercase) and numbers (alpha numeric). This will be used in the data payload and signed for each input.
-
-For each input your will sign a message using this random string as part of the message. The message will consist of that random string contcatinated with the to address and the input's from address like so:
-
-`"RANDOM_STRING" + "TO_ADDRESS" + "INPUT_FROM_ADDRESS"`
-
-### TX Details
-
-> The transaction type to use is `18`
-
-> The too address of the transaction is the VFX address the transfer is going to
-
-> The data for the tx is explained below
-
-### TX Data
-
-```json
-{
-  "Function": "TransferCoinMulti()",
-    "Inputs": [
-      {
-        "SCUID": "", //the vBTC token's smart contract identifier,
-        "FromAddress": "", // the VFX address the input will be taken from
-        "Amount": 0.05, // the amount of vBTC to be used as an input
-        "Signature": "", //Sign the generated message (prev random string + to_address + from_address) with the holders keypair
-      },
-      ... // repeat for as many inputs as needed
-    ],
-    "Amount": 0.1, // Total amount (sum of all inputs)
-    "SignatureInput": "", // The generated message created above
-}
-```
-
-
+The raw V1 flow (`btcapi/BTCV2/GetTokenizationDetails`, `TokenizeBitcoin`, `WithdrawalCoinRawTX`, transaction types 17 to 21) was retired at block 7,400,500 on mainnet. The network no longer accepts V1 tokens, transfers or withdrawals, and V1 balances are frozen as they stand.
