@@ -5,7 +5,7 @@ sidebar_class_name: sidebar-btc
 
 # Web API: BTC
 
-The BTC API provides endpoints for Bitcoin-related functionality including address information, VBTC (VFX Bitcoin Token) management, and cross-chain operations.
+The BTC API of the VerifiedX explorer provides Bitcoin address information and vBTC (Verified Bitcoin) vault data.
 
 ## Base URL
 ```
@@ -183,6 +183,106 @@ Returns the default base64 image data for VBTC tokens.
 }
 ```
 
+## vBTC V2
+
+The `/api/btc/vbtc/` routes above list V1 vBTC tokens, which were retired at block 7,400,500 on mainnet. vBTC V2 vaults are under `/api/btc/vbtc-v2/`. The explorer indexes them from the chain; for a withdrawal's live state, read the node (see below).
+
+:::note
+These routes and fields are served by the testnet explorer now and by the mainnet explorer from the 9.0 release.
+:::
+
+### Attestation heights
+```http
+GET /api/btc/vbtc-v2/heights/
+```
+
+```json
+{ "record_height": 400, "enforcement_height": 401, "latest_block_height": 4217 }
+```
+
+From `record_height` a new vault is watched; from `enforcement_height` older vaults are frozen. A height is `null` while Core has not set it.
+
+### List vaults
+```http
+GET /api/btc/vbtc-v2/
+GET /api/btc/vbtc-v2/{vfx_address}/
+```
+
+All vaults, or those an address owns or has sent or received vBTC on, as `{"results": [...]}`.
+
+### Vault details
+```http
+GET /api/btc/vbtc-v2/detail/{sc_identifier}/
+```
+
+```json
+{
+  "sc_identifier": "<contract UID>",
+  "name": "Treasury vault",
+  "description": "",
+  "owner_address": "<owner>",
+  "pending_owner_address": null,
+  "is_watched": true,
+  "image_url": "…",
+  "deposit_address": "bc1p…",
+  "frost_group_public_key": "03…",
+  "required_threshold": 51,
+  "proof_block_height": 2839,
+  "global_balance": "0.0001",
+  "total_received": "…",
+  "total_sent": "…",
+  "tx_count": 1,
+  "is_pending_withdrawal": false,
+  "addresses": { "<owner>": "0.00007", "<holder>": "0.00003" },
+  "available_balances": { "<owner>": "0.00007", "<holder>": "0.00003" },
+  "nft": { "…": "…" },
+  "withdrawal_requests": [ ],
+  "created_at": "2026-10-23T13:01:20Z"
+}
+```
+
+- `is_watched`: the vault was created from the recording height, and the chain records its Bitcoin. A watched vault's backing is `global_balance`, read from the chain; `total_received` and `total_sent` come from Bitcoin providers and are kept up to date only for vaults the chain does not watch.
+- `addresses` is each address's gross vBTC on the vault; `available_balances` nets out its open withdrawals and is what a wallet should size sends from.
+- `pending_owner_address`: a reserve owner's ownership transfer that takes effect at its unlock.
+
+### Transfers and withdrawals of a vault
+```http
+GET /api/btc/vbtc-v2/transfers/{sc_identifier}/
+GET /api/btc/vbtc-v2/withdrawals/{sc_identifier}/
+```
+
+A withdrawal row (one per vault share of a request):
+
+```json
+{
+  "requestor_address": "<requester>",
+  "btc_address": "bc1q…",
+  "amount": "0.00002",
+  "fee_rate": 3,
+  "btc_transaction_hash": "c314d462…",
+  "status": "completed",
+  "request_transaction_hash": "<request hash>",
+  "completion_transaction_hash": null,
+  "pin_state": null,
+  "pin_txid": null,
+  "pin_fee_rate": null,
+  "releasing": null,
+  "expires_at_height": null,
+  "closed_because": null,
+  "refunded_amount": null
+}
+```
+
+- `status` is `requested`, `pending_btc`, `completed`, `cancellation_requested` or `cancelled`. A watched vault's withdrawal goes from `requested` to `completed` (paid, with the paying `btc_transaction_hash`) or `cancelled`.
+- `closed_because` says why a `cancelled` row closed without payment: `Cancelled`, `Released`, `Expired` or `Void`. `refunded_amount` is set when less than the amount came back (a release keeps its Bitcoin fee).
+- While a watched vault's withdrawal is open, `pin_state` is `Waiting` or `Pinned`, with the newest pin's `pin_txid` and `pin_fee_rate`, `releasing`, and `expires_at_height` while it waits.
+
+:::caution Follow open withdrawals through the node
+The node reports a withdrawal's pin in the block that mines the request. The explorer reads it later, after a following Bitcoin report, so `pin_state` and `pin_txid` can be empty while a withdrawal is already pinned. Integrators should follow open withdrawals with the node's `GetWithdrawalPin` and `GetWithdrawalRequestShares` routes ([vBTC](/docs/integration/vbtc#follow-a-withdrawal)).
+:::
+
+The `/api/btc/vbtc-v2/…/prepare/` and `…/send/` routes forward raw builds and signed submissions to a node's `vbtcapi/VBTC` raw routes. They take snake-case fields (for a withdrawal request `sc_identifier`, `requestor_address`, `btc_address`, `amount`, `fee_rate`; for a send `hash`, `signature`, `public_key`) and answer with the node's answer and `success`, or with `success: false`, `message` and the node's answer under `raw`. The steps and checks are those of [vBTC Raw Integration](/docs/integration/vbtc-raw). The explorer has no route for the multi-vault withdrawal or for a fee raise or release; send those to a node.
+
 ## Field Descriptions
 
 ### Bitcoin Address Data
@@ -200,7 +300,7 @@ Returns the default base64 image data for VBTC tokens.
 
 ## Notes
 
-- VBTC tokens represent Bitcoin locked in the VFX ecosystem
+- vBTC is Bitcoin held one to one in vaults whose keys are split among VerifiedX validators
 - Bitcoin amounts are typically represented as strings to preserve precision
 - UTXOs (Unspent Transaction Outputs) are used for Bitcoin transaction construction
 - All endpoints support caching for improved performance
