@@ -23,7 +23,7 @@ vBTC transforms Bitcoin from a passive store of value into a trustless, programm
 - **Trustless by Design:** No centralized custodian or discretionary minting authority. Rules-based issuance.
 - **Non-Synthetic Bitcoin:** Not a derivative. No rehypothecation or balance-sheet exposure. Direct, provable ownership.
 - **1:1 Bitcoin Backing:** Deterministic mint, burn, and redemption.
-- **On-Chain Verifiability:** Supply and settlement are auditable on-chain. No reliance on off-chain attestations.
+- **On-Chain Verifiability:** Supply and settlement are auditable on-chain. Validators attest each vault's Bitcoin to the chain, so balances do not rest on an off-chain report.
 
 ---
 
@@ -45,7 +45,7 @@ vBTC transforms Bitcoin from a passive store of value into a trustless, programm
 
 ### True Native Bitcoin DeFi
 
-- **No Bridge Risk:** No multi-sig bridges or validator-controlled assets.
+- **No Bridge Risk:** No multi-sig bridge and no single custodian: each vault's Bitcoin key exists only in shares among validators, and the chain records each vault's Bitcoin.
 - **Bitcoin-First Architecture:** Bitcoin is the asset of record, not a secondary token.
 - **Institutional-Grade:** Bank-adjacent (not grey market). Suitable for collateral and clearing.
 
@@ -84,6 +84,7 @@ vBTC transforms Bitcoin from a passive store of value into a trustless, programm
 - [vBTC Core](/docs/core/vbtc)
 - [vBTC GUI](/docs/gui/gui-vbtc)
 - [vBTC Integration](/docs/integration/vbtc)
+- [vBTC Raw Integration](/docs/integration/vbtc-raw)
 
 ### Solutions
 
