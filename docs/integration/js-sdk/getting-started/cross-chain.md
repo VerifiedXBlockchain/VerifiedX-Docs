@@ -653,6 +653,6 @@ Now that you understand cross-chain integration:
 
 1. **Build Advanced Apps**: Explore [Complete Applications](../examples/applications.md)
 2. **See More Examples**: Check out [Code Snippets](../examples/snippets.md)
-3. **API Deep Dive**: Study the [API References](../api/)
+3. **API Deep Dive**: Study the [API References](../api/vfx-client)
 
 Cross-chain development opens up exciting possibilities. Start building the future of decentralized finance!
