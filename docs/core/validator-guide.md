@@ -409,4 +409,4 @@ After any restart, confirm the validator is still active (`/val`) and reactivate
 | Snapshot | `?network=mainnet` | `?network=testnet` |
 | Explorer | [spyglass.verifiedx.io](https://spyglass.verifiedx.io) | [spyglass-testnet.verifiedx.io](https://spyglass-testnet.verifiedx.io) |
 | Getting funds | 5,000 VFX from your wallet | [Faucet](https://spyglass-testnet.verifiedx.io/faucet) |
-| Validator bond from block | not set yet | `1171999` |
+| Validator bond from block | `7568349` | `399` |
