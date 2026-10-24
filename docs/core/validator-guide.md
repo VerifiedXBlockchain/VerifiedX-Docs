@@ -14,7 +14,7 @@ Callouts like this one mark what changes when targeting **testnet** instead of m
 
 ## What you'll need
 
-- **5,000 VFX.** From the validator bond height (`ValidatorBondHeight`; block 399 on testnet since its October 2026 restart, set at the 9.0 release on mainnet), the 5,000 VFX is bonded: it cannot be sent while you are a registered validator, and it unlocks 1,200 blocks after your validator exit transaction is mined (see [Stopping and updating](#10-stopping-and-updating)). Anything above 5,000 VFX stays spendable. There is no penalty. Before that height your VFX stays fully liquid. Send 5,001 VFX so a transaction fee never dips you below the 5,000 floor.
+- **5,000 VFX.** From the validator bond height (`ValidatorBondHeight`; block 7,568,349 on mainnet; block 399 on testnet since its October 2026 restart), the 5,000 VFX is bonded: it cannot be sent while you are a registered validator, and it unlocks 1,200 blocks after your validator exit transaction is mined (see [Stopping and updating](#10-stopping-and-updating)). Anything above 5,000 VFX stays spendable. There is no penalty. Before that height your VFX stays fully liquid. Send 5,001 VFX so a transaction fee never dips you below the 5,000 floor.
 - **A server.** Ubuntu 22.04 LTS, 2 vCPU, 4 GB RAM, 40 GB+ SSD, with a static public IP. Both x64 and ARM64 work. The mainnet chain is roughly 15 GB as of mid-2026 and growing, so leave disk headroom.
 - **Open ports.** See the table below.
 - **A wallet holding your VFX** (for example [Switchblade](../gui/gui-installation)) to fund the validator address from.

@@ -24,7 +24,7 @@ From Core 9.0 the network itself records each vault's Bitcoin. Validators report
 - **Vaults keep their keys alive.** When too many holders of a vault's key have left the validator set, the validators make a new key for it (type 46) and the vault's coins are moved to the new key while the old one can still sign.
 - **Bitcoin reorganisations are followed.** If Bitcoin reorganises below reported events, they are taken back (type 45).
 
-Vaults created before the recording height (**legacy** vaults) keep the earlier way of working until the enforcement height, and are frozen from then on. Their holders should move to a new vault or withdraw before that height. On mainnet both heights are set at the 9.0 release; on testnet they are 400 and 401.
+Vaults created before the recording height (**legacy** vaults) keep the earlier way of working until the enforcement height, and are frozen from then on. Their holders should move to a new vault or withdraw before that height. On mainnet they are 7,568,350 and 7,658,350; on testnet they are 400 and 401.
 
 ## S3C vaults
 

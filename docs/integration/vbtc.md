@@ -36,8 +36,8 @@ Every route that describes a vault says which kind it is: `Attested` (watched), 
 | Node API | `http://localhost:7292` | `http://localhost:17292` (start the node with `testnet`) |
 | Bitcoin network | Bitcoin mainnet | The VerifiedX signet, a private Bitcoin signet: explorer `https://signet.verifiedx.io`, Esplora API `https://signet.verifiedx.io/api`, 10-minute blocks, `tb1…` addresses. There is no public faucet; ask the VerifiedX team in the Discord for test BTC |
 | Bitcoin confirmations before a vault event counts | 6 blocks on top of the block that holds it | 3 blocks on top |
-| Attestation recording height (vaults created from here are watched) | Set at the 9.0 release | 400 |
-| Attestation enforcement height (legacy vaults frozen) | Set at the 9.0 release, about two weeks after the recording height | 401 |
+| Attestation recording height (vaults created from here are watched) | 7,568,350 | 400 |
+| Attestation enforcement height (legacy vaults frozen) | 7,658,350 (recording height + 90,000, about 12 days) | 401 |
 
 The testnet restarted from genesis on 22 October 2026 when it moved to the VerifiedX signet, so every testnet vault is watched. `GET /vbtcapi/VBTC/GetBitcoinAttestationStatus` returns the heights a node is running with (see [Attestation status](#attestation-status)).
 
