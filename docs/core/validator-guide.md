@@ -360,6 +360,8 @@ curl -s -H "apitoken: YOUR_API_TOKEN" http://localhost:7292/vbtcapi/VBTC/GetVali
 
 `Bond.Bonded`, `Bond.Spendable`, `Bond.ExitHeight` and `Bond.UnlocksAtHeight` show whether the stake is locked, what you can send now, and when it frees. `Bond.RuleActive` is `false` before the bond height.
 
+**Core 9.0.1** must be running before block 7,575,250 on mainnet (block 7,400 on testnet), where it turns on the ledger rules Core 9.0 shipped switched off (see [Core 9.0.1 ledger rules](../integration/transaction-creation.md#core-901-ledger-rules)). From that height a block producer's VRF is seeded from its epoch's anchor block, 100 blocks below the epoch's first height, and epochs are 8,640 blocks. A validator registered after an epoch's anchor produces from the next epoch, so a newly registered validator can wait up to one epoch and 100 blocks (about 30 hours at 12 seconds a block) before it produces.
+
 **Update the node** with a build-then-swap, so a broken build can never take your validator down:
 
 ```bash
