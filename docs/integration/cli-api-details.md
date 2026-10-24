@@ -391,6 +391,8 @@ This document provides comprehensive documentation for all API endpoints in the 
 - `name` (string, path) - ADNR name  
 **Returns:** ADNR creation result
 
+From the BTC-name signer height (block 7,575,250 on mainnet, block 7,400 on testnet, from Core 9.0.1), the node signs `<unix seconds>:<address>:<name>.btc` with the key of `btcAddress`, which must be in this wallet with the wallet unlocked. The signature is valid for 30 minutes. Pass `name` without `.btc`.
+
 #### GET `/SignAdnrTransferAcceptance/{btcAddress}/{name}/{newOwner}`
 **Summary:** Sign, as the receiver, that a `.btc` name may be transferred to one of this wallet's Bitcoin addresses for a VFX owner  
 **Parameters:**
@@ -409,7 +411,7 @@ This document provides comprehensive documentation for all API endpoints in the 
 - `btcToSignature` (string, query, optional) - The receiver's acceptance signature over `btcToMessage`  
 **Returns:** Transfer result
 
-From the BTC-name signer height (`BtcNameSignerOwnsAddressHeight`), a transfer must carry the receiving Bitcoin address's signed acceptance of the name for the new owner. The height is set in Core 9.0 but not yet active on testnet or mainnet; before it, the two query parameters are ignored.
+From the BTC-name signer height (`BtcNameSignerOwnsAddressHeight`: block 7,575,250 on mainnet, block 7,400 on testnet, from Core 9.0.1), a transfer must carry the receiving Bitcoin address's signed acceptance of the name for the new owner. Before it, the two query parameters are ignored.
 
 - **Same wallet:** when the key for `btcToAddress` is in this wallet, leave both parameters out. The node signs the acceptance itself.
 - **Cross-wallet:** the receiver calls `SignAdnrTransferAcceptance` on their own node and sends the sender the message and signature. The sender passes both, URL-encoded, as `btcToMessage` and `btcToSignature`. The SwitchBlade wallet carries the pair as one copyable acceptance code, `<message>|<signature>`.

@@ -9,6 +9,28 @@ sidebar_position: 4
 
 The purpose of this document is to teach you how to create a transaction and sign the transaction to then broadcast over the VFX network. Please note with this process you are never needed to expose your private key to the wallet or anywhere outside your own building application. At the end of this document in the extra section is how you can send a TX if your private key is associated with a wallet.
 
+## Core 9.0.1 ledger rules
+
+Core 9.0 shipped a batch of ledger and consensus rules switched off. Core 9.0.1 turns them on at one height (`LedgerRulesBatchHeight`): block **7,575,250** on mainnet and block **7,400** on testnet. Every validator and caster must run Core 9.0.1 before that height. What changes for integrators from that height:
+
+- **`.btc` name create:** signed by the key of the Bitcoin address the name points at. The signed message is `<unix seconds>:<VFX owner>:<name>.btc` and is valid for 30 minutes. The name is sent without `.btc`. See [VFX Domain Services](../core/domains.md#creating-a-btc-name).
+- **`.btc` name transfer:** carries the receiving Bitcoin key's acceptance, `<unix seconds>:<new VFX owner>:<name>.btc`, valid for 24 hours. See [`TransferAdnr`](./cli-api-details.md#adnr-management).
+- **`.vfx` names (`AdnrCreate()`):** lowercase letters, digits and `-`, 1 to 65 characters, sent with no suffix. A label whose legacy `.rbx` name exists cannot be taken.
+- **Token mints (`TokenMint()`):** refused on a paused contract, with more decimal places than the token's `DecimalPlaces`, or when the supply or the holder's balance would overflow. One mint per contract per block.
+- **NFT `Update()`, `Transfer()`, `Burn()`, `Evolve()`, `Devolve()` and `ChangeEvolveStateSpecific()`:** `Data` must be in the array form. A single object, which used to be mined with no effect, is refused.
+- **Evolve:** `Evolve()`, `Devolve()` and `ChangeEvolveStateSpecific()` only apply to a contract with the Evolving feature, and carry a body that keeps it.
+- **Contract moves:** a block moves a contract (`Transfer()` or `Burn()`) at most once.
+- **Vote topics (`VOTE_TOPIC`):** the function is `TopicAdd()` only. The chain sets the new topic's owner, tally, creation time and validator count; values sent for them are not used.
+- **`DecShopCreate()`:** the shop's owner is the transaction's sender.
+- **`TokenContractOwnerChange()`:** the new owner is the transaction's recipient (`ToAddress`).
+- **Fee:** below 1 VFX (private transactions hash differently and are exempt).
+- **Fractional amounts:** a transaction with a non-whole `Amount` must hash with that amount. A signature over a hash made with `0` is refused.
+- **Recipient network:** `ToAddress` carries this network's version byte. A testnet address on mainnet, or the reverse, is refused (nodes already refuse it at admission).
+- **Block producers (VRF seed):** a producer's VRF is seeded from its epoch's anchor block, 100 blocks below the epoch's first height, not from the parent block's hash. Epochs are 8,640 blocks counted from the activation height. A validator registered after an epoch's anchor produces from the next epoch.
+- **Block size:** at most 3,000 transactions per block, the coinbase included.
+
+The same height also turns on: a reserve's `Recover()` reading every pending row; no `Amount` on a reserve transaction other than a transfer; each key named once in a contract-call vBTC V2 transfer's `Data`; the replay guard kept by block time; token transfers that credit the recipient before debiting the sender; one `.btc` name per Bitcoin address, with delete and transfer acting only on the sender's own record; `TopicAdd()` judged only on state every node holds; shields that carry no nullifier; and the signer-age rule for the Bitcoin-report signer set.
+
 ## How to create an VFX Transaction
 
 To first create a transaction you must understand how the transaction class is made. Below is the class in its full form and the enums associated with it.
