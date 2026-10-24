@@ -1,15 +1,16 @@
 # BtcClient API Reference
 
-The `BtcClient` provides comprehensive Bitcoin functionality including wallet management, transactions, and mempool interactions through the Mempool.space API.
+The `BtcClient` provides Bitcoin wallet management, transactions and fee information through a mempool.space-style (Esplora) API: mempool.space for mainnet, and the VerifiedX signet's API for testnet.
 
 ## Constructor
 
-### `new btc.BtcClient(network)`
+### `new btc.BtcClient(network, options?)`
 
 Creates a new BtcClient instance.
 
 **Parameters:**
-- `network` ('mainnet' | 'testnet'): The Bitcoin network to connect to
+- `network` ('mainnet' | 'testnet'): The Bitcoin network to connect to. `'testnet'` is the Bitcoin network the VerifiedX testnet follows: the VerifiedX signet.
+- `options` (optional): `{ dryRun?: boolean, apiBaseUrl?: string }`. `apiBaseUrl` overrides the Esplora API origin, including `/api`. Defaults: `https://mempool.space/api` on mainnet; on testnet `https://signet.verifiedx.io/api` from SDK 3.7.0. SDK 3.6.0 and earlier default testnet to Bitcoin testnet4, which the VerifiedX testnet no longer uses: pass `{ apiBaseUrl: 'https://signet.verifiedx.io/api' }` with those versions.
 
 **Example:**
 ```typescript
@@ -17,6 +18,9 @@ import { btc } from 'vfx-web-sdk';
 
 const client = new btc.BtcClient('testnet');
 const mainnetClient = new btc.BtcClient('mainnet');
+
+// SDK 3.6.0 and earlier: point testnet at the VerifiedX signet
+const signetClient = new btc.BtcClient('testnet', { apiBaseUrl: 'https://signet.verifiedx.io/api' });
 ```
 
 ## Wallet Generation
@@ -486,7 +490,7 @@ try {
 ### Performance
 - **Cache fee rates**: Don't fetch fees for every transaction
 - **Batch address lookups**: Group multiple address queries when possible
-- **Handle rate limits**: Mempool.space API has rate limiting
+- **Handle rate limits**: the mempool.space API has rate limiting
 
 ### Address Types
 - **Use bech32 for new applications**: Lower fees and better support
@@ -504,7 +508,7 @@ const SATOSHI_TO_BTC_MULTIPLIER = 0.00000001;
 ### Networks
 The client automatically configures the correct Bitcoin network based on the constructor parameter:
 - `'mainnet'`: Bitcoin mainnet
-- `'testnet'`: Bitcoin testnet
+- `'testnet'`: the VerifiedX signet, a private Bitcoin signet with 10-minute blocks and `tb1…` addresses (explorer `https://signet.verifiedx.io`). There is no public faucet; ask the VerifiedX team for test BTC.
 
 ## Examples
 

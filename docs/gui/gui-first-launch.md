@@ -20,7 +20,7 @@ When you launch VerifiedX Switchblade for the first time, follow these steps to 
 3. **Sync Completion**:
    - Allow the wallet to finish syncing with the blockchain. Depending on your internet connection, this may take several minutes.
 
-For any issues, consult the [troubleshooting section](/gui/gui-trouble-shooting) or connect with our support team on [Discord](https://discord.gg/7cd5ebDQCj).
+For any issues, consult the [troubleshooting section](/docs/gui/gui-trouble-shooting) or ask the VerifiedX support team on [Discord](https://discord.gg/7cd5ebDQCj).
 
 
 

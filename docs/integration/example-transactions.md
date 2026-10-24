@@ -244,6 +244,8 @@ null
 
 ## VBTC
 
+These are V1 vBTC transactions (types 17 to 21), mined before V1 vBTC was retired at block 7,400,500. The network no longer accepts them; they are kept to help decode history.
+
 ### VBTC Deploy
 
 **Transaction Hash:** `e6a91c9ff6267bc63b449c34a10e4c75230187597efd0bcc489331f682f9f574`

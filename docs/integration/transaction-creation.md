@@ -59,40 +59,73 @@ public class Transaction {
 - **Data** - This is the associated tx data for when a transaction is more than just a basic transfer of VFX (ex: NFTs, ADNRs, etc.). This can be left as _null_ if performing a basic VFX tx.
 - **Signature** - This is an ECDSA Signature where the message is always the Hash of the transaction.
 - **Height** - This is the block height a TX is associated with once crafted. This is auto populated and can be left as 0 when creating a TX.
-- **TransactionType** - This is from the enum above. If you are performing a basic TX then you would choose TransactionType.TX or 0.
+- **TransactionType** - This is from the enum below. If you are performing a basic TX then you would choose TransactionType.TX or 0.
 - **TransactionRating** - This is auto filled through TX Verify and can be left _null._
 - **TransactionStatus** - This needs to be defaulted to 1.
 
+The enums below match `VerifiedXCore/Models/Transaction.cs` in Core 9.0. Types 43, 45 and 46 are created by the validators and have no sender (`From` and `To` are `BTC_Attestation`, with no amount and no fee), so a client never builds them; it may still see them in blocks and transaction lists. Type 44 is an ordinary transaction signed by the withdrawal's requester.
+
 ```csharp
- public enum TransactionType{
-    TX,
-    NODE,
-    NFT_MINT, //mint
-    NFT_TX, //transfer or other process (not for sale or burn)
-    NFT_BURN,//burn nft
-    NFT_SALE,//sale NFT
-    ADNR, //address dnr
-    DSTR, //DST shop registration
-    VOTE_TOPIC, //voting topic for validators to vote on
-    VOTE, //cast vote for topic
-    RESERVE, //create a reserve TX
-    SC_MINT, //standard sc mint
-    SC_TX, //standard sc tx
-    SC_BURN, //standard sc burn
-    FTKN_MINT, //fungible token mint
-    FTKN_TX, //fungible token tx
-    FTKN_BURN, //fungible token burn
-    TKNZ_MINT,//tokenization token mint
-    TKNZ_TX, //tokenization token tx
-    TKNZ_BURN, //tokenization token burn
-    TKNZ_WD_ARB,
-    TKNZ_WD_OWNER
+ public enum TransactionType
+{
+    TX = 0,
+    NODE = 1,
+    NFT_MINT = 2, //mint
+    NFT_TX = 3, //transfer or other process (not for sale or burn)
+    NFT_BURN = 4, //burn nft
+    NFT_SALE = 5, //sale NFT
+    ADNR = 6, //address dnr
+    DSTR = 7, //DST shop registration
+    VOTE_TOPIC = 8, //voting topic for validators to vote on
+    VOTE = 9, //cast vote for topic
+    RESERVE = 10, //create a reserve TX
+    SC_MINT = 11, //standard sc mint
+    SC_TX = 12, //standard sc tx
+    SC_BURN = 13, //standard sc burn
+    FTKN_MINT = 14, //fungible token mint
+    FTKN_TX = 15, //fungible token tx
+    FTKN_BURN = 16, //fungible token burn
+    TKNZ_MINT = 17, //tokenization token mint
+    TKNZ_TX = 18, //tokenization token tx
+    TKNZ_BURN = 19, //tokenization token burn
+    TKNZ_WD_ARB = 20,
+    TKNZ_WD_OWNER = 21,
+    VBTC_V2_VALIDATOR_REGISTER = 22, //validator registers for vBTC v2
+    VBTC_V2_VALIDATOR_HEARTBEAT = 23, //validator heartbeat
+    VBTC_V2_VALIDATOR_EXIT = 24, //validator exits the vBTC v2 pool
+    VBTC_V2_CONTRACT_CREATE = 25, //create a vBTC v2 contract
+    VBTC_V2_TRANSFER = 26, //transfer vBTC v2 tokens
+    VBTC_V2_WITHDRAWAL_REQUEST = 27, //request a withdrawal to BTC
+    VBTC_V2_WITHDRAWAL_COMPLETE = 28, //complete a withdrawal
+    VBTC_V2_WITHDRAWAL_CANCEL = 29, //request a cancellation
+    VBTC_V2_WITHDRAWAL_VOTE = 30, //validator votes on a cancellation
+    VFX_SHIELD = 31,
+    VFX_UNSHIELD = 32,
+    VFX_PRIVATE_TRANSFER = 33,
+    VBTC_V2_SHIELD = 34,
+    VBTC_V2_UNSHIELD = 35,
+    VBTC_V2_PRIVATE_TRANSFER = 36,
+    VBTC_V2_BRIDGE_LOCK = 37, //lock vBTC for bridging to Base
+    VBTC_V2_BRIDGE_UNLOCK = 38, //unlock vBTC after a burn on Base (legacy, single lock)
+    VBTC_V2_BRIDGE_POOL_UNLOCK = 39, //pool unlock: credit vBTC from several locks to a VFX address
+    VBTC_V2_BRIDGE_EXIT_TO_BTC = 40, //Base burn for a BTC exit: records the withdrawal on VFX
+    VBTC_V2_BRIDGE_EXIT_TO_BTC_COMPLETE = 41, //after the BTC broadcast
+    VBTC_V2_BRIDGE_EXIT_TO_BTC_FAIL = 42, //FROST failed for some locks: reverse and retry
+    VBTC_V2_BTC_REPORT = 43, //Bitcoin headers and the vault transactions of one Bitcoin block (validators, sender-less)
+    VBTC_V2_COIN_PIN = 44, //the requester re-pins its withdrawal at a higher Bitcoin fee rate (fee bump; watched vaults)
+    VBTC_V2_BTC_REORG = 45, //Bitcoin reorganised below reported events: they are taken back (validators, sender-less)
+    VBTC_V2_VAULT_REKEY = 46 //a vault's key is replaced by one the current validators made (validators, sender-less)
 }
 
 public enum TransactionStatus {
    Pending,
    Success,
-   Failed
+   Failed,
+   Reserved,
+   CalledBack,
+   Recovered,
+   ReplacedByFee,
+   Invalid = 999
 }
 
 public enum TransactionRating {

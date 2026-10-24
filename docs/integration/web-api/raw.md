@@ -200,6 +200,10 @@ POST /api/raw/withdraw-vbtc/
 
 Body: the pre-signed withdrawal payload accepted by the node's `btcapi/BTCV2/WithdrawalCoinRawTX` endpoint.
 
+:::caution
+This is a V1 vBTC withdrawal. V1 vBTC was retired at block 7,400,500 on mainnet (from block 1 on the testnet since its October 2026 restart), and the network refuses V1 withdrawals from that height. For vBTC V2 withdrawals see [vBTC Raw Integration](/docs/integration/vbtc-raw).
+:::
+
 **Response:**
 ```json
 {"success": true, "result": { "...": "node response" }}

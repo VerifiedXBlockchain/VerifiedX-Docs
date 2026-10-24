@@ -14,7 +14,7 @@ Callouts like this one mark what changes when targeting **testnet** instead of m
 
 ## What you'll need
 
-- **5,000 VFX.** Your VFX stays fully liquid — there is no lockup and no penalty; you can stop validating and transact with your funds at any time. We recommend sending 5,001 VFX so a transaction fee never dips you below the 5,000 floor.
+- **5,000 VFX.** From the validator bond height (`ValidatorBondHeight`; block 7,568,349 on mainnet; block 399 on testnet since its October 2026 restart), the 5,000 VFX is bonded: it cannot be sent while you are a registered validator, and it unlocks 1,200 blocks after your validator exit transaction is mined (see [Stopping and updating](#10-stopping-and-updating)). Anything above 5,000 VFX stays spendable. There is no penalty. Before that height your VFX stays fully liquid. Send 5,001 VFX so a transaction fee never dips you below the 5,000 floor.
 - **A server.** Ubuntu 22.04 LTS, 2 vCPU, 4 GB RAM, 40 GB+ SSD, with a static public IP. Both x64 and ARM64 work. The mainnet chain is roughly 15 GB as of mid-2026 and growing, so leave disk headroom.
 - **Open ports.** See the table below.
 - **A wallet holding your VFX** (for example [Switchblade](../gui/gui-installation)) to fund the validator address from.
@@ -108,6 +108,10 @@ dotnet publish -c Release -r linux-arm64 --self-contained false --output ./publi
 
 The node now lives at `~/vfx-cli/published/ReserveBlockCore.dll`.
 
+The publish also copies the native FROST and PLONK libraries for your architecture next to the node. On `linux-arm64` it takes the arm64 builds of both. Before 9.0, an arm64 publish shipped the x86-64 PLONK library, so publish 9.0 fresh rather than reusing an older output folder. The FROST library is pinned to version `0.2.0-frost-real`. A node that loads any other version fails its startup check and stays out of vBTC key ceremonies and signings, so never copy native libraries in from another release.
+
+On first start the node downloads the PLONK parameters file, `vfx_plonk_v4.params` (about 400 MB), into `PlonkParams` in the data directory (`PlonkParamsTestNet` on testnet), and checks its SHA-256 before using it. Leave room and time for it. To use a copy you already have, set `VFX_PLONK_PARAMS_PATH` to its full path. A file that doesn't match the pinned hash is ignored and the published one is downloaded instead.
+
 :::note Testnet
 Check out the `testnet` branch instead of `main`.
 :::
@@ -155,6 +159,8 @@ What the startup flags do:
 - `enableapi` — turns on the local wallet API on port `7292`. It is off by default, and this guide relies on it.
 - `openapi` — binds the API on all interfaces instead of localhost only. With `7292` closed in your firewall this changes nothing day to day, but it lets you open the port later for remote management without restarting the node. Drop it if you will only ever call the API from the server itself.
 - `apitoken=...` — requires the `apitoken` header on every API call.
+
+From Core 9.0 the values of `apitoken=` and `encpass=` are taken exactly as you type them: mixed case is kept, and so is any `=` inside the value (`apitoken=AbC123==` gives the token `AbC123==`). Earlier releases lowercased them and cut them at a second `=`. If you started an older node with a mixed-case or `=`-containing token, your API calls must now send the token exactly as given. A token from `openssl rand -hex 16` is lowercase with no `=`, so nothing changes for it.
 
 Attach to watch the console, and detach again with `Ctrl+A` then `D` — do **not** press `Ctrl+C`, that kills the node:
 
@@ -331,10 +337,28 @@ The CLI continuously self-checks its validator ports. If your node becomes unrea
 
 ## 10. Stopping and updating
 
-**Stop validating** — your funds stay liquid and are spendable immediately:
+**Stop validating:**
 
 - Console: type `11` (stop masternode), or
 - API: `curl -s -H "apitoken: YOUR_API_TOKEN" http://localhost:7292/api/V1/TurnOffValidator/YOUR_VFX_ADDRESS`
+
+From the validator bond height, both send the validator exit transaction before the node stops, and print whether it was sent. The validator stops counting on chain at once, and its 5,000 VFX stake unlocks 1,200 blocks (about four hours at 12 seconds a block) after the exit is mined. Before the bond height no stake is locked and no exit is sent: your funds are spendable immediately.
+
+Going quiet unlocks nothing. A validator whose node is down or unreachable stays bonded until an exit is mined. To exit an address this wallet holds, whether or not the node is validating with it:
+
+```bash
+curl -s -X POST -H "apitoken: YOUR_API_TOKEN" http://localhost:7292/vbtcapi/VBTC/ExitValidator/YOUR_VFX_ADDRESS
+```
+
+The response carries `ExitTxHash` and the bond. A registration or heartbeat mined during the wait, for example from restarting validation, resumes the bond. If the validator holds key shares of vBTC vaults, keep its node and key shares after the exit: those vaults' withdrawals still need its signature.
+
+Check a bond at any time, for any address:
+
+```bash
+curl -s -H "apitoken: YOUR_API_TOKEN" http://localhost:7292/vbtcapi/VBTC/GetValidatorBond/YOUR_VFX_ADDRESS
+```
+
+`Bond.Bonded`, `Bond.Spendable`, `Bond.ExitHeight` and `Bond.UnlocksAtHeight` show whether the stake is locked, what you can send now, and when it frees. `Bond.RuleActive` is `false` before the bond height.
 
 **Update the node** with a build-then-swap, so a broken build can never take your validator down:
 
@@ -385,3 +409,4 @@ After any restart, confirm the validator is still active (`/val`) and reactivate
 | Snapshot | `?network=mainnet` | `?network=testnet` |
 | Explorer | [spyglass.verifiedx.io](https://spyglass.verifiedx.io) | [spyglass-testnet.verifiedx.io](https://spyglass-testnet.verifiedx.io) |
 | Getting funds | 5,000 VFX from your wallet | [Faucet](https://spyglass-testnet.verifiedx.io/faucet) |
+| Validator bond from block | not set yet | `1171999` |

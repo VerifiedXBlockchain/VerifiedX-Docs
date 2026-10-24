@@ -25,6 +25,8 @@ This document provides comprehensive documentation for all API endpoints in the 
 12. [Adjudicator API](#12-adjudicator-api) - `/adjapi/ADJV1`
 13. [Validator Node API](#13-validator-node-api) - `/valapi/Validator`
 14. [Integrations API](#14-integrations-api) - `/iapi/IntegrationsV1`
+15. [vBTC V2 API (9.0 additions)](#15-vbtc-v2-api-90-additions) - `/vbtcapi/VBTC`
+16. [Privacy API: raw shielded VFX (9.0 additions)](#16-privacy-api-raw-shielded-vfx-90-additions) - `/privacyapi/PrivacyV1`
 
 ---
 
@@ -389,13 +391,29 @@ This document provides comprehensive documentation for all API endpoints in the 
 - `name` (string, path) - ADNR name  
 **Returns:** ADNR creation result
 
-#### GET `/TransferAdnr/{toAddress}/{btcFromAddress}/{btcToAddress}`
+#### GET `/SignAdnrTransferAcceptance/{btcAddress}/{name}/{newOwner}`
+**Summary:** Sign, as the receiver, that a `.btc` name may be transferred to one of this wallet's Bitcoin addresses for a VFX owner  
+**Parameters:**
+- `btcAddress` (string, path) - This wallet's Bitcoin address that will receive the name; its key must be in this wallet and the wallet must be unlocked  
+- `name` (string, path) - The name, with or without `.btc`  
+- `newOwner` (string, path) - The VFX address that will own the name  
+**Returns:** `{"Success": true, "Message": "Signed.", "BTCToMessage": "...", "BTCToSignature": "..."}`. `BTCToMessage` is `<unix seconds>:<newOwner>:<name>.btc`, and `BTCToSignature` is the receiving Bitcoin key's signature of it. Give both to the sender for `TransferAdnr`. The acceptance is valid for 24 hours from its timestamp.
+
+#### GET `/TransferAdnr/{toAddress}/{btcFromAddress}/{btcToAddress}?btcToMessage={message}&btcToSignature={signature}`
 **Summary:** Transfer Bitcoin ADNR  
 **Parameters:**
 - `toAddress` (string, path) - Target VFX address  
 - `btcFromAddress` (string, path) - Source Bitcoin address  
 - `btcToAddress` (string, path) - Target Bitcoin address  
+- `btcToMessage` (string, query, optional) - The receiver's acceptance message, from `SignAdnrTransferAcceptance`  
+- `btcToSignature` (string, query, optional) - The receiver's acceptance signature over `btcToMessage`  
 **Returns:** Transfer result
+
+From the BTC-name signer height (`BtcNameSignerOwnsAddressHeight`), a transfer must carry the receiving Bitcoin address's signed acceptance of the name for the new owner. The height is set in Core 9.0 but not yet active on testnet or mainnet; before it, the two query parameters are ignored.
+
+- **Same wallet:** when the key for `btcToAddress` is in this wallet, leave both parameters out. The node signs the acceptance itself.
+- **Cross-wallet:** the receiver calls `SignAdnrTransferAcceptance` on their own node and sends the sender the message and signature. The sender passes both, URL-encoded, as `btcToMessage` and `btcToSignature`. The SwitchBlade wallet carries the pair as one copyable acceptance code, `<message>|<signature>`.
+- The transfer is refused if the acceptance names a different owner or name, is not signed by the key of `btcToAddress`, or is more than 24 hours old.
 
 #### GET `/DeleteAdnr/{btcFromAddress}`
 **Summary:** Delete Bitcoin ADNR  
@@ -404,6 +422,10 @@ This document provides comprehensive documentation for all API endpoints in the 
 **Returns:** Deletion result
 
 ### vBTC (Tokenized Bitcoin)
+
+:::caution V1 vBTC is retired
+These are the V1 vBTC routes. V1 was retired at block 7,400,500 on mainnet (block 1 on the testnet since its October 2026 restart): the network accepts no new V1 token, transfer or withdrawal, and V1 balances are frozen. vBTC V2 is under [`vbtcapi/VBTC`](#15-vbtc-v2-api-90-additions); see [vBTC](./vbtc.md).
+:::
 
 #### POST `/TokenizeBitcoin`
 **Summary:** Create vBTC tokens from Bitcoin  
@@ -1140,6 +1162,10 @@ This document provides comprehensive documentation for all API endpoints in the 
 **Summary:** Get comprehensive validator information  
 **Returns:** Validator network data
 
+#### GET `/ClearAttestationGuard`
+**Summary:** Localhost only. Forgets which block this caster signed at each height. The node keeps those claims on disk so a restart doesn't release them; this is the deliberate way to release a height that can never be certified with the block this node signed. Called from any other address it returns `401`  
+**Returns:** `{"Success": true, "ClaimsRemoved": 3}`
+
 ---
 
 ## 14. Integrations API
@@ -1159,6 +1185,209 @@ This document provides comprehensive documentation for all API endpoints in the 
 #### GET `/LastBlock`
 **Summary:** Get last block information  
 **Returns:** Most recent block data
+
+---
+
+## 15. vBTC V2 API (9.0 additions)
+**Base Routes:** `vbtcapi/VBTC`, `vbtcapi/VBTC/{somePassword?}`  
+**Controller:** VBTCController  
+
+This section covers the routes Core 9.0 adds to the vBTC V2 API: withdrawals from vaults the chain watches, the Bitcoin attestation reads, and the validator bond. The whole vault lifecycle (creation, deposits, transfers, ownership, withdrawals including the multi-vault withdrawal, legacy vaults and S3C) is documented with examples on the [vBTC](./vbtc.md) page, and the external-signer flow on [vBTC Raw Integration](./vbtc-raw.md).
+
+**Watched and legacy vaults.** From the Bitcoin attestation recording height (`BitcoinAttestationRecordHeight`; block 7,568,350 on mainnet; block 400 on testnet since its October 2026 restart), a newly created vault is *watched*: its deposits and withdrawals are recorded on chain from Bitcoin reports, and the owner's balance is its attested coins. A watched vault's withdrawal has no completion transaction and no cancellation vote. After the request is mined, the chain fixes ("pins") the Bitcoin transaction that pays it, and the withdrawal completes when Bitcoin confirms it. Until it is pinned, the requester can cancel it, and the cancel takes effect when mined. If it does not confirm, the requester can raise its fee (bump) or give it up (release), both as a `VBTC_V2_COIN_PIN` (type 44) transaction. Vaults created before that height are *legacy*. They keep the earlier request, complete and cancel flow until the enforcement height (`BitcoinAttestationHeight`; block 401 on testnet, set at the 9.0 release on mainnet, about two weeks after the recording height). From then on they are frozen, and withdrawal completion (type 28), the cancellation vote (type 30), bridge exit completion (type 41) and bridge exit failure (type 42) are refused for every vault. `GetVaultBitcoin` tells you which kind a vault is.
+
+### Withdrawal Flows
+
+Check the vault's kind first with `GET vbtcapi/VBTC/GetVaultBitcoin/{scUID}` (`Vault.Attested`, `Vault.Legacy`, `Vault.Frozen`). Both kinds start the same way: `POST vbtcapi/VBTC/RequestWithdrawal` when this node holds the requester's key, or `POST vbtcapi/VBTC/GetRawRequestWithdrawalTxData` then `POST vbtcapi/VBTC/SendRawRequestWithdrawalTx` for an external key.
+
+**Watched vault** (created from the recording height):
+1. Request the withdrawal. The vBTC is debited when the request is mined.
+2. While no Bitcoin transaction is pinned for it (`Withdrawal.State` is `Waiting` and `Withdrawal.CanCancel` is `true` in `GetWithdrawalPin`), the requester can cancel it with an ordinary `VBTC_V2_WITHDRAWAL_CANCEL` (type 29): `POST vbtcapi/VBTC/CancelWithdrawal` when this node holds the requester's key, `POST vbtcapi/VBTC/GetRawCancelWithdrawalTxData` then `POST vbtcapi/VBTC/SendRawCancelWithdrawalTx` for an external key, or `POST wallet/api/vbtc/withdraw/cancel` in the built-in wallet. Only the requester can cancel. There is no validator vote (a type-30 vote is refused on a watched vault). The withdrawal closes as cancelled in the block that mines the cancel, and the escrowed vBTC is refunded. Once a Bitcoin transaction is pinned, a cancel is refused, and only a bump or a release (step 5) is left. A bridge exit's part can't be cancelled this way.
+3. The chain pins the Bitcoin transaction that pays it, and the vault's signers sign it. Follow it with `GET vbtcapi/VBTC/GetWithdrawalPin/{scUID}/{withdrawalRequestHash}` (the built-in wallet: `GET wallet/api/vbtc/withdraw/pin/{scUID}/{requestHash}`). There is no completion transaction to send, and `POST vbtcapi/VBTC/CompleteWithdrawal` returns the pin's state instead of signing.
+4. Bitcoin confirms the payment and the withdrawal is complete.
+5. If the payment isn't confirming, either bump it (a type-44 transaction; the higher fee comes out of the withdrawal) or release it (also type 44): the coins go back to the vault and the vBTC is refunded, less the release's Bitcoin fee. A pinned withdrawal can't be cancelled.
+
+   | | Bump | Release |
+   | --- | --- | --- |
+   | Node holds the requester's key | `POST vbtcapi/VBTC/BumpWithdrawalFee` | `POST vbtcapi/VBTC/ReleaseWithdrawal` |
+   | External key (build, sign `Hash`, send) | `POST vbtcapi/VBTC/GetRawBumpWithdrawalFeeTxData` then `POST vbtcapi/VBTC/SendRawBumpWithdrawalFeeTx` | `POST vbtcapi/VBTC/GetRawReleaseWithdrawalTxData` then `POST vbtcapi/VBTC/SendRawReleaseWithdrawalTx` |
+   | Built-in browser wallet (node's account) | `POST wallet/api/vbtc/withdraw/bumpfee` | `POST wallet/api/vbtc/withdraw/release` |
+
+A request still waiting for coins can run out, and its vBTC is then refunded as for a cancel. Once its Bitcoin transaction is pinned, it can't run out.
+
+**Legacy vault** (created before the recording height), until the enforcement height:
+1. Request the withdrawal.
+2. Complete it with `POST vbtcapi/VBTC/CompleteWithdrawal` (or `POST vbtcapi/VBTC/GetRawCompleteWithdrawalTxData` then `POST vbtcapi/VBTC/SendRawCompleteWithdrawalTx`), which signs and broadcasts the Bitcoin transaction and records the completion (type 28).
+3. To cancel, send `POST vbtcapi/VBTC/CancelWithdrawal` (type 29); validators vote on it (type 30).
+
+From the enforcement height a legacy vault is frozen: nothing debits its balance, and withdrawal completion (type 28), the cancellation vote (type 30), bridge exit completion (type 41) and bridge exit failure (type 42) are refused for every vault.
+
+### Bitcoin Attestation
+
+#### GET `/GetBitcoinAttestationStatus`
+**Summary:** The attestation layer as this node's chain state holds it: the three heights, the Bitcoin tip the chain has attested, how far vault events are recorded, the signer set, and the confirmations a Bitcoin block needs before it is reported  
+**Returns:** `{"Success": true, "Attestation": {...}}`
+
+#### GET `/GetVaultBitcoin/{scUID}`
+**Summary:** A vault's Bitcoin as consensus holds it: the deposit script, every unspent coin and what holds it, the totals the owner's balance is computed from, and the withdrawals still open  
+**Parameters:**
+- `scUID` (string, path) - The vault's smart contract UID  
+**Returns:** `Vault` (the kind: `Attested`, `Legacy`, `FreezeHeight`, `Frozen`) and `Bitcoin`. For a vault the chain does not watch, `Success` is `false`, `Bitcoin` is `null` and `Message` gives the reason; `Vault` is still filled in
+
+#### GET `/GetBridgeExit/{baseBurnTxHash}`
+**Summary:** The bridge exit the chain holds for a Base burn: waiting, pinned, complete or failed, and for an exit on watched vaults each vault's part with its Bitcoin transaction  
+**Parameters:**
+- `baseBurnTxHash` (string, path) - The Base burn transaction hash  
+**Returns:** `{"Success": true, "Exit": {...}}`, or `Success: false` when no exit is recorded for the burn
+
+### Withdrawals from Watched Vaults
+
+#### GET `/GetWithdrawalPin/{scUID}/{withdrawalRequestHash}`
+**Summary:** Where a withdrawal from a watched vault stands: waiting for coins, its Bitcoin transaction pinned (with every transaction pinned for it, their fees and the unsigned bytes), paid, or closed and refunded. Answered from chain state, so any node gives the same answer  
+**Parameters:**
+- `scUID` (string, path) - The vault's smart contract UID  
+- `withdrawalRequestHash` (string, path) - The hash of the withdrawal request transaction  
+**Returns:** `{"Success": true, "Attested": true, "Withdrawal": {...}}`. For a vault the chain does not watch, `Success` is `false`, `Attested` is `false`, `Vault` gives its kind, and the withdrawal is completed with `CompleteWithdrawal` instead. On a watched vault whose request isn't mined yet (or isn't on that vault), `Success` is `false`, `Attested` is `true` and `Withdrawal` is `null`. Try again once the request is mined.
+
+#### POST `/BumpWithdrawalFee`
+**Summary:** Raise the Bitcoin fee of a pinned withdrawal that is not confirming, signed by the requester's account on this node. The chain pins a replacement that spends the same coins; the higher fee comes out of the withdrawal's own amount  
+**Request Body:**
+```json
+{
+  "SmartContractUID": "...",
+  "RequestorAddress": "...", // the address that requested the withdrawal; it signs
+  "WithdrawalRequestHash": "...",
+  "FeeRate": 12 // sat/vB, above the rate the withdrawal's newest Bitcoin transaction pays
+}
+```
+**Returns:** `{"Success": true, "FeeBumpTxHash": "...", "Release": false, ...}`. Follow it with `GetWithdrawalPin`.
+
+#### POST `/ReleaseWithdrawal`
+**Summary:** Give up a pinned withdrawal that is not confirming, signed by the requester's account on this node. The chain pins a Bitcoin transaction that returns the coins to the vault; when Bitcoin shows it, the withdrawal is closed and the vBTC refunded, less that transaction's Bitcoin fee, and the requester can withdraw again. If a payment of the withdrawal confirms first, it is paid as usual  
+**Request Body:** Same as `BumpWithdrawalFee`; `FeeRate` must be above the rate the withdrawal's newest transaction pays  
+**Returns:** `{"Success": true, "FeeBumpTxHash": "...", "Release": true, ...}`
+
+#### POST `/GetRawBumpWithdrawalFeeTxData`
+#### POST `/GetRawReleaseWithdrawalTxData`
+**Summary:** Build the unsigned type-44 fee bump or release for a requester whose key this node does not hold. The node checks it against the same rule block validation applies before returning it  
+**Request Body:** Same as `BumpWithdrawalFee`  
+**Returns:** The unsigned transaction (`Hash`, `Timestamp`, `FromAddress`, `ToAddress`, `Amount`, `Fee`, `Nonce`, `TransactionType`, `TransactionTypeId`, `Data`). Sign `Hash` and submit it with the matching send route.
+
+#### POST `/SendRawBumpWithdrawalFeeTx`
+#### POST `/SendRawReleaseWithdrawalTx`
+**Summary:** Submit a signed type-44 transaction built by the matching `GetRaw...TxData` route. Each send route accepts only what its own build route made, so a fee bump can't be sent as a release by mistake  
+**Request Body:**
+```json
+{
+  "Hash": "...", // the Hash the build route returned
+  "Signature": "...", // the requester's signature over Hash
+  "PublicKey": "..." // the requester's public key (required)
+}
+```
+**Returns:** `{"Success": true, "Hash": "...", "Message": "..."}`
+
+The node's built-in browser wallet has the same three operations at `GET /wallet/api/vbtc/withdraw/pin/{scUID}/{requestHash}`, `POST /wallet/api/vbtc/withdraw/bumpfee` and `POST /wallet/api/vbtc/withdraw/release`, signed by the node's account. The bump and release body is camel-case, and `feeRate` is a string; a JSON number is rejected with `400`:
+
+```json
+{
+  "scUID": "...",
+  "ownerAddress": "...", // the requester
+  "requestHash": "...",
+  "feeRate": "12"
+}
+```
+
+### Validator Bond
+
+#### GET `/GetValidatorBond/{address}`
+**Summary:** The validator bond of any address: whether its stake is locked, how much it can send, when it unlocks after an exit, and from which block it counts for a vault's key ceremony  
+**Parameters:**
+- `address` (string, path) - VFX address  
+**Returns:** `Bond` with `RuleActive`, `RuleStartsAtHeight`, `Bonded`, `BondedAmount`, `Balance`, `Spendable`, `BondedAtHeight`, `ExitHeight`, `UnlocksAtHeight`, `ExitWaitBlocks`, `StakeLockedSinceHeight`, `CountsForKeyCeremoniesFromHeight`, `CountsForKeyCeremoniesNow`, `CountsForReportSignersFromHeight`, `Note`
+
+#### POST `/ExitValidator/{address}`
+**Summary:** Send the validator exit transaction for an address this wallet holds. The validator stops counting on chain at once, and its bonded 5,000 VFX unlocks 1,200 blocks after the exit is mined. Works for a validator that is no longer running too. If this node is validating with that address, it also stops validating. Refused before the validator bond height (`ValidatorBondHeight`), when no stake is locked  
+**Parameters:**
+- `address` (string, path) - The validator's VFX address  
+**Returns:** `{"Success": true, "ExitTxHash": "...", "Bond": {...}}`
+
+See [Run a Validator](../core/validator-guide.md#10-stopping-and-updating) for the full exit.
+
+---
+
+## 16. Privacy API: raw shielded VFX (9.0 additions)
+**Base Routes:** `privacyapi/PrivacyV1`, `privacyapi/PrivacyV1/{somePassword?}`  
+**Controller:** PrivacyV1Controller  
+
+For wallets that hold their own keys and keep no shielded wallet on this node, such as a web wallet. The node reads the pool, finds the caller's notes and runs the prover; the caller signs (shield only) and submits. The rest of the privacy controller is not documented here yet.
+
+- **Shield (T→Z):** `GetRawShieldTxData` → sign `Hash` with the transparent key → `SendRawPrivateTx` with `Hash` and `Signature`.
+- **Unshield (Z→T) and private transfer (Z→Z):** `GetRawUnshieldTxData` or `GetRawPrivateTransferTxData` with the `zfx_` address and its viewing key → `SendRawPrivateTx` with `Hash` only. These are authorised by the zero-knowledge proof, not a signature.
+
+:::warning
+In this scheme the viewing key is spend authority. Send it only to a node you trust, over TLS.
+:::
+
+A built transaction waits on the node for 30 minutes (`ExpiresUtc`). A spend also goes stale when the pool's Merkle root moves, so submit promptly and rebuild on "merkle_root does not match".
+
+Responses are `{"Success": true, "Result": {...}}` or `{"Success": false, "Message": "..."}`.
+
+#### POST `/GetRawShieldTxData`
+**Summary:** An unsigned, proven shield for a `FromAddress` this node does not hold  
+**Request Body:**
+```json
+{
+  "FromAddress": "...",
+  "RecipientZfxAddress": "zfx_...",
+  "ShieldAmount": 10.0,
+  "TransparentFee": null, // optional; the node calculates it when omitted
+  "Memo": null // optional
+}
+```
+**Returns:** `Result` with `Hash`, `Transaction`, `Fee`, `RequiresSignature` (`true`), `MerkleRoot`, `ExpiresUtc`
+
+#### POST `/GetShieldedNotesRaw`
+**Summary:** Stateless scan: the VFX notes a viewing key can open, with position, spent, pending and spendable state, and randomness. Needs no wallet on this node  
+**Request Body:**
+```json
+{
+  "ZfxAddress": "zfx_...",
+  "ViewingKey": "...", // 32 bytes, Base64 or 64 hex characters
+  "FromHeight": null, // optional; default the proof-rules height once active, else 0
+  "ToHeight": null, // optional; default the chain tip
+  "IncludeSpent": false
+}
+```
+**Returns:** `Result` with `Notes` (`Commitment`, `Amount`, `TreePosition`, `BlockHeight`, `Spent`, `PendingSpend`, `Spendable`, ...), `UnspentBalance`, `SpendableBalance`, `ProofRulesActive`
+
+#### POST `/GetRawUnshieldTxData`
+**Summary:** A complete, proven unshield from the caller's notes. No signature needed  
+**Request Body:**
+```json
+{
+  "ZfxAddress": "zfx_...",
+  "ViewingKey": "...",
+  "TransparentToAddress": "...",
+  "TransparentAmount": 5.0,
+  "InputCommitments": null // optional: spend exactly these 1 or 2 notes; the node selects when omitted
+}
+```
+**Returns:** `Result` with `Hash`, `Transaction`, `Fee`, `SpentCommitments`, `ChangeAmount`, `MerkleRoot`, `ExpiresUtc`
+
+#### POST `/GetRawPrivateTransferTxData`
+**Summary:** A complete, proven private transfer to another `zfx_` address, or to your own to consolidate. No signature needed  
+**Request Body:** `ZfxAddress`, `ViewingKey`, `RecipientZfxAddress`, `PaymentAmount`, `InputCommitments` (optional)  
+**Returns:** As `GetRawUnshieldTxData`
+
+#### POST `/VerifyRawPrivateTx`
+**Summary:** Dry run: the node's full verifier on a built transaction, with the signature for a shield. Nothing is broadcast  
+**Request Body:** `{"Hash": "...", "Signature": "..."}` (`Signature` for a shield only)  
+**Returns:** `Result` with `Hash` and `"Transaction verifies."`, or the reason it doesn't
+
+#### POST `/SendRawPrivateTx`
+**Summary:** Submit a built transaction: a shield with `Hash` and `Signature`, an unshield or transfer with `Hash` only  
+**Request Body:** `{"Hash": "...", "Signature": "..."}`  
+**Returns:** `Result` with `Hash` and `Message`
 
 ---
 

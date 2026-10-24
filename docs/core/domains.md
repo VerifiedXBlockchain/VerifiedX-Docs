@@ -43,6 +43,12 @@ Key properties of the ADNR model include:
 - **ResolveAdnr()**: This method resolves the human-readable domain back to its original blockchain address, enabling seamless address lookup during transactions.
 - **DeleteAdnr()**: Users can also delete ADNR entries if they no longer want a domain associated with a particular address.
 
+#### Transferring a `.btc` name
+
+From the BTC-name signer height (`BtcNameSignerOwnsAddressHeight`, set in Core 9.0 and not yet active on either network), the receiving Bitcoin address has to agree to a `.btc` name transfer. The receiver signs an acceptance, the message `<unix seconds>:<new VFX owner>:<name>.btc` signed with the key of the Bitcoin address that will receive the name, and the sender includes it in the transfer. An acceptance is valid for 24 hours.
+
+When both Bitcoin addresses are in the same wallet, the node signs the acceptance itself. Between wallets, the receiver creates it with `SignAdnrTransferAcceptance` and hands it to the sender, who passes it to `TransferAdnr` (see the [CLI API reference](../integration/cli-api-details.md#adnr-management)). In the SwitchBlade wallet the receiver copies it as one acceptance code, `<message>|<signature>`, and the sender pastes it into the transfer.
+
 ### Benefits of VFX Domain Services
 
 1. **User-Friendly Transactions**: 
