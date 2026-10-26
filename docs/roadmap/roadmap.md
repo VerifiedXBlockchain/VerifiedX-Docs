@@ -1,29 +1,32 @@
 # Roadmap
 
-### Dec 2025
-- Launching Butterfly p2p social payment and yield application
-- Bug Bounty program release
-- Token unlocking schedule
-
-### Q1 2026
-- Oracle data / validator upgrade
-- p2p Smart contract release with automated execution per minter parameters / inputs for decentralized and self custodial borrowing / lending
-- Privacy Layer
-- Quantum resistant addresses
-
-
-### Q2 / Q3 2026
-- AI Smart contract writer
-- Smart Order Routing System release
-- Butterfly feature upgrade
-- Mainnet upgrade
-
-
 ### Q4 2026
-- BTC / vBTC Validating enablement
+- vBTC integration launches
+- Bug bounty program launch
+- Additional independent security audit for mainnet release
+- Protocol-enforced revenue vault activated
+- Prism privacy features live
+- Foundation advisory council formation
+- BFLY agentic features and update release
+
+### Q1 2027
+- Stablecoin vaults deployment
+- VFX integration launches
+- Post-quantum hybrid signatures
+
+### Q2 2027
+- Validator oracle release
+- P2P smart contract release for self-custodial borrow / lend / escrow
+- Smart order routing system release
+
+### Q3 2027
+- AI smart contract deployer
+
+### Q4 2027
+- TBD release (with 2028)
 
 ---
 
 :::note Note
-Subject to changes
+Roadmaps are to be viewed as a guide per the core development plan and rollout, with changes updated in real time. The release schedule is only identified up to 12 months in advance and is subject to change and discretion.
 :::
