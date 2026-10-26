@@ -4,9 +4,6 @@ sidebar_position: 11
 
 # Smart Contracts & NFTs
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/yPOTakJrz2w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
-
-
 ## Smart Contracts
 
 ### Creating Smart Contracts
@@ -24,9 +21,6 @@ sidebar_position: 11
 - Combine multiple smart contracts into a collection.
 
 ## NFTs
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/l7UDVGQs7sw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
-
 
 ### Managing NFTs
 1. **Ownership and Transfers**:

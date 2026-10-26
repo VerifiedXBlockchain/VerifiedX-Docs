@@ -6,8 +6,6 @@ sidebar_position: 3
 
 The VerifiedX Switchblade dashboard is designed for simplicity and efficiency, providing all critical information at a glance. 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Mgou91imSTg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
-
 When you launch VerifiedX Switchblade for the first time, follow these steps to ensure a smooth start:
 
 1. **Snapshot Import**:
