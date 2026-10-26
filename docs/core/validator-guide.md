@@ -6,7 +6,7 @@ sidebar_position: 4
 
 This guide takes you from a blank Linux server to an active mainnet validator: install dependencies, build the Core CLI from source, fast-sync from a snapshot, run the node with a crash watchdog, fund your address, and start validating — through the CLI console or through the wallet API.
 
-The steps are opinionated so they work turn-key. We use Ubuntu 22.04 LTS, run the CLI inside a `screen` session, and install a small cron watchdog that restarts the node after a crash or reboot. Nothing here is specific to any cloud or hosting provider — if you know what you're doing, adjust freely.
+The steps are opinionated so they work turn-key. The guide uses Ubuntu 22.04 LTS, run the CLI inside a `screen` session, and install a small cron watchdog that restarts the node after a crash or reboot. Nothing here is specific to any cloud or hosting provider — if you know what you're doing, adjust freely.
 
 :::note Testnet
 Callouts like this one mark what changes when targeting **testnet** instead of mainnet. There is also a [testnet quick reference](#testnet-quick-reference) at the end.
@@ -15,8 +15,9 @@ Callouts like this one mark what changes when targeting **testnet** instead of m
 ## What you'll need
 
 - **5,000 VFX.** From the validator bond height (`ValidatorBondHeight`; block 7,568,349 on mainnet; block 399 on testnet since its October 2026 restart), the 5,000 VFX is bonded: it cannot be sent while you are a registered validator, and it unlocks 1,200 blocks after your validator exit transaction is mined (see [Stopping and updating](#10-stopping-and-updating)). Anything above 5,000 VFX stays spendable. There is no penalty. Before that height your VFX stays fully liquid. Send 5,001 VFX so a transaction fee never dips you below the 5,000 floor.
-- **A server.** Ubuntu 22.04 LTS, 2 vCPU, 4 GB RAM, 40 GB+ SSD, with a static public IP. Both x64 and ARM64 work. The mainnet chain is roughly 15 GB as of mid-2026 and growing, so leave disk headroom.
+- **A server.** Ubuntu 22.04 LTS, 2 vCPU, 4 GB RAM, 40 GB+ SSD, with a static public IP. Both x64 and ARM64 work. The mainnet chain is roughly 15 GB as of mid-2026 and growing, so leave disk headroom, plus about 300 MB for recent Bitcoin blocks and about 400 MB for the PLONK parameters.
 - **Open ports.** See the table below.
+- **Outbound access to the Bitcoin network.** A validator follows Bitcoin itself (see [What a validator does](#what-a-validator-does)), so it needs to reach Bitcoin peers on port `8333` and, as a fallback, `mempool.space` and `blockstream.info` over HTTPS. Most servers allow outbound traffic by default.
 - **A wallet holding your VFX** (for example [Switchblade](../gui/gui-installation)) to fund the validator address from.
 
 ### Ports
@@ -27,11 +28,12 @@ Callouts like this one mark what changes when targeting **testnet** instead of m
 | `3339` | Validator peer-to-peer | Open to the world |
 | `7294` | Validator API | Open to the world |
 | `7295` | Validator (FROST) port | Open to the world — **required for validating** |
-| `7296` | Validator (FROST) port over TLS | Open to the world — opened by the node next to `7295`, self-signed certificate |
+| `7296` | Validator (FROST) port over TLS | Optional — opened by the node next to `7295` with a self-signed certificate; not checked at activation |
 | `7292` | Wallet API (HTTP) | Keep closed — call it from the server itself |
+| `7293` | Wallet API (HTTPS, with `openapi`) | Keep closed |
 | `22` | SSH | Restrict to your own IP if possible |
 
-The CLI verifies its own ports when you activate a validator. If `7295` is not reachable from the outside, activation fails even though the CLI is listening — a missing firewall rule is the most common cause.
+The CLI verifies its own ports `3339`, `7294` and `7295` when you activate a validator and keeps checking them while it validates. If any of them is not reachable from the outside, activation fails even though the CLI is listening — a missing firewall rule is the most common cause. `3338` is not checked, but without it your node has no inbound peers.
 
 If your server has no external firewall, `ufw` works fine:
 
@@ -106,7 +108,7 @@ dotnet publish -c Release -r linux-x64 --self-contained false --output ./publish
 dotnet publish -c Release -r linux-arm64 --self-contained false --output ./published
 ```
 
-The node now lives at `~/vfx-cli/published/ReserveBlockCore.dll`.
+The node now lives at `~/vfx-cli/published/VerifiedXCore.dll`.
 
 The publish also copies the native FROST and PLONK libraries for your architecture next to the node. On `linux-arm64` it takes the arm64 builds of both. Before 9.0, an arm64 publish shipped the x86-64 PLONK library, so publish 9.0 fresh rather than reusing an older output folder. The FROST library is pinned to version `0.2.0-frost-real`. A node that loads any other version fails its startup check and stays out of vBTC key ceremonies and signings, so never copy native libraries in from another release.
 
@@ -151,7 +153,7 @@ Start the CLI inside a detached `screen` session (replace `YOUR_API_TOKEN` here 
 
 ```bash
 cd ~/vfx-cli/published
-screen -dmS vfx bash -lc "dotnet ReserveBlockCore.dll enableapi openapi apitoken=YOUR_API_TOKEN"
+screen -dmS vfx bash -lc "dotnet VerifiedXCore.dll enableapi openapi apitoken=YOUR_API_TOKEN"
 ```
 
 What the startup flags do:
@@ -177,7 +179,7 @@ curl -s -H "apitoken: YOUR_API_TOKEN" http://localhost:7292/api/V1/GetWalletInfo
 Compare the reported block height against the [Spyglass explorer](https://spyglass.verifiedx.io). Once the heights match, you are synced. In the console, `/info` shows the same.
 
 :::note Testnet
-Add the `testnet` flag — `dotnet ReserveBlockCore.dll enableapi openapi testnet apitoken=...` — and use port `17292` in the API calls.
+Add the `testnet` flag — `dotnet VerifiedXCore.dll enableapi openapi testnet apitoken=...` — and use port `17292` in the API calls.
 :::
 
 ## 6. Keep it running: crash watchdog
@@ -192,7 +194,7 @@ set -e
 
 API_TOKEN="YOUR_API_TOKEN"
 
-# Hold the watchdog off while we (re)start; cleared on success below.
+# Hold the watchdog off during the (re)start; cleared on success below.
 touch "$HOME/.vfx_cli_stopped"
 
 # Kill any existing session
@@ -200,7 +202,7 @@ screen -S vfx -X quit 2>/dev/null || true
 sleep 1
 
 cd "$HOME/vfx-cli/published"
-screen -dmS vfx bash -lc "dotnet ReserveBlockCore.dll enableapi openapi apitoken=$API_TOKEN"
+screen -dmS vfx bash -lc "dotnet VerifiedXCore.dll enableapi openapi apitoken=$API_TOKEN"
 
 sleep 2
 if screen -list | grep -q "\.vfx"; then
@@ -293,7 +295,7 @@ curl -s -H "apitoken: YOUR_API_TOKEN" http://localhost:7292/api/V1/ImportPrivate
 Type `/printkeys` in the console to print the private keys for all addresses on the node, and store them somewhere safe and offline. If the server dies, the private key is the only way to recover the funds.
 :::
 
-A note on wallet encryption: the CLI supports encrypting the wallet, but an encrypted wallet requires its password to be entered interactively before validating can start — which breaks unattended restarts. For a headless validator the practical setup is an unencrypted wallet on a well-firewalled box with SSH key authentication only.
+A note on wallet encryption: the CLI supports encrypting the wallet. An encrypted wallet can still start unattended if you pass its password on the start line with `encpass=YOUR_PASSWORD` (taken exactly as typed). The password then sits in `~/vfx-start.sh`, which is why that file is `chmod 700`. Either way, keep the box well firewalled with SSH key authentication only.
 
 ## 8. Fund the address
 
@@ -312,6 +314,8 @@ Get testnet funds from the [faucet](https://spyglass-testnet.verifiedx.io/faucet
 ## 9. Start validating
 
 Before activating, confirm: the node is fully synced, the address holds at least 5,000 VFX, and ports `3338`, `3339`, `7294`, and `7295` are reachable from the outside.
+
+Once validating starts, the node registers itself on chain automatically: after its ports are verified, its public IP is known, it has found a validator peer and 10 blocks have passed, it sends the validator registration transaction, which also records the validator's FROST public key. There is no separate key registration step. It then sends a heartbeat every 500 blocks; a validator without a heartbeat in the last 1,000 blocks stops counting as active.
 
 ### Via the CLI console
 
@@ -332,8 +336,26 @@ The name must be unique on the network — you will get `Node name already taken
 - `GetAllAddresses` (step 8) shows the address flagged as validating.
 
 :::note Stay reachable
-The CLI continuously self-checks its validator ports. If your node becomes unreachable for around 90 seconds — a firewall change, a network outage, a host migration — it deactivates validation and does **not** re-activate on its own. Fix connectivity, then start validating again as above.
+The CLI continuously self-checks its validator ports. If your node becomes unreachable for around 90 seconds — a firewall change, a network outage, a host migration — it deactivates validation and does **not** re-activate on its own. It sends no exit transaction when it does this, so your 5,000 VFX stays bonded. Fix connectivity, then start validating again as above.
 :::
+
+## What a validator does
+
+From Core 9.0 a validator does more than produce blocks. Once its bond has been in place for 14,400 blocks (about two days), it also:
+
+- **Follows Bitcoin.** A built-in Bitcoin light client, which runs only while the node is validating, keeps eight Bitcoin peers found through the Bitcoin DNS seeds, follows the header chain and keeps about 300 MB of recent blocks under `Databases/BtcBlocks`. Public explorers are asked only when no peer delivers a block. There is nothing to install or configure. See [Bitcoin Integration](./bitcoin.md).
+- **Signs Bitcoin reports.** Validators build and sign the reports that record vault deposits and spends on chain. A validator that cannot fetch a Bitcoin block waits and signs nothing for it.
+- **Takes part in vBTC key ceremonies and signings.** A validator can be chosen to hold a key share of a vBTC vault. It then signs that vault's withdrawals, which the chain has already fixed, and helps move the vault to a new key when too many of its holders have left.
+
+Validators already active at mainnet block 7,496,000 count as aged from the start. Restarting a validator during an exit wait resumes the bond and starts its age again.
+
+Check the network's attestation state, including the signer set and the attested Bitcoin tip, with:
+
+```bash
+curl -s -H "apitoken: YOUR_API_TOKEN" http://localhost:7292/vbtcapi/VBTC/GetBitcoinAttestationStatus
+```
+
+To run a vault's signing only on your own validators, see [Institutional Signing (S3C)](./s3c-institutional.md).
 
 ## 10. Stopping and updating
 
@@ -370,7 +392,7 @@ git fetch origin && git reset --hard origin/main
 
 # Build the new version alongside the running one (use linux-arm64 on ARM)
 dotnet publish -c Release -r linux-x64 --self-contained false --output ./published_next
-test -f ./published_next/ReserveBlockCore.dll && echo "BUILD OK" || echo "BUILD FAILED - old version untouched"
+test -f ./published_next/VerifiedXCore.dll && echo "BUILD OK" || echo "BUILD FAILED - old version untouched"
 
 # Swap and restart
 touch ~/.vfx_cli_stopped
@@ -390,7 +412,7 @@ After any restart, confirm the validator is still active (`/val`) and reactivate
 
 - **`A fatal error occurred. The folder [/usr/share/dotnet/host/fxr] does not exist`** — conflicting dotnet packages; see [Dotnet Conflicts](./build-instructions#dotnet-conflicts).
 - **Block height stuck** — stop the CLI (marker + `SendExit`), re-apply the latest snapshot (step 4 — mind the wallet-file warning), start again.
-- **Validator silently deactivated** — almost always the port self-check: verify `7295` and the peer-to-peer ports are reachable from outside, then start validating again.
+- **Validator silently deactivated** — almost always the port self-check: verify `3339`, `7294` and `7295` are reachable from outside, then start validating again. The bond stays locked; no exit was sent.
 - **Node didn't come back after a reboot** — check `~/vfx-watchdog.log`, and make sure `~/.vfx_cli_stopped` isn't lingering (running `bash ~/vfx-start.sh` clears it).
 - **What is it doing right now?** — `screen -r vfx` shows the live console; detach with `Ctrl+A` then `D`.
 
