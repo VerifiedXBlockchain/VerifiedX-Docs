@@ -64,11 +64,11 @@ Linux Install For Ubuntu 22.04:
 9. `dotnet publish -c Release -r linux-x64 --output ./rbxpublished`
    > Please note the `linux-x64` can be changed if you are on a different architecture like arm or x86.
 10. `cd rbxpublished`
-11. `dotnet ReserveBlockCore.dll`
+11. `dotnet VerifiedXCore.dll`
 
 From here you are done. The wallet will be running. To turn on the API simple type ‘10’ and press enter or you can pass it in as a command argument.
 
-`dotnet ReserveBlockCore.dll enableapi`
+`dotnet VerifiedXCore.dll enableapi`
 
 You are done! You should now see a wallet running! Some common errors are usually related to file permissions. Please ensure you have given proper permission to the newly created RBX folder
 
@@ -85,7 +85,7 @@ You are done! You should now see a wallet running! Some common errors are usuall
 7. `dotnet publish -c Release -r win-x64 --output ./rbxpublished`
    > please note the `win-x64` can be changed if you are on a different architecture
 8. `cd rbxpublished`
-9. `dotnet ReserveBlockCore.exe`
+9. `dotnet VerifiedXCore.exe`
 
 ### Mac OS X
 
@@ -99,7 +99,7 @@ You are done! You should now see a wallet running! Some common errors are usuall
 7. `dotnet publish -c Release -r osx-x64 --output ./rbxpublished`
    > please note the 'osx-x64' can be changed if you are on a different architecture like arm.
 8. `cd rbxpublished`
-9. `dotnet ReserveBlockCore`, sometimes dotnet ReserveBlockCore.dll. Just depends on the current environment setup.
+9. `dotnet VerifiedXCore`, sometimes dotnet VerifiedXCore.dll. Just depends on the current environment setup.
 
 ## Wallet Config Setup
 
@@ -190,7 +190,7 @@ The point of this paper is to outline the config file setup and features it has.
 
     - Type `string`
     - Ex: `ValidatorAddress=RBcHyS2AF4Z4jgzTLZNBVLvtxQ6MtB2vUN`
-    - You can input a default validator address to instantly start validating. Please note you must also import the wallet address through the launch commands. Ex: ReserveBlockCore.exe privKey=MyPrivateKey.
+    - You can input a default validator address to instantly start validating. Please note you must also import the wallet address through the launch commands. Ex: VerifiedXCore.exe privKey=MyPrivateKey.
 
 15. ValidatorName (default is new guid)
 
@@ -468,7 +468,7 @@ Once a CLI is started you may type commands at any point and time and interact w
 The wallet must be left open for items to continue running. If using Linux and SSH it is recommended to use screen or other tool to keep it running.
 
 Screen example:
-screen dotnet ReserveBlockCore.dll
+screen dotnet VerifiedXCore.dll
 
 > `ctrl A & ctrl D`
 > to detach from the screen session.

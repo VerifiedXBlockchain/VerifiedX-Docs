@@ -10,10 +10,15 @@ You can access testnet by running the CLI with the `testnet` flag.
 
 Testnet database files are stored as a sibling file to your mainnet db files with the suffix `test`.
 
-All ports are one digits longer, prefixed with a `1`.
+All ports are one digit longer, prefixed with a `1`:
 
-Validating: `13338` & `13339`.
-API: `17292`.
+| | Mainnet | Testnet |
+|---|---|---|
+| Peer-to-peer | `3338`, `3339` | `13338`, `13339` |
+| Validator API | `7294` | `17294` |
+| Validator (FROST) | `7295` | `17295` |
+| Validator (FROST) over TLS | `7296` | `17296` |
+| Wallet API | `7292` | `17292` |
 
 Thus, you would access swagger through this link: `http://localhost:17292/swagger`.
 
@@ -46,6 +51,8 @@ Please note that all testnet addresses begin with an `x` instead of an `R`.
 Testnet Explorer: https://spyglass-testnet.verifiedx.io
 
 Testnet Faucet: https://spyglass-testnet.verifiedx.io/faucet
+
+## Bitcoin: the VerifiedX signet
 
 For anything Bitcoin related, the VerifiedX testnet uses the VerifiedX signet, a private Bitcoin signet run by the VerifiedX team. It replaces Bitcoin testnet4.
 

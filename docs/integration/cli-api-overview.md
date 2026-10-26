@@ -39,7 +39,7 @@ This document provides an overview of the different API namespaces and their pur
   - Transaction creation and broadcasting
   - UTXO management
   - Bitcoin tokenization operations
-  - ElectrumX server integration
+  - Wallet Bitcoin data through Electrum servers (consensus verifies vault Bitcoin on its own; see [Bitcoin Integration](../core/bitcoin.md))
 
 ### 4. **Smart Contract API** (`scapi/`)
 - **Base Route**: `scapi/scv1`

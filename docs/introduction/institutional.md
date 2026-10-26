@@ -130,20 +130,20 @@ Each layer is designed to interoperate seamlessly while maintaining strict guara
 
 ## Architecture Layers
 
-### 1. Bitcoin Custody & Proof Layer
+### 1. Bitcoin Verification & Custody Layer
 
 This layer is responsible for maintaining the integrity and verifiability of underlying Bitcoin.
 
 **Components:**
 
-- Multi-party custody (FROST MPC evolving design)
-- Deposit and redemption validation flows
-- Proof-of-reserves and proof-of-movement systems
-- On-chain proof publisher
+- Bitcoin-aware consensus: every node verifies Bitcoin's proof-of-work header chain and the Merkle inclusion of each vault deposit and spend ([Bitcoin Integration](/docs/core/bitcoin))
+- FROST threshold signing: each vault's Bitcoin key exists only in shares among validators
+- Allocator-controlled signing (S3C): a vault's key generation and signing restricted to the owner's own validators ([Institutional Signing](/docs/core/s3c-institutional))
+- Consensus-fixed withdrawals: the Bitcoin transaction that pays a withdrawal is determined by consensus before it is signed
 
 **Key Properties:**
 
-- 1:1 backing of vBTC to Bitcoin
+- 1:1 backing of vBTC to Bitcoin, recorded by the chain
 - No synthetic issuance or rehypothecation
 - Cryptographically verifiable reserves
 - Deterministic redemption guarantees
@@ -154,9 +154,9 @@ This layer governs the minting and burning of vBTC in direct correspondence with
 
 **Functions:**
 
-- Bitcoin deposit → vBTC mint
-- vBTC burn → Bitcoin redemption
-- Supply synchronization with custody layer
+- Verified Bitcoin deposit → vBTC credited 1:1
+- vBTC withdrawal → consensus-fixed Bitcoin payment
+- Supply synchronization with the Bitcoin the chain records
 - Transaction validation and settlement finality
 
 **Key Properties:**
@@ -262,12 +262,12 @@ End-user and institutional interfaces built on top of VerifiedX.
 
 ### Bitcoin to Yield Lifecycle
 
-1. Bitcoin is deposited into the custody layer
-2. Proof is generated and verified on-chain
-3. vBTC is minted 1:1 on VerifiedX
+1. Bitcoin is deposited to a vault's Bitcoin address
+2. Validators report the deposit; every node verifies its proof-of-work and Merkle proof
+3. Once the deposit is buried under 6 Bitcoin blocks, vBTC is credited 1:1 on VerifiedX
 4. vBTC is deployed into liquidity or yield modules
 5. Yield is generated (e.g., USDC return strategies)
-6. vBTC can be redeemed at any time via burn + release
+6. vBTC can be redeemed at any time: consensus fixes the Bitcoin transaction, the vault's signers sign it, and it settles when Bitcoin confirms it
 
 ### Cross-Ecosystem Deployment Flow
 
@@ -279,10 +279,19 @@ End-user and institutional interfaces built on top of VerifiedX.
 
 ---
 
+## Allocator-Controlled Signing
+
+Institutional allocators can run the signing of their own vaults. With S3C (Self-Custodial Smart Contracts), a vault's key ceremony and every signature are restricted to at least three validators the allocator operates, and the public validator set never holds a share. Consensus still verifies the vault's Bitcoin and fixes every withdrawal, so the allocator keeps direct control of authorization and execution without stepping outside the network's rules.
+
+See [Institutional Signing (S3C)](/docs/core/s3c-institutional) for the setup.
+
+---
+
 ## Security Model
 
 VerifiedX is designed with a defense-in-depth approach:
 
+- Bitcoin state verified at the consensus layer, not taken from an external report
 - Multi-layer audits across all components
 - Validator consensus thresholds for critical operations
 - Cryptographic proof systems for asset verification

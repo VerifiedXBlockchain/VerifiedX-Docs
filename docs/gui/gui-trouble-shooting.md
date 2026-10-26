@@ -17,15 +17,15 @@ The first thing you should try is simply restarting your computer and then relau
 
 You may have a corrupt database file. Ensure your private keys(s) are backed up, the follow these steps:
 
-> Note: We have decided to keep the original network's name as the location of the DB folder to make it backwards compatible. This may be migrated in the future.
+> Note: The database folder keeps the original network's name, `RBX`, for backwards compatibility. This may be migrated in the future.
 
 1. Close your wallet.
 
-2. Ensure ReserveBlockCore is not running. You can either:
+2. Ensure VerifiedXCore (the CLI) is not running. You can either:
 
     a. Restart your computer AGAIN
 
-    b. Check your Task Manager (Windows) or Activity Monitor (MacOS) for a process called ReserveBlockCore and end it. Please note that this is a background process and you may need to switch to the advanced mode. If you are not familiar with how to do this, use option `a` above instead.
+    b. Check your Task Manager (Windows) or Activity Monitor (MacOS) for a process called VerifiedXCore and end it. Please note that this is a background process and you may need to switch to the advanced mode. If you are not familiar with how to do this, use option `a` above instead.
 
 3. Navigate to your DB Folder
 
@@ -41,7 +41,7 @@ You may have a corrupt database file. Ensure your private keys(s) are backed up,
 
 On some versions of windows, you may run into permission problems with the core CLI launching the API. To solve this issue you'll want to set both the GUI and the CLI to run as adminstrator:
 
-1. Navigate to `C:\Program Files (x87)\VFXWallet\`
+1. Navigate to the wallet's install folder, usually `C:\Program Files (x86)\VFXWallet\`
 
 2. Right click on `VFXWallet.exe` and choose `Properties`
 > If you don't see `VFXWallet.exe` it's likely because you don't have extensions visible on your machine. Instead, just look for `VFXWallet`.
@@ -50,22 +50,22 @@ On some versions of windows, you may run into permission problems with the core 
 
 4. Enable the checkbox for `Run this program as administrator` and click OK, and then OK again.
 
-5. Navigate into the `RBXCore` folder and repeat the same step for `ReserveBlockCore.exe`
-> If you don't have hidden files enabled, you will see three files called `ReserveBlockCore`. You'll want to use the one that has the VFX cube icon.
+5. Navigate into the `VFXCore` folder and repeat the same step for `VerifiedXCore.exe`
+> If you don't have extensions visible, look for `VerifiedXCore` with the VFX cube icon.
 
 6. Then launch the GUI as normal and everything should work as expected.
 
 ### It's still not working.
 
-We've determined it is not due to a rogue process nor a corrupted database. What we'll try next is seeing if we can manually launch the CLI.
+If it is not a rogue process or a corrupted database, the next step is to launch the CLI manually.
 
 1. Ensure your wallet is closed and no CLI processes are running (follow instructions above).
 
-2. Launch ReserveBlockCore
+2. Launch VerifiedXCore
 
-    a. Windows: navigate to `C:\Program Files (x86)\VFXWallet\RBXCore`. Then, launch `ReserveBlockCore.exe`. Note: you may not see `.exe` depending on your Windows' settings.
+    a. Windows: navigate to `C:\Program Files (x86)\VFXWallet\VFXCore`. Then, launch `VerifiedXCore.exe`. Note: you may not see `.exe` depending on your Windows' settings.
 
-    b. MacOS: navigate to `/Applications` and right click on `VFXWallet.app` and then choose `Show Package Contents`. Open up `Contents > Resources > RBXCore` and then launch `ReserveBlockCore`.
+    b. MacOS: navigate to `/Applications` and right click on `VFXWallet.app` and then choose `Show Package Contents`. Open up `Contents > Resources > VFXCore` and then launch `VerifiedXCore`.
 
 3. You should see the CLI booting up and blocks coming in. If an error message occurs, check the following:
 
@@ -94,7 +94,7 @@ Usually this is because you haven't reached the local block height where the tra
 
 It's also possible you haven't imported the correct key(s). Double check those.
 
-In the case that it's still off, sometimes a state tree rebuild can help. You'll need to force quit `ReserveBlockCore` in your Task Manager (Windows) or Activity Monitor (MacOS) and then close the GUI. Restart the GUI and the state tree will rebuild.
+In the case that it's still off, sometimes a state tree rebuild can help. You'll need to force quit `VerifiedXCore` in your Task Manager (Windows) or Activity Monitor (MacOS) and then close the GUI. Restart the GUI and the state tree will rebuild.
 
 ## I imported a snapshot and lost my keys
 
@@ -110,6 +110,6 @@ As mentioned during the snapshot import process, you must backup your keys befor
 
 
 :::note TIP
-**Not seeing the answer your looking for? Just ask the community!**
+**Not seeing the answer you're looking for? Just ask the community!**
 > <a href="https://discord.gg/7cd5ebDQCj">Join Discord</a>
 :::

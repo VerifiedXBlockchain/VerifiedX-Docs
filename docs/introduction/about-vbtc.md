@@ -5,7 +5,7 @@ sidebar_class_name: sidebar-btc
 
 # About vBTC
 
-vBTC transforms Bitcoin from a passive store of value into a trustless, programmable, institutional-grade settlement stablecoin and yield-enabled asset — without wrapped tokens, custody risk, or synthetic exposure.
+vBTC transforms Bitcoin from a passive store of value into a trustless, programmable, institutional-grade settlement and yield-enabled asset, without wrapped tokens, custody risk, or synthetic exposure. VerifiedX consensus verifies the Bitcoin behind every vault and fixes every redemption, so vBTC follows its Bitcoin exactly.
 
 > vBTC is a trustless, non-synthetic, programmable ownership of Bitcoin, designed to enable true native Bitcoin DeFi without custodial bridges, IOUs, or wrapped risk.
 
@@ -24,6 +24,15 @@ vBTC transforms Bitcoin from a passive store of value into a trustless, programm
 - **Non-Synthetic Bitcoin:** Not a derivative. No rehypothecation or balance-sheet exposure. Direct, provable ownership.
 - **1:1 Bitcoin Backing:** Deterministic mint, burn, and redemption.
 - **On-Chain Verifiability:** Supply and settlement are auditable on-chain. Validators attest each vault's Bitcoin to the chain, so balances do not rest on an off-chain report.
+
+---
+
+### Verified by Consensus
+
+- **Bitcoin-Aware Consensus:** Every node verifies Bitcoin's proof-of-work header chain and the Merkle inclusion of each vault deposit and spend. No Bitcoin server or block producer is taken at its word. See [Bitcoin Integration](/docs/core/bitcoin).
+- **Consensus-Fixed Redemption:** When a withdrawal is requested, consensus determines the exact Bitcoin transaction that pays it before any signature is made. The vault's signers can sign only that transaction.
+- **Threshold Signing:** Each vault's Bitcoin key exists only in shares among validators (FROST); no single party holds the whole key.
+- **Allocator-Controlled Signing:** Institutions can restrict a vault's key ceremony and signing to three or more validators they run (S3C). See [Institutional Signing](/docs/core/s3c-institutional).
 
 ---
 
@@ -83,6 +92,8 @@ vBTC transforms Bitcoin from a passive store of value into a trustless, programm
 - [vBTC GUI](/docs/gui/gui-vbtc)
 - [vBTC Integration](/docs/integration/vbtc)
 - [vBTC Raw Integration](/docs/integration/vbtc-raw)
+- [Bitcoin Integration in VerifiedX Core](/docs/core/bitcoin)
+- [Institutional Signing (S3C)](/docs/core/s3c-institutional)
 
 ### Solutions
 

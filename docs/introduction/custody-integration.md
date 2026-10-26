@@ -19,9 +19,9 @@ This is verifiable Bitcoin infrastructure.
 
 VerifiedX custody integration operates through a coordinated system of:
 
-- Multi-party custody (FROST MPC-based architecture)
-- Deterministic deposit and redemption workflows
-- On-chain proof publishing and verification
+- FROST threshold signing, with each vault's key held only in shares
+- Bitcoin-aware consensus that verifies every vault deposit and spend
+- Deterministic deposit and redemption workflows, with withdrawals fixed by consensus
 - 1:1 vBTC issuance and burn mechanics
 
 Custodians maintain control of underlying Bitcoin, while VerifiedX enables programmable utility on-chain.
@@ -39,14 +39,14 @@ Custodians maintain control of underlying Bitcoin, while VerifiedX enables progr
 
 ### Deterministic Mint & Redemption
 
-- Bitcoin deposit → verified proof → vBTC mint
-- vBTC burn → validated request → Bitcoin release
+- Bitcoin deposit → consensus-verified and buried 6 blocks → vBTC credited
+- vBTC withdrawal request → consensus-fixed Bitcoin transaction → Bitcoin release
 - Fully auditable lifecycle for every asset movement
 - No discretionary or opaque processes
 
 ### Proof-of-Reserves & Movement
 
-- On-chain proof publication for all custody events
+- Every vault deposit and spend recorded by consensus from Bitcoin's own proof-of-work and Merkle proofs
 - Independent verification of reserves and flows
 - Real-time visibility into system integrity
 - Cryptographic guarantees across all transactions
@@ -88,11 +88,18 @@ VerifiedX supports multiple institutional integration models:
 - Validator or service provider participation
 - Embedded support within institutional platforms
 
+### Allocator-Operated Signing
+
+- Run three or more of your own validators and restrict a vault's key ceremony and signing to them (S3C)
+- The public validator set never holds a share of those vaults' keys
+- See [Institutional Signing (S3C)](/docs/core/s3c-institutional)
+
 ---
 
 ## Security Model
 
-- FROST MPC custody design with distributed key management
+- FROST threshold signing with distributed key generation; optionally restricted to allocator-operated validators (S3C)
+- Bitcoin deposits and spends verified at the consensus layer
 - Multi-layer audit coverage across custody and protocol layers
 - Deterministic transaction validation and execution
 - Validator consensus thresholds for critical operations
