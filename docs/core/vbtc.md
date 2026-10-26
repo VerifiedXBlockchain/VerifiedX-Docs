@@ -30,6 +30,16 @@ Vaults created before the recording height (**legacy** vaults) keep the earlier 
 
 An owner can have a vault's key held only by validators the owner runs (S3C, self-custodial smart contracts): at least three of the owner's own registered validators, all of which take part in the key ceremony and in signing. Public vaults never use S3C validators. See [S3C vaults](../integration/vbtc.md#s3c-vaults).
 
+## vBTC.b on Base
+
+vBTC.b ("Verified Bitcoin on Base") carries vBTC to Base as an ERC-20 with 8 decimals, while the Bitcoin stays in its VerifiedX vaults and issuance stays canonical: every vBTC.b is backed by vBTC locked on VerifiedX.
+
+- **To Base.** The owner locks vBTC on VerifiedX (transaction type 37). Once the lock is 30 VFX blocks deep, the bridge's validators each sign an attestation of it, and the owner's node submits those signatures to the vBTC.b contract on Base, which mints only with at least two thirds of its validators' signatures (never fewer than two). The owner pays the Base gas from a Base address derived from the owner's VFX key.
+- **Back to VerifiedX.** A holder burns vBTC.b on Base naming a VFX address. The bridge's casters see the burn, agree on it, and credit the vBTC from the locked pool (type 39).
+- **Straight to Bitcoin.** A holder burns vBTC.b on Base naming a Bitcoin address. The casters record the exit on VerifiedX (type 40), consensus fixes the Bitcoin transactions that pay it from the vaults' coins, and the vaults' signers sign them, exactly as for a withdrawal. The exit completes when Bitcoin confirms it.
+
+vBTC cannot be bridged directly from an S3C vault; see [Institutional Signing (S3C)](./s3c-institutional.md#operating-the-pool). See [Bridging to Base](../integration/vbtc.md#bridging-to-base-vbtcb) for the routes.
+
 ## Networks
 
 vBTC on mainnet is backed by Bitcoin mainnet. The VerifiedX testnet follows the VerifiedX signet, a private Bitcoin signet with 10-minute blocks and an explorer at `https://signet.verifiedx.io` (Esplora API at `https://signet.verifiedx.io/api`); test BTC comes from the VerifiedX team, not a public faucet. See [Testnet](../integration/testnet.md).

@@ -780,6 +780,53 @@ On a legacy vault, before the enforcement height, this route is what pays the sh
 
 When an error comes back from the node's transaction check it is prefixed `TX Verify Failed: `.
 
+## Bridging to Base (vBTC.b)
+
+vBTC.b is vBTC on Base, an ERC-20 (`vBTCb`, symbol `vBTC.b`, 8 decimals) minted against vBTC locked on VerifiedX. See [vBTC.b on Base](../core/vbtc.md#vbtcb-on-base) for the model.
+
+### To Base
+
+The owner's node runs the whole flow: it broadcasts the lock (type 37), collects the bridge validators' mint attestations once the lock is 30 VFX blocks deep, and submits `mintWithProof` on Base from a Base address derived from the owner's VFX key. That address pays the Base gas, so fund it with a little ETH first.
+
+```
+GET  /wallet/api/base-address/{vfxAddress}
+GET  /wallet/api/vbtc/bridge/preflight/{ownerAddress}/{scUID}
+POST /wallet/api/vbtc/bridge/toBase
+```
+
+`preflight` shows what the bridge will need, including the ETH balance of the derived Base address. `toBase` takes a camel-case body with the amount as a string:
+
+```json
+{
+  "scUID": "<vault UID>",
+  "ownerAddress": "<owner VFX address>",
+  "amount": "0.0005",
+  "evmDestination": "0x<40 hex characters>"
+}
+```
+
+It is refused when the derived Base address holds no ETH. Follow it with `GET /wallet/api/vbtc/bridge/status/{lockId}`; if the Base submission fails, `POST /wallet/api/vbtc/bridge/retry/{lockId}/{ownerAddress}` (or `forceRetry`) submits it again.
+
+A lock is refused when the sender is a vault (reserve) account, the vault is S3C, the amount is not a whole number of satoshis, or `evmDestination` is not `0x` followed by 40 hex characters.
+
+`POST /vbtcapi/VBTC/BridgeToBase` (`SmartContractUID`, `OwnerAddress`, `Amount`, `EvmDestination`) broadcasts the lock only. To mint yourself, read the signatures from `GET /vbtcapi/VBTC/GetMintAttestation/{lockId}` and the contract address and ABI from `GET /vbtcapi/VBTC/GetBridgeConfig`, and call `mintWithProof` from your own EVM wallet.
+
+### Back to VerifiedX or out to Bitcoin
+
+Exits start on Base, from the holder's own EVM wallet; the node has no burn route.
+
+- `burnForVfxExit(amount, vfxDestinationAddress)` returns vBTC to a VFX address. The bridge's casters see the burn, agree on it and broadcast a pool unlock (type 39) that credits the destination.
+- `burnForBTCExit(amount, btcDestination)` pays Bitcoin. The casters record the exit on VerifiedX (type 40), and on watched vaults consensus pins each vault's part in the same block, exactly like a withdrawal. Follow it on any node with `GET /vbtcapi/VBTC/GetBridgeExit/{baseBurnTxHash}`: `Status` is `Waiting`, `Pinned`, `Complete` or `Failed`, and `Parts` lists each vault's pinned Bitcoin transaction. An exit not pinned within 360 blocks fails by rule and its locks are restored. The Bitcoin fee starts at 10 sat/vB and comes out of the payout.
+
+### Bridge status and balances
+
+- `GET /vbtcapi/VBTC/GetBridgeStatus`: whether the bridge is configured on this node, the contract, chain id and total vBTC.b supply on Base.
+- `GET /vbtcapi/VBTC/GetBridgeConfig`: `IsEnabled`, `ContractAddress`, `ChainId`, `Network` and the contract `Abi`.
+- `GET /vbtcapi/VBTC/GetBaseBalance/{evmAddress}`: an address's vBTC.b balance.
+- `GET /vbtcapi/VBTC/GetBridgeLockStatus/{lockId}`, `GetBridgeLocks/{scUID}` and `GetBridgeLocksByOwner/{ownerAddress}` read this node's own records, so ask the node that made the lock.
+
+Mainnet uses Base (chain id 8453) and testnet uses Base Sepolia (chain id 84532). A new `config.txt` is written with the network's contract and RPC (`BaseBridgeContract`, `BaseBridgeRpcUrl`, `BaseBridgeRpcUrl2`, `BaseBridgeRpcUrl3`, `BaseBridgeChainId`); a node whose existing `config.txt` lacks them reports `BridgeEnabled: false`.
+
 ## Legacy vaults
 
 A legacy vault was created before the attestation recording height. Its Bitcoin is not in consensus: its owner's balance comes from Bitcoin servers, and its withdrawals work the earlier way.
