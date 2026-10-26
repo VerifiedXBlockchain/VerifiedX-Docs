@@ -9,7 +9,7 @@ The most important step is to install .net core 6.
 
 For Linux you can find install instructions here https://docs.microsoft.com/en-us/dotnet/core/install/linux. This document will cover how to install for Ubuntu.
 
-In the last step for _dotnet ReserveBlockCore(.dll or .exe or blank)_ if that does not work you can also try _dotnet run ReserveBlockCore(.dll or .exe or blank)_
+In the last step for _dotnet VerifiedXCore(.dll or .exe or blank)_ if that does not work you can also try _dotnet run VerifiedXCore(.dll or .exe or blank)_
 
 ## Linux
 
@@ -31,7 +31,7 @@ Linux Install For Ubuntu 22.04:
 9. `dotnet build` - There should be 0 (zero) errors.
 10. `dotnet publish -c Release -r linux-x64 --output ./vfxpublished` \*\*please note the `linux-x64` can be changed if you are on a different architecture
 11. `cd vfxpublished`
-12. `dotnet ReserveBlockCore.dll`
+12. `dotnet VerifiedXCore.dll`
 
 You are done! You should now see a wallet running! Some common errors are usually related to file permissions. Please ensure you have given proper permission to the newly created VFX folder
 
@@ -77,7 +77,7 @@ Once that is installed follow steps below.
 5. `dotnet build` - There should be 0 (zero) errors.
 6. `dotnet publish` -c Release -r win-x64 --output ./vfxpublished \*\*please note the `win-x64` can be changed if you are on a different architecture
 7. `cd vfxpublished`
-8. `dotnet ReserveBlockCore.exe`
+8. `dotnet VerifiedXCore.exe`
 
 ## Mac OSX
 
@@ -92,7 +92,7 @@ Once that is installed follow steps below.
 5. `dotnet build` - There should be 0 (zero) errors.
 6. `dotnet publish -c Release -r osx-x64 --output ./vfxpublished `\*\*please note the `osx-x64` can be changed if you are on a different architecture like arm.
 7. `cd vfxpublished`
-8. `dotnet ReserveBlockCore`
+8. `dotnet VerifiedXCore`
 
 ## Native libraries and PLONK parameters
 

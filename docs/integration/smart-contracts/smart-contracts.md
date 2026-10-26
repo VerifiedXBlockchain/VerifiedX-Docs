@@ -22,14 +22,14 @@ Snippets from this repo are also included within the following docs, but the exa
 
 1. You will need a core CLI running with its API enabled
     - Either press `10` to enable the API in the CLI's interface
-    - Or, you can launch it like so: `./ReserveBlockCore enableapi`
+    - Or, you can launch it like so: `./VerifiedXCore enableapi`
 
 2. If the wallet will be running on an alternate machine, you'll need to enable the `openapi` flag when launching
-    - `./ReserveBlockCore enableapi openapi`
+    - `./VerifiedXCore enableapi openapi`
     - This will allow you to communicate to the CLI's API outside of localhost
 
 3. If you are planning on running it using openapi, it is recommended you seed an `apitoken` to block non-authenticated access.
-    - `./ReserveBlockCore enableapi openapi apitoken=random_lowercase_string`
+    - `./VerifiedXCore enableapi openapi apitoken=random_lowercase_string`
     - Then, in all requests you will need to add this key/value into your headers: `{"apitoken": "random_lowercase_string"}`
     - If this is not included and/or is not the correct token, the API will throw a 403 error
 
