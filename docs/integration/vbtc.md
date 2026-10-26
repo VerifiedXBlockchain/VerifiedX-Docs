@@ -298,7 +298,7 @@ The vault's Bitcoin as consensus holds it: deposit script, every unspent coin an
     "PinnedSats": 0,
     "ReleaseFeesSats": 308,
     "SweepFeesSats": 0,
-    "Keys": [ { "Generation": 0, "DepositAddress": "bc1p…", "Holders": 13, "MinSigners": 9, "Current": true, "RekeyDue": false } ],
+    "Keys": [ { "Generation": 0, "DepositAddress": "bc1p…", "Holders": 13, "MinSigners": 7, "Current": true, "RekeyDue": false } ],
     "CanSign": true,
     "Coins": [ { "Outpoint": "<txid>:1", "ValueSats": 7000, "Status": "Unspent", "HeldFor": null } ],
     "OrphanedCoins": [],
