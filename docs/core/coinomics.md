@@ -22,7 +22,7 @@ The VerifiedX (VFX) coin is the native coin of the VerifiedX network. It pays fo
 
 - **Becoming a Validator**: Running a validator requires 5,000 VFX, bonded to the validator address. The bond cannot be spent while the validator is registered and unlocks 1,200 blocks after the validator's exit transaction is mined. A validator takes part in vBTC key ceremonies and Bitcoin report signing once its bond has been in place for 14,400 blocks (about two days). See [Run a Validator](./validator-guide.md).
 
-- **Proposing and Voting**: On-chain governance is open to validators. A proposal (topic) is created from a validator address that holds at least 5,000 VFX and costs 10 VFX, which is burned. Votes are cast from validator addresses holding at least 5,000 VFX, one vote per address per topic, and cost only the network fee. Voting periods are 30, 60, 90 or 180 days.
+- **Proposing and Voting**: On-chain governance is open to validators. A proposal (topic) is created from a validator address that holds at least 5,000 VFX and costs 10 VFX, which is burned. Validators vote on proposals, one vote per validator, and a vote costs only the network fee. Voting periods are 30, 60, 90 or 180 days.
 
 - **Utility Fees**: VFX pays the network's utility fees, all of which are burned:
 

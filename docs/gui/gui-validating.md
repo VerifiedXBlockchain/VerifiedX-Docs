@@ -13,4 +13,4 @@ To become a validator on the VerifiedX network, you'll need:
 
 Validators receive no block rewards. They secure the network, and from Core 9.0 they also follow Bitcoin, sign the reports that record vBTC vault deposits and spends, and take part in vBTC key ceremonies and withdrawal signing once their bond has been in place for about two days. See [Run a Validator](../core/validator-guide.md) for the full picture.
 
-Validators also govern the network. A validator address holding at least 5,000 VFX can vote on network proposals, one vote per address per proposal, and can create a proposal for 10 VFX, which is burned. This is all accomplished with real-time 'one-click' actions and visuals in the wallets.
+Each validator you run grants you one vote on network proposals, changes, and enhancements, creating a truly decentralized governing body with a one CPU one vote methodology, where validators collectively shape the future of the network. This is all accomplished with real-time ‘one-click’ actions and visuals in the wallets.
