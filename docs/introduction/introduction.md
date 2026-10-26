@@ -36,7 +36,7 @@ Through products and infrastructure including vBTC, vBTC.b, BFLY, SwitchBlade, a
 - **TPS:** 25,000 – 30,000 (scales with validator growth)
 - **Supply:** 200M fixed, fully circulated
 - **Effective Supply:** 132.7M (less burns, lost keys, bans, and treasury of 67.3M)
-- **Governance:** On-chain voting, one CPU one vote per validator
+- **Governance:** On-chain proposals and voting by validators, one vote per validator address (5,000 VFX bond)
 - **Carbon Footprint:** Carbon Neutral
 
 All fees burn. No inflationary features. Completely deflationary asset.

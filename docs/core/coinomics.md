@@ -4,32 +4,44 @@ sidebar_position: 11
 
 # VerifiedX (VFX) Coin Summary
 
-The VerifiedX (VFX) coin is the native cryptocurrency of the VerifiedX platform, a next-generation blockchain designed to operate completely decentralized and autonomously.
+The VerifiedX (VFX) coin is the native coin of the VerifiedX network. It pays for every transaction, secures the network through validator bonds, and gives validators their voice in governance.
 
 ## Coinomics
 
-- **Total Lifetime Supply**: The total lifetime supply of VerifiedX (VFX) is capped at 200,000,000 coins. There will never be more than this amount of VFX in circulation.
+- **Total Lifetime Supply**: The total lifetime supply of VFX is capped at 200,000,000 coins. There will never be more than this amount of VFX in circulation.
 
-- **Anti-Inflationary Model**: VerifiedX employs an anti-inflationary model by permanently burning coins. Once coins are burned, they are removed from the circulating supply for good, helping to maintain scarcity and stabilize the value of the coin over time. Coins are burned through tx fees, DNR registration, shop registration, and many other ways. 
+- **No Validator Rewards**: Validators receive no new coins. Block rewards ended at block 3,074,181, and the supply was completed at 200,000,000 at block 3,074,185. No VFX has been minted since, and consensus refuses any block that pays a reward.
 
-- **No Validator Rewards**: Validators on the VerifiedX network do not receive new coins as rewards. This means no additional VFX coins will ever be minted or introduced into circulation, ensuring that the coin supply remains constant and deflationary over time. This also eliminates the inherent parasitic draw these type of features have on a network. 
+- **Anti-Inflationary Model**: VFX is permanently burned, never collected. Every transaction fee is destroyed, as are the VFX paid to register a domain, open an auction house, register a vault account, or create a governance proposal. Once burned, coins are removed from the circulating supply for good.
 
-- **Sustainable Model**: The lack of new coin issuance, combined with the coin-burning mechanism, creates a sustainable and deflationary system that supports long-term value retention.
+- **Sustainable Model**: No new issuance, combined with continuous burning, makes VFX a fixed and deflationary supply that supports long-term value retention.
 
 ## Coin Utility
 
-- **Network Purpose**: VFX is the mechanism used to generate transactions on the VerifiedX network. Without VFX one cannot transaction on the network. VFX is used to pay all transactions fees and any other utility fee like registering a DNR or a vault account. 
+- **Transactions**: VFX is required to transact on the VerifiedX network. Every transaction, including vBTC, token and NFT transactions, pays its network fee in VFX.
 
-- **Fees**: VFX operates as the core and only coin for fees on the VerifiedX network.
+- **Becoming a Validator**: Running a validator requires 5,000 VFX, bonded to the validator address. The bond cannot be spent while the validator is registered and unlocks 1,200 blocks after the validator's exit transaction is mined. A validator takes part in vBTC key ceremonies and Bitcoin report signing once its bond has been in place for 14,400 blocks (about two days). See [Run a Validator](./validator-guide.md).
 
-- **Gasless**: VFX is not on an EVM and so, does not require gas. Our smart contracts have in built recursion protection and because of this do not need gas fees. 
+- **Proposing and Voting**: On-chain governance is open to validators. A proposal (topic) is created from a validator address that holds at least 5,000 VFX and costs 10 VFX, which is burned. Votes are cast from validator addresses holding at least 5,000 VFX, one vote per address per topic, and cost only the network fee. Voting periods are 30, 60, 90 or 180 days.
+
+- **Utility Fees**: VFX pays the network's utility fees, all of which are burned:
+
+| Action | Cost |
+|---|---|
+| Domain name (`.vfx` or `.btc`): create, transfer or delete | 5 VFX |
+| Auction house: create / update / delete | 10 / 1 / 1 VFX |
+| Vault (reserve) account registration | 4 VFX |
+| Governance proposal | 10 VFX |
+| Vote | network fee only |
+
+- **Fees**: VFX is the only coin used for fees on the VerifiedX network. The network fee is 0.00002 VFX per KB of transaction, with a minimum of 0.000003 VFX. Bitcoin-side fees for vBTC withdrawals are paid in BTC.
+
+- **Gasless**: VerifiedX smart contracts do not run on an EVM and do not need gas. They have built-in recursion protection, so execution costs no gas fees.
 
 ## Coin Details
 
 - VFX is capped at 200,000,000.
-- Near zero transaction fees.
+- Near zero transaction fees, all of them burned.
 - Is a native coin and not built on another network.
 - Generally only uses 8 decimals.
-- Is recoverable through vault accounts. 
-
-
+- Is recoverable through vault accounts.
