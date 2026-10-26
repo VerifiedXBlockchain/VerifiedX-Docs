@@ -43,12 +43,12 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
-    title: 'Video Tutorials',
-    url: "/docs/tutorials/video-tutorials/",
+    title: 'vBTC',
+    url: "/docs/introduction/about-vbtc",
 
     description: (
       <>
-        Learn more about installing and operating VFX Switchblade through a collection of video tutorials.
+        Learn how vBTC makes Bitcoin programmable, with native Bitcoin redemption.
 
       </>
     ),

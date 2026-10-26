@@ -4,11 +4,28 @@ sidebar_position: 1
 
 # About VerifiedX
 
-VerifiedX (VFX) is the financial operating system for Bitcoin and intelligent real-world assets — pairing self-custodial ownership, instant settlement, programmable finance, native Bitcoin utility, and agentic financial infrastructure. Through products including vBTC, SwitchBlade, BFLY, and PulseXAI, VerifiedX connects institutions, users, and autonomous systems through a unified ecosystem. Its asset infrastructure is designed for real-world use with programmable features: protocol-enforced asset functionality, deterministic settlement, and automated financial flows.
+VerifiedX is a financial operating system for Bitcoin and intelligent assets, designed to enable self-custodial ownership, programmable finance, native Bitcoin utility, instant settlement, and agentic financial infrastructure.
 
-> "If Bitcoin is Cyber Manhattan, VerifiedX is the Statue of Liberty."
+VerifiedX is an independent Layer 1 network with Bitcoin-aware consensus. The protocol independently validates Bitcoin’s proof-of-work header chain and cryptographic transaction inclusion, allowing verified Bitcoin state to become a consensus-enforced input to the VerifiedX state machine. This enables Bitcoin to participate in programmable financial applications without relying on pooled custodial representations, external attestations, or smart contracts as the ultimate authority over asset execution.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/hgp9nlsWFv8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
+VerifiedX separates ownership, verification, authorization, and execution. Bitcoin establishes the underlying transaction truth; VerifiedX consensus independently verifies and enforces that state; asset owners retain authorization over their Bitcoin; and threshold signing infrastructure executes protocol-permitted Bitcoin transactions. Institutional allocators can operate their own validator and FROST signing infrastructure, preserving direct control over their Bitcoin authorization and execution environment.
+
+Unlike architectures in which application-level smart contracts determine financial state transitions, VerifiedX places critical financial rules and asset protections at the consensus layer. Smart contracts and applications can provide instructions, while consensus determines whether execution is permitted under the network’s rules.
+
+Through products and infrastructure including vBTC, vBTC.b, BFLY, SwitchBlade, and PulseXAI, VerifiedX connects institutions, individuals, applications, and autonomous systems through a unified financial infrastructure designed around verifiable ownership, deterministic execution, and native asset utility.
+
+---
+
+### VerifiedX Ecosystem
+
+- **vBTC & vBTC.b** — Programmable Bitcoin infrastructure with native Bitcoin redemption and canonical interoperability.
+- **BFLY** — Payments, savings, commerce, and click-to-earn infrastructure for users and intelligent applications.
+- **SwitchBlade** — Self-custodial wallet and asset-control technology.
+- **PulseXAI** — Generative and tokenized intelligence infrastructure for autonomous financial agents and intelligent assets.
+- **Institutional Bitcoin Infrastructure** — Allocator-controlled signing, settlement, and programmable Bitcoin architecture.
+- **Bitcoin-Aware Consensus** — Consensus-level verification of Bitcoin headers, transaction inclusion, and attested Bitcoin state.
+- **Consensus-Driven Programmability** — Financial execution governed by protocol consensus rules rather than application code alone.
+- **Canonical Interoperability** — Infrastructure for extending VerifiedX assets and functionality across external blockchain ecosystems while maintaining canonical issuance and redemption.
 
 ---
 
@@ -26,22 +43,6 @@ All fees burn. No inflationary features. Completely deflationary asset.
 
 ---
 
-### Key Innovations
-
-- **VFX SwitchBlade Wallet:** Multi-interface (CLI, GUI, Web) non-custodial wallet supporting VFX & BTC with tokenization, lending, vaulting, auctions, domain naming, and fiat on/off ramps.
-- **vBTC (Verified Bitcoin):** First decentralized, self-custodial Bitcoin token with a 1:1 BTC peg, near-zero fees, instant settlement, and added on-chain utility.
-- **VFX Vaults:** "Cold storage in a hot wallet" with 24-hour recovery, escrow, and self-destruct restore options.
-
----
-
-### Why Bitcoin?
-
-Bitcoin is the tried, true, and battle-tested network for digital capital. With a finite supply, BTC is a store of value that is digital gold, perfected property, and a hedge that is borderless and permissionless. It is the solution to transforming capital from financial and physical assets to digital assets and reduces barriers for the unbanked.
-
-But Bitcoin has limitations — slow confirmation times, high fees during congestion, limited on-chain utility, and self-custody challenges. VerifiedX addresses these by enabling tokenized commerce, DeFi, and secure self-custody while staying true to Bitcoin's original mission as sound, decentralized money.
-
----
-
 ### Documents & Resources
 
 - [VerifiedX Deck](/docs/documents/slide-deck)
@@ -50,7 +51,7 @@ But Bitcoin has limitations — slow confirmation times, high fees during conges
 - [VFX Ecosystem Console](/docs/introduction/vfx-ecosystem)
 - [vBTC Ecosystem](/docs/introduction/vbtc-ecosystem)
 - [About vBTC](/docs/introduction/about-vbtc)
-- [vBTC Institutional](/docs/documents/vbtc-institutional)
-- [vBTC DeFi](/docs/documents/vbtc-defi)
-- [vBTC Tech & Flow](/documents/vBTC-v2-TechAndFlow.pdf)
+- [vBTC Hero Doc](/docs/documents/vbtc-hero-doc)
+- [vBTC Flow](/docs/documents/vbtc-flow)
+- [vBTC and vBTC.b Technical](/docs/documents/vbtc-technical)
 - [Halborn Audit](/docs/documents/halborn-audit)

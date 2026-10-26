@@ -51,10 +51,6 @@ vBTC on mainnet is backed by Bitcoin mainnet. The VerifiedX testnet follows the 
 
 [vBTC Flow](../documents/vbtc-flow)
 
-[vBTC DeFi](../documents/vbtc-defi)
-
 [vBTC One Sheet](../documents/vbtc-one-sheet)
-
-[vBTC Institutional](../documents/vbtc-institutional)
 
 The source is in the [VerifiedX Core repository](https://github.com/VerifiedXBlockchain/VerifiedX-Core).

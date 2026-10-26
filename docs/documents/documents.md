@@ -15,14 +15,10 @@ sidebar_position: 1
 
 [vBTC Flow](./vbtc-flow)
 
-[vBTC DeFi](./vbtc-defi)
-
 [vBTC One Sheet](./vbtc-one-sheet)
 
-[vBTC Institutional](./vbtc-institutional)
+[vBTC and vBTC.b Technical](./vbtc-technical)
 
 [Prism Privacy](/docs/introduction/prism-privacy)
 
 [Halborn Audit](./halborn-audit)
-
-[Legacy Core Audit and Opinion](./legacy-audit)

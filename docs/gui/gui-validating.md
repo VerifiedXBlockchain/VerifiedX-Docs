@@ -6,11 +6,9 @@ sidebar_position: 13
 # Validating
 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/WXyil3BzLDk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
-
 To become a validator on the VerifiedX network, you’ll need:
 
-- 5,000 VFX (fully liquid and usable anytime). Note: the video above mentions 50k which was the correct amount at the time of recording.
+- 5,000 VFX (fully liquid and usable anytime).
 - A machine meeting the standard specs, with a static IP address. 
 - Four open ports for network connectivity. (`3338`, `3339`, `7294`, and `7295`)
 

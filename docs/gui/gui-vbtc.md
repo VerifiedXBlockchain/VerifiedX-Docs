@@ -6,9 +6,6 @@ sidebar_class_name: sidebar-btc
 
 # Verified Bitcoin (vBTC)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/R_i1DwBUrA8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
-
-
 ### Overview
 vBTC is Bitcoin on the VerifiedX network, one to one:
 - Each vBTC is backed by Bitcoin held in a vault whose key is split among VerifiedX validators.

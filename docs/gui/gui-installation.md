@@ -4,8 +4,6 @@ sidebar_position: 2
 
 # Installation Instructions
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/vc5mDE81c88" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen></iframe>
-
 ### macOS
 1. **Download**: Visit the VerifiedX website and download the DMG file appropriate for your system’s architecture (ARM or Intel).
 2. **Open the File**: Double-click the downloaded file to open it.

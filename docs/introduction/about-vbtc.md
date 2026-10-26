@@ -74,9 +74,7 @@ vBTC transforms Bitcoin from a passive store of value into a trustless, programm
 ### Documents
 
 - [vBTC Hero Doc](/docs/documents/vbtc-hero-doc)
-- [vBTC DeFi](/docs/documents/vbtc-defi)
 - [vBTC One Sheet](/docs/documents/vbtc-one-sheet)
-- [vBTC Institutional](/docs/documents/vbtc-institutional)
 - [vBTC Tech & Flow](/docs/documents/vbtc-flow)
 
 ### Technical
