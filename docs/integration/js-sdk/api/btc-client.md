@@ -508,7 +508,7 @@ const SATOSHI_TO_BTC_MULTIPLIER = 0.00000001;
 ### Networks
 The client automatically configures the correct Bitcoin network based on the constructor parameter:
 - `'mainnet'`: Bitcoin mainnet
-- `'testnet'`: the VerifiedX signet, a private Bitcoin signet with 10-minute blocks and `tb1…` addresses (explorer `https://signet.verifiedx.io`). There is no public faucet; ask the VerifiedX team for test BTC.
+- `'testnet'`: the VerifiedX signet, a private Bitcoin signet with 10-minute blocks and `tb1…` addresses (explorer `https://signet.verifiedx.io`). Test BTC comes from the [testnet faucet](https://spyglass-testnet.verifiedx.io/faucet) (Signet BTC tab).
 
 ## Examples
 
