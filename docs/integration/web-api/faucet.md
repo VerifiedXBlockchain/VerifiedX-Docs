@@ -4,7 +4,7 @@ sidebar_position: 7
 
 # Web API: Faucet
 
-The testnet faucet pays testnet VFX and signet BTC (Bitcoin on the [VerifiedX signet](../testnet.md#bitcoin-the-verifiedx-signet)) for development and testing. It is the API behind the [faucet page](https://spyglass-testnet.verifiedx.io/faucet) on the testnet explorer, and it only runs on testnet.
+The testnet faucet pays testnet VFX and signet BTC (Bitcoin on the [VerifiedX signet](../signet.md), the testnet's own Bitcoin network) for development and testing. It is the API behind the [faucet page](https://spyglass-testnet.verifiedx.io/faucet) on the testnet explorer, and it only runs on testnet.
 
 A request is confirmed by a code sent by SMS to a phone number, and each verified phone number has a lifetime limit for each asset.
 
