@@ -83,7 +83,7 @@ Teams that run automated tests against the testnet can ask for:
 - **A faucet automation token**, which funds addresses through the faucet API without the SMS step.
 - **Signet blocks on demand**, so a test does not wait about 10 minutes for each confirmation.
 
-Ask in the `Testnet Faucet` channel on [Discord](https://discord.gg/7cd5ebDQCj). The token and the endpoint details come with access.
+Both come with [Partner API access](./signet.md#partner-api-access), which explains how to ask for it and how to call both APIs.
 
 ---
 

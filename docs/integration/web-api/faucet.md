@@ -127,4 +127,4 @@ Teams that test against the VerifiedX testnet from scripts or CI can ask for an 
 
 The VerifiedX team can also give automation access to mine signet blocks on demand, so a test does not have to wait about 10 minutes for each confirmation.
 
-To ask for either, write in the `Testnet Faucet` channel on [Discord](https://discord.gg/7cd5ebDQCj). The token and the endpoint details come with access. Keep the token out of repositories, logs and issue trackers.
+Both are part of [Partner API access](../signet.md#partner-api-access), which explains how to ask for it, the limits, and how to call both APIs. Keep the tokens out of repositories, logs and issue trackers.
