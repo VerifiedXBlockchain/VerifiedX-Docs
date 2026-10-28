@@ -54,7 +54,7 @@ Testnet Faucet: https://spyglass-testnet.verifiedx.io/faucet
 
 ## Bitcoin: the VerifiedX signet
 
-For anything Bitcoin related, the VerifiedX testnet uses the VerifiedX signet, a private Bitcoin signet run by the VerifiedX team. It replaces Bitcoin testnet4.
+For anything Bitcoin related, the VerifiedX testnet uses the VerifiedX signet, a private Bitcoin signet run by the VerifiedX team. It replaces Bitcoin testnet4. See [VerifiedX Signet](./signet.md) for how it works, its explorer and APIs, and mining blocks on demand.
 
 Bitcoin Signet Explorer: https://signet.verifiedx.io
 
