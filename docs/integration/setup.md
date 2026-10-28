@@ -443,13 +443,11 @@ Please be sure you are on testnet so as to not make any mistakes with your mainn
 VFX addresses on testnet will ALWAYS start with an `x`. For Example:
 `xC1zNn7596TC4Bcyn1vE88pj12hfieqCoa`
 
-The primary testnet faucet will come from this address (subject to change): `xMpa8DxDLdC9SQPcAFBc2vqwyPsoFtrWyC`
+There are three ways to get testnet funds:
 
-There are three ways to get funds from the faucet:
-
-1. Message the discord channel titled `Testnet Faucet` with your VFX address and funds will be sent.
-2. Reach out to your point of contact through your current chat tool (telegram, skype, email, etc.) and ask them to send funds to a request testnet address.
-3. Use the testnet faucet via the explorer (https://spyglass-testnet.verifiedx.io/faucet)
+1. Use the testnet faucet on the explorer (https://spyglass-testnet.verifiedx.io/faucet). It pays testnet VFX and signet BTC after an SMS check. See [Testnet](./testnet.md#getting-test-funds).
+2. Message the Discord channel titled `Testnet Faucet` with your address and funds will be sent.
+3. Reach out to your point of contact through your current chat tool (telegram, skype, email, etc.) and ask them to send funds to a requested testnet address.
 
 It is advised to begin with testnet to ensure all functions are working with your environment before moving over to mainnet.
 

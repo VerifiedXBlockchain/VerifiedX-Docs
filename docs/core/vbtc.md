@@ -42,7 +42,7 @@ vBTC cannot be bridged directly from an S3C vault; see [Institutional Signing (S
 
 ## Networks
 
-vBTC on mainnet is backed by Bitcoin mainnet. The VerifiedX testnet follows the VerifiedX signet, a private Bitcoin signet with 10-minute blocks and an explorer at `https://signet.verifiedx.io` (Esplora API at `https://signet.verifiedx.io/api`); test BTC comes from the VerifiedX team, not a public faucet. See [Testnet](../integration/testnet.md).
+vBTC on mainnet is backed by Bitcoin mainnet. The VerifiedX testnet follows the VerifiedX signet, a private Bitcoin signet with 10-minute blocks and an explorer at `https://signet.verifiedx.io` (Esplora API at `https://signet.verifiedx.io/api`); test BTC comes from the [testnet faucet](https://spyglass-testnet.verifiedx.io/faucet) (Signet BTC tab). See [Testnet](../integration/testnet.md#getting-test-funds).
 
 ## Benefits
 

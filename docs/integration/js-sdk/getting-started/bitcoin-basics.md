@@ -437,7 +437,7 @@ Now that you understand Bitcoin basics:
 ## Common Issues
 
 ### Insufficient Balance
-Make sure your wallet has enough Bitcoin. On testnet, use a Bitcoin testnet faucet.
+Make sure your wallet has enough Bitcoin. On testnet, get signet BTC from the [testnet faucet](https://spyglass-testnet.verifiedx.io/faucet) (Signet BTC tab).
 
 ### Transaction Fee Too Low
 Increase the fee rate if transactions are stuck in mempool.

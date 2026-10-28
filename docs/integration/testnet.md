@@ -62,7 +62,28 @@ Bitcoin Signet Esplora API: https://signet.verifiedx.io/api
 
 The signet keeps Bitcoin's 10-minute blocks. A vBTC vault event (a deposit, or a withdrawal's payment) counts once 3 signet blocks are on top of its block. The testnet restarted from genesis in October 2026 for the move to the signet: every vault on it is watched (the attestation recording height is 400). See [vBTC](./vbtc.md).
 
-Bitcoin addresses look the same as on other Bitcoin test networks (`tb1…`). There is no public signet faucet: ask the VerifiedX team in the Discord for test BTC.
+Bitcoin addresses look the same as on other Bitcoin test networks (`tb1…`).
+
+## Getting test funds
+
+The [testnet faucet](https://spyglass-testnet.verifiedx.io/faucet) pays both testnet VFX and signet BTC:
+
+1. Open the faucet and pick the **VFX** or **Signet BTC** tab.
+2. Enter your address (a VFX address starting with `x`, or a signet address starting with `tb1`), the amount and your phone number.
+3. Enter the code you receive by SMS. The faucet sends the funds and shows the transaction.
+
+Each phone number can receive up to the limits shown on the faucet page (currently 1,000 VFX and 0.01 BTC in total). Signet BTC confirms in the next signet block, about 10 minutes. For more, ask in the `Testnet Faucet` channel on Discord.
+
+The same faucet is available as an API: see [Web API: Faucet](./web-api/faucet.md).
+
+### For test automation
+
+Teams that run automated tests against the testnet can ask for:
+
+- **A faucet automation token**, which funds addresses through the faucet API without the SMS step.
+- **Signet blocks on demand**, so a test does not wait about 10 minutes for each confirmation.
+
+Ask in the `Testnet Faucet` channel on [Discord](https://discord.gg/7cd5ebDQCj). The token and the endpoint details come with access.
 
 ---
 
