@@ -281,7 +281,11 @@ A withdrawal row (one per vault share of a request):
 The node reports a withdrawal's pin in the block that mines the request. The explorer reads it later, after a following Bitcoin report, so `pin_state` and `pin_txid` can be empty while a withdrawal is already pinned. Integrators should follow open withdrawals with the node's `GetWithdrawalPin` and `GetWithdrawalRequestShares` routes ([vBTC](/docs/integration/vbtc#follow-a-withdrawal)).
 :::
 
-The `/api/btc/vbtc-v2/…/prepare/` and `…/send/` routes forward raw builds and signed submissions to a node's `vbtcapi/VBTC` raw routes. They take snake-case fields (for a withdrawal request `sc_identifier`, `requestor_address`, `btc_address`, `amount`, `fee_rate`; for a send `hash`, `signature`, `public_key`) and answer with the node's answer and `success`, or with `success: false`, `message` and the node's answer under `raw`. The steps and checks are those of [vBTC Raw Integration](/docs/integration/vbtc-raw). The explorer has no route for the multi-vault withdrawal or for a fee raise or release; send those to a node.
+The `/api/btc/vbtc-v2/…/prepare/` and `…/send/` routes forward raw builds and signed submissions to a node's `vbtcapi/VBTC` raw routes. They take snake-case fields (for a withdrawal request `sc_identifier`, `requestor_address`, `btc_address`, `amount`, `fee_rate`; for a send `hash`, `signature`, `public_key`) and answer with the node's answer and `success`, or with `success: false`, `message` and the node's answer under `raw`. The steps and checks are those of [vBTC Raw Integration](/docs/integration/vbtc-raw).
+
+A multi-vault withdrawal is built with `POST /api/btc/vbtc-v2/withdraw/multi/prepare/`, which forwards to the node's `GetRawRequestWithdrawalMultiTxData`. It takes `requestor_address`, `btc_address`, `total_amount`, `fee_rate` and `inputs`, one `{"sc_identifier", "amount"}` per vault (at most 10, summing to `total_amount`). The node checks every share against the vault, the per-share fee floor and the destination before answering with the hash to sign. The signed hash goes through `withdraw/request/send/`, like a single-vault request. A refusal answers HTTP 500 with the node's `message`, and a missing field HTTP 400.
+
+The explorer has no route for a fee raise or release; send those to a node.
 
 ## Field Descriptions
 

@@ -209,7 +209,37 @@ Releases the .btc domain on `btcFromAddress`, managed by the signer. Costs 5 VFX
 
 The network refuses every domain operation from a reserve (xRBX) account.
 
-## vBTC Multi-Contract Transfer
+## vBTC V2
+
+These methods create vBTC V2 vaults, move vBTC and withdraw it to Bitcoin through the explorer API (Spyglass). For the protocol behind them (watched vaults, pinned withdrawals, fee floors) see [vBTC Integration](../../vbtc.md). Every method that signs takes either `privateKey` or an external `signer` (see [External Signing](#external-signing)), and none of them runs on a `dryRun` client.
+
+Since Core 9.0 the chain watches vaults created from the attestation recording height: their withdrawals are paid by the vault's signers on a Bitcoin transaction the chain pins, with no FROST ceremony and no completion transaction. Vaults created before it ("legacy" vaults, `is_watched: false`) still complete withdrawals with a FROST ceremony. The withdrawal methods below handle both and say which they are dealing with.
+
+### Reading vaults
+
+| Method | Returns |
+|--------|---------|
+| `listVbtcTokens()` | Every V2 vault the explorer indexes |
+| `getVbtcTokens(address)` | The vaults `address` owns or holds vBTC on |
+| `getVbtcTokenDetail(scIdentifier)` | One vault |
+| `getVbtcTransfers(scIdentifier)` | The vault's vBTC transfers |
+| `getVbtcWithdrawals(scIdentifier)` | The vault's withdrawal requests and their status |
+
+A vault (`VbtcV2Token`) carries `sc_identifier`, `owner_address`, `deposit_address`, `global_balance`, `is_watched`, `addresses` (each holder's balance) and `available_balances` (each holder's balance minus its open withdrawal requests, which is what can be sent). Older explorer deployments omit the last two; fall back to `addresses`.
+
+### `createVbtcToken({ ownerAddress, privateKey | signer, name, description, ticker, onProgress?, pollIntervalMs?, timeoutMs? })`
+
+Creates a vault owned by `ownerAddress`: it runs the key ceremony (the owner signs its start and share-distribution messages), waits for it to finish (default timeout 3 minutes, polled every 4 s), then signs and sends the contract create transaction. `onProgress` reports `ceremony_started`, `ceremony_polling`, `ceremony_complete`, `contract_preparing` and `contract_sent`.
+
+**Returns:** `Promise<{ transactionHash: string; scIdentifier: string; depositAddress: string }>`
+
+Send Bitcoin to `depositAddress` to fund the vault. The explorer may answer 404 for a new vault for a minute or two until it has indexed the create transaction.
+
+### `transferVbtc({ scIdentifier, fromAddress, toAddress, amount, privateKey | signer })`
+
+Sends `amount` vBTC from one vault to `toAddress`. A `.vfx` name is resolved to its address first, and a recipient on the other network is refused before anything is built.
+
+**Returns:** `Promise<{ transactionHash: string }>`
 
 ### `transferVbtcMulti({ toAddress, totalAmount, privateKey | signer, inputs? })`
 
@@ -226,6 +256,104 @@ refuses it from a reserve account or to a shielded address.
 
 `allocateVbtcInputs(balances, total)` and `vbtcMultiTransferData(...)` are
 exported for callers that fetch balances or choose contracts themselves.
+
+### `requestWithdrawal({ scIdentifier, requestorAddress, btcAddress, amount, feeRate, privateKey | signer, onProgress?, pollIntervalMs?, timeoutMs? })`
+
+Withdraws `amount` vBTC from one vault to `btcAddress` at `feeRate` sat/vB: it sends the withdrawal request (type 27), then calls `completeWithdrawal` for it. The Bitcoin fee comes out of `amount`, and at least 546 sats must be left after a fee of 154 vB at `feeRate`, so the smallest withdrawal is `154 × feeRate + 546` sats. The SDK refuses a smaller one before building.
+
+**Returns:** `Promise<VbtcWithdrawalResult>`: `withdrawalRequestHash`, `paid`, `btcTransactionHash` and `completionTransactionHash` (both empty while `paid` is false), and `watched` (the withdrawal's state on a watched vault, else `null`).
+
+On a watched vault the result usually comes back with `paid: false`: the chain has taken the request and the vault's signers are paying it, which takes Bitcoin confirmations. Nothing more needs to be sent. Follow it with `getWithdrawalPin`, or call `completeWithdrawal` again later.
+
+If the request is on chain but completing it fails, the error is a `VbtcWithdrawalIncompleteError` carrying `withdrawalRequestHash`. The chain refuses a new request while that one stands, so resume it with `completeWithdrawal`.
+
+### `completeWithdrawal({ scIdentifier, requestorAddress, withdrawalRequestHash, btcAddress, amount, feeRate, privateKey | signer, onProgress?, pollIntervalMs?, timeoutMs? })`
+
+Finishes a withdrawal request that is already on chain.
+
+- **Watched vault:** sends nothing. It waits (up to `timeoutMs`, default 3 minutes) until the node has recorded the request, then resolves with `paid: true` and the paying transaction if Bitcoin has paid it, or `paid: false` and its state in `watched`. `onProgress` reports `watched_polling`. It throws `VbtcWithdrawalClosedError` if the withdrawal closed unpaid (released, expired or void); the vBTC has then been returned to the requester.
+- **Legacy vault:** runs the FROST signing ceremony, broadcasts the signed Bitcoin transaction and records the completion (type 28). `onProgress` reports `frost_preparing`, `frost_polling`, `frost_complete`, `btc_broadcast` and `completion_recorded`. It is safe to call again for a request whose earlier attempt stopped before the broadcast. A transient ceremony failure says so in the error: wait about 60 seconds and call it again.
+
+If the Bitcoin transaction may have been broadcast but the completion was not recorded, it throws `VbtcWithdrawalUnrecordedError` with `btcTransactionHash` and, when the broadcast outcome is unknown, `signedBtcTxHex`. **Do not call `completeWithdrawal` again in that state**: a second ceremony can pay the destination twice. Look the transaction up, re-broadcast `signedBtcTxHex` if it is missing (the same transaction can only confirm once), then call `recordWithdrawalCompletion`.
+
+### `recordWithdrawalCompletion({ scIdentifier, requestorAddress, withdrawalRequestHash, btcTransactionHash, amount, btcDestination, privateKey | signer, onProgress? })`
+
+Records an already-broadcast legacy withdrawal on the VFX chain (type 28) without running the ceremony again. This is the recovery path after a `VbtcWithdrawalUnrecordedError`, and it needs no ceremony state, so it works from a fresh process as long as the Bitcoin txid was kept.
+
+**Returns:** `Promise<VbtcWithdrawalResult>` with `paid: true`.
+
+### `requestWithdrawalMulti({ btcAddress, totalAmount, feeRate, privateKey | signer, inputs?, vaults?, maxFee? })`
+
+Withdraws `totalAmount` vBTC to one Bitcoin address from several vaults in one request (one type 27, one signature). The chain opens one share per vault under the request's hash, and each share is paid by its own Bitcoin transaction, so `feeRate` (a whole number of sat/vB) is paid once per share, out of that share.
+
+- Without `inputs`, the vaults and amounts are chosen from the requester's spendable balances (largest first, at most 10 vaults), limited to `vaults` when given. With `inputs`, they must sum to `totalAmount`.
+- When one vault covers the total, the ordinary single-vault request is sent instead, as the node does.
+- Before signing, the SDK checks that `btcAddress` is on this network, every share clears the fee floor, and the transaction is the requester's own type 27 carrying exactly these shares with a VFX fee no higher than `maxFee` (default 0.01). Otherwise it throws `PreSignCheckError` and signs nothing.
+- Not available from a reserve (xRBX) account.
+
+It sends the request and returns; it does not wait for payment.
+
+**Returns:** `Promise<{ withdrawalRequestHash: string; inputs: Array<{ scIdentifier: string; amount: number }>; totalAmount: number; btcAddress: string; feeRate: number; fee: number }>`
+
+Keep `inputs`: the share methods below take them as `shares`.
+
+### `getWithdrawalShares({ withdrawalRequestHash, requestorAddress, shares })`
+
+Reads where each share of a request stands from the node. A single-vault request has one share.
+
+**Returns:** `Promise<VbtcWithdrawalShare[]>`, each with `scIdentifier`, `amount`, `outcome`, `watched`, `pinnedBtcTransactionHash` and `btcTransactionHash`. `outcome` is one of:
+
+| Outcome | Meaning |
+|---------|---------|
+| `paid` | Bitcoin paid it |
+| `being_paid` | Pinned: the vault's signers are paying it. Its fee can be raised, or it can be released |
+| `waiting` | The vault's free coins do not cover it yet; it pins when they do. It can be cancelled |
+| `released` | Its requester gave it up; the vBTC came back less the release transaction's fee |
+| `cancelled` | Cancelled while waiting; the vBTC came back |
+| `closed` | Closed unpaid another way (expired, void); the vBTC came back |
+| `not_mined` | The node has not mined the request yet |
+| `legacy` | A vault the chain does not watch: complete this share with `completeWithdrawal` |
+
+### `followWithdrawalShares({ withdrawalRequestHash, requestorAddress, shares, onProgress?, pollIntervalMs?, timeoutMs? })`
+
+Reads the shares (every 15 s by default) until every one is final (`paid`, `released`, `cancelled`, `closed` or `legacy`) or `timeoutMs` passes (default 10 minutes), passing each read to `onProgress`. Paying takes Bitcoin confirmations, so a short timeout usually returns `settled: false` with the shares as they stand; call it again later.
+
+**Returns:** `Promise<{ withdrawalRequestHash: string; shares: VbtcWithdrawalShare[]; settled: boolean; lastError?: string }>`
+
+### `getWithdrawalPin({ scIdentifier, withdrawalRequestHash, requestorAddress })`
+
+Where a withdrawal (or one share) on a watched vault stands: `state` (`Waiting`, `Pinned`, `Settled`, `Released` or another closed state), `paid`, `closed`, the pinned Bitcoin transaction and its `feeRate`, the paying transaction, `minimumNextFeeRate`, and whether it can be raised (`canRaiseFee`), released (`canRelease`) or cancelled (`canCancel`). Returns `null` for a legacy vault. Throws `VbtcNodeUnreachableError` when the explorer could not reach the node; ask again.
+
+### `bumpWithdrawalFee({ scIdentifier, withdrawalRequestHash, feeRate, privateKey | signer })`
+
+Raises the Bitcoin fee of a pinned withdrawal on a watched vault that is not confirming (type 44). The chain pins a replacement that spends the same coins, and the higher fee comes out of the withdrawal's amount. `feeRate` must be at least `minimumNextFeeRate` from `getWithdrawalPin`. The SDK reads the withdrawal first and refuses unless it can be raised; a refusal by the node throws `TransactionRefusedError` with the node's reason. For a multi-vault request, name the share's vault and the request's hash.
+
+**Returns:** `Promise<string | null>`, the transaction hash.
+
+### `releaseWithdrawal({ scIdentifier, withdrawalRequestHash, feeRate, privateKey | signer })`
+
+Gives up a pinned withdrawal on a watched vault (type 44): the chain pins a Bitcoin transaction that returns its coins to the vault, and once Bitcoin confirms it the vBTC comes back to the requester, less that transaction's fee. If one of its payments confirms first, it is paid instead. `feeRate` follows the same rule as `bumpWithdrawalFee`, and the node also refuses a release whose fee does not beat the pinned transaction's by its relay cost.
+
+**Returns:** `Promise<string | null>`, the transaction hash.
+
+### `cancelWithdrawal({ scIdentifier, ownerAddress, withdrawalRequestHash, privateKey | signer })`
+
+Cancels a withdrawal request (type 29). On a watched vault this works only while it is `Waiting` (`canCancel`), and the vBTC comes back at once; a pinned one can be released instead. For a multi-vault request, name the share's vault and the request's hash.
+
+**Returns:** `Promise<{ transactionHash: string }>`
+
+### vBTC errors
+
+All are exported from `vfx-web-sdk`.
+
+| Error | When | What to do |
+|-------|------|------------|
+| `VbtcWithdrawalIncompleteError` | The request is on chain but completing it failed | Call `completeWithdrawal` with its `withdrawalRequestHash` |
+| `VbtcWithdrawalUnrecordedError` | A legacy withdrawal's Bitcoin transaction may be out, but its completion was not recorded | Never re-run `completeWithdrawal`. Re-broadcast `signedBtcTxHex` if the transaction is missing, then `recordWithdrawalCompletion` |
+| `VbtcWithdrawalClosedError` | A watched withdrawal closed unpaid | Nothing; the vBTC is back with the requester. `withdrawal` holds its final state |
+| `VbtcNodeUnreachableError` | The explorer could not reach the node for a withdrawal's state | Ask again |
+| `PreSignCheckError` | The transaction to sign was not the one asked for | Nothing was signed; check the inputs |
+| `TransactionRefusedError` | The node refused the transaction | Read the node's reason in the message |
 
 ## Fungible Token Methods (VFX20)
 
