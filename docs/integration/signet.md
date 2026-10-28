@@ -61,7 +61,112 @@ For more sBTC than the faucet gives, ask in the `Testnet Faucet` channel on [Dis
 
 ## Mining blocks
 
-Blocks come only from the VerifiedX team's signer, which produces one about every 10 minutes. Because the network is the team's own, it can also produce blocks on demand. For test automation that cannot wait about 10 minutes per confirmation (for example a test that needs 6 confirmations), the VerifiedX team can give access to mine signet blocks on demand, together with a faucet automation token that funds addresses without the SMS step. Ask in the `Testnet Faucet` channel on [Discord](https://discord.gg/7cd5ebDQCj); the details come with access.
+Blocks come only from the VerifiedX team's signer, which produces one about every 10 minutes. Because the network is the team's own, it can also produce blocks on demand: partners with [Partner API access](#partner-api-access) can mine up to 10 blocks at once instead of waiting about 10 minutes for each confirmation.
+
+## Partner API access
+
+Teams that integrate with VerifiedX and test against the testnet from scripts or CI can get Partner API access. It comes as two tokens:
+
+| Token | What it does |
+|-------|--------------|
+| **Faucet token** | Funds testnet VFX and signet BTC addresses through the faucet API at once, with no phone number or SMS code |
+| **Mining token** | Mines 1 to 10 signet blocks on demand, so a test gets its confirmations in seconds |
+
+To ask for access, write in the `Testnet Faucet` channel on [Discord](https://discord.gg/7cd5ebDQCj) with your team and what you are testing. The tokens and the mining endpoint come with access. Treat the tokens as secrets: keep them in your secret store or CI secrets, never in a repository, a log or an issue, and ask for a new one if one leaks.
+
+### Fund an address
+
+```http
+POST https://data-testnet.verifiedx.io/api/faucet/request/
+X-Faucet-Token: <faucet token>
+Content-Type: application/json
+```
+
+```json
+{
+  "address": "xC1zNn7596TC4Bcyn1vE88pj12hfieqCoa",
+  "amount": "10",
+  "btc_address": "tb1qw508d6qejxtdg4y5r3zarvary0c5xw7kxpjzsx",
+  "btc_amount": "0.002"
+}
+```
+
+Send the VFX part (`address`, `amount`), the signet BTC part (`btc_address`, `btc_amount`) or both. The faucet pays before it answers:
+
+```json
+{
+  "message": "Funds requested successfully.",
+  "hash": "60ab…",
+  "btc_hash": "9f3c…",
+  "uuid": "6f1c2a9e-3b7d-4c55-9a4e-0d2f8e1b7c31"
+}
+```
+
+- **Minimums:** 0.0001 VFX and 0.00001 BTC. There is no per-request maximum.
+- **Daily limits:** 1,000 VFX and 0.1 BTC per rolling 24 hours, shared by every partner. Ask on Discord if a test needs more.
+- **Refusals:** HTTP 400 with a `message` (see [Web API: Faucet](./web-api/faucet.md#errors)). When one part is paid and the other fails, the answer still carries the paid part's hash.
+- **Unknown BTC result:** if the message says the BTC payment may have gone through, it is never sent again and still counts against the limit. Check the [signet explorer](https://signet.verifiedx.io) before asking again.
+
+### Mine blocks on demand
+
+```http
+POST <mining endpoint>
+Authorization: Bearer <mining token>
+Content-Type: application/json
+```
+
+```json
+{ "blocks": 6 }
+```
+
+`blocks` is 1 to 10. The answer is HTTP 202 with a request to follow:
+
+```json
+{
+  "id": 42,
+  "status": "pending",
+  "blocks": 6,
+  "start_height": null,
+  "end_height": null,
+  "block_hashes": [],
+  "error": "",
+  "created_at": "2026-10-28T15:04:05+00:00",
+  "finished_at": null
+}
+```
+
+Poll `GET <mining endpoint><id>/` with the same header until `status` is `done` or `failed`. It moves `pending` → `mining` → `done`. A finished request has `start_height`, `end_height` and `block_hashes`; a failed one has `error`.
+
+| Answer | Meaning |
+|--------|---------|
+| `202` | Accepted; poll the request |
+| `400` | `blocks` is not a whole number from 1 to 10 |
+| `401` | The token is missing or wrong |
+| `503` | On-demand mining is switched off |
+
+Rules for using it:
+
+- **Broadcast first, then mine.** A block only includes what is already in the mempool.
+- **Mine what a step needs in one call.** For 6 confirmations, ask for 6 blocks once; do not mine in a loop.
+- **Mine only when a test needs it.** Every extra block shortens the current difficulty period, so heavy use raises the next difficulty a little for everyone. The 10-minute blocks keep coming either way.
+
+### Example: fund, then confirm
+
+```bash
+# FAUCET_TOKEN, MINING_TOKEN and MINE_URL come from your secret store
+RESULT=$(curl -s -X POST https://data-testnet.verifiedx.io/api/faucet/request/ \
+  -H "X-Faucet-Token: $FAUCET_TOKEN" -H "Content-Type: application/json" \
+  -d '{"btc_address": "tb1q...", "btc_amount": "0.002"}')
+echo "$RESULT" | jq -r .btc_hash
+
+# One block confirms the payment; a vBTC vault deposit needs 4 (its block and 3 on top)
+ID=$(curl -s -X POST "$MINE_URL" \
+  -H "Authorization: Bearer $MINING_TOKEN" -H "Content-Type: application/json" \
+  -d '{"blocks": 1}' | jq -r .id)
+until curl -s "${MINE_URL}${ID}/" -H "Authorization: Bearer $MINING_TOKEN" \
+  | jq -e '.status == "done" or .status == "failed"' > /dev/null; do sleep 2; done
+curl -s "${MINE_URL}${ID}/" -H "Authorization: Bearer $MINING_TOKEN" | jq '{status, end_height, error}'
+```
 
 ## Running your own node
 
